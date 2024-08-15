@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct ValidationQuery: Encodable {
+struct EmailValidationQuery: Encodable {
     let email: String
 }
