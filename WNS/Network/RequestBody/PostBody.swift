@@ -1,5 +1,5 @@
 //
-//  PostQuery.swift
+//  PostBody.swift
 //  WNS
 //
 //  Created by J Oh on 8/14/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostQuery: Encodable {
+struct PostBody: Encodable {
     let title: String?
     let content: String?
     let content1: String?

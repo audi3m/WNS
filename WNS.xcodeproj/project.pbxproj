@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D404A4E22C6D84FC005C3C6E /* LikeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4E12C6D84FC005C3C6E /* LikeQuery.swift */; };
-		D404A4E42C6D862E005C3C6E /* ProfileQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4E32C6D862E005C3C6E /* ProfileQuery.swift */; };
+		D404A4E22C6D84FC005C3C6E /* LikeBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4E12C6D84FC005C3C6E /* LikeBody.swift */; };
+		D404A4E42C6D862E005C3C6E /* ProfileBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4E32C6D862E005C3C6E /* ProfileBody.swift */; };
 		D404A4E72C6DA0EC005C3C6E /* JoinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4E62C6DA0EC005C3C6E /* JoinResponse.swift */; };
 		D404A4E92C6DA90B005C3C6E /* EmailValidationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4E82C6DA90B005C3C6E /* EmailValidationResponse.swift */; };
 		D404A4EB2C6DA97B005C3C6E /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4EA2C6DA97B005C3C6E /* LoginResponse.swift */; };
@@ -30,9 +30,10 @@
 		D404A50B2C6E2D51005C3C6E /* GetOthersProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A50A2C6E2D51005C3C6E /* GetOthersProfileResponse.swift */; };
 		D404A50D2C6E2DE9005C3C6E /* HashtagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A50C2C6E2DE9005C3C6E /* HashtagResponse.swift */; };
 		D404A50F2C6E302E005C3C6E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A50E2C6E302E005C3C6E /* NetworkManager.swift */; };
+		D404A5122C6E4EC8005C3C6E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D404A5112C6E4EC8005C3C6E /* SnapKit */; };
+		D404A51D2C6E4F2D005C3C6E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A51C2C6E4F2D005C3C6E /* SignupViewModel.swift */; };
 		D467D4212C6C7FFA000C3993 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4202C6C7FFA000C3993 /* AppDelegate.swift */; };
 		D467D4232C6C7FFA000C3993 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */; };
-		D467D4252C6C7FFA000C3993 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4242C6C7FFA000C3993 /* ViewController.swift */; };
 		D467D42A2C6C7FFB000C3993 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D467D4292C6C7FFB000C3993 /* Assets.xcassets */; };
 		D467D42D2C6C7FFC000C3993 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D467D42C2C6C7FFC000C3993 /* Base */; };
 		D467D4352C6C803E000C3993 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D467D4342C6C803E000C3993 /* .gitignore */; };
@@ -43,22 +44,22 @@
 		D467D4442C6C86CC000C3993 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D467D4432C6C86CC000C3993 /* RxSwift */; };
 		D467D4472C6C86FA000C3993 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D467D4462C6C86FA000C3993 /* Realm */; };
 		D467D4492C6C8738000C3993 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4482C6C8738000C3993 /* TargetType.swift */; };
-		D467D44B2C6C8758000C3993 /* JoinQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D44A2C6C8758000C3993 /* JoinQuery.swift */; };
+		D467D44B2C6C8758000C3993 /* JoinBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D44A2C6C8758000C3993 /* JoinBody.swift */; };
 		D467D44D2C6CB39C000C3993 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D44C2C6CB39C000C3993 /* SignUpViewController.swift */; };
 		D467D44F2C6CD892000C3993 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D44E2C6CD892000C3993 /* LogInViewController.swift */; };
 		D467D4512C6CD94C000C3993 /* DetailReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4502C6CD94C000C3993 /* DetailReviewViewController.swift */; };
 		D467D4532C6CD98C000C3993 /* MainPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4522C6CD98C000C3993 /* MainPostViewController.swift */; };
 		D467D4552C6CDDAD000C3993 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4542C6CDDAD000C3993 /* Router.swift */; };
-		D467D4582C6CE03A000C3993 /* EmailValidationQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4572C6CE03A000C3993 /* EmailValidationQuery.swift */; };
-		D467D45A2C6CE188000C3993 /* LoginQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4592C6CE188000C3993 /* LoginQuery.swift */; };
-		D467D45C2C6CE3FA000C3993 /* PostImageQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D45B2C6CE3FA000C3993 /* PostImageQuery.swift */; };
-		D467D45E2C6CE840000C3993 /* PostQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D45D2C6CE840000C3993 /* PostQuery.swift */; };
-		D467D4602C6CE99C000C3993 /* CommentQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D45F2C6CE99C000C3993 /* CommentQuery.swift */; };
+		D467D4582C6CE03A000C3993 /* EmailValidationBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4572C6CE03A000C3993 /* EmailValidationBody.swift */; };
+		D467D45A2C6CE188000C3993 /* LoginBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4592C6CE188000C3993 /* LoginBody.swift */; };
+		D467D45C2C6CE3FA000C3993 /* PostImageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D45B2C6CE3FA000C3993 /* PostImageBody.swift */; };
+		D467D45E2C6CE840000C3993 /* PostBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D45D2C6CE840000C3993 /* PostBody.swift */; };
+		D467D4602C6CE99C000C3993 /* CommentBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D45F2C6CE99C000C3993 /* CommentBody.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D404A4E12C6D84FC005C3C6E /* LikeQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeQuery.swift; sourceTree = "<group>"; };
-		D404A4E32C6D862E005C3C6E /* ProfileQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileQuery.swift; sourceTree = "<group>"; };
+		D404A4E12C6D84FC005C3C6E /* LikeBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeBody.swift; sourceTree = "<group>"; };
+		D404A4E32C6D862E005C3C6E /* ProfileBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBody.swift; sourceTree = "<group>"; };
 		D404A4E62C6DA0EC005C3C6E /* JoinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinResponse.swift; sourceTree = "<group>"; };
 		D404A4E82C6DA90B005C3C6E /* EmailValidationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationResponse.swift; sourceTree = "<group>"; };
 		D404A4EA2C6DA97B005C3C6E /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
@@ -80,10 +81,10 @@
 		D404A50A2C6E2D51005C3C6E /* GetOthersProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOthersProfileResponse.swift; sourceTree = "<group>"; };
 		D404A50C2C6E2DE9005C3C6E /* HashtagResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagResponse.swift; sourceTree = "<group>"; };
 		D404A50E2C6E302E005C3C6E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		D404A51C2C6E4F2D005C3C6E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		D467D41D2C6C7FFA000C3993 /* WNS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WNS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D467D4202C6C7FFA000C3993 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D467D4242C6C7FFA000C3993 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D467D4292C6C7FFB000C3993 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D467D42C2C6C7FFC000C3993 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D467D42E2C6C7FFC000C3993 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -91,17 +92,17 @@
 		D467D4372C6C8070000C3993 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		D467D4392C6C85F4000C3993 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		D467D4482C6C8738000C3993 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
-		D467D44A2C6C8758000C3993 /* JoinQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinQuery.swift; sourceTree = "<group>"; };
+		D467D44A2C6C8758000C3993 /* JoinBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinBody.swift; sourceTree = "<group>"; };
 		D467D44C2C6CB39C000C3993 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D467D44E2C6CD892000C3993 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		D467D4502C6CD94C000C3993 /* DetailReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReviewViewController.swift; sourceTree = "<group>"; };
 		D467D4522C6CD98C000C3993 /* MainPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPostViewController.swift; sourceTree = "<group>"; };
 		D467D4542C6CDDAD000C3993 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		D467D4572C6CE03A000C3993 /* EmailValidationQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationQuery.swift; sourceTree = "<group>"; };
-		D467D4592C6CE188000C3993 /* LoginQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQuery.swift; sourceTree = "<group>"; };
-		D467D45B2C6CE3FA000C3993 /* PostImageQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageQuery.swift; sourceTree = "<group>"; };
-		D467D45D2C6CE840000C3993 /* PostQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostQuery.swift; sourceTree = "<group>"; };
-		D467D45F2C6CE99C000C3993 /* CommentQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentQuery.swift; sourceTree = "<group>"; };
+		D467D4572C6CE03A000C3993 /* EmailValidationBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationBody.swift; sourceTree = "<group>"; };
+		D467D4592C6CE188000C3993 /* LoginBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginBody.swift; sourceTree = "<group>"; };
+		D467D45B2C6CE3FA000C3993 /* PostImageBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageBody.swift; sourceTree = "<group>"; };
+		D467D45D2C6CE840000C3993 /* PostBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBody.swift; sourceTree = "<group>"; };
+		D467D45F2C6CE99C000C3993 /* CommentBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBody.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +114,7 @@
 				D467D4422C6C86CC000C3993 /* RxCocoa in Frameworks */,
 				D467D4472C6C86FA000C3993 /* Realm in Frameworks */,
 				D467D43F2C6C86B6000C3993 /* Alamofire in Frameworks */,
+				D404A5122C6E4EC8005C3C6E /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +148,74 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
+		D404A5132C6E4F09005C3C6E /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		D404A5142C6E4F0B005C3C6E /* New Group1 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group1";
+			sourceTree = "<group>";
+		};
+		D404A5152C6E4F0F005C3C6E /* New Group2 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group2";
+			sourceTree = "<group>";
+		};
+		D404A5162C6E4F11005C3C6E /* New Group3 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group3";
+			sourceTree = "<group>";
+		};
+		D404A5172C6E4F13005C3C6E /* New Group4 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group4";
+			sourceTree = "<group>";
+		};
+		D404A5182C6E4F15005C3C6E /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				D467D4502C6CD94C000C3993 /* DetailReviewViewController.swift */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
+		D404A5192C6E4F17005C3C6E /* PostsView */ = {
+			isa = PBXGroup;
+			children = (
+				D467D4522C6CD98C000C3993 /* MainPostViewController.swift */,
+			);
+			path = PostsView;
+			sourceTree = "<group>";
+		};
+		D404A51A2C6E4F19005C3C6E /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				D467D44E2C6CD892000C3993 /* LogInViewController.swift */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		D404A51B2C6E4F1B005C3C6E /* SignupView */ = {
+			isa = PBXGroup;
+			children = (
+				D467D44C2C6CB39C000C3993 /* SignUpViewController.swift */,
+				D404A51C2C6E4F2D005C3C6E /* SignupViewModel.swift */,
+			);
+			path = SignupView;
+			sourceTree = "<group>";
+		};
 		D467D4142C6C7FFA000C3993 = {
 			isa = PBXGroup;
 			children = (
@@ -168,12 +238,16 @@
 			children = (
 				D467D4202C6C7FFA000C3993 /* AppDelegate.swift */,
 				D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */,
-				D467D4242C6C7FFA000C3993 /* ViewController.swift */,
-				D467D44C2C6CB39C000C3993 /* SignUpViewController.swift */,
-				D467D44E2C6CD892000C3993 /* LogInViewController.swift */,
-				D467D4502C6CD94C000C3993 /* DetailReviewViewController.swift */,
-				D467D4522C6CD98C000C3993 /* MainPostViewController.swift */,
 				D467D4362C6C8061000C3993 /* Network */,
+				D404A51B2C6E4F1B005C3C6E /* SignupView */,
+				D404A51A2C6E4F19005C3C6E /* LoginView */,
+				D404A5192C6E4F17005C3C6E /* PostsView */,
+				D404A5182C6E4F15005C3C6E /* DetailView */,
+				D404A5172C6E4F13005C3C6E /* New Group4 */,
+				D404A5162C6E4F11005C3C6E /* New Group3 */,
+				D404A5152C6E4F0F005C3C6E /* New Group2 */,
+				D404A5142C6E4F0B005C3C6E /* New Group1 */,
+				D404A5132C6E4F09005C3C6E /* New Group */,
 				D467D4292C6C7FFB000C3993 /* Assets.xcassets */,
 				D467D42B2C6C7FFC000C3993 /* LaunchScreen.storyboard */,
 				D467D42E2C6C7FFC000C3993 /* Info.plist */,
@@ -198,14 +272,14 @@
 		D467D4562C6CDFE8000C3993 /* RequestBody */ = {
 			isa = PBXGroup;
 			children = (
-				D467D44A2C6C8758000C3993 /* JoinQuery.swift */,
-				D467D4572C6CE03A000C3993 /* EmailValidationQuery.swift */,
-				D467D4592C6CE188000C3993 /* LoginQuery.swift */,
-				D467D45B2C6CE3FA000C3993 /* PostImageQuery.swift */,
-				D467D45D2C6CE840000C3993 /* PostQuery.swift */,
-				D467D45F2C6CE99C000C3993 /* CommentQuery.swift */,
-				D404A4E12C6D84FC005C3C6E /* LikeQuery.swift */,
-				D404A4E32C6D862E005C3C6E /* ProfileQuery.swift */,
+				D467D44A2C6C8758000C3993 /* JoinBody.swift */,
+				D467D4572C6CE03A000C3993 /* EmailValidationBody.swift */,
+				D467D4592C6CE188000C3993 /* LoginBody.swift */,
+				D467D45B2C6CE3FA000C3993 /* PostImageBody.swift */,
+				D467D45D2C6CE840000C3993 /* PostBody.swift */,
+				D467D45F2C6CE99C000C3993 /* CommentBody.swift */,
+				D404A4E12C6D84FC005C3C6E /* LikeBody.swift */,
+				D404A4E32C6D862E005C3C6E /* ProfileBody.swift */,
 			);
 			path = RequestBody;
 			sourceTree = "<group>";
@@ -231,6 +305,7 @@
 				D467D4412C6C86CC000C3993 /* RxCocoa */,
 				D467D4432C6C86CC000C3993 /* RxSwift */,
 				D467D4462C6C86FA000C3993 /* Realm */,
+				D404A5112C6E4EC8005C3C6E /* SnapKit */,
 			);
 			productName = WNS;
 			productReference = D467D41D2C6C7FFA000C3993 /* WNS.app */;
@@ -264,6 +339,7 @@
 				D467D43D2C6C86B6000C3993 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				D467D4402C6C86CC000C3993 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				D467D4452C6C86FA000C3993 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				D404A5102C6E4EC8005C3C6E /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = D467D41E2C6C7FFA000C3993 /* Products */;
 			projectDirPath = "";
@@ -297,31 +373,31 @@
 				D467D44D2C6CB39C000C3993 /* SignUpViewController.swift in Sources */,
 				D404A5092C6E2CA8005C3C6E /* EditMyProfileResponse.swift in Sources */,
 				D404A4ED2C6DA9A0005C3C6E /* RefreshResponse.swift in Sources */,
-				D467D4252C6C7FFA000C3993 /* ViewController.swift in Sources */,
 				D404A4F32C6DB78D005C3C6E /* PostResponse.swift in Sources */,
 				D467D43A2C6C85F4000C3993 /* TokenManager.swift in Sources */,
 				D404A4FB2C6DFC2C005C3C6E /* GetUserPostResponse.swift in Sources */,
 				D404A5052C6E0019005C3C6E /* FollowResponse.swift in Sources */,
-				D404A4E22C6D84FC005C3C6E /* LikeQuery.swift in Sources */,
-				D467D4602C6CE99C000C3993 /* CommentQuery.swift in Sources */,
+				D404A4E22C6D84FC005C3C6E /* LikeBody.swift in Sources */,
+				D467D4602C6CE99C000C3993 /* CommentBody.swift in Sources */,
 				D404A50F2C6E302E005C3C6E /* NetworkManager.swift in Sources */,
 				D404A50D2C6E2DE9005C3C6E /* HashtagResponse.swift in Sources */,
 				D404A4FD2C6DFCD9005C3C6E /* WriteCommentResponse.swift in Sources */,
 				D404A4E92C6DA90B005C3C6E /* EmailValidationResponse.swift in Sources */,
 				D404A4F52C6DBAAB005C3C6E /* GetAllPostsResponse.swift in Sources */,
 				D467D4512C6CD94C000C3993 /* DetailReviewViewController.swift in Sources */,
-				D467D45A2C6CE188000C3993 /* LoginQuery.swift in Sources */,
+				D467D45A2C6CE188000C3993 /* LoginBody.swift in Sources */,
 				D467D4552C6CDDAD000C3993 /* Router.swift in Sources */,
-				D467D45E2C6CE840000C3993 /* PostQuery.swift in Sources */,
-				D467D44B2C6C8758000C3993 /* JoinQuery.swift in Sources */,
+				D467D45E2C6CE840000C3993 /* PostBody.swift in Sources */,
+				D467D44B2C6C8758000C3993 /* JoinBody.swift in Sources */,
 				D404A5072C6E2BB7005C3C6E /* GetMyProfileResponse.swift in Sources */,
-				D404A4E42C6D862E005C3C6E /* ProfileQuery.swift in Sources */,
+				D404A4E42C6D862E005C3C6E /* ProfileBody.swift in Sources */,
 				D404A50B2C6E2D51005C3C6E /* GetOthersProfileResponse.swift in Sources */,
-				D467D45C2C6CE3FA000C3993 /* PostImageQuery.swift in Sources */,
+				D467D45C2C6CE3FA000C3993 /* PostImageBody.swift in Sources */,
 				D404A4F72C6DC422005C3C6E /* GetSomePostResponse.swift in Sources */,
+				D404A51D2C6E4F2D005C3C6E /* SignupViewModel.swift in Sources */,
 				D467D4212C6C7FFA000C3993 /* AppDelegate.swift in Sources */,
 				D467D4382C6C8070000C3993 /* APIKey.swift in Sources */,
-				D467D4582C6CE03A000C3993 /* EmailValidationQuery.swift in Sources */,
+				D467D4582C6CE03A000C3993 /* EmailValidationBody.swift in Sources */,
 				D404A4F12C6DB762005C3C6E /* PostImageResponse.swift in Sources */,
 				D404A4EF2C6DA9D9005C3C6E /* WithdrawResponse.swift in Sources */,
 				D404A4F92C6DFB99005C3C6E /* EditPostResponse.swift in Sources */,
@@ -556,6 +632,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D404A5102C6E4EC8005C3C6E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 		D467D43D2C6C86B6000C3993 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -583,6 +667,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D404A5112C6E4EC8005C3C6E /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D404A5102C6E4EC8005C3C6E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
 		D467D43E2C6C86B6000C3993 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D467D43D2C6C86B6000C3993 /* XCRemoteSwiftPackageReference "Alamofire" */;
