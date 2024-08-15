@@ -1,5 +1,5 @@
 //
-//  GetPostResponse.swift
+//  GetAllPostsResponse.swift
 //  WNS
 //
 //  Created by J Oh on 8/15/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetAllPostResponse: Decodable {
+struct GetAllPostsResponse: Decodable {
     let data: [PostResponse]
     let nextCursor: String
     

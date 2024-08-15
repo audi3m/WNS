@@ -19,8 +19,8 @@ struct PostResponse: Decodable {
     let content5: String?
     let createdAt: String
     let creater: Creater
-    let files: [String]
-    let likes: [String]
+    let files: [String] // dir
+    let likes: [String] // user_id
     let likes2: [String]?
     let hashTags: [String]
     let comments: [Comment]
@@ -48,7 +48,7 @@ struct PostResponse: Decodable {
 struct Creater: Decodable {
     let userID: String
     let nick: String
-    let profileImage: String
+    let profileImage: String?
     
     enum CodingKeys: String, CodingKey {
         case userID = "user_id"

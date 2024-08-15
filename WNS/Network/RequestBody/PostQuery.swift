@@ -16,5 +16,5 @@ struct PostQuery: Encodable {
     let content4: String?
     let content5: String?
     let product_id: String?
-    let files: [String]?
+    let files: [String]? // [] -> delete
 }

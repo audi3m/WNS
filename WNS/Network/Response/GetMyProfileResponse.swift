@@ -16,7 +16,7 @@ struct GetMyProfileResponse: Decodable {
     let profileImage: String?
     let followers: [Profile]
     let following: [Profile]
-    let posts: [String]
+    let posts: [String] // post_id
     
     enum CodingKeys: String, CodingKey {
         case userID = "user_id"

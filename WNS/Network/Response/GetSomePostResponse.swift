@@ -20,8 +20,8 @@ struct GetSomePostResponse: Decodable {
     let createdAt: String
     let creater: Creater
     let files: [String]
-    let likes: [String]
-    let likes2: [String]
+    let likes: [String] // user_id
+    let likes2: [String]?
     let hashTags: [String]
     let comments: [Comment]
     
