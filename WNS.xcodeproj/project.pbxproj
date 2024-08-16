@@ -38,6 +38,8 @@
 		D404A5272C6F7D10005C3C6E /* GetAllPostQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5262C6F7D10005C3C6E /* GetAllPostQuery.swift */; };
 		D404A5292C6F7DAD005C3C6E /* GetLikePostQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5282C6F7DAD005C3C6E /* GetLikePostQuery.swift */; };
 		D404A52B2C6F7E05005C3C6E /* HashQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A52A2C6F7E05005C3C6E /* HashQuery.swift */; };
+		D404A52D2C6F875E005C3C6E /* NetworkTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A52C2C6F875E005C3C6E /* NetworkTestView.swift */; };
+		D404A52F2C6F9435005C3C6E /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A52E2C6F9435005C3C6E /* ErrorResponse.swift */; };
 		D467D4212C6C7FFA000C3993 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4202C6C7FFA000C3993 /* AppDelegate.swift */; };
 		D467D4232C6C7FFA000C3993 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */; };
 		D467D42A2C6C7FFB000C3993 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D467D4292C6C7FFB000C3993 /* Assets.xcassets */; };
@@ -92,6 +94,8 @@
 		D404A5262C6F7D10005C3C6E /* GetAllPostQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllPostQuery.swift; sourceTree = "<group>"; };
 		D404A5282C6F7DAD005C3C6E /* GetLikePostQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLikePostQuery.swift; sourceTree = "<group>"; };
 		D404A52A2C6F7E05005C3C6E /* HashQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashQuery.swift; sourceTree = "<group>"; };
+		D404A52C2C6F875E005C3C6E /* NetworkTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTestView.swift; sourceTree = "<group>"; };
+		D404A52E2C6F9435005C3C6E /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		D467D41D2C6C7FFA000C3993 /* WNS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WNS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D467D4202C6C7FFA000C3993 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +158,7 @@
 				D404A5082C6E2CA8005C3C6E /* EditMyProfileResponse.swift */,
 				D404A50A2C6E2D51005C3C6E /* GetOthersProfileResponse.swift */,
 				D404A50C2C6E2DE9005C3C6E /* HashtagResponse.swift */,
+				D404A52E2C6F9435005C3C6E /* ErrorResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 			children = (
 				D467D4202C6C7FFA000C3993 /* AppDelegate.swift */,
 				D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */,
+				D404A52C2C6F875E005C3C6E /* NetworkTestView.swift */,
 				D404A5202C6F28A5005C3C6E /* TestViewController.swift */,
 				D467D4362C6C8061000C3993 /* Network */,
 				D404A51B2C6E4F1B005C3C6E /* SignupView */,
@@ -392,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D404A4E72C6DA0EC005C3C6E /* JoinResponse.swift in Sources */,
+				D404A52D2C6F875E005C3C6E /* NetworkTestView.swift in Sources */,
 				D404A5032C6DFE5F005C3C6E /* LikePostResponse.swift in Sources */,
 				D467D44D2C6CB39C000C3993 /* JoinViewController.swift in Sources */,
 				D404A5092C6E2CA8005C3C6E /* EditMyProfileResponse.swift in Sources */,
@@ -406,6 +413,7 @@
 				D404A50F2C6E302E005C3C6E /* NetworkManager.swift in Sources */,
 				D404A50D2C6E2DE9005C3C6E /* HashtagResponse.swift in Sources */,
 				D404A4FD2C6DFCD9005C3C6E /* WriteCommentResponse.swift in Sources */,
+				D404A52F2C6F9435005C3C6E /* ErrorResponse.swift in Sources */,
 				D404A4E92C6DA90B005C3C6E /* EmailValidationResponse.swift in Sources */,
 				D404A4F52C6DBAAB005C3C6E /* GetAllPostsResponse.swift in Sources */,
 				D467D4512C6CD94C000C3993 /* DetailReviewViewController.swift in Sources */,
