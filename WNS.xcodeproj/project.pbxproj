@@ -31,7 +31,13 @@
 		D404A50D2C6E2DE9005C3C6E /* HashtagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A50C2C6E2DE9005C3C6E /* HashtagResponse.swift */; };
 		D404A50F2C6E302E005C3C6E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A50E2C6E302E005C3C6E /* NetworkManager.swift */; };
 		D404A5122C6E4EC8005C3C6E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D404A5112C6E4EC8005C3C6E /* SnapKit */; };
-		D404A51D2C6E4F2D005C3C6E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A51C2C6E4F2D005C3C6E /* SignupViewModel.swift */; };
+		D404A51D2C6E4F2D005C3C6E /* JoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A51C2C6E4F2D005C3C6E /* JoinViewModel.swift */; };
+		D404A51F2C6F262F005C3C6E /* JoinTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A51E2C6F262F005C3C6E /* JoinTextField.swift */; };
+		D404A5212C6F28A5005C3C6E /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5202C6F28A5005C3C6E /* TestViewController.swift */; };
+		D404A5242C6F2EA4005C3C6E /* TextFieldEffects in Frameworks */ = {isa = PBXBuildFile; productRef = D404A5232C6F2EA4005C3C6E /* TextFieldEffects */; };
+		D404A5272C6F7D10005C3C6E /* GetAllPostQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5262C6F7D10005C3C6E /* GetAllPostQuery.swift */; };
+		D404A5292C6F7DAD005C3C6E /* GetLikePostQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5282C6F7DAD005C3C6E /* GetLikePostQuery.swift */; };
+		D404A52B2C6F7E05005C3C6E /* HashQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A52A2C6F7E05005C3C6E /* HashQuery.swift */; };
 		D467D4212C6C7FFA000C3993 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4202C6C7FFA000C3993 /* AppDelegate.swift */; };
 		D467D4232C6C7FFA000C3993 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */; };
 		D467D42A2C6C7FFB000C3993 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D467D4292C6C7FFB000C3993 /* Assets.xcassets */; };
@@ -42,10 +48,9 @@
 		D467D43F2C6C86B6000C3993 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D467D43E2C6C86B6000C3993 /* Alamofire */; };
 		D467D4422C6C86CC000C3993 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D467D4412C6C86CC000C3993 /* RxCocoa */; };
 		D467D4442C6C86CC000C3993 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D467D4432C6C86CC000C3993 /* RxSwift */; };
-		D467D4472C6C86FA000C3993 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D467D4462C6C86FA000C3993 /* Realm */; };
 		D467D4492C6C8738000C3993 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4482C6C8738000C3993 /* TargetType.swift */; };
 		D467D44B2C6C8758000C3993 /* JoinBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D44A2C6C8758000C3993 /* JoinBody.swift */; };
-		D467D44D2C6CB39C000C3993 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D44C2C6CB39C000C3993 /* SignUpViewController.swift */; };
+		D467D44D2C6CB39C000C3993 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D44C2C6CB39C000C3993 /* JoinViewController.swift */; };
 		D467D44F2C6CD892000C3993 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D44E2C6CD892000C3993 /* LogInViewController.swift */; };
 		D467D4512C6CD94C000C3993 /* DetailReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4502C6CD94C000C3993 /* DetailReviewViewController.swift */; };
 		D467D4532C6CD98C000C3993 /* MainPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4522C6CD98C000C3993 /* MainPostViewController.swift */; };
@@ -81,7 +86,12 @@
 		D404A50A2C6E2D51005C3C6E /* GetOthersProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOthersProfileResponse.swift; sourceTree = "<group>"; };
 		D404A50C2C6E2DE9005C3C6E /* HashtagResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagResponse.swift; sourceTree = "<group>"; };
 		D404A50E2C6E302E005C3C6E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		D404A51C2C6E4F2D005C3C6E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		D404A51C2C6E4F2D005C3C6E /* JoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewModel.swift; sourceTree = "<group>"; };
+		D404A51E2C6F262F005C3C6E /* JoinTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTextField.swift; sourceTree = "<group>"; };
+		D404A5202C6F28A5005C3C6E /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		D404A5262C6F7D10005C3C6E /* GetAllPostQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllPostQuery.swift; sourceTree = "<group>"; };
+		D404A5282C6F7DAD005C3C6E /* GetLikePostQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLikePostQuery.swift; sourceTree = "<group>"; };
+		D404A52A2C6F7E05005C3C6E /* HashQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashQuery.swift; sourceTree = "<group>"; };
 		D467D41D2C6C7FFA000C3993 /* WNS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WNS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D467D4202C6C7FFA000C3993 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,7 +103,7 @@
 		D467D4392C6C85F4000C3993 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		D467D4482C6C8738000C3993 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		D467D44A2C6C8758000C3993 /* JoinBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinBody.swift; sourceTree = "<group>"; };
-		D467D44C2C6CB39C000C3993 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		D467D44C2C6CB39C000C3993 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		D467D44E2C6CD892000C3993 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		D467D4502C6CD94C000C3993 /* DetailReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReviewViewController.swift; sourceTree = "<group>"; };
 		D467D4522C6CD98C000C3993 /* MainPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPostViewController.swift; sourceTree = "<group>"; };
@@ -112,9 +122,9 @@
 			files = (
 				D467D4442C6C86CC000C3993 /* RxSwift in Frameworks */,
 				D467D4422C6C86CC000C3993 /* RxCocoa in Frameworks */,
-				D467D4472C6C86FA000C3993 /* Realm in Frameworks */,
 				D467D43F2C6C86B6000C3993 /* Alamofire in Frameworks */,
 				D404A5122C6E4EC8005C3C6E /* SnapKit in Frameworks */,
+				D404A5242C6F2EA4005C3C6E /* TextFieldEffects in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,10 +220,21 @@
 		D404A51B2C6E4F1B005C3C6E /* SignupView */ = {
 			isa = PBXGroup;
 			children = (
-				D467D44C2C6CB39C000C3993 /* SignUpViewController.swift */,
-				D404A51C2C6E4F2D005C3C6E /* SignupViewModel.swift */,
+				D467D44C2C6CB39C000C3993 /* JoinViewController.swift */,
+				D404A51C2C6E4F2D005C3C6E /* JoinViewModel.swift */,
+				D404A51E2C6F262F005C3C6E /* JoinTextField.swift */,
 			);
 			path = SignupView;
+			sourceTree = "<group>";
+		};
+		D404A5252C6F7CF7005C3C6E /* QueryString */ = {
+			isa = PBXGroup;
+			children = (
+				D404A5262C6F7D10005C3C6E /* GetAllPostQuery.swift */,
+				D404A5282C6F7DAD005C3C6E /* GetLikePostQuery.swift */,
+				D404A52A2C6F7E05005C3C6E /* HashQuery.swift */,
+			);
+			path = QueryString;
 			sourceTree = "<group>";
 		};
 		D467D4142C6C7FFA000C3993 = {
@@ -238,6 +259,7 @@
 			children = (
 				D467D4202C6C7FFA000C3993 /* AppDelegate.swift */,
 				D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */,
+				D404A5202C6F28A5005C3C6E /* TestViewController.swift */,
 				D467D4362C6C8061000C3993 /* Network */,
 				D404A51B2C6E4F1B005C3C6E /* SignupView */,
 				D404A51A2C6E4F19005C3C6E /* LoginView */,
@@ -263,6 +285,7 @@
 				D467D4542C6CDDAD000C3993 /* Router.swift */,
 				D467D4392C6C85F4000C3993 /* TokenManager.swift */,
 				D467D4482C6C8738000C3993 /* TargetType.swift */,
+				D404A5252C6F7CF7005C3C6E /* QueryString */,
 				D467D4562C6CDFE8000C3993 /* RequestBody */,
 				D404A4E52C6DA0D6005C3C6E /* Response */,
 			);
@@ -304,8 +327,8 @@
 				D467D43E2C6C86B6000C3993 /* Alamofire */,
 				D467D4412C6C86CC000C3993 /* RxCocoa */,
 				D467D4432C6C86CC000C3993 /* RxSwift */,
-				D467D4462C6C86FA000C3993 /* Realm */,
 				D404A5112C6E4EC8005C3C6E /* SnapKit */,
+				D404A5232C6F2EA4005C3C6E /* TextFieldEffects */,
 			);
 			productName = WNS;
 			productReference = D467D41D2C6C7FFA000C3993 /* WNS.app */;
@@ -338,8 +361,8 @@
 			packageReferences = (
 				D467D43D2C6C86B6000C3993 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				D467D4402C6C86CC000C3993 /* XCRemoteSwiftPackageReference "RxSwift" */,
-				D467D4452C6C86FA000C3993 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				D404A5102C6E4EC8005C3C6E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				D404A5222C6F2EA4005C3C6E /* XCRemoteSwiftPackageReference "TextFieldEffects" */,
 			);
 			productRefGroup = D467D41E2C6C7FFA000C3993 /* Products */;
 			projectDirPath = "";
@@ -370,7 +393,7 @@
 			files = (
 				D404A4E72C6DA0EC005C3C6E /* JoinResponse.swift in Sources */,
 				D404A5032C6DFE5F005C3C6E /* LikePostResponse.swift in Sources */,
-				D467D44D2C6CB39C000C3993 /* SignUpViewController.swift in Sources */,
+				D467D44D2C6CB39C000C3993 /* JoinViewController.swift in Sources */,
 				D404A5092C6E2CA8005C3C6E /* EditMyProfileResponse.swift in Sources */,
 				D404A4ED2C6DA9A0005C3C6E /* RefreshResponse.swift in Sources */,
 				D404A4F32C6DB78D005C3C6E /* PostResponse.swift in Sources */,
@@ -378,6 +401,7 @@
 				D404A4FB2C6DFC2C005C3C6E /* GetUserPostResponse.swift in Sources */,
 				D404A5052C6E0019005C3C6E /* FollowResponse.swift in Sources */,
 				D404A4E22C6D84FC005C3C6E /* LikeBody.swift in Sources */,
+				D404A5292C6F7DAD005C3C6E /* GetLikePostQuery.swift in Sources */,
 				D467D4602C6CE99C000C3993 /* CommentBody.swift in Sources */,
 				D404A50F2C6E302E005C3C6E /* NetworkManager.swift in Sources */,
 				D404A50D2C6E2DE9005C3C6E /* HashtagResponse.swift in Sources */,
@@ -390,18 +414,22 @@
 				D467D45E2C6CE840000C3993 /* PostBody.swift in Sources */,
 				D467D44B2C6C8758000C3993 /* JoinBody.swift in Sources */,
 				D404A5072C6E2BB7005C3C6E /* GetMyProfileResponse.swift in Sources */,
+				D404A5272C6F7D10005C3C6E /* GetAllPostQuery.swift in Sources */,
 				D404A4E42C6D862E005C3C6E /* ProfileBody.swift in Sources */,
 				D404A50B2C6E2D51005C3C6E /* GetOthersProfileResponse.swift in Sources */,
 				D467D45C2C6CE3FA000C3993 /* PostImageBody.swift in Sources */,
 				D404A4F72C6DC422005C3C6E /* GetSomePostResponse.swift in Sources */,
-				D404A51D2C6E4F2D005C3C6E /* SignupViewModel.swift in Sources */,
+				D404A51D2C6E4F2D005C3C6E /* JoinViewModel.swift in Sources */,
 				D467D4212C6C7FFA000C3993 /* AppDelegate.swift in Sources */,
+				D404A5212C6F28A5005C3C6E /* TestViewController.swift in Sources */,
 				D467D4382C6C8070000C3993 /* APIKey.swift in Sources */,
+				D404A52B2C6F7E05005C3C6E /* HashQuery.swift in Sources */,
 				D467D4582C6CE03A000C3993 /* EmailValidationBody.swift in Sources */,
 				D404A4F12C6DB762005C3C6E /* PostImageResponse.swift in Sources */,
 				D404A4EF2C6DA9D9005C3C6E /* WithdrawResponse.swift in Sources */,
 				D404A4F92C6DFB99005C3C6E /* EditPostResponse.swift in Sources */,
 				D467D4232C6C7FFA000C3993 /* SceneDelegate.swift in Sources */,
+				D404A51F2C6F262F005C3C6E /* JoinTextField.swift in Sources */,
 				D404A5012C6DFE0C005C3C6E /* LikeResponse.swift in Sources */,
 				D467D4532C6CD98C000C3993 /* MainPostViewController.swift in Sources */,
 				D404A4FF2C6DFDA8005C3C6E /* EditCommentResponse.swift in Sources */,
@@ -640,6 +668,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		D404A5222C6F2EA4005C3C6E /* XCRemoteSwiftPackageReference "TextFieldEffects" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/raulriera/TextFieldEffects.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.0;
+			};
+		};
 		D467D43D2C6C86B6000C3993 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -656,14 +692,6 @@
 				minimumVersion = 6.7.1;
 			};
 		};
-		D467D4452C6C86FA000C3993 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -671,6 +699,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D404A5102C6E4EC8005C3C6E /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		D404A5232C6F2EA4005C3C6E /* TextFieldEffects */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D404A5222C6F2EA4005C3C6E /* XCRemoteSwiftPackageReference "TextFieldEffects" */;
+			productName = TextFieldEffects;
 		};
 		D467D43E2C6C86B6000C3993 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -686,11 +719,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D467D4402C6C86CC000C3993 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
-		};
-		D467D4462C6C86FA000C3993 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D467D4452C6C86FA000C3993 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
