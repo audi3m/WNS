@@ -10,18 +10,9 @@ import SnapKit
 
 final class JoinViewController: UIViewController {
     
-    let emailField: UITextField = {
-        let field = UITextField()
-        field.placeholder = "이메일 주소"
-        field.borderStyle = .roundedRect
-        field.font = .systemFont(ofSize: 15)
-        return field
-    }()
-    let emailValidLabel: UILabel = {
-        let label = UILabel()
-        label.text = "유효한 이메일입니다"
-        label.font = .systemFont(ofSize: 12)
-        return label
+    let emailField: JoinField = {
+        let view = JoinField(type: .email)
+        return view
     }()
     let emailDuplicationCheckButton: UIButton = {
         let button = UIButton()
@@ -31,62 +22,35 @@ final class JoinViewController: UIViewController {
         button.backgroundColor = .systemGray2
         return button
     }()
-    let passwordField: UITextField = {
-        let field = UITextField()
-        field.placeholder = "비밀번호"
-        field.borderStyle = .roundedRect
-        field.font = .systemFont(ofSize: 15)
-        return field
+    let passwordField: JoinField = {
+        let view = JoinField(type: .password)
+        return view
     }()
-    let passwordValidLabel: UILabel = {
-        let label = UILabel()
-        label.text = "유효한 비밀번호입니다"
-        label.font = .systemFont(ofSize: 12)
-        return label
+    let nicknameField: JoinField = {
+        let view = JoinField(type: .nickname)
+        return view
     }()
-    let nicknameField: UITextField = {
-        let field = UITextField()
-        field.placeholder = "닉네임"
-        field.borderStyle = .roundedRect
-        field.font = .systemFont(ofSize: 15)
-        return field
-    }()
-    let nicknameValidLabel: UILabel = {
-        let label = UILabel()
-        label.text = "유효한 이메일입니다"
-        label.font = .systemFont(ofSize: 12)
-        return label
-    }()
-    let phoneNumberField: UITextField = {
-        let field = UITextField()
-        field.placeholder = "전화번호"
-        field.keyboardType = .numberPad
-        field.borderStyle = .roundedRect
-        field.font = .systemFont(ofSize: 15)
-        return field
-    }()
-    let phoneNumberValidLabel: UILabel = {
-        let label = UILabel()
-        label.text = "유효한 전화번호입니다"
-        label.font = .systemFont(ofSize: 12)
-        return label
+    let phoneNuberField: JoinField = {
+        let view = JoinField(type: .phoneNumber)
+        return view
     }()
     let birthdayLabel: UILabel = {
         let label = UILabel()
         label.text = "생일"
+        label.font = .systemFont(ofSize: 15)
         return label
-    }()
-    let birthdayPicker: UIDatePicker = {
-        let picker = UIDatePicker()
-        picker.preferredDatePickerStyle = .compact
-        picker.datePickerMode = .date
-        return picker
     }()
     let birthdayValidLabel: UILabel = {
         let label = UILabel()
         label.text = "만 19세 이상만 가입이 가능합니다"
         label.font = .systemFont(ofSize: 12)
         return label
+    }()
+    let birthdayPicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.preferredDatePickerStyle = .wheels
+        picker.datePickerMode = .date
+        return picker
     }()
     let signupButton: UIButton = {
         let button = UIButton()
@@ -105,8 +69,6 @@ final class JoinViewController: UIViewController {
     }
     
     
-    
-    
 }
 
 extension JoinViewController {
@@ -116,91 +78,65 @@ extension JoinViewController {
         navigationItem.title = "회원가입"
         
         view.addSubview(emailField)
-        view.addSubview(emailValidLabel)
         view.addSubview(emailDuplicationCheckButton)
         view.addSubview(passwordField)
-        view.addSubview(passwordValidLabel)
         view.addSubview(nicknameField)
-        view.addSubview(nicknameValidLabel)
-        view.addSubview(phoneNumberField)
-        view.addSubview(phoneNumberValidLabel)
+        view.addSubview(phoneNuberField)
         view.addSubview(birthdayLabel)
         view.addSubview(birthdayPicker)
         view.addSubview(birthdayValidLabel)
         view.addSubview(signupButton)
         
+//        emailField.validationLabel.text = "유효한 이메일입니다"
         emailField.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.leading.equalTo(view).inset(20)
             make.trailing.equalTo(emailDuplicationCheckButton.snp.leading).offset(-10)
-            make.height.equalTo(40)
-        }
-        
-        emailValidLabel.snp.makeConstraints { make in
-            make.top.equalTo(emailField.snp.bottom).offset(8)
-            make.horizontalEdges.equalTo(view).inset(24)
-            make.height.equalTo(12)
+            make.height.equalTo(60)
         }
         
         emailDuplicationCheckButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(emailField.textField.snp.top)
+            make.bottom.equalTo(emailField.textField.snp.bottom)
             make.trailing.equalTo(view).offset(-20)
             make.width.equalTo(70)
-            make.height.equalTo(40)
         }
         
         passwordField.snp.makeConstraints { make in
-            make.top.equalTo(emailValidLabel.snp.bottom).offset(20)
+            make.top.equalTo(emailField.snp.bottom).offset(15)
             make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(40)
-        }
-        
-        passwordValidLabel.snp.makeConstraints { make in
-            make.top.equalTo(passwordField.snp.bottom).offset(8)
-            make.horizontalEdges.equalTo(view).inset(24)
-            make.height.equalTo(12)
+            make.height.equalTo(60)
         }
         
         nicknameField.snp.makeConstraints { make in
-            make.top.equalTo(passwordValidLabel.snp.bottom).offset(20)
+            make.top.equalTo(passwordField.snp.bottom).offset(15)
             make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(40)
+            make.height.equalTo(60)
         }
         
-        nicknameValidLabel.snp.makeConstraints { make in
-            make.top.equalTo(nicknameField.snp.bottom).offset(8)
-            make.horizontalEdges.equalTo(view).inset(24)
-            make.height.equalTo(12)
-        }
-        
-        phoneNumberField.snp.makeConstraints { make in
-            make.top.equalTo(nicknameValidLabel.snp.bottom).offset(20)
+        phoneNuberField.snp.makeConstraints { make in
+            make.top.equalTo(nicknameField.snp.bottom).offset(15)
             make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(40)
-        }
-        
-        phoneNumberValidLabel.snp.makeConstraints { make in
-            make.top.equalTo(phoneNumberField.snp.bottom).offset(8)
-            make.horizontalEdges.equalTo(view).inset(24)
-            make.height.equalTo(12)
+            make.height.equalTo(60)
         }
         
         birthdayLabel.snp.makeConstraints { make in
-            make.top.equalTo(phoneNumberValidLabel.snp.bottom).offset(20)
+            make.top.equalTo(phoneNuberField.snp.bottom).offset(15)
             make.leading.equalTo(view).offset(20)
-            make.height.equalTo(40)
-        }
-        
-        birthdayPicker.snp.makeConstraints { make in
-            make.top.equalTo(phoneNumberValidLabel.snp.bottom).offset(20)
-            make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(40)
+            make.height.equalTo(15)
         }
         
         birthdayValidLabel.snp.makeConstraints { make in
-            make.top.equalTo(birthdayPicker.snp.bottom).offset(8)
-            make.horizontalEdges.equalTo(view).inset(24)
-            make.height.equalTo(12)
+            make.top.equalTo(phoneNuberField.snp.bottom).offset(15)
+            make.leading.equalTo(birthdayLabel.snp.trailing).offset(10)
+            make.trailing.equalTo(view).offset(-20)
+            make.height.equalTo(15)
+        }
+        
+        birthdayPicker.snp.makeConstraints { make in
+            make.top.equalTo(birthdayLabel.snp.bottom).offset(8)
+            make.horizontalEdges.equalTo(view).inset(20)
+            make.height.equalTo(100)
         }
         
         signupButton.snp.makeConstraints { make in

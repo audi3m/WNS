@@ -37,12 +37,11 @@ extension NetworkManager {
                         if let statusCode = response.response?.statusCode {
                             switch statusCode {
                             case 400:
-                                print("필수값을 채워주세요")
+                                print("에러코드: \(statusCode) 필수값을 채워주세요")
                             case 409:
-                                print("이미 가입된 유저입니다")
+                                print("에러코드: \(statusCode) 이미 가입된 유저입니다")
                             default:
-                                print("Failed")
-                                print(failure)
+                                print("Unknown Error: \(failure)")
                             }
                         }
                     }
@@ -82,7 +81,7 @@ extension NetworkManager {
         }
     }
     
-    func login(body: LoginBody) {
+    func login(body: LoginBody, handler: @escaping () -> Void) {
         do {
             let request = try Router.login(body: body).asURLRequest()
             AF.request(request)
@@ -91,19 +90,22 @@ extension NetworkManager {
                     switch response.result {
                     case .success(let response):
                         dump(response)
+                        handler()
                     case .failure(let failure):
                         if let statusCode = response.response?.statusCode {
                             switch statusCode {
                             case 400:
-                                print("필수값을 채워주세요")
+                                print("에러코드: \(statusCode) 필수값을 채워주세요")
                             case 401:
-                                print("계정을 확인해주세요")
+                                print("에러코드: \(statusCode) 계정을 확인해주세요")
                             default:
                                 print("Failed: \(failure)")
                             }
                         }
+                        
+                        
                     }
-            }
+                }
             
         } catch {
             print(error)

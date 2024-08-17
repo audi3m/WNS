@@ -29,7 +29,8 @@ final class MainPostViewController: UIViewController {
 extension MainPostViewController {
     
     private func configureView() {
-        
+        view.backgroundColor = .systemBackground
+        navigationItem.title = "POST"
     }
     
     
