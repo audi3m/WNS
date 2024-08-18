@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct EmailValidationResponse: Decodable {
+struct EmailDuplicateCheckResponse: Decodable {
     let message: String
 }

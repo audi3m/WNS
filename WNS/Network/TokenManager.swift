@@ -12,12 +12,15 @@ final class TokenManager {
     static let shared = TokenManager()
     private init() { }
     
+    
+    
     var access: String {
         get {
             return UserDefaults.standard.string(forKey: "access") ?? ""
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "access")
+            print("액세스 토큰 재설정")
         }
     }
     
@@ -27,6 +30,7 @@ final class TokenManager {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "refresh")
+            print("리프레시 토큰 재설정")
         }
     }
     

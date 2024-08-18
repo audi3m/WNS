@@ -18,8 +18,7 @@ final class JoinField: UIView {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "  이메일 주소  "
-//        label.textColor = .secondaryLabel
+        label.text = "  이메일 주소  " 
         label.font = .systemFont(ofSize: 12)
         label.backgroundColor = .systemBackground
         return label

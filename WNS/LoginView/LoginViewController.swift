@@ -7,8 +7,10 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: BaseViewController {
     
     let imageView: UIImageView = {
         let view = UIImageView()
@@ -43,17 +45,47 @@ final class LoginViewController: UIViewController {
         return button
     }()
     
-    
+    let viewModel = LoginViewModel()
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        
+        rxBind()
     }
-     
+    
     
 }
 
+// Rx Functions
+extension LoginViewController {
+    
+    private func rxBind() {
+        
+        let input = LoginViewModel.Input(loginTap: loginButton.rx.tap,
+                                         signupTap: signupButton.rx.tap)
+        let output = viewModel.transform(input: input)
+        
+//        output.text
+//            .map { joke in
+//                return joke.joke
+//            }
+//            .drive(emailTextField.rx.text)
+//            .disposed(by: disposeBag)
+//        
+//        output.text
+//            .map { value in
+//                return "농담: \(value.id)"
+//            }
+//            .drive(navigationItem.rx.title)
+//            .disposed(by: disposeBag)
+         
+        
+    }
+    
+}
+
+// Network Functions
 extension LoginViewController {
     
     @objc private func login() {
@@ -63,9 +95,14 @@ extension LoginViewController {
         
         let loginInfo = LoginBody(email: email, password: password)
         
-        NetworkManager.shared.login(body: loginInfo) {
+        NetworkManager.shared.login(body: loginInfo) { response in
+            TokenManager.shared.access = response.accessToken
+            TokenManager.shared.refresh = response.refreshToken
+            
             let vc = MainPostViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.resetRootViewController(root: vc, withNav: true)
+        } failHandler: { message in
+            self.showAlert(title: "오류", message: message, ok: "확인") { }
         }
         
     }
@@ -80,7 +117,6 @@ extension LoginViewController {
 extension LoginViewController {
     
     private func configureView() {
-        view.backgroundColor = .systemBackground
         navigationItem.title = "로그인"
         
         view.addSubview(imageView)

@@ -10,7 +10,7 @@
 		D404A4E22C6D84FC005C3C6E /* LikeBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4E12C6D84FC005C3C6E /* LikeBody.swift */; };
 		D404A4E42C6D862E005C3C6E /* ProfileBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4E32C6D862E005C3C6E /* ProfileBody.swift */; };
 		D404A4E72C6DA0EC005C3C6E /* JoinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4E62C6DA0EC005C3C6E /* JoinResponse.swift */; };
-		D404A4E92C6DA90B005C3C6E /* EmailValidationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4E82C6DA90B005C3C6E /* EmailValidationResponse.swift */; };
+		D404A4E92C6DA90B005C3C6E /* EmailDuplicateCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4E82C6DA90B005C3C6E /* EmailDuplicateCheckResponse.swift */; };
 		D404A4EB2C6DA97B005C3C6E /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4EA2C6DA97B005C3C6E /* LoginResponse.swift */; };
 		D404A4ED2C6DA9A0005C3C6E /* RefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4EC2C6DA9A0005C3C6E /* RefreshResponse.swift */; };
 		D404A4EF2C6DA9D9005C3C6E /* WithdrawResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4EE2C6DA9D9005C3C6E /* WithdrawResponse.swift */; };
@@ -40,6 +40,24 @@
 		D404A52D2C6F875E005C3C6E /* NetworkTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A52C2C6F875E005C3C6E /* NetworkTestView.swift */; };
 		D404A52F2C6F9435005C3C6E /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A52E2C6F9435005C3C6E /* ErrorResponse.swift */; };
 		D404A5332C706E24005C3C6E /* JoinField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5322C706E24005C3C6E /* JoinField.swift */; };
+		D404A5352C7085E0005C3C6E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5342C7085E0005C3C6E /* BaseViewController.swift */; };
+		D404A5372C708686005C3C6E /* ViewController+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5362C708686005C3C6E /* ViewController+Ex.swift */; };
+		D404A5392C70871B005C3C6E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5382C70871B005C3C6E /* LoginViewModel.swift */; };
+		D404A53C2C7087B8005C3C6E /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D404A53B2C7087B8005C3C6E /* IQKeyboardManagerSwift */; };
+		D404A53E2C70889E005C3C6E /* MainPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A53D2C70889E005C3C6E /* MainPostViewModel.swift */; };
+		D404A5402C7088B4005C3C6E /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A53F2C7088B4005C3C6E /* DetailViewModel.swift */; };
+		D404A5422C70E1A1005C3C6E /* MainPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5412C70E1A1005C3C6E /* MainPostTableViewCell.swift */; };
+		D404A5442C71B44A005C3C6E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5432C71B44A005C3C6E /* ProfileViewController.swift */; };
+		D404A5462C71B5BC005C3C6E /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5452C71B5BC005C3C6E /* CommentsViewController.swift */; };
+		D404A5482C71B62F005C3C6E /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5472C71B62F005C3C6E /* CommentTableViewCell.swift */; };
+		D404A54A2C71B7DE005C3C6E /* NSObject+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5492C71B7DE005C3C6E /* NSObject+Ex.swift */; };
+		D404A54C2C71BAD0005C3C6E /* CommentTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A54B2C71BAD0005C3C6E /* CommentTextFieldView.swift */; };
+		D404A54F2C7204B6005C3C6E /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A54E2C7204B6005C3C6E /* NewPostViewController.swift */; };
+		D404A5512C720AB6005C3C6E /* CountAndLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5502C720AB6005C3C6E /* CountAndLabelView.swift */; };
+		D404A5542C720D38005C3C6E /* FollowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5532C720D38005C3C6E /* FollowsViewController.swift */; };
+		D404A5562C720E95005C3C6E /* FollowsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5552C720E95005C3C6E /* FollowsTableViewCell.swift */; };
+		D404A5582C721063005C3C6E /* FollowsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5572C721063005C3C6E /* FollowsViewModel.swift */; };
+		D404A55A2C721108005C3C6E /* FollowsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5592C721108005C3C6E /* FollowsListView.swift */; };
 		D467D4212C6C7FFA000C3993 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4202C6C7FFA000C3993 /* AppDelegate.swift */; };
 		D467D4232C6C7FFA000C3993 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */; };
 		D467D42A2C6C7FFB000C3993 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D467D4292C6C7FFB000C3993 /* Assets.xcassets */; };
@@ -57,7 +75,7 @@
 		D467D4512C6CD94C000C3993 /* DetailReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4502C6CD94C000C3993 /* DetailReviewViewController.swift */; };
 		D467D4532C6CD98C000C3993 /* MainPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4522C6CD98C000C3993 /* MainPostViewController.swift */; };
 		D467D4552C6CDDAD000C3993 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4542C6CDDAD000C3993 /* Router.swift */; };
-		D467D4582C6CE03A000C3993 /* EmailValidationBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4572C6CE03A000C3993 /* EmailValidationBody.swift */; };
+		D467D4582C6CE03A000C3993 /* EmailDuplicationCheckBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4572C6CE03A000C3993 /* EmailDuplicationCheckBody.swift */; };
 		D467D45A2C6CE188000C3993 /* LoginBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4592C6CE188000C3993 /* LoginBody.swift */; };
 		D467D45C2C6CE3FA000C3993 /* PostImageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D45B2C6CE3FA000C3993 /* PostImageBody.swift */; };
 		D467D45E2C6CE840000C3993 /* PostBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D45D2C6CE840000C3993 /* PostBody.swift */; };
@@ -68,7 +86,7 @@
 		D404A4E12C6D84FC005C3C6E /* LikeBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeBody.swift; sourceTree = "<group>"; };
 		D404A4E32C6D862E005C3C6E /* ProfileBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBody.swift; sourceTree = "<group>"; };
 		D404A4E62C6DA0EC005C3C6E /* JoinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinResponse.swift; sourceTree = "<group>"; };
-		D404A4E82C6DA90B005C3C6E /* EmailValidationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationResponse.swift; sourceTree = "<group>"; };
+		D404A4E82C6DA90B005C3C6E /* EmailDuplicateCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailDuplicateCheckResponse.swift; sourceTree = "<group>"; };
 		D404A4EA2C6DA97B005C3C6E /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		D404A4EC2C6DA9A0005C3C6E /* RefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResponse.swift; sourceTree = "<group>"; };
 		D404A4EE2C6DA9D9005C3C6E /* WithdrawResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawResponse.swift; sourceTree = "<group>"; };
@@ -96,6 +114,23 @@
 		D404A52C2C6F875E005C3C6E /* NetworkTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTestView.swift; sourceTree = "<group>"; };
 		D404A52E2C6F9435005C3C6E /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		D404A5322C706E24005C3C6E /* JoinField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinField.swift; sourceTree = "<group>"; };
+		D404A5342C7085E0005C3C6E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		D404A5362C708686005C3C6E /* ViewController+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Ex.swift"; sourceTree = "<group>"; };
+		D404A5382C70871B005C3C6E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		D404A53D2C70889E005C3C6E /* MainPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPostViewModel.swift; sourceTree = "<group>"; };
+		D404A53F2C7088B4005C3C6E /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		D404A5412C70E1A1005C3C6E /* MainPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPostTableViewCell.swift; sourceTree = "<group>"; };
+		D404A5432C71B44A005C3C6E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		D404A5452C71B5BC005C3C6E /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		D404A5472C71B62F005C3C6E /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		D404A5492C71B7DE005C3C6E /* NSObject+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Ex.swift"; sourceTree = "<group>"; };
+		D404A54B2C71BAD0005C3C6E /* CommentTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextFieldView.swift; sourceTree = "<group>"; };
+		D404A54E2C7204B6005C3C6E /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
+		D404A5502C720AB6005C3C6E /* CountAndLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountAndLabelView.swift; sourceTree = "<group>"; };
+		D404A5532C720D38005C3C6E /* FollowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsViewController.swift; sourceTree = "<group>"; };
+		D404A5552C720E95005C3C6E /* FollowsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsTableViewCell.swift; sourceTree = "<group>"; };
+		D404A5572C721063005C3C6E /* FollowsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsViewModel.swift; sourceTree = "<group>"; };
+		D404A5592C721108005C3C6E /* FollowsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsListView.swift; sourceTree = "<group>"; };
 		D467D41D2C6C7FFA000C3993 /* WNS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WNS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D467D4202C6C7FFA000C3993 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,7 +147,7 @@
 		D467D4502C6CD94C000C3993 /* DetailReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReviewViewController.swift; sourceTree = "<group>"; };
 		D467D4522C6CD98C000C3993 /* MainPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPostViewController.swift; sourceTree = "<group>"; };
 		D467D4542C6CDDAD000C3993 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		D467D4572C6CE03A000C3993 /* EmailValidationBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationBody.swift; sourceTree = "<group>"; };
+		D467D4572C6CE03A000C3993 /* EmailDuplicationCheckBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailDuplicationCheckBody.swift; sourceTree = "<group>"; };
 		D467D4592C6CE188000C3993 /* LoginBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginBody.swift; sourceTree = "<group>"; };
 		D467D45B2C6CE3FA000C3993 /* PostImageBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageBody.swift; sourceTree = "<group>"; };
 		D467D45D2C6CE840000C3993 /* PostBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBody.swift; sourceTree = "<group>"; };
@@ -129,6 +164,7 @@
 				D467D43F2C6C86B6000C3993 /* Alamofire in Frameworks */,
 				D404A5122C6E4EC8005C3C6E /* SnapKit in Frameworks */,
 				D404A5242C6F2EA4005C3C6E /* TextFieldEffects in Frameworks */,
+				D404A53C2C7087B8005C3C6E /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				D404A4E62C6DA0EC005C3C6E /* JoinResponse.swift */,
-				D404A4E82C6DA90B005C3C6E /* EmailValidationResponse.swift */,
+				D404A4E82C6DA90B005C3C6E /* EmailDuplicateCheckResponse.swift */,
 				D404A4EA2C6DA97B005C3C6E /* LoginResponse.swift */,
 				D404A4EC2C6DA9A0005C3C6E /* RefreshResponse.swift */,
 				D404A4EE2C6DA9D9005C3C6E /* WithdrawResponse.swift */,
@@ -163,45 +199,55 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
-		D404A5132C6E4F09005C3C6E /* New Group */ = {
+		D404A5132C6E4F09005C3C6E /* Comments */ = {
 			isa = PBXGroup;
 			children = (
+				D404A5452C71B5BC005C3C6E /* CommentsViewController.swift */,
+				D404A5472C71B62F005C3C6E /* CommentTableViewCell.swift */,
+				D404A54B2C71BAD0005C3C6E /* CommentTextFieldView.swift */,
 			);
-			path = "New Group";
+			path = Comments;
 			sourceTree = "<group>";
 		};
-		D404A5142C6E4F0B005C3C6E /* New Group1 */ = {
+		D404A5142C6E4F0B005C3C6E /* CustomDesign */ = {
 			isa = PBXGroup;
 			children = (
+				D404A5322C706E24005C3C6E /* JoinField.swift */,
+				D404A5502C720AB6005C3C6E /* CountAndLabelView.swift */,
 			);
-			path = "New Group1";
+			path = CustomDesign;
 			sourceTree = "<group>";
 		};
-		D404A5152C6E4F0F005C3C6E /* New Group2 */ = {
+		D404A5152C6E4F0F005C3C6E /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
+				D404A5432C71B44A005C3C6E /* ProfileViewController.swift */,
 			);
-			path = "New Group2";
+			path = ProfileView;
 			sourceTree = "<group>";
 		};
-		D404A5162C6E4F11005C3C6E /* New Group3 */ = {
+		D404A5162C6E4F11005C3C6E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D404A5362C708686005C3C6E /* ViewController+Ex.swift */,
+				D404A5492C71B7DE005C3C6E /* NSObject+Ex.swift */,
 			);
-			path = "New Group3";
+			path = Extensions;
 			sourceTree = "<group>";
 		};
-		D404A5172C6E4F13005C3C6E /* New Group4 */ = {
+		D404A5172C6E4F13005C3C6E /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				D404A5342C7085E0005C3C6E /* BaseViewController.swift */,
 			);
-			path = "New Group4";
+			path = Base;
 			sourceTree = "<group>";
 		};
 		D404A5182C6E4F15005C3C6E /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
 				D467D4502C6CD94C000C3993 /* DetailReviewViewController.swift */,
+				D404A53F2C7088B4005C3C6E /* DetailViewModel.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -210,6 +256,9 @@
 			isa = PBXGroup;
 			children = (
 				D467D4522C6CD98C000C3993 /* MainPostViewController.swift */,
+				D404A53D2C70889E005C3C6E /* MainPostViewModel.swift */,
+				D404A5412C70E1A1005C3C6E /* MainPostTableViewCell.swift */,
+				D404A54D2C7204AB005C3C6E /* NewPost */,
 			);
 			path = PostsView;
 			sourceTree = "<group>";
@@ -218,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				D467D44E2C6CD892000C3993 /* LoginViewController.swift */,
+				D404A5382C70871B005C3C6E /* LoginViewModel.swift */,
 			);
 			path = LoginView;
 			sourceTree = "<group>";
@@ -227,7 +277,6 @@
 			children = (
 				D467D44C2C6CB39C000C3993 /* JoinViewController.swift */,
 				D404A51C2C6E4F2D005C3C6E /* JoinViewModel.swift */,
-				D404A5322C706E24005C3C6E /* JoinField.swift */,
 			);
 			path = SignupView;
 			sourceTree = "<group>";
@@ -240,6 +289,25 @@
 				D404A52A2C6F7E05005C3C6E /* HashQuery.swift */,
 			);
 			path = QueryString;
+			sourceTree = "<group>";
+		};
+		D404A54D2C7204AB005C3C6E /* NewPost */ = {
+			isa = PBXGroup;
+			children = (
+				D404A54E2C7204B6005C3C6E /* NewPostViewController.swift */,
+			);
+			path = NewPost;
+			sourceTree = "<group>";
+		};
+		D404A5522C720D24005C3C6E /* FollowView */ = {
+			isa = PBXGroup;
+			children = (
+				D404A5532C720D38005C3C6E /* FollowsViewController.swift */,
+				D404A5592C721108005C3C6E /* FollowsListView.swift */,
+				D404A5552C720E95005C3C6E /* FollowsTableViewCell.swift */,
+				D404A5572C721063005C3C6E /* FollowsViewModel.swift */,
+			);
+			path = FollowView;
 			sourceTree = "<group>";
 		};
 		D467D4142C6C7FFA000C3993 = {
@@ -269,12 +337,13 @@
 				D404A51B2C6E4F1B005C3C6E /* SignupView */,
 				D404A51A2C6E4F19005C3C6E /* LoginView */,
 				D404A5192C6E4F17005C3C6E /* PostsView */,
+				D404A5132C6E4F09005C3C6E /* Comments */,
 				D404A5182C6E4F15005C3C6E /* DetailView */,
-				D404A5172C6E4F13005C3C6E /* New Group4 */,
-				D404A5162C6E4F11005C3C6E /* New Group3 */,
-				D404A5152C6E4F0F005C3C6E /* New Group2 */,
-				D404A5142C6E4F0B005C3C6E /* New Group1 */,
-				D404A5132C6E4F09005C3C6E /* New Group */,
+				D404A5522C720D24005C3C6E /* FollowView */,
+				D404A5152C6E4F0F005C3C6E /* ProfileView */,
+				D404A5172C6E4F13005C3C6E /* Base */,
+				D404A5162C6E4F11005C3C6E /* Extensions */,
+				D404A5142C6E4F0B005C3C6E /* CustomDesign */,
 				D467D4292C6C7FFB000C3993 /* Assets.xcassets */,
 				D467D42B2C6C7FFC000C3993 /* LaunchScreen.storyboard */,
 				D467D42E2C6C7FFC000C3993 /* Info.plist */,
@@ -302,7 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				D467D44A2C6C8758000C3993 /* JoinBody.swift */,
-				D467D4572C6CE03A000C3993 /* EmailValidationBody.swift */,
+				D467D4572C6CE03A000C3993 /* EmailDuplicationCheckBody.swift */,
 				D467D4592C6CE188000C3993 /* LoginBody.swift */,
 				D467D45B2C6CE3FA000C3993 /* PostImageBody.swift */,
 				D467D45D2C6CE840000C3993 /* PostBody.swift */,
@@ -335,6 +404,7 @@
 				D467D4432C6C86CC000C3993 /* RxSwift */,
 				D404A5112C6E4EC8005C3C6E /* SnapKit */,
 				D404A5232C6F2EA4005C3C6E /* TextFieldEffects */,
+				D404A53B2C7087B8005C3C6E /* IQKeyboardManagerSwift */,
 			);
 			productName = WNS;
 			productReference = D467D41D2C6C7FFA000C3993 /* WNS.app */;
@@ -369,6 +439,7 @@
 				D467D4402C6C86CC000C3993 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				D404A5102C6E4EC8005C3C6E /* XCRemoteSwiftPackageReference "SnapKit" */,
 				D404A5222C6F2EA4005C3C6E /* XCRemoteSwiftPackageReference "TextFieldEffects" */,
+				D404A53A2C7087B8005C3C6E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = D467D41E2C6C7FFA000C3993 /* Products */;
 			projectDirPath = "";
@@ -402,48 +473,65 @@
 				D404A5032C6DFE5F005C3C6E /* LikePostResponse.swift in Sources */,
 				D467D44D2C6CB39C000C3993 /* JoinViewController.swift in Sources */,
 				D404A5092C6E2CA8005C3C6E /* EditMyProfileResponse.swift in Sources */,
+				D404A5512C720AB6005C3C6E /* CountAndLabelView.swift in Sources */,
 				D404A4ED2C6DA9A0005C3C6E /* RefreshResponse.swift in Sources */,
+				D404A5442C71B44A005C3C6E /* ProfileViewController.swift in Sources */,
 				D404A4F32C6DB78D005C3C6E /* PostResponse.swift in Sources */,
+				D404A5422C70E1A1005C3C6E /* MainPostTableViewCell.swift in Sources */,
 				D467D43A2C6C85F4000C3993 /* TokenManager.swift in Sources */,
 				D404A4FB2C6DFC2C005C3C6E /* GetUserPostResponse.swift in Sources */,
 				D404A5052C6E0019005C3C6E /* FollowResponse.swift in Sources */,
+				D404A55A2C721108005C3C6E /* FollowsListView.swift in Sources */,
 				D404A4E22C6D84FC005C3C6E /* LikeBody.swift in Sources */,
+				D404A5582C721063005C3C6E /* FollowsViewModel.swift in Sources */,
+				D404A5462C71B5BC005C3C6E /* CommentsViewController.swift in Sources */,
 				D404A5292C6F7DAD005C3C6E /* GetLikePostQuery.swift in Sources */,
 				D467D4602C6CE99C000C3993 /* CommentBody.swift in Sources */,
 				D404A50F2C6E302E005C3C6E /* NetworkManager.swift in Sources */,
 				D404A50D2C6E2DE9005C3C6E /* HashtagResponse.swift in Sources */,
+				D404A54A2C71B7DE005C3C6E /* NSObject+Ex.swift in Sources */,
 				D404A4FD2C6DFCD9005C3C6E /* WriteCommentResponse.swift in Sources */,
 				D404A52F2C6F9435005C3C6E /* ErrorResponse.swift in Sources */,
-				D404A4E92C6DA90B005C3C6E /* EmailValidationResponse.swift in Sources */,
+				D404A4E92C6DA90B005C3C6E /* EmailDuplicateCheckResponse.swift in Sources */,
 				D404A4F52C6DBAAB005C3C6E /* GetAllPostsResponse.swift in Sources */,
 				D467D4512C6CD94C000C3993 /* DetailReviewViewController.swift in Sources */,
 				D404A5332C706E24005C3C6E /* JoinField.swift in Sources */,
 				D467D45A2C6CE188000C3993 /* LoginBody.swift in Sources */,
 				D467D4552C6CDDAD000C3993 /* Router.swift in Sources */,
+				D404A5562C720E95005C3C6E /* FollowsTableViewCell.swift in Sources */,
 				D467D45E2C6CE840000C3993 /* PostBody.swift in Sources */,
 				D467D44B2C6C8758000C3993 /* JoinBody.swift in Sources */,
 				D404A5072C6E2BB7005C3C6E /* GetMyProfileResponse.swift in Sources */,
 				D404A5272C6F7D10005C3C6E /* GetAllPostQuery.swift in Sources */,
 				D404A4E42C6D862E005C3C6E /* ProfileBody.swift in Sources */,
 				D404A50B2C6E2D51005C3C6E /* GetOthersProfileResponse.swift in Sources */,
+				D404A5352C7085E0005C3C6E /* BaseViewController.swift in Sources */,
 				D467D45C2C6CE3FA000C3993 /* PostImageBody.swift in Sources */,
 				D404A4F72C6DC422005C3C6E /* GetSomePostResponse.swift in Sources */,
 				D404A51D2C6E4F2D005C3C6E /* JoinViewModel.swift in Sources */,
 				D467D4212C6C7FFA000C3993 /* AppDelegate.swift in Sources */,
+				D404A5542C720D38005C3C6E /* FollowsViewController.swift in Sources */,
 				D404A5212C6F28A5005C3C6E /* TestViewController.swift in Sources */,
+				D404A5402C7088B4005C3C6E /* DetailViewModel.swift in Sources */,
 				D467D4382C6C8070000C3993 /* APIKey.swift in Sources */,
+				D404A53E2C70889E005C3C6E /* MainPostViewModel.swift in Sources */,
 				D404A52B2C6F7E05005C3C6E /* HashQuery.swift in Sources */,
-				D467D4582C6CE03A000C3993 /* EmailValidationBody.swift in Sources */,
+				D467D4582C6CE03A000C3993 /* EmailDuplicationCheckBody.swift in Sources */,
+				D404A5392C70871B005C3C6E /* LoginViewModel.swift in Sources */,
+				D404A54F2C7204B6005C3C6E /* NewPostViewController.swift in Sources */,
 				D404A4F12C6DB762005C3C6E /* PostImageResponse.swift in Sources */,
+				D404A5372C708686005C3C6E /* ViewController+Ex.swift in Sources */,
 				D404A4EF2C6DA9D9005C3C6E /* WithdrawResponse.swift in Sources */,
 				D404A4F92C6DFB99005C3C6E /* EditPostResponse.swift in Sources */,
 				D467D4232C6C7FFA000C3993 /* SceneDelegate.swift in Sources */,
+				D404A54C2C71BAD0005C3C6E /* CommentTextFieldView.swift in Sources */,
 				D404A5012C6DFE0C005C3C6E /* LikeResponse.swift in Sources */,
 				D467D4532C6CD98C000C3993 /* MainPostViewController.swift in Sources */,
 				D404A4FF2C6DFDA8005C3C6E /* EditCommentResponse.swift in Sources */,
 				D467D44F2C6CD892000C3993 /* LoginViewController.swift in Sources */,
 				D404A4EB2C6DA97B005C3C6E /* LoginResponse.swift in Sources */,
 				D467D4492C6C8738000C3993 /* TargetType.swift in Sources */,
+				D404A5482C71B62F005C3C6E /* CommentTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,6 +772,14 @@
 				minimumVersion = 1.7.0;
 			};
 		};
+		D404A53A2C7087B8005C3C6E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.1;
+			};
+		};
 		D467D43D2C6C86B6000C3993 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -712,6 +808,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D404A5222C6F2EA4005C3C6E /* XCRemoteSwiftPackageReference "TextFieldEffects" */;
 			productName = TextFieldEffects;
+		};
+		D404A53B2C7087B8005C3C6E /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D404A53A2C7087B8005C3C6E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		D467D43E2C6C86B6000C3993 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

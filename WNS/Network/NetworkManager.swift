@@ -52,15 +52,18 @@ extension NetworkManager {
         }
     }
     
-    func emailValidation(body: EmailValidationBody) {
+    func emailDuplicateCheck(body: EmailDuplicationCheckBody,
+                             handler: @escaping (String) -> Void,
+                             onError: @escaping (String) -> Void) {
         do {
-            let request = try Router.emailValidation(body: body).asURLRequest()
+            let request = try Router.emailDuplicateCheck(body: body).asURLRequest()
             AF.request(request)
                 .validate(statusCode: 200...299)
-                .responseDecodable(of: EmailValidationResponse.self) { response in
+                .responseDecodable(of: EmailDuplicateCheckResponse.self) { response in
                     switch response.result {
                     case .success(let response):
                         dump(response)
+                        handler(response.message)
                     case .failure(let failure):
                         if let statusCode = response.response?.statusCode {
                             switch statusCode {
@@ -68,6 +71,7 @@ extension NetworkManager {
                                 print("필수값을 채워주세요")
                             case 409:
                                 print("이미 사용중인 이메일입니다")
+                                onError("이미 사용중인 이메일입니다")
                             default:
                                 print("Failed")
                                 print(failure)
@@ -81,7 +85,7 @@ extension NetworkManager {
         }
     }
     
-    func login(body: LoginBody, handler: @escaping () -> Void) {
+    func login(body: LoginBody, handler: @escaping (LoginResponse) -> Void, failHandler: @escaping (String) -> Void) {
         do {
             let request = try Router.login(body: body).asURLRequest()
             AF.request(request)
@@ -90,14 +94,16 @@ extension NetworkManager {
                     switch response.result {
                     case .success(let response):
                         dump(response)
-                        handler()
+                        handler(response)
                     case .failure(let failure):
                         if let statusCode = response.response?.statusCode {
                             switch statusCode {
                             case 400:
                                 print("에러코드: \(statusCode) 필수값을 채워주세요")
+                                failHandler("에러코드: \(statusCode) 필수값을 채워주세요")
                             case 401:
                                 print("에러코드: \(statusCode) 계정을 확인해주세요")
+                                failHandler("에러코드: \(statusCode) 계정을 확인해주세요")
                             default:
                                 print("Failed: \(failure)")
                             }

@@ -1,13 +1,13 @@
 //
-//  JoinViewModel.swift
+//  DetailViewModel.swift
 //  WNS
 //
-//  Created by J Oh on 8/15/24.
+//  Created by J Oh on 8/17/24.
 //
 
 import Foundation
 
-final class JoinViewModel {
+final class DetailViewModel {
     
     func transform(input: Input) -> Output {
         
@@ -18,7 +18,7 @@ final class JoinViewModel {
     
 }
 
-extension JoinViewModel {
+extension DetailViewModel {
     
     struct Input {
         

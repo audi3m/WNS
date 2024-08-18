@@ -7,19 +7,22 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
-final class JoinViewController: UIViewController {
+final class JoinViewController: BaseViewController {
     
     let emailField: JoinField = {
         let view = JoinField(type: .email)
         return view
     }()
-    let emailDuplicationCheckButton: UIButton = {
+    lazy var emailDuplicationCheckButton: UIButton = {
         let button = UIButton()
         button.setTitle("중복 확인", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14)
         button.layer.cornerRadius = 8
         button.backgroundColor = .systemGray2
+        button.addTarget(self, action: #selector(duplicateCheck), for: .touchUpInside)
         return button
     }()
     let passwordField: JoinField = {
@@ -37,7 +40,7 @@ final class JoinViewController: UIViewController {
     let birthdayLabel: UILabel = {
         let label = UILabel()
         label.text = "생일"
-        label.font = .systemFont(ofSize: 15)
+        label.font = .systemFont(ofSize: 12)
         return label
     }()
     let birthdayValidLabel: UILabel = {
@@ -52,29 +55,76 @@ final class JoinViewController: UIViewController {
         picker.datePickerMode = .date
         return picker
     }()
-    let signupButton: UIButton = {
+    lazy var signupButton: UIButton = {
         let button = UIButton()
         button.setTitle("가입하기", for: .normal)
         button.configuration = .borderedProminent()
+        button.addTarget(self, action: #selector(signup), for: .touchUpInside)
         return button
     }()
     
     let viewModel = JoinViewModel()
+    var validatedEmail = ""
+    var validated = false
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        
+        rxBind()
     }
     
     
 }
 
+// Rx Functions
+extension JoinViewController {
+    
+    private func rxBind() {
+        
+    }
+    
+}
+
+// Network Functions
+extension JoinViewController {
+    
+    @objc private func signup() {
+        
+    }
+    
+    @objc private func duplicateCheck() {
+        if let email = emailField.textField.text {
+            guard !email.isEmpty else {
+                self.showAlert(title: "", message: "이메일을 입력하세요", ok: "확인") { }
+                return
+            }
+            let body = EmailDuplicationCheckBody(email: email)
+            NetworkManager.shared.emailDuplicateCheck(body: body) { message in
+                self.showAlert(title: "", message: message, ok: "확인") {
+                    self.setDuplicateButton(checked: true)
+                    self.validatedEmail = email
+                    // validatedEmail 변하면 다시 회색
+                }
+            } onError: { message in
+                self.showAlert(title: "", message: message, ok: "확인") { }
+            }
+        }
+    }
+    
+    private func setDuplicateButton(checked: Bool) {
+        emailDuplicationCheckButton.backgroundColor = checked ? .systemGreen : .systemGray2
+        emailDuplicationCheckButton.setTitle(checked ? "가능" : "중복 확인", for: .normal)
+        emailDuplicationCheckButton.isEnabled = checked ? false : true
+        
+    }
+    
+}
+
+// View
 extension JoinViewController {
     
     private func configureView() {
-        view.backgroundColor = .systemBackground
         navigationItem.title = "회원가입"
         
         view.addSubview(emailField)
@@ -87,9 +137,8 @@ extension JoinViewController {
         view.addSubview(birthdayValidLabel)
         view.addSubview(signupButton)
         
-//        emailField.validationLabel.text = "유효한 이메일입니다"
         emailField.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
             make.leading.equalTo(view).inset(20)
             make.trailing.equalTo(emailDuplicationCheckButton.snp.leading).offset(-10)
             make.height.equalTo(60)
@@ -136,7 +185,7 @@ extension JoinViewController {
         birthdayPicker.snp.makeConstraints { make in
             make.top.equalTo(birthdayLabel.snp.bottom).offset(8)
             make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(100)
+            make.height.equalTo(120)
         }
         
         signupButton.snp.makeConstraints { make in

@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct EmailValidationBody: Encodable {
+struct EmailDuplicationCheckBody: Encodable {
     let email: String
 }

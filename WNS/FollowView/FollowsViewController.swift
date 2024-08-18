@@ -1,8 +1,8 @@
 //
-//  DetailReviewViewController.swift
+//  FollowsViewController.swift
 //  WNS
 //
-//  Created by J Oh on 8/14/24.
+//  Created by J Oh on 8/18/24.
 //
 
 import UIKit
@@ -10,7 +10,8 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-final class DetailReviewViewController: BaseViewController {
+final class FollowsViewController: BaseViewController {
+    
     
     
     
@@ -29,9 +30,15 @@ final class DetailReviewViewController: BaseViewController {
     
 }
 
-extension DetailReviewViewController {
+extension FollowsViewController {
     
     private func configureView() {
+        navigationItem.title = "닉네임"
+        
+        
+        
+        
+        
         
     }
     
