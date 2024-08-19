@@ -23,13 +23,34 @@ final class CommentsViewController: BaseViewController {
         return view
     }()
     
+    let viewModel = CommentsViewModel()
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        
+        rxBind()
     }
     
      
+    
+}
+
+// Rx
+extension CommentsViewController {
+    
+    private func rxBind() {
+        
+        let input = CommentsViewModel.Input()
+        let output = viewModel.transform(input: input)
+        
+        output.commentsList
+            .drive(tableView.rx.items(cellIdentifier: CommentTableViewCell.id, cellType: CommentTableViewCell.self)) { (row, element, cell) in
+                
+            }
+            .disposed(by: disposeBag)
+        
+    }
     
 }
 

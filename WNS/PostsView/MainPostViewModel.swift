@@ -6,7 +6,29 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 final class MainPostViewModel {
     
+    let disposeBag = DisposeBag()
+    
+    func transform(input: Input) -> Output {
+        
+        
+        
+        return Output()
+    }
+    
+}
+
+extension MainPostViewModel {
+    
+    struct Input {
+        
+    }
+    
+    struct Output {
+        
+    }
 }

@@ -11,6 +11,8 @@ import RxCocoa
 
 final class LoginViewModel {
     
+    let disposeBag = DisposeBag()
+    
     func transform(input: Input) -> Output {
 //        let result = input.loginTap // dispose 되지 않고 계속 유지
 //            .flatMap {

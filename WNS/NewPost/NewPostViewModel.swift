@@ -1,15 +1,15 @@
 //
-//  DetailViewModel.swift
+//  NewPostViewModel.swift
 //  WNS
 //
-//  Created by J Oh on 8/17/24.
+//  Created by J Oh on 8/18/24.
 //
 
 import Foundation
 import RxSwift
 import RxCocoa
 
-final class DetailViewModel {
+final class NewPostViewModel {
     
     let disposeBag = DisposeBag()
     
@@ -22,7 +22,7 @@ final class DetailViewModel {
     
 }
 
-extension DetailViewModel {
+extension NewPostViewModel {
     
     struct Input {
         

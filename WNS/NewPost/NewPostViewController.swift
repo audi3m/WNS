@@ -35,7 +35,7 @@ final class NewPostViewController: BaseViewController {
         return button
     }()
     
-    
+    let viewModel = NewPostViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +52,9 @@ extension NewPostViewController {
     
     private func rxBind() {
         
+        let input = NewPostViewModel.Input()
+        let output = viewModel.transform(input: input)
+        
     }
     
 }
@@ -63,6 +66,10 @@ extension NewPostViewController {
         
     }
     
+    @objc private func dismissView() {
+        dismiss(animated: true)
+    }
+    
 }
 
 // View
@@ -70,6 +77,13 @@ extension NewPostViewController {
     
     private func configureView() {
         navigationItem.title = "새로운 포스트"
+        
+        
+        let close = UIBarButtonItem(title: "닫기", style: .plain, target: self, action: #selector(dismissView))
+        
+        navigationItem.leftBarButtonItem = close
+        
+        
     }
     
 }

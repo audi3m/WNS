@@ -82,6 +82,11 @@ extension JoinViewController {
     
     private func rxBind() {
         
+        let input = JoinViewModel.Input()
+        let output = viewModel.transform(input: input)
+        
+        
+        
     }
     
 }

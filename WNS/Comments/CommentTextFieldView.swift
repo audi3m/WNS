@@ -14,13 +14,13 @@ final class CommentTextFieldView: UIView {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 15
         return view
     }()
     let commentField: UITextField = {
         let field = UITextField()
         field.placeholder = "댓글 달기..."
-        
+        field.borderStyle = .roundedRect
         return field
     }()
     let sendButton: UIButton = {
@@ -44,15 +44,16 @@ final class CommentTextFieldView: UIView {
         addSubview(sendButton)
         
         profileImageView.snp.makeConstraints { make in
-            
+            make.top.leading.equalToSuperview().inset(15)
+            make.size.equalTo(30)
         }
         
         commentField.snp.makeConstraints { make in
-            
+            make.top.equalToSuperview()
         }
         
         sendButton.snp.makeConstraints { make in
-            
+            make.top.trailing.equalToSuperview().inset(15)
         }
         
     }

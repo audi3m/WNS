@@ -168,7 +168,7 @@ extension NetworkManager {
                                 print("Forbidden")
                             case 419:
                                 print("액세스 토큰이 만료되었습니다. 다시 로그인 해주세요")
-                                // refresh
+                                self.refreshAccessToken()
                             default:
                                 print("Failed: \(failure)")
                             }

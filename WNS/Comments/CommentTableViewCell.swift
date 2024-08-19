@@ -15,7 +15,7 @@ final class CommentTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.backgroundColor = .systemMint
-        imageView.layer.cornerRadius = 15
+        imageView.layer.cornerRadius = 20
         return imageView
     }()
     let userNameLabel: UILabel = {
@@ -47,14 +47,18 @@ final class CommentTableViewCell: UITableViewCell {
         contentView.addSubview(commentLabel)
         
         profileImageView.snp.makeConstraints { make in
-            
+            make.top.leading.equalTo(contentView).offset(15)
+            make.size.equalTo(40)
         }
         
         userNameLabel.snp.makeConstraints { make in
-            
+            make.top.equalTo(profileImageView.snp.top)
+            make.leading.equalTo(profileImageView.snp.trailing).offset(15)
         }
         
         commentLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(profileImageView.snp.bottom)
+            make.leading.equalTo(profileImageView.snp.trailing).offset(15)
             
         }
         

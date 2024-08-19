@@ -11,6 +11,8 @@ import RxCocoa
 
 final class FollowsViewModel {
     
+    let disposeBag = DisposeBag()
+    
     func transform(input: Input) -> Output {
         
         

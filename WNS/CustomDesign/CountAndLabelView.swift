@@ -38,6 +38,7 @@ final class CountAndLabelView: UIView {
     }
  
     override init(frame: CGRect) {
+        self.type = .posts
         super.init(frame: frame)
         configureView()
     }

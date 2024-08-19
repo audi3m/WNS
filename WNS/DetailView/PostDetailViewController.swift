@@ -1,8 +1,8 @@
 //
-//  FollowsViewController.swift
+//  PostDetailViewController.swift
 //  WNS
 //
-//  Created by J Oh on 8/18/24.
+//  Created by J Oh on 8/14/24.
 //
 
 import UIKit
@@ -10,15 +10,12 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-final class FollowsViewController: BaseViewController {
+final class PostDetailViewController: BaseViewController {
     
     
     
     
-    
-    
-    
-    let viewModel = FollowsViewModel()
+    let viewModel = DetailViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,32 +24,28 @@ final class FollowsViewController: BaseViewController {
     }
     
     
-    
-    
-    
-    
+     
 }
 
 // Rx
-extension FollowsViewController {
+extension PostDetailViewController {
     private func rxBind() {
         
-        let input = FollowsViewModel.Input()
+        let input = DetailViewModel.Input()
         let output = viewModel.transform(input: input)
             
     }
 }
 
+// Functions
+extension PostDetailViewController {
+    
+}
+
 // View
-extension FollowsViewController {
+extension PostDetailViewController {
     
     private func configureView() {
-        navigationItem.title = "닉네임"
-        
-        
-        
-        
-        
         
     }
     

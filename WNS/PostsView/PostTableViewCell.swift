@@ -1,5 +1,5 @@
 //
-//  MainPostCell.swift
+//  PostTableViewCell.swift
 //  WNS
 //
 //  Created by J Oh on 8/17/24.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class MainPostTableViewCell: UITableViewCell {
+final class PostTableViewCell: UITableViewCell {
     
     
     

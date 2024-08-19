@@ -39,24 +39,31 @@ final class ProfileViewController: BaseViewController {
         return label
     }()
     
-    
-    
-    
-    
+    let viewModel = ProfileViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        
+        rxBind()
     }
-    
-    
-    
     
     
     
 }
 
+// Rx
+extension ProfileViewController {
+    
+    private func rxBind() {
+        
+        let input = ProfileViewModel.Input()
+        let output = viewModel.transform(input: input)
+            
+    }
+    
+}
+
+// View
 extension ProfileViewController {
     
     private func configureView() { 
@@ -67,6 +74,26 @@ extension ProfileViewController {
         view.addSubview(nicknameLabel)
         view.addSubview(phoneLabel)
         view.addSubview(birthdayLabel) 
+        
+        profileImageView.snp.makeConstraints { make in
+            
+        }
+        
+        emailLabel.snp.makeConstraints { make in
+            
+        }
+        
+        nicknameLabel.snp.makeConstraints { make in
+            
+        }
+        
+        phoneLabel.snp.makeConstraints { make in
+            
+        }
+        
+        birthdayLabel.snp.makeConstraints { make in
+            
+        }
         
         
         
