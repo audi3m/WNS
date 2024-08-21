@@ -15,7 +15,7 @@ final class CommentTableViewCell: UITableViewCell {
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.backgroundColor = .systemMint
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 18
         return view
     }()
     let userNameLabel: UILabel = {
@@ -29,6 +29,8 @@ final class CommentTableViewCell: UITableViewCell {
         label.numberOfLines = 2
         return label
     }()
+    
+    var data: Comment?
      
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -47,7 +49,7 @@ final class CommentTableViewCell: UITableViewCell {
         
         profileImageView.snp.makeConstraints { make in
             make.top.leading.equalTo(contentView).offset(15)
-            make.size.equalTo(40)
+            make.size.equalTo(36)
         }
         
         userNameLabel.snp.makeConstraints { make in
@@ -58,12 +60,18 @@ final class CommentTableViewCell: UITableViewCell {
         commentLabel.snp.makeConstraints { make in
             make.top.equalTo(profileImageView.snp.centerY)
             make.leading.equalTo(profileImageView.snp.trailing).offset(15)
+            make.height.equalTo(30)
             make.bottom.equalTo(contentView).offset(-10)
         }
         
+    }
+    
+    func configureData() {
+        guard let data else { return }
         
-        
-        
+        profileImageView.image = UIImage(systemName: "person.circle")
+        userNameLabel.text = data.creator.nick
+        commentLabel.text = data.content
     }
 }
 

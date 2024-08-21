@@ -14,18 +14,32 @@ final class CommentsViewController: BaseViewController {
     
     lazy var tableView: UITableView = {
         let view = UITableView()
+        view.delegate = self
+        view.dataSource = self
         view.register(CommentTableViewCell.self, forCellReuseIdentifier: CommentTableViewCell.id)
         return view
     }()
-    let commentField: CommentTextFieldView = {
+    lazy var commentField: CommentTextFieldView = {
         let view = CommentTextFieldView()
-        
+        view.commentField.delegate = self
+        view.sendButton.addTarget(self, action: #selector(writeComment), for: .touchUpInside)
         return view
     }()
     
+    let postID: String
     let viewModel = CommentsViewModel()
     let disposeBag = DisposeBag()
+    var list = [Comment]()
     
+    init(postID: String) {
+        self.postID = postID
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +47,8 @@ final class CommentsViewController: BaseViewController {
             sheet.detents = [.medium(), .large()]
             sheet.prefersGrabberVisible = true
         }
+        
+        getComments(postID: postID)
         
         configureView()
         rxBind()
@@ -42,25 +58,79 @@ final class CommentsViewController: BaseViewController {
     
 }
 
+// Functions
+extension CommentsViewController {
+    func getComments(postID: String) {
+        NetworkManager.shared.getSomePost(postID: postID) { [weak self] post in
+            self?.list = post.comments
+            self?.tableView.reloadData()
+        }
+    }
+    
+    @objc private func writeComment() {
+        guard let comment = commentField.commentField.text else { return }
+        
+        let commentBody = CommentBody(content: comment)
+        NetworkManager.shared.writeComment(postID: postID, body: commentBody) { response in
+            print(response)
+            self.commentField.commentField.text = ""
+            self.getComments(postID: self.postID)
+        } onError: { message in
+            print(message)
+        }
+    }
+}
+
 // Rx
 extension CommentsViewController {
     
     private func rxBind() {
         
-        let input = CommentsViewModel.Input()
-        let output = viewModel.transform(input: input)
         
-        output.commentsList
-            .drive(tableView.rx.items(cellIdentifier: CommentTableViewCell.id, cellType: CommentTableViewCell.self)) { (row, element, cell) in
-                cell.commentLabel.text = element.content
-                cell.userNameLabel.text = element.creator.nick
-            }
-            .disposed(by: disposeBag)
         
     }
     
 }
 
+extension CommentsViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        guard let comment = commentField.commentField.text else { return false }
+        
+        let commentBody = CommentBody(content: comment)
+        NetworkManager.shared.writeComment(postID: postID, body: commentBody) { response in
+            print(response)
+            self.commentField.commentField.text = ""
+            self.getComments(postID: self.postID)
+        } onError: { message in
+            print(message)
+        }
+        
+        
+        return true
+        
+    }
+    
+}
+
+// TableView
+extension CommentsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        list.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CommentTableViewCell.id, for: indexPath) as! CommentTableViewCell
+        let data = list[indexPath.row]
+        cell.data = data
+        cell.configureData()
+        return cell
+    }
+    
+    
+}
+
+// View
 extension CommentsViewController {
     
     private func configureView() { 
@@ -80,9 +150,6 @@ extension CommentsViewController {
             make.height.equalTo(50)
         }
         
-        
     }
-    
-    
     
 }
