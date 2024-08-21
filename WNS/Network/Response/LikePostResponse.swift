@@ -8,7 +8,7 @@
 import Foundation
 
 struct LikePostResponse: Decodable {
-    let data: [PostResponse]
+    let data: [Post]
     let nextCursor: String
     
     enum CodingKeys: String, CodingKey {
@@ -18,7 +18,7 @@ struct LikePostResponse: Decodable {
 }
 
 struct Like2PostResponse: Decodable {
-    let data: [PostResponse]
+    let data: [Post]
     let nextCursor: String
     
     enum CodingKeys: String, CodingKey {

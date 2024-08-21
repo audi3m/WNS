@@ -108,8 +108,6 @@ extension NetworkManager {
                                 print("Failed: \(failure)")
                             }
                         }
-                        
-                        
                     }
                 }
             
@@ -118,7 +116,7 @@ extension NetworkManager {
         }
     }
     
-    func refreshAccessToken() {
+    func refreshAccessToken(handler: @escaping (() -> Void), onFail: @escaping ((String) -> Void)) {
         
         do {
             let request = try Router.refreshAccessToken.asURLRequest()
@@ -127,17 +125,20 @@ extension NetworkManager {
                 .responseDecodable(of: RefreshResponse.self) { response in
                     switch response.result {
                     case .success(let response):
+                        LoginManager.shared.access = response.accessToken
                         dump(response)
+                        handler()
                     case .failure(let failure):
                         if let statusCode = response.response?.statusCode {
                             switch statusCode {
                             case 401:
-                                print("인증할 수 없는 액세스/리프레시 토큰입니다")
+                                onFail("인증할 수 없는 액세스/리프레시 토큰입니다")
                             case 403:
-                                print("Forbidden")
+                                onFail("Forbidden")
                             case 418:
-                                print("리프레시 토큰이 만료되었습니다. 다시 로그인 해주세요")
+                                onFail("리프레시 토큰이 만료되었습니다. 다시 로그인 해주세요")
                                 // 로그인 화면 전환
+                                
                             default:
                                 print("Failed: \(failure)")
                             }
@@ -150,7 +151,7 @@ extension NetworkManager {
         }
     }
     
-    func withdraw() {
+    func withdraw(handler: @escaping (() -> Void)) {
         do {
             let request = try Router.withdraw.asURLRequest()
             AF.request(request)
@@ -168,7 +169,12 @@ extension NetworkManager {
                                 print("Forbidden")
                             case 419:
                                 print("액세스 토큰이 만료되었습니다. 다시 로그인 해주세요")
-                                self.refreshAccessToken()
+                                self.refreshAccessToken {
+                                    self.withdraw { }
+                                } onFail: { message in
+                                    print(message)
+                                }
+
                             default:
                                 print("Failed: \(failure)")
                             }
@@ -224,7 +230,7 @@ extension NetworkManager {
             let request = try Router.writePost(body: body).asURLRequest()
             AF.request(request)
                 .validate(statusCode: 200...299)
-                .responseDecodable(of: PostResponse.self) { response in
+                .responseDecodable(of: Post.self) { response in
                     switch response.result {
                     case .success(let response):
                         dump(response)
@@ -251,7 +257,7 @@ extension NetworkManager {
         }
     }
     
-    func getAllPosts(query: GetAllPostQuery) {
+    func getAllPosts(query: GetAllPostQuery, handler: @escaping (GetAllPostsResponse) -> Void) {
         do {
             let request = try Router.getAllPosts(query: query).asURLRequest()
             AF.request(request)
@@ -260,6 +266,7 @@ extension NetworkManager {
                     switch response.result {
                     case .success(let response):
                         dump(response)
+                        handler(response)
                     case .failure(let failure):
                         if let statusCode = response.response?.statusCode {
                             switch statusCode {
@@ -288,7 +295,7 @@ extension NetworkManager {
             let request = try Router.getSomePost(postID: postID).asURLRequest()
             AF.request(request)
                 .validate(statusCode: 200...299)
-                .responseDecodable(of: GetSomePostResponse.self) { response in
+                .responseDecodable(of: Post.self) { response in
                     switch response.result {
                     case .success(let response):
                         dump(response)

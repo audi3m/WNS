@@ -20,7 +20,9 @@ final class MainPostViewController: BaseViewController {
     }()
     
     
+    
     let viewModel = MainPostViewModel()
+    var list = [Post]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,37 +48,77 @@ extension MainPostViewController {
 
 // Functions
 extension MainPostViewController {
-    @objc private func profileButtonClicked() { 
-        let vc = ProfileViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
     
     @objc private func commentsButtonClicked() {
         let vc = CommentsViewController()
-        vc.modalPresentationStyle = .formSheet
-        present(vc, animated: true)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .formSheet
+        present(nav, animated: true)
+    }
+    
+    @objc private func refreshToken() {
+        NetworkManager.shared.refreshAccessToken {
+            
+        } onFail: { message in
+            print(message)
+        }
+    }
+    
+    @objc private func callPosts() {
+        let query = GetAllPostQuery(next: "", limit: "10", productID: "WNS_user")
+        NetworkManager.shared.getAllPosts(query: query) { response in
+            self.list = response.data
+            self.tableView.reloadData()
+        }
+    }
+    
+    @objc private func login() {
+        
+        let login = LoginBody(email: "c@c.com", password: "cccc")
+        NetworkManager.shared.login(body: login) { response in
+            print("Login Success")
+            LoginManager.shared.access = response.accessToken
+            LoginManager.shared.refresh = response.refreshToken
+            LoginManager.shared.userID = response.userID
+            
+        } failHandler: { message in
+            print(message)
+        }
+
+    }
+    
+    
+}
+
+// Nav
+extension MainPostViewController {
+    
+    private func configureView() {
+        navigationItem.title = "게시물"
+        
+        let login = UIBarButtonItem(image: UIImage(systemName: "arrow.right.square"),
+                                    style: .plain, target: self,
+                                    action: #selector(login))
+        let refreshToken = UIBarButtonItem(image: UIImage(systemName: "arrow.left.arrow.right.square"),
+                                    style: .plain, target: self,
+                                    action: #selector(refreshToken))
+        let callPosts = UIBarButtonItem(image: UIImage(systemName: "arrow.circlepath"),
+                                       style: .plain, target: self,
+                                       action: #selector(callPosts))
+        let comments = UIBarButtonItem(image: UIImage(systemName: "bubble"),
+                                       style: .plain, target: self,
+                                       action: #selector(commentsButtonClicked))
+        
+        navigationItem.leftBarButtonItems = [login, refreshToken]
+        navigationItem.rightBarButtonItems = [callPosts, comments]
+        
     }
 }
 
 // View
 extension MainPostViewController {
     
-    private func configureView() {
-        navigationItem.title = "포스트"
-        
-        let profile = UIBarButtonItem(image: UIImage(systemName: "person.circle"),
-                                      style: .plain, target: self,
-                                      action: #selector(profileButtonClicked))
-        
-        let comments = UIBarButtonItem(image: UIImage(systemName: "bubble"),
-                                       style: .plain, target: self,
-                                       action: #selector(commentsButtonClicked))
-        
-        navigationItem.rightBarButtonItem = profile
-        navigationItem.leftBarButtonItem = comments
-        
-        
-    }
+    
     
     
 }

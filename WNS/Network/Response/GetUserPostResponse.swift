@@ -8,7 +8,7 @@
 import Foundation
 
 struct GetUserPostResponse: Decodable {
-    let data: [PostResponse]
+    let data: [Post]
     let nextCursor: String
     
     enum CodingKeys: String, CodingKey {

@@ -7,4 +7,4 @@
 
 import Foundation
 
-typealias EditPostResponse = PostResponse
+typealias EditPostResponse = Post

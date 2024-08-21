@@ -59,7 +59,11 @@ final class CountAndLabelView: UIView {
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(countLabel.snp.bottom).offset(4)
             make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
+        
+        countLabel.text = "\(Int.random(in: 100..<1000))"
+        nameLabel.text = type.rawValue
     }
     
     

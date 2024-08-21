@@ -28,6 +28,12 @@ final class CommentsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let sheet = sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+        }
+        
         configureView()
         rxBind()
     }
@@ -46,7 +52,8 @@ extension CommentsViewController {
         
         output.commentsList
             .drive(tableView.rx.items(cellIdentifier: CommentTableViewCell.id, cellType: CommentTableViewCell.self)) { (row, element, cell) in
-                
+                cell.commentLabel.text = element.content
+                cell.userNameLabel.text = element.creator.nick
             }
             .disposed(by: disposeBag)
         
@@ -64,11 +71,12 @@ extension CommentsViewController {
         
         tableView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            
+            make.bottom.equalTo(commentField.snp.top)
         }
         
         commentField.snp.makeConstraints { make in
-            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
             make.height.equalTo(50)
         }
         

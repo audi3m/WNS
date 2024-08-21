@@ -18,12 +18,13 @@ final class WineTabController: UITabBarController, UITabBarControllerDelegate {
         let vc2 = UINavigationController(rootViewController: ProfileViewController())
         let addNew = UIViewController()
         
-        vc1.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "house.fill"), selectedImage: nil)
-        vc2.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "person.crop.circle"), selectedImage: nil)
-        addNew.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus.square",
-                                                        withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)), tag: 1)
+        vc1.tabBarItem = UITabBarItem(title: nil, image: TabItemsImage.home.unselectedImage, selectedImage: TabItemsImage.home.selectedImage)
+        vc2.tabBarItem = UITabBarItem(title: nil, image: TabItemsImage.profile.unselectedImage, selectedImage: TabItemsImage.profile.selectedImage)
+        addNew.tabBarItem = UITabBarItem(title: "", image: TabItemsImage.addNew.selectedImage, tag: 1)
         
         viewControllers = [vc1, addNew, vc2]
+        
+        tabBar.tintColor = .label
 
         delegate = self
     }

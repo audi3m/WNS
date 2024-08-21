@@ -12,8 +12,11 @@ import RxCocoa
 
 final class PostDetailViewController: BaseViewController {
     
-    
-    
+    lazy var pageViewController: UIPageViewController = {
+        let vc = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        
+        return vc
+    }()
     
     let viewModel = DetailViewModel()
     
@@ -24,7 +27,7 @@ final class PostDetailViewController: BaseViewController {
     }
     
     
-     
+    
 }
 
 // Rx
@@ -33,6 +36,9 @@ extension PostDetailViewController {
         
         let input = DetailViewModel.Input()
         let output = viewModel.transform(input: input)
+        
+        
+        
             
     }
 }

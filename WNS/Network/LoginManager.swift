@@ -1,5 +1,5 @@
 //
-//  TokenManager.swift
+//  LoginManager.swift
 //  WNS
 //
 //  Created by J Oh on 8/14/24.
@@ -7,12 +7,10 @@
 
 import Foundation
 
-final class TokenManager {
+final class LoginManager {
     
-    static let shared = TokenManager()
+    static let shared = LoginManager()
     private init() { }
-    
-    
     
     var access: String {
         get {
@@ -33,6 +31,18 @@ final class TokenManager {
             print("리프레시 토큰 재설정")
         }
     }
+    
+    var userID: String {
+        get {
+            return UserDefaults.standard.string(forKey: "userID") ?? ""
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "userID")
+            print("userID")
+        }
+    }
+    
+    
     
     
 }

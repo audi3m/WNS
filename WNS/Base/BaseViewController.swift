@@ -15,7 +15,6 @@ class BaseViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .label
         hideKeyboardWhenTappedAround()
-        
     }
     
     func showAlert(title: String, message: String, ok: String, handler: @escaping (() -> Void)) {
@@ -40,7 +39,6 @@ class BaseViewController: UIViewController {
         alert.addAction(cancel)
         present(alert, animated: true)
     }
-    
 }
 
 extension BaseViewController {

@@ -96,8 +96,8 @@ extension LoginViewController {
         let loginInfo = LoginBody(email: email, password: password)
         
         NetworkManager.shared.login(body: loginInfo) { response in
-            TokenManager.shared.access = response.accessToken
-            TokenManager.shared.refresh = response.refreshToken
+            LoginManager.shared.access = response.accessToken
+            LoginManager.shared.refresh = response.refreshToken
             
             let vc = MainPostViewController()
             self.resetRootViewController(root: vc, withNav: true)

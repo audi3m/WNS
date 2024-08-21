@@ -1,5 +1,5 @@
 //
-//  PostResponse.swift
+//  Post.swift
 //  WNS
 //
 //  Created by J Oh on 8/15/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostResponse: Decodable {
+struct Post: Decodable {
     let postID: String
     let productID: String?
     let title: String?
@@ -18,7 +18,7 @@ struct PostResponse: Decodable {
     let content4: String?
     let content5: String?
     let createdAt: String
-    let creater: Creater
+    let creator: Creator
     let files: [String] // dir
     let likes: [String] // user_id
     let likes2: [String]?
@@ -36,7 +36,7 @@ struct PostResponse: Decodable {
         case content4
         case content5
         case createdAt
-        case creater
+        case creator
         case files
         case likes
         case likes2
@@ -45,7 +45,7 @@ struct PostResponse: Decodable {
     }
 }
 
-struct Creater: Decodable {
+struct Creator: Decodable {
     let userID: String
     let nick: String
     let profileImage: String?
@@ -61,12 +61,12 @@ struct Comment: Decodable {
     let commentID: String
     let content: String
     let createdAt: String
-    let creater: Creater
+    let creator: Creator
     
     enum CodingKeys: String, CodingKey {
         case commentID = "comment_id"
         case content
         case createdAt
-        case creater
+        case creator
     }
 }

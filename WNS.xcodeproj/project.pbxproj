@@ -15,7 +15,7 @@
 		D404A4ED2C6DA9A0005C3C6E /* RefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4EC2C6DA9A0005C3C6E /* RefreshResponse.swift */; };
 		D404A4EF2C6DA9D9005C3C6E /* WithdrawResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4EE2C6DA9D9005C3C6E /* WithdrawResponse.swift */; };
 		D404A4F12C6DB762005C3C6E /* PostImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4F02C6DB762005C3C6E /* PostImageResponse.swift */; };
-		D404A4F32C6DB78D005C3C6E /* PostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4F22C6DB78D005C3C6E /* PostResponse.swift */; };
+		D404A4F32C6DB78D005C3C6E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4F22C6DB78D005C3C6E /* Post.swift */; };
 		D404A4F52C6DBAAB005C3C6E /* GetAllPostsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4F42C6DBAAB005C3C6E /* GetAllPostsResponse.swift */; };
 		D404A4F72C6DC422005C3C6E /* GetSomePostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4F62C6DC422005C3C6E /* GetSomePostResponse.swift */; };
 		D404A4F92C6DFB99005C3C6E /* EditPostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A4F82C6DFB99005C3C6E /* EditPostResponse.swift */; };
@@ -62,13 +62,17 @@
 		D404A55F2C721364005C3C6E /* WineTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A55E2C721364005C3C6E /* WineTabController.swift */; };
 		D404A5612C721387005C3C6E /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5602C721387005C3C6E /* CommentsViewModel.swift */; };
 		D404A5632C721455005C3C6E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5622C721455005C3C6E /* ProfileViewModel.swift */; };
+		D462B0D52C7452D400AE86CE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D42C7452D400AE86CE /* SettingsViewController.swift */; };
+		D462B0D72C7452EC00AE86CE /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D62C7452EC00AE86CE /* SettingsViewModel.swift */; };
+		D462B0D92C747B1C00AE86CE /* TabItemsImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D82C747B1C00AE86CE /* TabItemsImage.swift */; };
+		D462B0DC2C74AF7B00AE86CE /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = D462B0DB2C74AF7B00AE86CE /* Toast */; };
 		D467D4212C6C7FFA000C3993 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4202C6C7FFA000C3993 /* AppDelegate.swift */; };
 		D467D4232C6C7FFA000C3993 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */; };
 		D467D42A2C6C7FFB000C3993 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D467D4292C6C7FFB000C3993 /* Assets.xcassets */; };
 		D467D42D2C6C7FFC000C3993 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D467D42C2C6C7FFC000C3993 /* Base */; };
 		D467D4352C6C803E000C3993 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D467D4342C6C803E000C3993 /* .gitignore */; };
 		D467D4382C6C8070000C3993 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4372C6C8070000C3993 /* APIKey.swift */; };
-		D467D43A2C6C85F4000C3993 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4392C6C85F4000C3993 /* TokenManager.swift */; };
+		D467D43A2C6C85F4000C3993 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4392C6C85F4000C3993 /* LoginManager.swift */; };
 		D467D43F2C6C86B6000C3993 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D467D43E2C6C86B6000C3993 /* Alamofire */; };
 		D467D4422C6C86CC000C3993 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D467D4412C6C86CC000C3993 /* RxCocoa */; };
 		D467D4442C6C86CC000C3993 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D467D4432C6C86CC000C3993 /* RxSwift */; };
@@ -95,7 +99,7 @@
 		D404A4EC2C6DA9A0005C3C6E /* RefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResponse.swift; sourceTree = "<group>"; };
 		D404A4EE2C6DA9D9005C3C6E /* WithdrawResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawResponse.swift; sourceTree = "<group>"; };
 		D404A4F02C6DB762005C3C6E /* PostImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageResponse.swift; sourceTree = "<group>"; };
-		D404A4F22C6DB78D005C3C6E /* PostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResponse.swift; sourceTree = "<group>"; };
+		D404A4F22C6DB78D005C3C6E /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D404A4F42C6DBAAB005C3C6E /* GetAllPostsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllPostsResponse.swift; sourceTree = "<group>"; };
 		D404A4F62C6DC422005C3C6E /* GetSomePostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSomePostResponse.swift; sourceTree = "<group>"; };
 		D404A4F82C6DFB99005C3C6E /* EditPostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostResponse.swift; sourceTree = "<group>"; };
@@ -139,6 +143,9 @@
 		D404A55E2C721364005C3C6E /* WineTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTabController.swift; sourceTree = "<group>"; };
 		D404A5602C721387005C3C6E /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
 		D404A5622C721455005C3C6E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		D462B0D42C7452D400AE86CE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D462B0D62C7452EC00AE86CE /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		D462B0D82C747B1C00AE86CE /* TabItemsImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemsImage.swift; sourceTree = "<group>"; };
 		D467D41D2C6C7FFA000C3993 /* WNS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WNS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D467D4202C6C7FFA000C3993 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,7 +154,7 @@
 		D467D42E2C6C7FFC000C3993 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D467D4342C6C803E000C3993 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D467D4372C6C8070000C3993 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
-		D467D4392C6C85F4000C3993 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		D467D4392C6C85F4000C3993 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		D467D4482C6C8738000C3993 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		D467D44A2C6C8758000C3993 /* JoinBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinBody.swift; sourceTree = "<group>"; };
 		D467D44C2C6CB39C000C3993 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +179,7 @@
 				D467D43F2C6C86B6000C3993 /* Alamofire in Frameworks */,
 				D404A5122C6E4EC8005C3C6E /* SnapKit in Frameworks */,
 				D404A5242C6F2EA4005C3C6E /* TextFieldEffects in Frameworks */,
+				D462B0DC2C74AF7B00AE86CE /* Toast in Frameworks */,
 				D404A53C2C7087B8005C3C6E /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,7 +196,7 @@
 				D404A4EC2C6DA9A0005C3C6E /* RefreshResponse.swift */,
 				D404A4EE2C6DA9D9005C3C6E /* WithdrawResponse.swift */,
 				D404A4F02C6DB762005C3C6E /* PostImageResponse.swift */,
-				D404A4F22C6DB78D005C3C6E /* PostResponse.swift */,
+				D404A4F22C6DB78D005C3C6E /* Post.swift */,
 				D404A4F42C6DBAAB005C3C6E /* GetAllPostsResponse.swift */,
 				D404A4F62C6DC422005C3C6E /* GetSomePostResponse.swift */,
 				D404A4F82C6DFB99005C3C6E /* EditPostResponse.swift */,
@@ -222,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				D404A5322C706E24005C3C6E /* JoinField.swift */,
-				D404A5502C720AB6005C3C6E /* CountAndLabelView.swift */,
 			);
 			path = CustomDesign;
 			sourceTree = "<group>";
@@ -232,6 +239,7 @@
 			children = (
 				D404A5432C71B44A005C3C6E /* ProfileViewController.swift */,
 				D404A5622C721455005C3C6E /* ProfileViewModel.swift */,
+				D404A5502C720AB6005C3C6E /* CountAndLabelView.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -324,8 +332,18 @@
 			isa = PBXGroup;
 			children = (
 				D404A55E2C721364005C3C6E /* WineTabController.swift */,
+				D462B0D82C747B1C00AE86CE /* TabItemsImage.swift */,
 			);
 			path = Tab;
+			sourceTree = "<group>";
+		};
+		D462B0D32C7452C300AE86CE /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D462B0D42C7452D400AE86CE /* SettingsViewController.swift */,
+				D462B0D62C7452EC00AE86CE /* SettingsViewModel.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		D467D4142C6C7FFA000C3993 = {
@@ -361,6 +379,7 @@
 				D404A5182C6E4F15005C3C6E /* DetailView */,
 				D404A5522C720D24005C3C6E /* FollowView */,
 				D404A5152C6E4F0F005C3C6E /* ProfileView */,
+				D462B0D32C7452C300AE86CE /* Settings */,
 				D404A5172C6E4F13005C3C6E /* Base */,
 				D404A5162C6E4F11005C3C6E /* Extensions */,
 				D404A5142C6E4F0B005C3C6E /* CustomDesign */,
@@ -378,7 +397,7 @@
 				D404A50E2C6E302E005C3C6E /* NetworkManager.swift */,
 				D467D4372C6C8070000C3993 /* APIKey.swift */,
 				D467D4542C6CDDAD000C3993 /* Router.swift */,
-				D467D4392C6C85F4000C3993 /* TokenManager.swift */,
+				D467D4392C6C85F4000C3993 /* LoginManager.swift */,
 				D467D4482C6C8738000C3993 /* TargetType.swift */,
 				D404A5252C6F7CF7005C3C6E /* QueryString */,
 				D467D4562C6CDFE8000C3993 /* RequestBody */,
@@ -425,6 +444,7 @@
 				D404A5112C6E4EC8005C3C6E /* SnapKit */,
 				D404A5232C6F2EA4005C3C6E /* TextFieldEffects */,
 				D404A53B2C7087B8005C3C6E /* IQKeyboardManagerSwift */,
+				D462B0DB2C74AF7B00AE86CE /* Toast */,
 			);
 			productName = WNS;
 			productReference = D467D41D2C6C7FFA000C3993 /* WNS.app */;
@@ -460,6 +480,7 @@
 				D404A5102C6E4EC8005C3C6E /* XCRemoteSwiftPackageReference "SnapKit" */,
 				D404A5222C6F2EA4005C3C6E /* XCRemoteSwiftPackageReference "TextFieldEffects" */,
 				D404A53A2C7087B8005C3C6E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				D462B0DA2C74AF7B00AE86CE /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = D467D41E2C6C7FFA000C3993 /* Products */;
 			projectDirPath = "";
@@ -488,6 +509,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D462B0D92C747B1C00AE86CE /* TabItemsImage.swift in Sources */,
 				D404A4E72C6DA0EC005C3C6E /* JoinResponse.swift in Sources */,
 				D404A52D2C6F875E005C3C6E /* NetworkTestView.swift in Sources */,
 				D404A5032C6DFE5F005C3C6E /* LikePostResponse.swift in Sources */,
@@ -497,9 +519,9 @@
 				D404A4ED2C6DA9A0005C3C6E /* RefreshResponse.swift in Sources */,
 				D404A5442C71B44A005C3C6E /* ProfileViewController.swift in Sources */,
 				D404A55F2C721364005C3C6E /* WineTabController.swift in Sources */,
-				D404A4F32C6DB78D005C3C6E /* PostResponse.swift in Sources */,
+				D404A4F32C6DB78D005C3C6E /* Post.swift in Sources */,
 				D404A5422C70E1A1005C3C6E /* PostTableViewCell.swift in Sources */,
-				D467D43A2C6C85F4000C3993 /* TokenManager.swift in Sources */,
+				D467D43A2C6C85F4000C3993 /* LoginManager.swift in Sources */,
 				D404A4FB2C6DFC2C005C3C6E /* GetUserPostResponse.swift in Sources */,
 				D404A5052C6E0019005C3C6E /* FollowResponse.swift in Sources */,
 				D404A55A2C721108005C3C6E /* FollowsListView.swift in Sources */,
@@ -526,6 +548,7 @@
 				D404A5072C6E2BB7005C3C6E /* GetMyProfileResponse.swift in Sources */,
 				D404A5272C6F7D10005C3C6E /* GetAllPostQuery.swift in Sources */,
 				D404A4E42C6D862E005C3C6E /* ProfileBody.swift in Sources */,
+				D462B0D52C7452D400AE86CE /* SettingsViewController.swift in Sources */,
 				D404A50B2C6E2D51005C3C6E /* GetOthersProfileResponse.swift in Sources */,
 				D404A5352C7085E0005C3C6E /* BaseViewController.swift in Sources */,
 				D467D45C2C6CE3FA000C3993 /* PostImageBody.swift in Sources */,
@@ -542,6 +565,7 @@
 				D404A52B2C6F7E05005C3C6E /* HashQuery.swift in Sources */,
 				D467D4582C6CE03A000C3993 /* EmailDuplicationCheckBody.swift in Sources */,
 				D404A5392C70871B005C3C6E /* LoginViewModel.swift in Sources */,
+				D462B0D72C7452EC00AE86CE /* SettingsViewModel.swift in Sources */,
 				D404A54F2C7204B6005C3C6E /* NewPostViewController.swift in Sources */,
 				D404A4F12C6DB762005C3C6E /* PostImageResponse.swift in Sources */,
 				D404A5372C708686005C3C6E /* ViewController+Ex.swift in Sources */,
@@ -804,6 +828,14 @@
 				minimumVersion = 7.1.1;
 			};
 		};
+		D462B0DA2C74AF7B00AE86CE /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
 		D467D43D2C6C86B6000C3993 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -837,6 +869,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D404A53A2C7087B8005C3C6E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		D462B0DB2C74AF7B00AE86CE /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D462B0DA2C74AF7B00AE86CE /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 		D467D43E2C6C86B6000C3993 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -11,23 +11,22 @@ import SnapKit
 final class CommentTableViewCell: UITableViewCell {
     
     let profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.backgroundColor = .systemMint
-        imageView.layer.cornerRadius = 20
-        return imageView
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
+        view.backgroundColor = .systemMint
+        view.layer.cornerRadius = 20
+        return view
     }()
     let userNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .black
+        label.font = .systemFont(ofSize: 13)
         return label
     }()
     let commentLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .black
+        label.font = .systemFont(ofSize: 13)
+        label.numberOfLines = 2
         return label
     }()
      
@@ -57,9 +56,9 @@ final class CommentTableViewCell: UITableViewCell {
         }
         
         commentLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(profileImageView.snp.bottom)
+            make.top.equalTo(profileImageView.snp.centerY)
             make.leading.equalTo(profileImageView.snp.trailing).offset(15)
-            
+            make.bottom.equalTo(contentView).offset(-10)
         }
         
         
