@@ -14,7 +14,9 @@ final class NetworkTestView: UIViewController {
         super.viewDidLoad()
         
         let body = JoinBody(email: "ab@a.com", password: "aaaabbbb", nick: "My name is ab", phoneNum: "01011112222", birthDay: "20000202")
-        NetworkManager.shared.join(body: body)
+        NetworkManager.shared.join(body: body) { response in
+            
+        }
         
     }
 }

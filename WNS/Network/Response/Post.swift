@@ -11,6 +11,7 @@ struct Post: Decodable {
     let postID: String
     let productID: String?
     let title: String?
+    let price: Int?
     let content: String?
     let content1: String?
     let content2: String?
@@ -29,6 +30,7 @@ struct Post: Decodable {
         case postID = "post_id"
         case productID = "product_id"
         case title
+        case price
         case content
         case content1
         case content2
@@ -45,7 +47,7 @@ struct Post: Decodable {
     }
 }
 
-struct Creator: Decodable {
+struct Creator: Decodable, Hashable {
     let userID: String
     let nick: String
     let profileImage: String?
@@ -57,7 +59,11 @@ struct Creator: Decodable {
     }
 }
 
-struct Comment: Decodable {
+struct Comment: Decodable, Hashable {
+    static func == (lhs: Comment, rhs: Comment) -> Bool {
+        lhs.commentID == rhs.commentID
+    }
+    
     let commentID: String
     let content: String
     let createdAt: String

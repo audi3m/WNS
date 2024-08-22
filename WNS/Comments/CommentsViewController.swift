@@ -49,12 +49,10 @@ final class CommentsViewController: BaseViewController {
         }
         
         getComments(postID: postID)
-        
         configureView()
         rxBind()
+        
     }
-    
-     
     
 }
 
@@ -69,15 +67,15 @@ extension CommentsViewController {
     
     @objc private func writeComment() {
         guard let comment = commentField.commentField.text else { return }
+        guard !comment.isEmpty else { return }
         
         let commentBody = CommentBody(content: comment)
         NetworkManager.shared.writeComment(postID: postID, body: commentBody) { response in
             print(response)
             self.commentField.commentField.text = ""
             self.getComments(postID: self.postID)
-        } onError: { message in
-            print(message)
         }
+        view.endEditing(true)
     }
 }
 
@@ -87,28 +85,24 @@ extension CommentsViewController {
     private func rxBind() {
         
         
-        
     }
     
 }
 
 extension CommentsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         guard let comment = commentField.commentField.text else { return false }
+        guard !comment.isEmpty else { return false }
         
         let commentBody = CommentBody(content: comment)
         NetworkManager.shared.writeComment(postID: postID, body: commentBody) { response in
             print(response)
             self.commentField.commentField.text = ""
             self.getComments(postID: self.postID)
-        } onError: { message in
-            print(message)
         }
         
-        
+        view.endEditing(true)
         return true
-        
     }
     
 }

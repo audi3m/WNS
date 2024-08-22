@@ -1,14 +1,14 @@
 //
-//  CommentTableViewCell.swift
+//  CommentCollectionViewCell.swift
 //  WNS
 //
-//  Created by J Oh on 8/18/24.
+//  Created by J Oh on 8/22/24.
 //
 
 import UIKit
 import SnapKit
 
-final class CommentTableViewCell: UITableViewCell {
+final class CommentCollectionViewListCell: UICollectionViewListCell {
     
     let profileImageView: UIImageView = {
         let view = UIImageView()
@@ -30,18 +30,17 @@ final class CommentTableViewCell: UITableViewCell {
     }()
     
     var data: Comment?
-     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.selectionStyle = .none
-        configure()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configure() {
+    private func configureView() {
         contentView.addSubview(profileImageView)
         contentView.addSubview(nicknameLabel)
         contentView.addSubview(commentLabel)
@@ -76,6 +75,5 @@ final class CommentTableViewCell: UITableViewCell {
         commentLabel.text = data.content
     }
 }
-
 
 

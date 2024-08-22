@@ -8,6 +8,10 @@
 import Foundation
 import Alamofire
 
+enum RequestError: Error {
+    case invalidURL
+}
+
 protocol TargetType: URLRequestConvertible {
     var baseURL: String { get }
     var method: HTTPMethod { get }
@@ -19,24 +23,18 @@ protocol TargetType: URLRequestConvertible {
 }
 
 extension TargetType {
+    
     func asURLRequest() throws -> URLRequest {
         
-//        let url = try baseURL.asURL()
-        var urlComponents = URLComponents(string: baseURL)
-        urlComponents?.path = path
-        
+        var url = try baseURL.asURL()
         if let queryItems {
-            urlComponents?.queryItems = queryItems
+            url.append(queryItems: queryItems)
         }
-        
-        guard let url = urlComponents.url else {
-            throw AFError.invalidURL(url: baseURL)
-        }
-        
-        var request = try URLRequest(url: url, method: method)
+        var request = try URLRequest(url: url.appendingPathComponent(path), method: method)
         request.allHTTPHeaderFields = header
-        
         request.httpBody = body
+        print(request)
         return request
+        
     }
 }

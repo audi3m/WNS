@@ -72,7 +72,7 @@
 		D467D42D2C6C7FFC000C3993 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D467D42C2C6C7FFC000C3993 /* Base */; };
 		D467D4352C6C803E000C3993 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D467D4342C6C803E000C3993 /* .gitignore */; };
 		D467D4382C6C8070000C3993 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4372C6C8070000C3993 /* APIKey.swift */; };
-		D467D43A2C6C85F4000C3993 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4392C6C85F4000C3993 /* LoginManager.swift */; };
+		D467D43A2C6C85F4000C3993 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D4392C6C85F4000C3993 /* AccountManager.swift */; };
 		D467D43F2C6C86B6000C3993 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D467D43E2C6C86B6000C3993 /* Alamofire */; };
 		D467D4422C6C86CC000C3993 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D467D4412C6C86CC000C3993 /* RxCocoa */; };
 		D467D4442C6C86CC000C3993 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D467D4432C6C86CC000C3993 /* RxSwift */; };
@@ -88,6 +88,11 @@
 		D467D45C2C6CE3FA000C3993 /* PostImageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D45B2C6CE3FA000C3993 /* PostImageBody.swift */; };
 		D467D45E2C6CE840000C3993 /* PostBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D45D2C6CE840000C3993 /* PostBody.swift */; };
 		D467D4602C6CE99C000C3993 /* CommentBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467D45F2C6CE99C000C3993 /* CommentBody.swift */; };
+		D4E3C7182C764C8E00131DA5 /* SearchUserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3C7172C764C8E00131DA5 /* SearchUserQuery.swift */; };
+		D4E3C71A2C764E1B00131DA5 /* SearchUsersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3C7192C764E1B00131DA5 /* SearchUsersResponse.swift */; };
+		D4E3C71C2C76C24C00131DA5 /* NicknameDuplicationCheckBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3C71B2C76C24C00131DA5 /* NicknameDuplicationCheckBody.swift */; };
+		D4E3C7402C76F84C00131DA5 /* RxComments.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3C73F2C76F84C00131DA5 /* RxComments.swift */; };
+		D4E3C7422C76FA9000131DA5 /* CommentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3C7412C76FA9000131DA5 /* CommentCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,7 +159,7 @@
 		D467D42E2C6C7FFC000C3993 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D467D4342C6C803E000C3993 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D467D4372C6C8070000C3993 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
-		D467D4392C6C85F4000C3993 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		D467D4392C6C85F4000C3993 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		D467D4482C6C8738000C3993 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		D467D44A2C6C8758000C3993 /* JoinBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinBody.swift; sourceTree = "<group>"; };
 		D467D44C2C6CB39C000C3993 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +172,11 @@
 		D467D45B2C6CE3FA000C3993 /* PostImageBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageBody.swift; sourceTree = "<group>"; };
 		D467D45D2C6CE840000C3993 /* PostBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBody.swift; sourceTree = "<group>"; };
 		D467D45F2C6CE99C000C3993 /* CommentBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBody.swift; sourceTree = "<group>"; };
+		D4E3C7172C764C8E00131DA5 /* SearchUserQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserQuery.swift; sourceTree = "<group>"; };
+		D4E3C7192C764E1B00131DA5 /* SearchUsersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersResponse.swift; sourceTree = "<group>"; };
+		D4E3C71B2C76C24C00131DA5 /* NicknameDuplicationCheckBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameDuplicationCheckBody.swift; sourceTree = "<group>"; };
+		D4E3C73F2C76F84C00131DA5 /* RxComments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxComments.swift; sourceTree = "<group>"; };
+		D4E3C7412C76FA9000131DA5 /* CommentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +219,7 @@
 				D404A5062C6E2BB6005C3C6E /* GetMyProfileResponse.swift */,
 				D404A5082C6E2CA8005C3C6E /* EditMyProfileResponse.swift */,
 				D404A50A2C6E2D51005C3C6E /* GetOthersProfileResponse.swift */,
+				D4E3C7192C764E1B00131DA5 /* SearchUsersResponse.swift */,
 				D404A50C2C6E2DE9005C3C6E /* HashtagResponse.swift */,
 				D404A52E2C6F9435005C3C6E /* ErrorResponse.swift */,
 			);
@@ -221,7 +232,9 @@
 				D404A5452C71B5BC005C3C6E /* CommentsViewController.swift */,
 				D404A5602C721387005C3C6E /* CommentsViewModel.swift */,
 				D404A5472C71B62F005C3C6E /* CommentTableViewCell.swift */,
+				D4E3C7412C76FA9000131DA5 /* CommentCollectionViewCell.swift */,
 				D404A54B2C71BAD0005C3C6E /* CommentTextFieldView.swift */,
+				D4E3C73F2C76F84C00131DA5 /* RxComments.swift */,
 			);
 			path = Comments;
 			sourceTree = "<group>";
@@ -304,6 +317,7 @@
 				D404A5262C6F7D10005C3C6E /* GetAllPostQuery.swift */,
 				D404A5282C6F7DAD005C3C6E /* GetLikePostQuery.swift */,
 				D404A52A2C6F7E05005C3C6E /* HashQuery.swift */,
+				D4E3C7172C764C8E00131DA5 /* SearchUserQuery.swift */,
 			);
 			path = QueryString;
 			sourceTree = "<group>";
@@ -369,6 +383,7 @@
 				D467D4202C6C7FFA000C3993 /* AppDelegate.swift */,
 				D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */,
 				D404A5202C6F28A5005C3C6E /* TestViewController.swift */,
+				D4E3C73B2C76D14B00131DA5 /* Account */,
 				D467D4362C6C8061000C3993 /* Network */,
 				D404A55D2C72126F005C3C6E /* Tab */,
 				D404A51B2C6E4F1B005C3C6E /* SignupView */,
@@ -397,7 +412,6 @@
 				D404A50E2C6E302E005C3C6E /* NetworkManager.swift */,
 				D467D4372C6C8070000C3993 /* APIKey.swift */,
 				D467D4542C6CDDAD000C3993 /* Router.swift */,
-				D467D4392C6C85F4000C3993 /* LoginManager.swift */,
 				D467D4482C6C8738000C3993 /* TargetType.swift */,
 				D404A5252C6F7CF7005C3C6E /* QueryString */,
 				D467D4562C6CDFE8000C3993 /* RequestBody */,
@@ -411,6 +425,7 @@
 			children = (
 				D467D44A2C6C8758000C3993 /* JoinBody.swift */,
 				D467D4572C6CE03A000C3993 /* EmailDuplicationCheckBody.swift */,
+				D4E3C71B2C76C24C00131DA5 /* NicknameDuplicationCheckBody.swift */,
 				D467D4592C6CE188000C3993 /* LoginBody.swift */,
 				D467D45B2C6CE3FA000C3993 /* PostImageBody.swift */,
 				D467D45D2C6CE840000C3993 /* PostBody.swift */,
@@ -419,6 +434,14 @@
 				D404A4E32C6D862E005C3C6E /* ProfileBody.swift */,
 			);
 			path = RequestBody;
+			sourceTree = "<group>";
+		};
+		D4E3C73B2C76D14B00131DA5 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				D467D4392C6C85F4000C3993 /* AccountManager.swift */,
+			);
+			path = Account;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -512,7 +535,10 @@
 				D462B0D92C747B1C00AE86CE /* TabItemsImage.swift in Sources */,
 				D404A4E72C6DA0EC005C3C6E /* JoinResponse.swift in Sources */,
 				D404A52D2C6F875E005C3C6E /* NetworkTestView.swift in Sources */,
+				D4E3C71A2C764E1B00131DA5 /* SearchUsersResponse.swift in Sources */,
+				D4E3C7422C76FA9000131DA5 /* CommentCollectionViewCell.swift in Sources */,
 				D404A5032C6DFE5F005C3C6E /* LikePostResponse.swift in Sources */,
+				D4E3C7402C76F84C00131DA5 /* RxComments.swift in Sources */,
 				D467D44D2C6CB39C000C3993 /* JoinViewController.swift in Sources */,
 				D404A5092C6E2CA8005C3C6E /* EditMyProfileResponse.swift in Sources */,
 				D404A5512C720AB6005C3C6E /* CountAndLabelView.swift in Sources */,
@@ -521,7 +547,7 @@
 				D404A55F2C721364005C3C6E /* WineTabController.swift in Sources */,
 				D404A4F32C6DB78D005C3C6E /* Post.swift in Sources */,
 				D404A5422C70E1A1005C3C6E /* PostTableViewCell.swift in Sources */,
-				D467D43A2C6C85F4000C3993 /* LoginManager.swift in Sources */,
+				D467D43A2C6C85F4000C3993 /* AccountManager.swift in Sources */,
 				D404A4FB2C6DFC2C005C3C6E /* GetUserPostResponse.swift in Sources */,
 				D404A5052C6E0019005C3C6E /* FollowResponse.swift in Sources */,
 				D404A55A2C721108005C3C6E /* FollowsListView.swift in Sources */,
@@ -544,6 +570,7 @@
 				D467D4552C6CDDAD000C3993 /* Router.swift in Sources */,
 				D404A5562C720E95005C3C6E /* FollowsTableViewCell.swift in Sources */,
 				D467D45E2C6CE840000C3993 /* PostBody.swift in Sources */,
+				D4E3C7182C764C8E00131DA5 /* SearchUserQuery.swift in Sources */,
 				D467D44B2C6C8758000C3993 /* JoinBody.swift in Sources */,
 				D404A5072C6E2BB7005C3C6E /* GetMyProfileResponse.swift in Sources */,
 				D404A5272C6F7D10005C3C6E /* GetAllPostQuery.swift in Sources */,
@@ -558,6 +585,7 @@
 				D404A5542C720D38005C3C6E /* FollowsViewController.swift in Sources */,
 				D404A55C2C721230005C3C6E /* NewPostViewModel.swift in Sources */,
 				D404A5212C6F28A5005C3C6E /* TestViewController.swift in Sources */,
+				D4E3C71C2C76C24C00131DA5 /* NicknameDuplicationCheckBody.swift in Sources */,
 				D404A5402C7088B4005C3C6E /* DetailViewModel.swift in Sources */,
 				D404A5612C721387005C3C6E /* CommentsViewModel.swift in Sources */,
 				D467D4382C6C8070000C3993 /* APIKey.swift in Sources */,
@@ -730,7 +758,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -762,7 +790,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

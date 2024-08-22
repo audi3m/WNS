@@ -1,5 +1,5 @@
 //
-//  LoginManager.swift
+//  AccountManager.swift
 //  WNS
 //
 //  Created by J Oh on 8/14/24.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class LoginManager {
+final class AccountManager {
     
-    static let shared = LoginManager()
+    static let shared = AccountManager()
     private init() { }
     
     var access: String {

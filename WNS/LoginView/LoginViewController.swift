@@ -96,14 +96,13 @@ extension LoginViewController {
         let loginInfo = LoginBody(email: email, password: password)
         
         NetworkManager.shared.login(body: loginInfo) { response in
-            LoginManager.shared.access = response.accessToken
-            LoginManager.shared.refresh = response.refreshToken
+            AccountManager.shared.userID = response.userID
+            AccountManager.shared.access = response.accessToken
+            AccountManager.shared.refresh = response.refreshToken
             
             let vc = MainPostViewController()
             self.resetRootViewController(root: vc, withNav: true)
-        } failHandler: { message in
-            self.showAlert(title: "오류", message: message, ok: "확인") { }
-        }
+        } 
         
     }
     

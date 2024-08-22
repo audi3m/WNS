@@ -112,8 +112,20 @@ extension NewPostViewController: PHPickerViewControllerDelegate {
 extension NewPostViewController {
     
     
-    
     @objc private func postButtonClicked() {
+        
+//        let postImageBody = PostImageBody(files: Data())
+//        NetworkManager.shared.postImage(body: postImageBody)
+        
+        let postBody = PostBody(title: titleTextField.text,
+                                product_id: ProductID.forUsers.rawValue)
+        NetworkManager.shared.writePost(body: postBody) { [weak self] response in
+            dump(response)
+            // PorgressView
+            
+            self?.dismissView()
+        }
+        
         
     }
     

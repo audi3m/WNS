@@ -22,7 +22,7 @@ final class JoinViewController: BaseViewController {
         button.titleLabel?.font = .systemFont(ofSize: 14)
         button.layer.cornerRadius = 8
         button.backgroundColor = .systemGray2
-        button.addTarget(self, action: #selector(duplicateCheck), for: .touchUpInside)
+        button.addTarget(self, action: #selector(emailDuplicationCheck), for: .touchUpInside)
         return button
     }()
     let passwordField: JoinField = {
@@ -32,6 +32,15 @@ final class JoinViewController: BaseViewController {
     let nicknameField: JoinField = {
         let view = JoinField(type: .nickname)
         return view
+    }()
+    lazy var nicknameDuplicationCheckButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("중복 확인", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14)
+        button.layer.cornerRadius = 8
+        button.backgroundColor = .systemGray2
+        button.addTarget(self, action: #selector(nicknameDuplicationCheck), for: .touchUpInside)
+        return button
     }()
     let phoneNuberField: JoinField = {
         let view = JoinField(type: .phoneNumber)
@@ -96,25 +105,39 @@ extension JoinViewController {
     
     @objc private func signup() {
         
+        let joinBody = JoinBody(email: emailField.textField.text ?? "",
+                                password: passwordField.textField.text ?? "",
+                                nick: nicknameField.textField.text ?? "",
+                                phoneNum: phoneNuberField.textField.text,
+                                birthDay: birthdayPicker.date.formatted())
+        
+        NetworkManager.shared.join(body: joinBody) { response in 
+            
+        }
+        
+        
     }
     
-    @objc private func duplicateCheck() {
+    @objc private func emailDuplicationCheck() {
         if let email = emailField.textField.text {
             guard !email.isEmpty else {
                 self.showAlert(title: "", message: "이메일을 입력하세요", ok: "확인") { }
                 return
             }
             let body = EmailDuplicationCheckBody(email: email)
-            NetworkManager.shared.emailDuplicateCheck(body: body) { message in
-                self.showAlert(title: "", message: message, ok: "확인") {
+            NetworkManager.shared.emailDuplicateCheck(body: body) { response in
+                self.showAlert(title: "", message: response.message, ok: "확인") {
                     self.setDuplicateButton(checked: true)
                     self.validatedEmail = email
                     // validatedEmail 변하면 다시 회색
                 }
-            } onError: { message in
-                self.showAlert(title: "", message: message, ok: "확인") { }
             }
         }
+    }
+    
+    @objc private func nicknameDuplicationCheck() {
+        
+        
     }
     
     private func setDuplicateButton(checked: Bool) {
@@ -136,6 +159,7 @@ extension JoinViewController {
         view.addSubview(emailDuplicationCheckButton)
         view.addSubview(passwordField)
         view.addSubview(nicknameField)
+        view.addSubview(nicknameDuplicationCheckButton)
         view.addSubview(phoneNuberField)
         view.addSubview(birthdayLabel)
         view.addSubview(birthdayPicker)
@@ -164,8 +188,16 @@ extension JoinViewController {
         
         nicknameField.snp.makeConstraints { make in
             make.top.equalTo(passwordField.snp.bottom).offset(15)
-            make.horizontalEdges.equalTo(view).inset(20)
+            make.leading.equalTo(view).offset(20)
+            make.trailing.equalTo(emailDuplicationCheckButton.snp.leading).offset(-10)
             make.height.equalTo(60)
+        }
+        
+        nicknameDuplicationCheckButton.snp.makeConstraints { make in
+            make.top.equalTo(nicknameField.textField.snp.top)
+            make.bottom.equalTo(nicknameField.textField.snp.bottom)
+            make.trailing.equalTo(view).offset(-20)
+            make.width.equalTo(70)
         }
         
         phoneNuberField.snp.makeConstraints { make in
