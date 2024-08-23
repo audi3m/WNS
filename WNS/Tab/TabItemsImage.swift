@@ -18,7 +18,7 @@ enum TabItemsImage {
         case .home:
             UIImage(systemName: "house") ?? UIImage()
         case .addNew:
-            UIImage(systemName: "plus.square", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)) ?? UIImage()
+            UIImage(systemName: "plus.square", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium)) ?? UIImage()
         case .profile:
             UIImage(systemName: "person.circle") ?? UIImage()
         }
@@ -29,7 +29,7 @@ enum TabItemsImage {
         case .home:
             UIImage(systemName: "house.fill") ?? UIImage()
         case .addNew:
-            UIImage(systemName: "plus.square", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)) ?? UIImage()
+            UIImage(systemName: "plus.square", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium)) ?? UIImage()
         case .profile:
             UIImage(systemName: "person.circle.fill") ?? UIImage()
         }

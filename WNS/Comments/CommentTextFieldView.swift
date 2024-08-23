@@ -19,7 +19,7 @@ final class CommentTextFieldView: UIView {
         view.tintColor = .label
         return view
     }()
-    let commentField: UITextField = {
+    let textField: UITextField = {
         let field = UITextField()
         field.placeholder = "댓글 달기..."
         field.borderStyle = .roundedRect
@@ -44,7 +44,7 @@ final class CommentTextFieldView: UIView {
     
     private func configureView() {
         addSubview(profileImageView)
-        addSubview(commentField)
+        addSubview(textField)
         addSubview(sendButton)
         
         profileImageView.snp.makeConstraints { make in
@@ -52,7 +52,7 @@ final class CommentTextFieldView: UIView {
             make.size.equalTo(30)
         }
         
-        commentField.snp.makeConstraints { make in
+        textField.snp.makeConstraints { make in
             make.centerY.equalTo(profileImageView.snp.centerY)
             make.leading.equalTo(profileImageView.snp.trailing).offset(15)
             make.trailing.equalTo(sendButton.snp.leading).offset(-15)

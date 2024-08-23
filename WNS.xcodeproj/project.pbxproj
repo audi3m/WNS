@@ -93,6 +93,11 @@
 		D4E3C71C2C76C24C00131DA5 /* NicknameDuplicationCheckBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3C71B2C76C24C00131DA5 /* NicknameDuplicationCheckBody.swift */; };
 		D4E3C7402C76F84C00131DA5 /* RxComments.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3C73F2C76F84C00131DA5 /* RxComments.swift */; };
 		D4E3C7422C76FA9000131DA5 /* CommentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3C7412C76FA9000131DA5 /* CommentCollectionViewCell.swift */; };
+		D4E3C7442C7844CB00131DA5 /* ButtonImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3C7432C7844CB00131DA5 /* ButtonImages.swift */; };
+		D4E3C7462C784F9B00131DA5 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3C7452C784F9B00131DA5 /* EmptyView.swift */; };
+		D4E3C7482C78544900131DA5 /* ProfileAndNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3C7472C78544900131DA5 /* ProfileAndNicknameView.swift */; };
+		D4E3C74B2C7859D100131DA5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D4E3C74A2C7859D100131DA5 /* Kingfisher */; };
+		D4E3C74D2C78D18300131DA5 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3C74C2C78D18300131DA5 /* HorizontalScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -177,6 +182,10 @@
 		D4E3C71B2C76C24C00131DA5 /* NicknameDuplicationCheckBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameDuplicationCheckBody.swift; sourceTree = "<group>"; };
 		D4E3C73F2C76F84C00131DA5 /* RxComments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxComments.swift; sourceTree = "<group>"; };
 		D4E3C7412C76FA9000131DA5 /* CommentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCollectionViewCell.swift; sourceTree = "<group>"; };
+		D4E3C7432C7844CB00131DA5 /* ButtonImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonImages.swift; sourceTree = "<group>"; };
+		D4E3C7452C784F9B00131DA5 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		D4E3C7472C78544900131DA5 /* ProfileAndNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAndNicknameView.swift; sourceTree = "<group>"; };
+		D4E3C74C2C78D18300131DA5 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +197,7 @@
 				D467D4422C6C86CC000C3993 /* RxCocoa in Frameworks */,
 				D467D43F2C6C86B6000C3993 /* Alamofire in Frameworks */,
 				D404A5122C6E4EC8005C3C6E /* SnapKit in Frameworks */,
+				D4E3C74B2C7859D100131DA5 /* Kingfisher in Frameworks */,
 				D404A5242C6F2EA4005C3C6E /* TextFieldEffects in Frameworks */,
 				D462B0DC2C74AF7B00AE86CE /* Toast in Frameworks */,
 				D404A53C2C7087B8005C3C6E /* IQKeyboardManagerSwift in Frameworks */,
@@ -243,6 +253,9 @@
 			isa = PBXGroup;
 			children = (
 				D404A5322C706E24005C3C6E /* JoinField.swift */,
+				D4E3C7452C784F9B00131DA5 /* EmptyView.swift */,
+				D4E3C7472C78544900131DA5 /* ProfileAndNicknameView.swift */,
+				D4E3C7432C7844CB00131DA5 /* ButtonImages.swift */,
 			);
 			path = CustomDesign;
 			sourceTree = "<group>";
@@ -327,6 +340,7 @@
 			children = (
 				D404A54E2C7204B6005C3C6E /* NewPostViewController.swift */,
 				D404A55B2C721230005C3C6E /* NewPostViewModel.swift */,
+				D4E3C74C2C78D18300131DA5 /* HorizontalScrollView.swift */,
 			);
 			path = NewPost;
 			sourceTree = "<group>";
@@ -468,6 +482,7 @@
 				D404A5232C6F2EA4005C3C6E /* TextFieldEffects */,
 				D404A53B2C7087B8005C3C6E /* IQKeyboardManagerSwift */,
 				D462B0DB2C74AF7B00AE86CE /* Toast */,
+				D4E3C74A2C7859D100131DA5 /* Kingfisher */,
 			);
 			productName = WNS;
 			productReference = D467D41D2C6C7FFA000C3993 /* WNS.app */;
@@ -504,6 +519,7 @@
 				D404A5222C6F2EA4005C3C6E /* XCRemoteSwiftPackageReference "TextFieldEffects" */,
 				D404A53A2C7087B8005C3C6E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				D462B0DA2C74AF7B00AE86CE /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				D4E3C7492C7859D100131DA5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = D467D41E2C6C7FFA000C3993 /* Products */;
 			projectDirPath = "";
@@ -540,6 +556,7 @@
 				D404A5032C6DFE5F005C3C6E /* LikePostResponse.swift in Sources */,
 				D4E3C7402C76F84C00131DA5 /* RxComments.swift in Sources */,
 				D467D44D2C6CB39C000C3993 /* JoinViewController.swift in Sources */,
+				D4E3C7442C7844CB00131DA5 /* ButtonImages.swift in Sources */,
 				D404A5092C6E2CA8005C3C6E /* EditMyProfileResponse.swift in Sources */,
 				D404A5512C720AB6005C3C6E /* CountAndLabelView.swift in Sources */,
 				D404A4ED2C6DA9A0005C3C6E /* RefreshResponse.swift in Sources */,
@@ -556,6 +573,7 @@
 				D404A5462C71B5BC005C3C6E /* CommentsViewController.swift in Sources */,
 				D404A5292C6F7DAD005C3C6E /* GetLikePostQuery.swift in Sources */,
 				D467D4602C6CE99C000C3993 /* CommentBody.swift in Sources */,
+				D4E3C74D2C78D18300131DA5 /* HorizontalScrollView.swift in Sources */,
 				D404A50F2C6E302E005C3C6E /* NetworkManager.swift in Sources */,
 				D404A50D2C6E2DE9005C3C6E /* HashtagResponse.swift in Sources */,
 				D404A54A2C71B7DE005C3C6E /* NSObject+Ex.swift in Sources */,
@@ -571,6 +589,7 @@
 				D404A5562C720E95005C3C6E /* FollowsTableViewCell.swift in Sources */,
 				D467D45E2C6CE840000C3993 /* PostBody.swift in Sources */,
 				D4E3C7182C764C8E00131DA5 /* SearchUserQuery.swift in Sources */,
+				D4E3C7462C784F9B00131DA5 /* EmptyView.swift in Sources */,
 				D467D44B2C6C8758000C3993 /* JoinBody.swift in Sources */,
 				D404A5072C6E2BB7005C3C6E /* GetMyProfileResponse.swift in Sources */,
 				D404A5272C6F7D10005C3C6E /* GetAllPostQuery.swift in Sources */,
@@ -591,6 +610,7 @@
 				D467D4382C6C8070000C3993 /* APIKey.swift in Sources */,
 				D404A53E2C70889E005C3C6E /* MainPostViewModel.swift in Sources */,
 				D404A52B2C6F7E05005C3C6E /* HashQuery.swift in Sources */,
+				D4E3C7482C78544900131DA5 /* ProfileAndNicknameView.swift in Sources */,
 				D467D4582C6CE03A000C3993 /* EmailDuplicationCheckBody.swift in Sources */,
 				D404A5392C70871B005C3C6E /* LoginViewModel.swift in Sources */,
 				D462B0D72C7452EC00AE86CE /* SettingsViewModel.swift in Sources */,
@@ -880,6 +900,14 @@
 				minimumVersion = 6.7.1;
 			};
 		};
+		D4E3C7492C7859D100131DA5 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -917,6 +945,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D467D4402C6C86CC000C3993 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		D4E3C74A2C7859D100131DA5 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4E3C7492C7859D100131DA5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -14,20 +14,9 @@ protocol PostCellDelegate: AnyObject {
 
 final class PostTableViewCell: UITableViewCell {
     
-    let profileImageView: UIImageView = {
-        let view = UIImageView()
-        view.contentMode = .scaleAspectFill
-        view.clipsToBounds = true
-        view.layer.cornerRadius = 18
-        view.image = UIImage(systemName: "person.circle")
-        view.tintColor = .label
+    let profileView: ProfileAndNicknameView = {
+        let view = ProfileAndNicknameView()
         return view
-    }()
-    let creatorLabel: UILabel = {
-        let label = UILabel()
-        label.text = "#레드 #본테라 #화이트"
-        label.font = .systemFont(ofSize: 13)
-        return label
     }()
     let postImagesView: UIView = {
         let view = UIView()
@@ -36,13 +25,13 @@ final class PostTableViewCell: UITableViewCell {
     }()
     let likeButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "heart", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium)), for: .normal)
+        button.setImage(ButtonImage.heart, for: .normal)
         button.tintColor = .label
         return button
     }()
     let commentsButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "bubble", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium)), for: .normal)
+        button.setImage(ButtonImage.bubble, for: .normal)
         button.tintColor = .label
         return button
     }()
@@ -68,7 +57,11 @@ final class PostTableViewCell: UITableViewCell {
     }()
     
     var postData: Post?
-    var like: Bool?
+    var like: Bool = false {
+        didSet {
+            setLikeButton(like: like)
+        }
+    }
     
     weak var delegate: PostCellDelegate?
     
@@ -94,11 +87,10 @@ final class PostTableViewCell: UITableViewCell {
 extension PostTableViewCell {
     
     @objc func likePostTapped() {
-        guard let like else { return }
-        like.toggle()
+        like = !like
         setLikeButton(like: like)
         guard let postData else { return }
-        let body = LikeBody(like_status: !like)
+        let body = LikeBody(like_status: like)
         
         NetworkManager.shared.like(postID: postData.postID, body: body) { response in
             DispatchQueue.main.async {
@@ -114,7 +106,7 @@ extension PostTableViewCell {
     }
     
     private func setLikeButton(like: Bool) {
-        let image = UIImage(systemName: like ? "heart.fill" : "heart", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium))
+        let image = like ? ButtonImage.heartFill : ButtonImage.heart
         likeButton.setImage(image, for: .normal)
         likeButton.tintColor = like ? .systemPink : .label
     }
@@ -124,15 +116,15 @@ extension PostTableViewCell {
 extension PostTableViewCell {
     func configureData() {
         guard let postData else { return }
-        
-        creatorLabel.text = postData.creator.nick
+        let creator = postData.creator
+        profileView.setProfile(creator: creator)
         titleLabel.text = postData.title
         bodyLabel.text = postData.content
         
         setLikeButton(like: like)
         
     }
-    
+     
 }
 
 // View
@@ -140,8 +132,7 @@ extension PostTableViewCell {
     
     private func configureView() {
         
-        contentView.addSubview(profileImageView)
-        contentView.addSubview(creatorLabel)
+        contentView.addSubview(profileView)
         contentView.addSubview(postImagesView)
         contentView.addSubview(likeButton)
         contentView.addSubview(commentsButton)
@@ -149,19 +140,12 @@ extension PostTableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(bodyLabel)
         
-        profileImageView.snp.makeConstraints { make in
-            make.top.leading.equalTo(contentView).inset(10)
-            make.size.equalTo(36)
-        }
-        
-        creatorLabel.snp.makeConstraints { make in
-            make.leading.equalTo(profileImageView.snp.trailing).offset(10)
-            make.trailing.equalTo(contentView).offset(-10)
-            make.centerY.equalTo(profileImageView.snp.centerY)
+        profileView.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalTo(contentView)
         }
         
         postImagesView.snp.makeConstraints { make in
-            make.top.equalTo(profileImageView.snp.bottom).offset(10)
+            make.top.equalTo(profileView.snp.bottom)
             make.horizontalEdges.equalToSuperview()
             make.height.equalTo(300)
         }
