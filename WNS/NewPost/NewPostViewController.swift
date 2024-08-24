@@ -11,6 +11,11 @@ import PhotosUI
 import RxSwift
 import RxCocoa
 
+struct ImageItem: Identifiable {
+    let id = UUID().uuidString
+    let image: UIImage
+}
+
 final class NewPostViewController: BaseViewController {
     
     lazy private var imagesCollectionView: UICollectionView = {
@@ -102,11 +107,7 @@ extension NewPostViewController: PHPickerViewControllerDelegate {
             self?.imagesCollectionView.reloadData()
         }
     }
-    
-    struct ImageItem: Identifiable {
-        let id = UUID()
-        let image: UIImage
-    }
+     
 }
 
 // Button Functions
@@ -114,11 +115,16 @@ extension NewPostViewController {
     
     @objc private func postButtonClicked() {
         
-//        let data = imageToData(images: selectedImages)
-//        let postImageBody = PostImageBody(files: data)
-//        NetworkManager.shared.postImage(body: postImageBody) { response in
-//            print(response)
-//        }
+        NetworkManager.shared.postImage(items: selectedImages) { [weak self] response in
+            guard let self else { return }
+            print(response.files)
+            let body = PostBody(title: self.titleTextField.text, content: contentTextView.text, product_id: ProductID.forUsers.rawValue, files: response.files)
+            NetworkManager.shared.writePost(body: body) { [weak self] post in
+                guard let self else { return }
+                print(post)
+                self.dismissView()
+            }
+        }
         
 //        let postBody = PostBody(title: titleTextField.text,
 //                                product_id: ProductID.forUsers.rawValue)
