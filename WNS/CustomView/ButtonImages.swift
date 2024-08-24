@@ -15,8 +15,12 @@ enum ButtonImage {
     
     static let postButton = UIImage(systemName: "plus.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 50, weight: .medium))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(paletteColors: [.white, .systemPurple]))
     
+    static let deleteButton = UIImage(systemName: "xmark.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(paletteColors: [.white, .lightGray]))
     
     
-    
+    static let navLogin = UIImage(systemName: "arrow.right.square")
+    static let navRefresh = UIImage(systemName: "arrow.circlepath")
+    static let navProfile = UIImage(systemName: "person.fill")
+    static let navCallPosts = UIImage(systemName: "square.and.arrow.down")
     
 }

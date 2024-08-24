@@ -21,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         
         
+//        let vc = TestViewController()
         let vc = MainPostViewController()
         let nav = UINavigationController(rootViewController: vc)
         window?.rootViewController = nav

@@ -187,6 +187,46 @@ extension NetworkManager {
 // Post
 extension NetworkManager {
     
+    func postImage2(body: PostImageBody, handler: @escaping ((PostImageResponse) -> Void)) {
+        do {
+            let request = try Router.postImage(body: body).asURLRequest()
+            AF.upload(multipartFormData: { multipartFormData in
+                
+                
+                
+                
+            }, with: <#T##any URLRequestConvertible#>)
+            AF.request(request)
+                .validate(statusCode: 200...299)
+                .responseDecodable(of: PostImageResponse.self) { response in
+                    switch response.result {
+                    case .success(let response):
+                        dump(response)
+                        handler(response)
+                    case .failure(let failure):
+                        if let statusCode = response.response?.statusCode {
+                            switch statusCode {
+                            case 400:
+                                print("잘못된 요청입니다\n필수값을 채워주세요")
+                            case 401:
+                                print("인증할 수 없는 액세스 토큰입니다")
+                            case 403:
+                                print("Forbidden")
+                            case 419:
+                                print("액세스 토큰이 만료되었습니다")
+                            default:
+                                print("Failed: \(failure)")
+                            }
+                        }
+                    }
+            }
+            
+        } catch {
+            print(error)
+        }
+
+    }
+    
     func postImage(body: PostImageBody, handler: @escaping ((PostImageResponse) -> Void)) {
         do {
             let request = try Router.postImage(body: body).asURLRequest()
@@ -261,8 +301,7 @@ extension NetworkManager {
                 .validate(statusCode: 200...299)
                 .responseDecodable(of: GetAllPostsResponse.self) { response in
                     switch response.result {
-                    case .success(let response):
-                        dump(response)
+                    case .success(let response): 
                         handler(response)
                     case .failure(let failure):
                         if let statusCode = response.response?.statusCode {

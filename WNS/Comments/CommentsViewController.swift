@@ -58,18 +58,15 @@ final class CommentsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getComments(postID: postID)
+        configureView()
+        rxBind()
         
         if let sheet = sheetPresentationController {
             sheet.detents = [.medium(), .large()]
             sheet.prefersGrabberVisible = true
         }
-        
-        getComments(postID: postID)
-        configureView()
-        rxBind()
-        
     }
-    
 }
 
 // Functions
@@ -97,12 +94,7 @@ extension CommentsViewController {
 
 // Rx
 extension CommentsViewController {
-    
-    private func rxBind() {
-        
-        
-    }
-    
+    private func rxBind() { }
 }
 
 extension CommentsViewController: UITextFieldDelegate {
@@ -136,8 +128,6 @@ extension CommentsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configureData()
         return cell
     }
-    
-    
 }
 
 // View
@@ -154,18 +144,14 @@ extension CommentsViewController {
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(commentField.snp.top)
         }
-        
         emptyView.snp.makeConstraints { make in
             make.bottom.equalTo(view.snp.centerY).offset(-30)
             make.centerX.equalTo(view)
         }
-        
         commentField.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
             make.height.equalTo(50)
         }
-        
     }
-    
 }

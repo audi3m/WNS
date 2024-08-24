@@ -19,6 +19,7 @@ final class MainPostViewController: BaseViewController {
         view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         view.delegate = self
         view.dataSource = self
+        view.prefetchDataSource = self
         view.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
         return view
     }()
@@ -57,19 +58,14 @@ extension MainPostViewController: PostCellDelegate {
 
 extension MainPostViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        
-//        for item in indexPaths {
-//            if item.row == list.count - 2 {
-//                start += 30
-//                if start <= totalItems {
-//                    requestItems()
-//                }
-//            }
-//        }
-        
+        for indexPath in indexPaths {
+            if indexPath.row == list.count - 2 {
+                if nextCursor != "0" {
+                    callPosts(next: nextCursor)
+                }
+            }
+        }
     }
-    
-    
 }
 
 // TableView
@@ -89,14 +85,24 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    private func configureRefreshControl() {
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+    }
+    
+    @objc private func pullToRefresh() {
+        nextCursor = ""
+        callPosts(next: nextCursor)
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
+        }
+    }
+    
 }
 
 // Rx
 extension MainPostViewController {
-    private func rxBind() {
-//        let input = MainPostViewModel.Input()
-//        let output = viewModel.transform(input: input)
-    }
+    private func rxBind() { }
 }
 
 // Functions
@@ -115,22 +121,28 @@ extension MainPostViewController {
         }
     }
     
-    @objc private func callPosts() {
-        let getAllPostsQuery = GetAllPostQuery(next: "", limit: "5", productID: ProductID.forUsers.rawValue)
+    @objc private func callPosts(next: String = "") {
+        let getAllPostsQuery = GetAllPostQuery(next: next, limit: "5", productID: ProductID.forUsers.rawValue)
         NetworkManager.shared.getAllPosts(query: getAllPostsQuery) { [weak self] response in
-            self?.list = response.data
-            self?.nextCursor = response.nextCursor
+            
             DispatchQueue.main.async {
-                self?.tableView.reloadData()
-                self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                if next.isEmpty {
+                    self?.list = response.data
+                    self?.tableView.reloadData()
+                    self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                } else {
+                    self?.list.append(contentsOf: response.data)
+                    self?.tableView.reloadData()
+                }
             }
+            self?.nextCursor = response.nextCursor
         }
     }
     
     @objc private func login() {
         let login = LoginBody(email: "c@c.com", password: "cccc")
-        NetworkManager.shared.login(body: login) { response in
-            self.view.makeToast("Login Success", position: .top)
+        NetworkManager.shared.login(body: login) { [weak self] response in
+            self?.view.makeToast("Login Success", position: .top)
             AccountManager.shared.access = response.accessToken
             AccountManager.shared.refresh = response.refreshToken
             AccountManager.shared.userID = response.userID
@@ -150,18 +162,10 @@ extension MainPostViewController {
     private func configureNav() {
         navigationItem.title = "게시물"
         
-        let login = UIBarButtonItem(image: UIImage(systemName: "arrow.right.square"),
-                                    style: .plain, target: self,
-                                    action: #selector(login))
-        let refreshToken = UIBarButtonItem(image: UIImage(systemName: "arrow.circlepath"),
-                                    style: .plain, target: self,
-                                    action: #selector(refreshToken))
-        let callPosts = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.down"),
-                                       style: .plain, target: self,
-                                       action: #selector(callPosts))
-        let profile = UIBarButtonItem(image: UIImage(systemName: "person.fill"),
-                                       style: .plain, target: self,
-                                       action: #selector(viewProfile))
+        let login = UIBarButtonItem(image: ButtonImage.navLogin, style: .plain, target: self, action: #selector(login))
+        let refreshToken = UIBarButtonItem(image: ButtonImage.navRefresh, style: .plain, target: self, action: #selector(refreshToken))
+        let profile = UIBarButtonItem(image: ButtonImage.navProfile, style: .plain, target: self, action: #selector(viewProfile))
+        let callPosts = UIBarButtonItem(image: ButtonImage.navCallPosts, style: .plain, target: self, action: #selector(callPosts))
         
         navigationItem.leftBarButtonItems = [login, refreshToken]
         navigationItem.rightBarButtonItems = [profile, callPosts]
@@ -180,7 +184,6 @@ extension MainPostViewController {
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view)
         }
-        
         addNewButton.snp.makeConstraints { make in
             make.trailing.equalTo(view).inset(20)
             make.bottom.equalTo(view.safeAreaLayoutGuide)

@@ -51,4 +51,8 @@ extension BaseViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    @objc func dismissView() {
+        dismiss(animated: true)
+    }
 }
