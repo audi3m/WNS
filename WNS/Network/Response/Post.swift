@@ -45,6 +45,10 @@ struct Post: Decodable {
         case hashTags
         case comments
     }
+    
+    var likeThisPost: Bool {
+        likes.contains(AccountManager.shared.userID)
+    }
 }
 
 struct Creator: Decodable, Hashable {

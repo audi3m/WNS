@@ -141,7 +141,8 @@ extension PostTableViewCell {
         contentView.addSubview(bodyLabel)
         
         profileView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(contentView)
+            make.top.equalTo(contentView)
+            make.horizontalEdges.equalTo(contentView).inset(15)
         }
         
         postImagesView.snp.makeConstraints { make in

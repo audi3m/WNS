@@ -63,7 +63,7 @@ extension HorizontalScrollView {
     
     func configureDataSource() {
         
-        let cellRegistration = UICollectionView.CellRegistration<PostImageCell, SelectedItem> { (cell, indexPath, identifier) in
+        let cellRegistration = UICollectionView.CellRegistration<NewPostImageCell, SelectedItem> { (cell, indexPath, identifier) in
             cell.imageView.image = identifier.image
         }
         

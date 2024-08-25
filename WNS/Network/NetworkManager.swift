@@ -181,7 +181,7 @@ extension NetworkManager {
 // Post
 extension NetworkManager {
     
-    func postImage(items: [ImageItem], handler: @escaping ((PostImageResponse) -> Void)) {
+    func postImages(items: [ImageItem], handler: @escaping ((PostImageResponse) -> Void)) {
         
         let url = APIKey.baseURL + "v1/posts/files"
         let headers: HTTPHeaders = [
@@ -212,43 +212,44 @@ extension NetworkManager {
                 }
             }
         }
-
-//        do {
-//            let request = try Router.postImage(body: body).asURLRequest()
-//            AF.request(request)
-//                .validate(statusCode: 200...299)
-//                .responseDecodable(of: PostImageResponse.self) { response in
-//                    switch response.result {
-//                    case .success(let response):
-//                        dump(response)
-//                        handler(response)
-//                    case .failure(let failure):
-//                        if let statusCode = response.response?.statusCode {
-//                            switch statusCode {
-//                            case 400:
-//                                print("잘못된 요청입니다\n필수값을 채워주세요")
-//                            case 401:
-//                                print("인증할 수 없는 액세스 토큰입니다")
-//                            case 403:
-//                                print("Forbidden")
-//                            case 419:
-//                                print("액세스 토큰이 만료되었습니다")
-//                            default:
-//                                print("Failed: \(failure)")
-//                            }
-//                        }
-//                    }
-//            }
-//            
-//        } catch {
-//            print(error)
-//        }
-
     }
     
     func writePost(body: PostBody, handler: @escaping ((Post) -> Void)) {
         do {
             let request = try Router.writePost(body: body).asURLRequest()
+            AF.request(request)
+                .validate(statusCode: 200...299)
+                .responseDecodable(of: Post.self) { response in
+                    switch response.result {
+                    case .success(let response):
+                        dump(response)
+                        handler(response)
+                    case .failure(let failure):
+                        if let statusCode = response.response?.statusCode {
+                            switch statusCode {
+                            case 401:
+                                print("인증할 수 없는 액세스 토큰입니다")
+                            case 403:
+                                print("Forbidden")
+                            case 410:
+                                print("생성된 게시글이 없습니다. 서버장애")
+                            case 419:
+                                print("액세스 토큰이 만료되었습니다")
+                            default:
+                                print("Failed: \(failure)")
+                            }
+                        }
+                    }
+            }
+            
+        } catch {
+            print(error)
+        }
+    }
+    
+    func getImages(dir: String, handler: @escaping ((Post) -> Void)) {
+        do {
+            let request = try Router.getImages(dir: dir).asURLRequest()
             AF.request(request)
                 .validate(statusCode: 200...299)
                 .responseDecodable(of: Post.self) { response in

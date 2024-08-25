@@ -22,7 +22,7 @@ final class NewPostViewController: BaseViewController {
         let view = UICollectionView(frame: view.bounds, collectionViewLayout: layout(size: CGSize(width: 80, height: 80)))
         view.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         view.showsHorizontalScrollIndicator = false
-        view.register(PostImageCell.self, forCellWithReuseIdentifier: PostImageCell.id)
+        view.register(NewPostImageCell.self, forCellWithReuseIdentifier: NewPostImageCell.id)
         view.register(GalleryButtonCell.self, forCellWithReuseIdentifier: GalleryButtonCell.id)
         view.delegate = self
         view.dataSource = self
@@ -115,7 +115,7 @@ extension NewPostViewController {
     
     @objc private func postButtonClicked() {
         
-        NetworkManager.shared.postImage(items: selectedImages) { [weak self] response in
+        NetworkManager.shared.postImages(items: selectedImages) { [weak self] response in
             guard let self else { return }
             print(response.files)
             let body = PostBody(title: self.titleTextField.text, content: contentTextView.text, product_id: ProductID.forUsers.rawValue, files: response.files)
@@ -148,7 +148,7 @@ extension NewPostViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.setCount(num: selectedImages.count)
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostImageCell.id, for: indexPath) as! PostImageCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewPostImageCell.id, for: indexPath) as! NewPostImageCell
             let data = selectedImages[indexPath.item - 1]
             cell.imageView.image = data.image
             cell.deleteButton.tag = indexPath.item

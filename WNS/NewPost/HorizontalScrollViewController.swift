@@ -14,7 +14,7 @@ final class HorizontalScrollViewController: BaseViewController {
         let view = UICollectionView(frame: view.bounds, collectionViewLayout: layout())
         view.contentInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         view.showsHorizontalScrollIndicator = false
-        view.register(PostImageCell.self, forCellWithReuseIdentifier: PostImageCell.id)
+        view.register(NewPostImageCell.self, forCellWithReuseIdentifier: NewPostImageCell.id)
         view.delegate = self
         view.dataSource = self
         return view
@@ -54,7 +54,7 @@ extension HorizontalScrollViewController: UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostImageCell.id, for: indexPath) as! PostImageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewPostImageCell.id, for: indexPath) as! NewPostImageCell
         let data = list[indexPath.item]
         cell.imageView.image = data
         cell.deleteButton.tag = indexPath.item

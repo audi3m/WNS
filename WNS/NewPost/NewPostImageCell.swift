@@ -1,5 +1,5 @@
 //
-//  PostImageCell.swift
+//  NewPostImageCell.swift
 //  WNS
 //
 //  Created by J Oh on 8/24/24.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class PostImageCell: UICollectionViewCell {
+class NewPostImageCell: UICollectionViewCell {
 
     let imageView: UIImageView = {
         let view = UIImageView()
@@ -41,7 +41,7 @@ class PostImageCell: UICollectionViewCell {
     
 }
 
-extension PostImageCell {
+extension NewPostImageCell {
     func configure() {
         contentView.addSubview(imageView)
         contentView.addSubview(deleteButton)

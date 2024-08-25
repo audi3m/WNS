@@ -23,6 +23,7 @@ final class ProfileAndNicknameView: UIView {
     let nicknameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
+        label.text = "Wine_Lover"
         return label
     }()
  
@@ -40,7 +41,8 @@ final class ProfileAndNicknameView: UIView {
         addSubview(nicknameLabel)
 
         profileImageView.snp.makeConstraints { make in
-            make.verticalEdges.leading.equalToSuperview().inset(10)
+            make.leading.equalToSuperview()
+            make.verticalEdges.equalToSuperview().inset(10)
             make.size.equalTo(30)
         }
         

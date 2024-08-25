@@ -36,7 +36,7 @@ final class MainPostViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNav()
+        configureNavBar()
         configureView()
         rxBind()
         callPosts()
@@ -85,9 +85,10 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    private func configureRefreshControl() {
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let post = list[indexPath.row]
+        let vc = PostDetailViewController(post: post)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func pullToRefresh() {
@@ -105,7 +106,7 @@ extension MainPostViewController {
     private func rxBind() { }
 }
 
-// Functions
+// Network Functions
 extension MainPostViewController {
     
     @objc private func writePost() {
@@ -148,33 +149,43 @@ extension MainPostViewController {
             AccountManager.shared.userID = response.userID
         }
     }
+     
+}
+
+// Other Functions
+extension MainPostViewController {
+    
+    @objc private func changeMode() {
+        if overrideUserInterfaceStyle == .light {
+            overrideUserInterfaceStyle = .dark
+        } else {
+            overrideUserInterfaceStyle = .light
+        }
+    }
     
     @objc private func viewProfile() {
         let vc = ProfileViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
-     
 }
 
 // Nav
 extension MainPostViewController {
     
-    private func configureNav() {
+    private func configureNavBar() {
         navigationItem.title = "게시물"
         
         let login = UIBarButtonItem(image: ButtonImage.navLogin, style: .plain, target: self, action: #selector(login))
         let refreshToken = UIBarButtonItem(image: ButtonImage.navRefresh, style: .plain, target: self, action: #selector(refreshToken))
         let profile = UIBarButtonItem(image: ButtonImage.navProfile, style: .plain, target: self, action: #selector(viewProfile))
-        let callPosts = UIBarButtonItem(image: ButtonImage.navCallPosts, style: .plain, target: self, action: #selector(callPosts))
+        let toggle = UIBarButtonItem(image: UIImage(systemName: "light.cylindrical.ceiling.inverse"),
+                                   style: .plain, target: self,
+                                   action: #selector(changeMode))
         
         navigationItem.leftBarButtonItems = [login, refreshToken]
-        navigationItem.rightBarButtonItems = [profile, callPosts]
+        navigationItem.rightBarButtonItems = [profile, toggle]
         
     }
-}
-
-// View
-extension MainPostViewController {
     
     private func configureView() {
         view.addSubview(tableView)
@@ -190,7 +201,5 @@ extension MainPostViewController {
             make.size.equalTo(50)
         }
     }
-    
 }
-
 
