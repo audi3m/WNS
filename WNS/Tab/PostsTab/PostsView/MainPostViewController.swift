@@ -23,12 +23,6 @@ final class MainPostViewController: BaseViewController {
         view.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
         return view
     }()
-    lazy var addNewButton: UIButton = {
-        let button = UIButton()
-        button.setImage(ButtonImage.postButton, for: .normal)
-        button.addTarget(self, action: #selector(writePost), for: .touchUpInside)
-        return button
-    }()
     
     let viewModel = MainPostViewModel()
     var list = [Post]()
@@ -50,7 +44,6 @@ extension MainPostViewController: PostCellDelegate {
     func commentsButtonTapped(in cell: UITableViewCell, postID: String) {
         let vc = CommentsViewController(postID: postID)
         let nav = UINavigationController(rootViewController: vc)
-        print(#function)
         present(nav, animated: true)
     }
      
@@ -79,24 +72,17 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as! PostTableViewCell
         let data = list[indexPath.row]
         cell.postData = data
-        cell.delegate = self
         cell.like = data.likes.contains(AccountManager.shared.userID)
+        cell.delegate = self 
         cell.configureData()
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let post = list[indexPath.row]
-        let vc = PostDetailViewController(post: post)
+        let postID = list[indexPath.row].postID
+        let vc = PostDetailViewController(postID: postID)
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @objc private func pullToRefresh() {
-        nextCursor = ""
-        callPosts(next: nextCursor)
-        DispatchQueue.main.async {
-            self.tableView.refreshControl?.endRefreshing()
-        }
     }
     
 }
@@ -125,7 +111,6 @@ extension MainPostViewController {
     @objc private func callPosts(next: String = "") {
         let getAllPostsQuery = GetAllPostQuery(next: next, limit: "5", productID: ProductID.forUsers.rawValue)
         NetworkManager.shared.getAllPosts(query: getAllPostsQuery) { [weak self] response in
-            
             DispatchQueue.main.async {
                 if next.isEmpty {
                     self?.list = response.data
@@ -163,13 +148,9 @@ extension MainPostViewController {
         }
     }
     
-    @objc private func viewProfile() {
-        let vc = ProfileViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
 }
 
-// Nav
+// View
 extension MainPostViewController {
     
     private func configureNavBar() {
@@ -177,28 +158,20 @@ extension MainPostViewController {
         
         let login = UIBarButtonItem(image: ButtonImage.navLogin, style: .plain, target: self, action: #selector(login))
         let refreshToken = UIBarButtonItem(image: ButtonImage.navRefresh, style: .plain, target: self, action: #selector(refreshToken))
-        let profile = UIBarButtonItem(image: ButtonImage.navProfile, style: .plain, target: self, action: #selector(viewProfile))
         let toggle = UIBarButtonItem(image: UIImage(systemName: "light.cylindrical.ceiling.inverse"),
                                    style: .plain, target: self,
                                    action: #selector(changeMode))
         
         navigationItem.leftBarButtonItems = [login, refreshToken]
-        navigationItem.rightBarButtonItems = [profile, toggle]
+        navigationItem.rightBarButtonItems = [toggle]
         
     }
     
     private func configureView() {
         view.addSubview(tableView)
-        view.addSubview(addNewButton)
-        
         tableView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(view)
-        }
-        addNewButton.snp.makeConstraints { make in
-            make.trailing.equalTo(view).inset(20)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.size.equalTo(50)
         }
     }
 }

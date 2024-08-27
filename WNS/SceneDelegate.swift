@@ -21,9 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         
         
-        let vc = TestViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        window?.rootViewController = nav
+        let vc = WineTabController()
+//        let vc2 = AppearanceSelectionViewController()
+//        let nav = UINavigationController(rootViewController: vc2)
+        window?.rootViewController = vc
         window?.makeKeyAndVisible()
         
     }

@@ -116,7 +116,7 @@ extension NetworkManager {
                     switch response.result {
                     case .success(let response):
                         AccountManager.shared.access = response.accessToken
-                        dump(response)
+                        print("액세스 토큰 업데이트 완료")
                         handler()
                     case .failure(let failure):
                         if let statusCode = response.response?.statusCode {

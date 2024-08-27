@@ -28,16 +28,12 @@ final class NewPostViewController: BaseViewController {
         view.dataSource = self
         return view
     }()
-    private let titleTextField: UITextField = {
-        let field = UITextField()
-        field.placeholder = "제목"
-        field.borderStyle = .roundedRect
+    private let titleField: JoinField = {
+        let field = JoinField(type: .title)
         return field
     }()
-    private let hashtagTextField: UITextField = {
-        let field = UITextField()
-        field.placeholder = "# 해시태그"
-        field.borderStyle = .roundedRect
+    private let hashtagField: JoinField = {
+        let field = JoinField(type: .hashtag)
         return field
     }()
     private let contentTextView: UITextView = {
@@ -117,22 +113,14 @@ extension NewPostViewController {
         
         NetworkManager.shared.postImages(items: selectedImages) { [weak self] response in
             guard let self else { return }
-            print(response.files)
-            let body = PostBody(title: self.titleTextField.text, content: contentTextView.text, product_id: ProductID.forUsers.rawValue, files: response.files)
+            let body = PostBody(title: self.titleField.textField.text, content: contentTextView.text, product_id: ProductID.forUsers.rawValue, files: response.files)
             NetworkManager.shared.writePost(body: body) { [weak self] post in
                 guard let self else { return }
                 print(post)
                 self.dismissView()
             }
         }
-        
-//        let postBody = PostBody(title: titleTextField.text,
-//                                product_id: ProductID.forUsers.rawValue)
-//        NetworkManager.shared.writePost(body: postBody) { [weak self] response in
-//            dump(response)
-//            // PorgressView
-//            self?.dismissView()
-//        }
+         
     }
 }
 
@@ -193,8 +181,8 @@ extension NewPostViewController {
         navigationItem.leftBarButtonItem = close
         
         view.addSubview(imagesCollectionView)
-        view.addSubview(titleTextField)
-        view.addSubview(hashtagTextField)
+        view.addSubview(titleField)
+        view.addSubview(hashtagField)
         view.addSubview(contentTextView)
         view.addSubview(postButton)
         
@@ -203,18 +191,18 @@ extension NewPostViewController {
             make.horizontalEdges.equalTo(view)
             make.height.equalTo(80)
         }
-        titleTextField.snp.makeConstraints { make in
-            make.top.equalTo(imagesCollectionView.snp.bottom).offset(20)
+        titleField.snp.makeConstraints { make in
+            make.top.equalTo(imagesCollectionView.snp.bottom).offset(30)
             make.horizontalEdges.equalTo(view).inset(20)
             make.height.equalTo(44)
         }
-        hashtagTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleTextField.snp.bottom).offset(20)
+        hashtagField.snp.makeConstraints { make in
+            make.top.equalTo(titleField.snp.bottom).offset(30)
             make.horizontalEdges.equalTo(view).inset(20)
             make.height.equalTo(44)
         }
         contentTextView.snp.makeConstraints { make in
-            make.top.equalTo(hashtagTextField.snp.bottom).offset(20)
+            make.top.equalTo(hashtagField.snp.bottom).offset(30)
             make.horizontalEdges.equalTo(view).inset(20)
             make.height.equalTo(200)
         }

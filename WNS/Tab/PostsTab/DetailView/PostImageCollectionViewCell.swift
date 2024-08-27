@@ -30,7 +30,7 @@ final class PostImageCollectionViewCell: UICollectionViewCell {
     }
     
     func setImage(fileURL: String) {
-        imageView.setImage(with: fileURL)
+        imageView.setImageWithURL(with: fileURL)
     }
     
 }

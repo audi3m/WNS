@@ -14,10 +14,10 @@ final class TestViewController: BaseViewController {
         let view = ProfileAndNicknameView()
         return view
     }()
-    let cellBackground: UIView = {
+    let imageBackground: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 15
+        view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
         view.layer.masksToBounds = true
         return view
     }()
@@ -51,6 +51,14 @@ final class TestViewController: BaseViewController {
         label.backgroundColor = .black.withAlphaComponent(0.5)
         return label
     }()
+    let labelBackground: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray6
+        view.layer.cornerRadius = 15
+        view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner)
+        view.layer.masksToBounds = true
+        return view
+    }()
     let wineNameLabel: UILabel = {
         let label = UILabel()
         label.text = "도그 포인트, 소비뇽 블랑 2017"
@@ -79,7 +87,7 @@ final class TestViewController: BaseViewController {
 extension TestViewController {
     
     private func configureImage1() {
-        cellBackground.addSubview(imageView1)
+        imageBackground.addSubview(imageView1)
         
         imageView1.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview()
@@ -88,8 +96,8 @@ extension TestViewController {
     }
     
     private func configureImages2() {
-        cellBackground.addSubview(imageView1)
-        cellBackground.addSubview(imageView2)
+        imageBackground.addSubview(imageView1)
+        imageBackground.addSubview(imageView2)
         
         imageView1.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -107,9 +115,9 @@ extension TestViewController {
     
     private func configureImages3() {
          
-        cellBackground.addSubview(imageView1)
-        cellBackground.addSubview(imageView2)
-        cellBackground.addSubview(imageView3)
+        imageBackground.addSubview(imageView1)
+        imageBackground.addSubview(imageView2)
+        imageBackground.addSubview(imageView3)
         
         imageView1.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -133,9 +141,9 @@ extension TestViewController {
     
     private func configureImages3Hor() {
          
-        cellBackground.addSubview(imageView1)
-        cellBackground.addSubview(imageView2)
-        cellBackground.addSubview(imageView3)
+        imageBackground.addSubview(imageView1)
+        imageBackground.addSubview(imageView2)
+        imageBackground.addSubview(imageView3)
         
         imageView1.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -159,10 +167,10 @@ extension TestViewController {
     
     private func configureImages45() {
          
-        cellBackground.addSubview(imageView1)
-        cellBackground.addSubview(imageView2)
-        cellBackground.addSubview(imageView3)
-        cellBackground.addSubview(moreView)
+        imageBackground.addSubview(imageView1)
+        imageBackground.addSubview(imageView2)
+        imageBackground.addSubview(imageView3)
+        imageBackground.addSubview(moreView)
         
         imageView1.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -193,26 +201,33 @@ extension TestViewController {
     
     private func configureBasicView() {
         view.addSubview(profileView)
-        view.addSubview(cellBackground)
-        cellBackground.addSubview(wineNameLabel)
-        cellBackground.addSubview(likeButton)
+        view.addSubview(imageBackground)
+        view.addSubview(labelBackground)
+        labelBackground.addSubview(likeButton)
+        labelBackground.addSubview(wineNameLabel)
         
         profileView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view).inset(20)
         }
-        cellBackground.snp.makeConstraints { make in
+        imageBackground.snp.makeConstraints { make in
             make.top.equalTo(profileView.snp.bottom)
             make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(250)
+            make.height.equalTo(180)
         }
-        wineNameLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-15)
-            make.horizontalEdges.equalToSuperview().inset(15)
+        labelBackground.snp.makeConstraints { make in
+            make.top.equalTo(imageBackground.snp.bottom).offset(2)
+            make.horizontalEdges.equalTo(view).inset(20)
+            make.height.equalTo(70)
         }
         likeButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-15)
+            make.top.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-15)
+        }
+        wineNameLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(15)
+            make.leading.equalToSuperview().offset(15)
+            make.trailing.equalTo(likeButton.snp.leading).inset(-15)
         }
     }
     

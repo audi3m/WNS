@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 enum FieldType {
-    case email, password, nickname, phoneNumber
+    case email, password, nickname, phoneNumber, title, hashtag
 }
 
 final class JoinField: UIView {
@@ -85,8 +85,17 @@ final class JoinField: UIView {
             textField.placeholder = "8자리 이상"
         case .nickname:
             titleLabel.text = "  닉네임 (선택)  "
+            textField.placeholder = ""
         case .phoneNumber:
             titleLabel.text = "  전화번호 (선택)  "
+            textField.placeholder = ""
+        case .title:
+            titleLabel.text = "  제목  "
+            textField.placeholder = ""
+        case .hashtag:
+            titleLabel.text = "  해시태그  "
+            textField.placeholder = "띄어쓰기 없이 입력 후 엔터"
+            
         }
     }
 }

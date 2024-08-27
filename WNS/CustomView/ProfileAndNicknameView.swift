@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import Kingfisher
  
 final class ProfileAndNicknameView: UIView {
       
@@ -54,7 +53,9 @@ final class ProfileAndNicknameView: UIView {
     }
     
     func setProfile(creator: Creator) {
-        
+        if let image = creator.profileImage, !image.isEmpty {
+            profileImageView.setImageWithURL(with: image)
+        }
         nicknameLabel.text = creator.nick
     }
 }

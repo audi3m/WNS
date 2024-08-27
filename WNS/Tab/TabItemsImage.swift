@@ -7,9 +7,10 @@
 
 import UIKit
 
-enum TabItemsImage {
+enum TabItemImage {
     
     case home
+    case search
     case addNew
     case profile
     
@@ -17,10 +18,12 @@ enum TabItemsImage {
         switch self {
         case .home:
             UIImage(systemName: "house") ?? UIImage()
+        case .search:
+            UIImage(systemName: "magnifyingglass") ?? UIImage()
         case .addNew:
-            UIImage(systemName: "plus.square", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium)) ?? UIImage()
+            UIImage(systemName: "plus.square", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .medium)) ?? UIImage()
         case .profile:
-            UIImage(systemName: "person.circle") ?? UIImage()
+            UIImage(systemName: "person.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)) ?? UIImage()
         }
     }
     
@@ -28,10 +31,12 @@ enum TabItemsImage {
         switch self {
         case .home:
             UIImage(systemName: "house.fill") ?? UIImage()
+        case .search:
+            UIImage(systemName: "magnifyingglass", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)) ?? UIImage()
         case .addNew:
-            UIImage(systemName: "plus.square", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium)) ?? UIImage()
+            UIImage(systemName: "plus.square", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .medium)) ?? UIImage()
         case .profile:
-            UIImage(systemName: "person.circle.fill") ?? UIImage()
+            UIImage(systemName: "person.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)) ?? UIImage()
         }
     }
     

@@ -5,7 +5,8 @@
 //  Created by J Oh on 8/18/24.
 //
 
-import UIKit
+//import UIKit
+import SwiftUI
 import SnapKit
 import RxSwift
 import RxCocoa
@@ -155,13 +156,5 @@ extension ProfileViewController {
             make.top.equalTo(phoneLabel.snp.bottom).offset(4)
             make.leading.equalTo(view).offset(15)
         }
-        
-        
-        
-        
-        
     }
-    
-    
-    
 }

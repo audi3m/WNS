@@ -10,7 +10,7 @@ import Kingfisher
 
 extension UIImageView {
     
-    func setImage(with fileURL: String) {
+    func setImageWithURL(with fileURL: String) {
         guard let url = URL(string: APIKey.baseURL + "v1/" + fileURL) else { return }
         let headers = [
             Header.authorization: AccountManager.shared.access,
