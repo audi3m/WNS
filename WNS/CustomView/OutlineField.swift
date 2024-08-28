@@ -31,16 +31,16 @@ final class OutlineField: UIView {
         button.layer.cornerRadius = 5
         return button
     }()
-    let textField: UITextField = {
+    lazy var textField: UITextField = {
         let field = UITextField()
         field.placeholder = "이메일"
         field.font = .systemFont(ofSize: 15)
+        field.keyboardType = fieldType.keyboardType
         return field
     }()
     let textView: UITextView = {
         let view = UITextView()
         view.font = .systemFont(ofSize: 15)
-        
         return view
     }()
     
@@ -66,16 +66,15 @@ final class OutlineField: UIView {
             make.edges.equalToSuperview()
         }
         iconImageView.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().inset(10)
+            make.top.leading.equalToSuperview().inset(15)
             make.size.equalTo(30)
         }
         
         if fieldType == .contents {
             outlineView.addSubview(textView)
             textView.snp.makeConstraints { make in
-                make.top.equalToSuperview().offset(10)
-                make.leading.equalTo(iconImageView.snp.trailing).offset(10)
-                make.trailing.bottom.equalToSuperview().inset(10)
+                make.verticalEdges.trailing.equalToSuperview().inset(15)
+                make.leading.equalTo(iconImageView.snp.trailing).offset(15)
             }
         } else {
             outlineView.addSubview(textField)
@@ -84,20 +83,19 @@ final class OutlineField: UIView {
                 outlineView.addSubview(duplicationButton)
                 
                 duplicationButton.snp.makeConstraints { make in
-                    make.verticalEdges.trailing.equalToSuperview().inset(10)
+                    make.verticalEdges.trailing.equalToSuperview().inset(15)
                     make.width.equalTo(50)
                 }
                 textField.snp.makeConstraints { make in
-                    make.top.equalToSuperview().offset(10)
-                    make.leading.equalTo(iconImageView.snp.trailing).offset(10)
-                    make.trailing.equalTo(duplicationButton.snp.leading).offset(-10)
-                    make.bottom.equalToSuperview().inset(10)
+                    make.verticalEdges.equalToSuperview().inset(10)
+                    make.leading.equalTo(iconImageView.snp.trailing).offset(15)
+                    make.trailing.equalTo(duplicationButton.snp.leading).offset(-15) 
                 }
                 
             } else {
                 textField.snp.makeConstraints { make in
-                    make.leading.equalTo(iconImageView.snp.trailing).offset(10)
-                    make.verticalEdges.trailing.equalToSuperview().inset(10)
+                    make.leading.equalTo(iconImageView.snp.trailing).offset(15)
+                    make.verticalEdges.trailing.equalToSuperview().inset(15)
                 }
             }
         }
@@ -109,12 +107,14 @@ final class OutlineField: UIView {
  
 extension OutlineField {
     enum FieldType {
-        case email, password, nickname, birthday, phone, contents
+        case email, emailForLogin, password, nickname, birthday, phone, contents, hashtag, title
         
         var placeholder: String {
             switch self {
             case .email:
                 "이메일 ex) aaa@aaa.com"
+            case .emailForLogin:
+                "이메일"
             case .password:
                 "비밀번호"
             case .nickname:
@@ -123,6 +123,10 @@ extension OutlineField {
                 "생년월일 8자리 ex) 20010710"
             case .phone:
                 "[선택] 전화번호 - 숫자만 입력"
+            case .hashtag:
+                "#해시태그"
+            case .title:
+                "제목"
             default:
                 ""
             }
@@ -130,7 +134,7 @@ extension OutlineField {
         
         var image: String {
             switch self {
-            case .email:
+            case .email, .emailForLogin:
                 "envelope"
             case .password:
                 "lock"
@@ -141,7 +145,22 @@ extension OutlineField {
             case .phone:
                 "phone"
             case .contents:
+                "text.quote"
+            case .hashtag:
+                "number"
+            case .title:
                 "pencil"
+            }
+        }
+        
+        var keyboardType: UIKeyboardType {
+            switch self {
+            case .email, .emailForLogin:
+                return .emailAddress
+            case .birthday, .phone:
+                return .numberPad
+            default:
+                return .default
             }
         }
     }

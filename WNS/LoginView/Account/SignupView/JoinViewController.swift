@@ -15,6 +15,7 @@ final class JoinViewController: BaseViewController {
     let imageView: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(systemName: "wineglass")
+        view.tintColor = .label
         view.contentMode = .scaleAspectFit
         return view
     }()
@@ -26,14 +27,15 @@ final class JoinViewController: BaseViewController {
     lazy var validationLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
-        label.text = "이메일"
-        label.numberOfLines = 5
+        label.textColor = .systemRed
+        label.numberOfLines = 0
         return label
     }()
     lazy var joinButton: UIButton = {
         let button = UIButton()
         button.setTitle("가입하기", for: .normal)
-        button.configuration = .borderedProminent()
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .lightGray
         button.addTarget(self, action: #selector(signup), for: .touchUpInside)
         return button
     }()
@@ -59,40 +61,16 @@ extension JoinViewController {
                                         nickname: nicknameField.textField.rx.text.orEmpty,
                                         birthday: birthdayField.textField.rx.text.orEmpty,
                                         phoneNumber: phoneField.textField.rx.text.orEmpty,
-                                        tap: joinButton.rx.tap)
+                                        tap: joinButton.rx.tap,
+                                        emailDupCheck: emailField.duplicationButton.rx.tap)
         
         let output = viewModel.transform(input: input)
         
-        output.emailValidation
-            .bind(with: self) { owner, result in
-                
-            }
-            .disposed(by: disposeBag)
         
-        output.passwordValidation
-            .bind(with: self) { owner, value in
-                owner.passwordValidLabel.text = value.text
-                owner.passwordValidLabel.textColor = value.valid ? .systemBlue : .systemRed
-            }
-            .disposed(by: disposeBag)
         
-        output.nicknameValidation
-            .bind(with: self) { owner, value in
-                owner.phoneValidLabel.textColor = value.valid ? .systemBlue : .systemRed
-            }
-            .disposed(by: disposeBag)
-        
-        output.phoneValidation
-            .bind(with: self) { owner, value in
-                owner.phoneValidLabel.textColor = value.valid ? .systemBlue : .systemRed
-                owner.phoneValidLabel.text = value.text
-            }
-            .disposed(by: disposeBag)
-        
-        output.ageValidation
-            .bind(with: self) { owner, value in
-                owner.birthInfoLabel.text = value.text
-                owner.birthInfoLabel.textColor = value.valid ? .systemBlue : .systemRed
+        output.validationText
+            .bind(with: self) { owner, warning in
+                owner.validationLabel.text = warning
             }
             .disposed(by: disposeBag)
         
@@ -105,7 +83,7 @@ extension JoinViewController {
         
         output.tap
             .bind(with: self) { owner, _ in
-                owner.showAlert(title: "완료", message: "")
+                
             }
             .disposed(by: disposeBag)
         
@@ -167,31 +145,31 @@ extension JoinViewController {
         emailField.snp.makeConstraints { make in
             make.top.equalTo(imageView.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(50)
+            make.height.equalTo(60)
         }
         
         passwordField.snp.makeConstraints { make in
             make.top.equalTo(emailField.snp.bottom).offset(-1.5)
             make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(50)
+            make.height.equalTo(60)
         }
         
         nicknameField.snp.makeConstraints { make in
             make.top.equalTo(passwordField.snp.bottom).offset(-1.5)
             make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(50)
+            make.height.equalTo(60)
         }
         
         birthdayField.snp.makeConstraints { make in
             make.top.equalTo(nicknameField.snp.bottom).offset(-1.5)
             make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(50)
+            make.height.equalTo(60)
         }
         
         phoneField.snp.makeConstraints { make in
             make.top.equalTo(birthdayField.snp.bottom).offset(-1.5)
             make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(50)
+            make.height.equalTo(60)
         }
         
         validationLabel.snp.makeConstraints { make in

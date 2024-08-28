@@ -19,15 +19,12 @@ final class LoginViewController: BaseViewController {
         view.tintColor = .label
         return view
     }()
-    let emailField: JoinField = {
-        let view = JoinField(type: .email)
-        view.textField.placeholder = ""
-        return view
-    }()
-    let passwordField: JoinField = {
-        let view = JoinField(type: .password)
-        view.textField.placeholder = ""
-        return view
+    let emailField = OutlineField(fieldType: .emailForLogin, cornerType: .top)
+    let passwordField = OutlineField(fieldType: .password, cornerType: .bottom)
+    let validLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13)
+        return label
     }()
     lazy var loginButton: UIButton = {
         let button = UIButton()
@@ -60,28 +57,7 @@ final class LoginViewController: BaseViewController {
 // Rx Functions
 extension LoginViewController {
     
-    private func rxBind() {
-        
-        let input = LoginViewModel.Input(loginTap: loginButton.rx.tap,
-                                         signupTap: signupButton.rx.tap)
-        let output = viewModel.transform(input: input)
-        
-//        output.text
-//            .map { joke in
-//                return joke.joke
-//            }
-//            .drive(emailTextField.rx.text)
-//            .disposed(by: disposeBag)
-//        
-//        output.text
-//            .map { value in
-//                return "농담: \(value.id)"
-//            }
-//            .drive(navigationItem.rx.title)
-//            .disposed(by: disposeBag)
-         
-        
-    }
+    private func rxBind() { }
     
 }
 
@@ -89,7 +65,7 @@ extension LoginViewController {
 extension LoginViewController {
     
     @objc private func login() {
-        // 빈 값인지 확인
+        
         guard let email = emailField.textField.text,
               let password = passwordField.textField.text else { return }
         
@@ -121,6 +97,7 @@ extension LoginViewController {
         view.addSubview(imageView)
         view.addSubview(emailField)
         view.addSubview(passwordField)
+        view.addSubview(validLabel)
         view.addSubview(loginButton)
         view.addSubview(signupButton)
         
@@ -131,7 +108,7 @@ extension LoginViewController {
         }
         
         emailField.snp.makeConstraints { make in
-            make.bottom.equalTo(passwordField.snp.top).offset(-15)
+            make.bottom.equalTo(passwordField.snp.top).offset(1.5)
             make.horizontalEdges.equalTo(view).inset(20)
             make.height.equalTo(60)
         }
@@ -142,19 +119,21 @@ extension LoginViewController {
             make.height.equalTo(60)
         }
         
+        validLabel.snp.makeConstraints { make in
+            make.top.equalTo(passwordField.snp.bottom).offset(10)
+            make.horizontalEdges.equalTo(view).inset(20)
+        }
+        
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordField.snp.bottom).offset(30)
+            make.top.equalTo(validLabel.snp.bottom).offset(30)
             make.horizontalEdges.equalTo(view).inset(20)
             make.height.equalTo(50)
         }
         
         signupButton.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(50)
+            make.top.equalTo(loginButton.snp.bottom).offset(30)
             make.centerX.equalTo(view)
             make.height.equalTo(20)
         }
-    }
-    
-    
-    
+    } 
 }

@@ -18,8 +18,15 @@ struct ImageItem: Identifiable {
 
 final class NewPostViewController: BaseViewController {
     
+    // UIScrollView와 contentView 추가
+    private let scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.keyboardDismissMode = .onDrag
+        return view
+    }()
+    private let contentView = UIView()
     lazy private var imagesCollectionView: UICollectionView = {
-        let view = UICollectionView(frame: view.bounds, collectionViewLayout: layout(size: CGSize(width: 80, height: 80)))
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout(size: CGSize(width: 80, height: 80)))
         view.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         view.showsHorizontalScrollIndicator = false
         view.register(NewPostImageCell.self, forCellWithReuseIdentifier: NewPostImageCell.id)
@@ -28,20 +35,11 @@ final class NewPostViewController: BaseViewController {
         view.dataSource = self
         return view
     }()
-    private let titleField: JoinField = {
-        let field = JoinField(type: .title)
-        return field
-    }()
-    private let hashtagField: JoinField = {
-        let field = JoinField(type: .hashtag)
-        return field
-    }()
-    private let contentTextView: UITextView = {
-        let view = UITextView()
-        view.font = .systemFont(ofSize: 15)
-        view.backgroundColor = .systemGray4
-        return view
-    }()
+    
+    let titleField = OutlineField(fieldType: .title, cornerType: .top)
+    let hashtagField = OutlineField(fieldType: .hashtag, cornerType: .middle)
+    let contentsField = OutlineField(fieldType: .contents, cornerType: .bottom)
+    
     lazy private var postButton: UIButton = {
         let button = UIButton()
         button.configuration = .borderedProminent()
@@ -103,7 +101,6 @@ extension NewPostViewController: PHPickerViewControllerDelegate {
             self?.imagesCollectionView.reloadData()
         }
     }
-     
 }
 
 // Button Functions
@@ -113,14 +110,16 @@ extension NewPostViewController {
         
         NetworkManager.shared.postImages(items: selectedImages) { [weak self] response in
             guard let self else { return }
-            let body = PostBody(title: self.titleField.textField.text, content: contentTextView.text, product_id: ProductID.forUsers.rawValue, files: response.files)
+            let body = PostBody(title: self.titleField.textField.text,
+                                content: contentsField.textField.text,
+                                product_id: ProductID.forUsers.rawValue,
+                                files: response.files)
             NetworkManager.shared.writePost(body: body) { [weak self] post in
                 guard let self else { return }
                 print(post)
                 self.dismissView()
             }
         }
-         
     }
 }
 
@@ -155,13 +154,12 @@ extension NewPostViewController: UICollectionViewDelegate, UICollectionViewDataS
         layout.itemSize = size
         return layout
     }
-        
+    
     @objc func deleteItem(_ sender: UIButton) {
         let tag = sender.tag - 1
         selectedImages.remove(at: tag)
         imagesCollectionView.reloadData()
     }
-    
 }
 
 extension NewPostViewController: UICollectionViewDelegateFlowLayout {
@@ -180,37 +178,53 @@ extension NewPostViewController {
         let close = UIBarButtonItem(title: "닫기", style: .plain, target: self, action: #selector(dismissView))
         navigationItem.leftBarButtonItem = close
         
-        view.addSubview(imagesCollectionView)
-        view.addSubview(titleField)
-        view.addSubview(hashtagField)
-        view.addSubview(contentTextView)
-        view.addSubview(postButton)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(imagesCollectionView)
+        contentView.addSubview(titleField)
+        contentView.addSubview(hashtagField)
+        contentView.addSubview(contentsField)
+        contentView.addSubview(postButton)
+        
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+         
+        contentView.snp.makeConstraints { make in
+            make.edges.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+        }
         
         imagesCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            make.horizontalEdges.equalTo(view)
+            make.top.equalTo(contentView.snp.top).offset(10)
+            make.horizontalEdges.equalTo(contentView)
             make.height.equalTo(80)
         }
+        
         titleField.snp.makeConstraints { make in
-            make.top.equalTo(imagesCollectionView.snp.bottom).offset(30)
-            make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(44)
+            make.top.equalTo(imagesCollectionView.snp.bottom).offset(20)
+            make.horizontalEdges.equalTo(contentView).inset(20)
+            make.height.equalTo(60)
         }
+        
         hashtagField.snp.makeConstraints { make in
-            make.top.equalTo(titleField.snp.bottom).offset(30)
-            make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(44)
+            make.top.equalTo(titleField.snp.bottom).offset(-1.5)
+            make.horizontalEdges.equalTo(contentView).inset(20)
+            make.height.equalTo(60)
         }
-        contentTextView.snp.makeConstraints { make in
-            make.top.equalTo(hashtagField.snp.bottom).offset(30)
-            make.horizontalEdges.equalTo(view).inset(20)
+        
+        contentsField.snp.makeConstraints { make in
+            make.top.equalTo(hashtagField.snp.bottom).offset(-1.5)
+            make.horizontalEdges.equalTo(contentView).inset(20)
             make.height.equalTo(200)
         }
+        
         postButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
-            make.horizontalEdges.equalTo(view).inset(20)
+            make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).offset(-30)
+            make.horizontalEdges.equalTo(contentView).inset(20)
             make.height.equalTo(50)
+            make.top.equalTo(contentsField.snp.bottom).offset(30)
+            make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).offset(-30)
         }
     }
-    
 }

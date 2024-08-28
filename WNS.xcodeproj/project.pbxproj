@@ -66,6 +66,7 @@
 		D41E73122C7EF9F400097F90 /* UIView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73112C7EF9F400097F90 /* UIView+Ex.swift */; };
 		D41E73142C7F08E500097F90 /* OutlineField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73132C7F08E500097F90 /* OutlineField.swift */; };
 		D41E73162C7F35DB00097F90 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73152C7F35DB00097F90 /* DateManager.swift */; };
+		D41E731A2C7F8D5F00097F90 /* OutlineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73192C7F8D5F00097F90 /* OutlineButton.swift */; };
 		D462B0D52C7452D400AE86CE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D42C7452D400AE86CE /* SettingsViewController.swift */; };
 		D462B0D72C7452EC00AE86CE /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D62C7452EC00AE86CE /* SettingsViewModel.swift */; };
 		D462B0D92C747B1C00AE86CE /* TabItemsImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D82C747B1C00AE86CE /* TabItemsImage.swift */; };
@@ -172,6 +173,7 @@
 		D41E73112C7EF9F400097F90 /* UIView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ex.swift"; sourceTree = "<group>"; };
 		D41E73132C7F08E500097F90 /* OutlineField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineField.swift; sourceTree = "<group>"; };
 		D41E73152C7F35DB00097F90 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		D41E73192C7F8D5F00097F90 /* OutlineButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineButton.swift; sourceTree = "<group>"; };
 		D462B0D42C7452D400AE86CE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D462B0D62C7452EC00AE86CE /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		D462B0D82C747B1C00AE86CE /* TabItemsImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemsImage.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				D4E3C7432C7844CB00131DA5 /* ButtonImages.swift */,
 				D4E3C7522C79F03900131DA5 /* GalleryButtonView.swift */,
 				D41E73132C7F08E500097F90 /* OutlineField.swift */,
+				D41E73192C7F8D5F00097F90 /* OutlineButton.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -712,6 +715,7 @@
 				D404A4EF2C6DA9D9005C3C6E /* WithdrawResponse.swift in Sources */,
 				D404A4F92C6DFB99005C3C6E /* EditPostResponse.swift in Sources */,
 				D467D4232C6C7FFA000C3993 /* SceneDelegate.swift in Sources */,
+				D41E731A2C7F8D5F00097F90 /* OutlineButton.swift in Sources */,
 				D404A54C2C71BAD0005C3C6E /* CommentTextFieldView.swift in Sources */,
 				D404A5012C6DFE0C005C3C6E /* LikeResponse.swift in Sources */,
 				D467D4532C6CD98C000C3993 /* MainPostViewController.swift in Sources */,
