@@ -81,25 +81,17 @@ final class PostTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         configureBasicView()
-        configureData()
-        configureImagesByCount()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        resetSubviews()
-        configureImagesByCount()
-    }
-    
-    private func resetSubviews() {
-        for subview in imageBackground.subviews {
-            subview.removeFromSuperview()
-        }
+        resetSubViews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
 }
 
@@ -141,15 +133,25 @@ extension PostTableViewCell {
         setLikeButton(like: like)
     }
     
+    func resetSubViews() {
+        imageBackground.backgroundColor = .systemBackground
+        imageView1.removeFromSuperview()
+        imageView2.removeFromSuperview()
+        imageView3.removeFromSuperview()
+        moreView.removeFromSuperview()
+    }
     
-     
 }
 
 // View
 extension PostTableViewCell {
     
-    private func configureImagesByCount() {
+    func configureImagesByCount() {
         guard let postData else { return }
+        let creator = postData.creator
+        profileView.setProfile(creator: creator)
+        setLikeButton(like: like)
+        
         switch postData.files.count {
         case 1: configureImage(post: postData)
         case 2: configureImages2(post: postData)

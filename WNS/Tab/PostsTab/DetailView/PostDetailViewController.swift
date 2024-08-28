@@ -68,6 +68,9 @@ final class PostDetailViewController: BaseViewController {
     }
 }
 
+    
+
+
 // Rx
 extension PostDetailViewController {
     private func rxBind() { }
@@ -75,6 +78,13 @@ extension PostDetailViewController {
 
 // Functions
 extension PostDetailViewController {
+    
+    @objc func commentsButtonTapped() {
+        let vc = CommentsViewController(postID: postID)
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
+    }
+    
     @objc func likeButtonTapped() {
         guard var like else { return }
         like = !like
@@ -104,7 +114,9 @@ extension PostDetailViewController {
         let image = post.likeThisPost ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
         let item = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(likeButtonTapped))
         item.tintColor = post.likeThisPost ? .systemPink : .label
-        navigationItem.rightBarButtonItem = item
+        
+        let comments = UIBarButtonItem(image: UIImage(systemName: "bubble"), style: .plain, target: self, action: #selector(commentsButtonTapped))
+        navigationItem.rightBarButtonItems = [comments, item]
     }
     
     private func configureView() {

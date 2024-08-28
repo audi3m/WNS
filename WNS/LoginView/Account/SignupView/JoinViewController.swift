@@ -12,59 +12,25 @@ import RxCocoa
 
 final class JoinViewController: BaseViewController {
     
-    let emailField: JoinField = {
-        let view = JoinField(type: .email)
+    let imageView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(systemName: "wineglass")
+        view.contentMode = .scaleAspectFit
         return view
     }()
-    lazy var emailDuplicationCheckButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("중복 확인", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 14)
-        button.layer.cornerRadius = 8
-        button.backgroundColor = .systemGray2
-        button.addTarget(self, action: #selector(emailDuplicationCheck), for: .touchUpInside)
-        return button
-    }()
-    let passwordField: JoinField = {
-        let view = JoinField(type: .password)
-        return view
-    }()
-    let nicknameField: JoinField = {
-        let view = JoinField(type: .nickname)
-        return view
-    }()
-    lazy var nicknameDuplicationCheckButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("중복 확인", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 14)
-        button.layer.cornerRadius = 8
-        button.backgroundColor = .systemGray2
-        button.addTarget(self, action: #selector(nicknameDuplicationCheck), for: .touchUpInside)
-        return button
-    }()
-    let phoneNuberField: JoinField = {
-        let view = JoinField(type: .phoneNumber)
-        return view
-    }()
-    let birthdayLabel: UILabel = {
+    let emailField = OutlineField(fieldType: .email, cornerType: .top)
+    let passwordField = OutlineField(fieldType: .password, cornerType: .middle)
+    let nicknameField = OutlineField(fieldType: .nickname, cornerType: .middle)
+    let birthdayField = OutlineField(fieldType: .birthday, cornerType: .middle)
+    let phoneField = OutlineField(fieldType: .phone, cornerType: .bottom)
+    lazy var validationLabel: UILabel = {
         let label = UILabel()
-        label.text = "생일"
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 13)
+        label.text = "이메일"
+        label.numberOfLines = 5
         return label
     }()
-    let birthdayValidLabel: UILabel = {
-        let label = UILabel()
-        label.text = "만 19세 이상만 가입이 가능합니다"
-        label.font = .systemFont(ofSize: 12)
-        return label
-    }()
-    let birthdayPicker: UIDatePicker = {
-        let picker = UIDatePicker()
-        picker.preferredDatePickerStyle = .wheels
-        picker.datePickerMode = .date
-        return picker
-    }()
-    lazy var signupButton: UIButton = {
+    lazy var joinButton: UIButton = {
         let button = UIButton()
         button.setTitle("가입하기", for: .normal)
         button.configuration = .borderedProminent()
@@ -73,16 +39,13 @@ final class JoinViewController: BaseViewController {
     }()
     
     let viewModel = JoinViewModel()
-    var validatedEmail = ""
-    var validated = false
-    
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         rxBind()
     }
-    
     
 }
 
@@ -91,10 +54,60 @@ extension JoinViewController {
     
     private func rxBind() {
         
-        let input = JoinViewModel.Input()
+        let input = JoinViewModel.Input(email: emailField.textField.rx.text.orEmpty,
+                                        password: passwordField.textField.rx.text.orEmpty,
+                                        nickname: nicknameField.textField.rx.text.orEmpty,
+                                        birthday: birthdayField.textField.rx.text.orEmpty,
+                                        phoneNumber: phoneField.textField.rx.text.orEmpty,
+                                        tap: joinButton.rx.tap)
+        
         let output = viewModel.transform(input: input)
         
+        output.emailValidation
+            .bind(with: self) { owner, result in
+                
+            }
+            .disposed(by: disposeBag)
         
+        output.passwordValidation
+            .bind(with: self) { owner, value in
+                owner.passwordValidLabel.text = value.text
+                owner.passwordValidLabel.textColor = value.valid ? .systemBlue : .systemRed
+            }
+            .disposed(by: disposeBag)
+        
+        output.nicknameValidation
+            .bind(with: self) { owner, value in
+                owner.phoneValidLabel.textColor = value.valid ? .systemBlue : .systemRed
+            }
+            .disposed(by: disposeBag)
+        
+        output.phoneValidation
+            .bind(with: self) { owner, value in
+                owner.phoneValidLabel.textColor = value.valid ? .systemBlue : .systemRed
+                owner.phoneValidLabel.text = value.text
+            }
+            .disposed(by: disposeBag)
+        
+        output.ageValidation
+            .bind(with: self) { owner, value in
+                owner.birthInfoLabel.text = value.text
+                owner.birthInfoLabel.textColor = value.valid ? .systemBlue : .systemRed
+            }
+            .disposed(by: disposeBag)
+        
+        output.allValidation
+            .bind(with: self) { owner, value in
+                owner.joinButton.backgroundColor = value ? .systemBlue : .lightGray
+                owner.joinButton.isEnabled = value
+            }
+            .disposed(by: disposeBag)
+        
+        output.tap
+            .bind(with: self) { owner, _ in
+                owner.showAlert(title: "완료", message: "")
+            }
+            .disposed(by: disposeBag)
         
     }
     
@@ -107,9 +120,9 @@ extension JoinViewController {
         
         let joinBody = JoinBody(email: emailField.textField.text ?? "",
                                 password: passwordField.textField.text ?? "",
-                                nick: nicknameField.textField.text ?? "",
-                                phoneNum: phoneNuberField.textField.text,
-                                birthDay: birthdayPicker.date.formatted())
+                                nick: nicknameField.textField.text ?? "", 
+                                phoneNum: "",
+                                birthDay: birthdayField.textField.text)
         
         NetworkManager.shared.join(body: joinBody) { response in 
             
@@ -119,33 +132,14 @@ extension JoinViewController {
     }
     
     @objc private func emailDuplicationCheck() {
-        if let email = emailField.textField.text {
-            guard !email.isEmpty else {
-                self.showAlert(title: "", message: "이메일을 입력하세요", ok: "확인") { }
-                return
-            }
-            let body = EmailDuplicationCheckBody(email: email)
-            NetworkManager.shared.emailDuplicateCheck(body: body) { response in
-                self.showAlert(title: "", message: response.message, ok: "확인") {
-                    self.setDuplicateButton(checked: true)
-                    self.validatedEmail = email
-                    // validatedEmail 변하면 다시 회색
-                }
-            }
-        }
+        
     }
     
     @objc private func nicknameDuplicationCheck() {
         
         
     }
-    
-    private func setDuplicateButton(checked: Bool) {
-        emailDuplicationCheckButton.backgroundColor = checked ? .systemGreen : .systemGray2
-        emailDuplicationCheckButton.setTitle(checked ? "가능" : "중복 확인", for: .normal)
-        emailDuplicationCheckButton.isEnabled = checked ? false : true
-        
-    }
+     
     
 }
 
@@ -155,81 +149,63 @@ extension JoinViewController {
     private func configureView() {
         navigationItem.title = "회원가입"
         
+        view.addSubview(imageView)
         view.addSubview(emailField)
-        view.addSubview(emailDuplicationCheckButton)
         view.addSubview(passwordField)
         view.addSubview(nicknameField)
-        view.addSubview(nicknameDuplicationCheckButton)
-        view.addSubview(phoneNuberField)
-        view.addSubview(birthdayLabel)
-        view.addSubview(birthdayPicker)
-        view.addSubview(birthdayValidLabel)
-        view.addSubview(signupButton)
+        view.addSubview(birthdayField)
+        view.addSubview(phoneField)
+        view.addSubview(validationLabel)
+        view.addSubview(joinButton)
         
-        emailField.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
-            make.leading.equalTo(view).inset(20)
-            make.trailing.equalTo(emailDuplicationCheckButton.snp.leading).offset(-10)
-            make.height.equalTo(60)
+        imageView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.centerX.equalTo(view)
+            make.size.equalTo(100)
         }
         
-        emailDuplicationCheckButton.snp.makeConstraints { make in
-            make.top.equalTo(emailField.textField.snp.top)
-            make.bottom.equalTo(emailField.textField.snp.bottom)
-            make.trailing.equalTo(view).offset(-20)
-            make.width.equalTo(70)
+        emailField.snp.makeConstraints { make in
+            make.top.equalTo(imageView.snp.bottom).offset(20)
+            make.horizontalEdges.equalTo(view).inset(20)
+            make.height.equalTo(50)
         }
         
         passwordField.snp.makeConstraints { make in
-            make.top.equalTo(emailField.snp.bottom).offset(15)
+            make.top.equalTo(emailField.snp.bottom).offset(-1.5)
             make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(60)
+            make.height.equalTo(50)
         }
         
         nicknameField.snp.makeConstraints { make in
-            make.top.equalTo(passwordField.snp.bottom).offset(15)
-            make.leading.equalTo(view).offset(20)
-            make.trailing.equalTo(emailDuplicationCheckButton.snp.leading).offset(-10)
-            make.height.equalTo(60)
-        }
-        
-        nicknameDuplicationCheckButton.snp.makeConstraints { make in
-            make.top.equalTo(nicknameField.textField.snp.top)
-            make.bottom.equalTo(nicknameField.textField.snp.bottom)
-            make.trailing.equalTo(view).offset(-20)
-            make.width.equalTo(70)
-        }
-        
-        phoneNuberField.snp.makeConstraints { make in
-            make.top.equalTo(nicknameField.snp.bottom).offset(15)
+            make.top.equalTo(passwordField.snp.bottom).offset(-1.5)
             make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(60)
+            make.height.equalTo(50)
         }
         
-        birthdayLabel.snp.makeConstraints { make in
-            make.top.equalTo(phoneNuberField.snp.bottom).offset(15)
-            make.leading.equalTo(view).offset(20)
-            make.height.equalTo(15)
-        }
-        
-        birthdayValidLabel.snp.makeConstraints { make in
-            make.top.equalTo(phoneNuberField.snp.bottom).offset(15)
-            make.leading.equalTo(birthdayLabel.snp.trailing).offset(10)
-            make.trailing.equalTo(view).offset(-20)
-            make.height.equalTo(15)
-        }
-        
-        birthdayPicker.snp.makeConstraints { make in
-            make.top.equalTo(birthdayLabel.snp.bottom).offset(8)
+        birthdayField.snp.makeConstraints { make in
+            make.top.equalTo(nicknameField.snp.bottom).offset(-1.5)
             make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(120)
+            make.height.equalTo(50)
         }
         
-        signupButton.snp.makeConstraints { make in
+        phoneField.snp.makeConstraints { make in
+            make.top.equalTo(birthdayField.snp.bottom).offset(-1.5)
+            make.horizontalEdges.equalTo(view).inset(20)
+            make.height.equalTo(50)
+        }
+        
+        validationLabel.snp.makeConstraints { make in
+            make.top.equalTo(phoneField.snp.bottom).offset(10)
+            make.horizontalEdges.equalTo(view).inset(20)
+        }
+        
+        joinButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
             make.horizontalEdges.equalTo(view).inset(20)
             make.height.equalTo(50)
         }
+        
+        emailField.duplicationButton.addTarget(self, action: #selector(emailDuplicationCheck), for: .touchUpInside)
         
     }
     

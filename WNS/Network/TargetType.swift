@@ -8,9 +8,7 @@
 import Foundation
 import Alamofire
 
-enum RequestError: Error {
-    case invalidURL
-}
+
 
 protocol TargetType: URLRequestConvertible {
     var baseURL: String { get }

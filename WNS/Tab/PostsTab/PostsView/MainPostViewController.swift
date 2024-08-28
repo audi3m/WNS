@@ -33,20 +33,17 @@ final class MainPostViewController: BaseViewController {
         configureNavBar()
         configureView()
         rxBind()
-        callPosts()
     }
     
 }
 
 // Delegate
 extension MainPostViewController: PostCellDelegate {
-    
     func commentsButtonTapped(in cell: UITableViewCell, postID: String) {
         let vc = CommentsViewController(postID: postID)
         let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true)
     }
-     
 }
 
 extension MainPostViewController: UITableViewDataSourcePrefetching {
@@ -74,7 +71,7 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
         cell.postData = data
         cell.like = data.likes.contains(AccountManager.shared.userID)
         cell.delegate = self 
-        cell.configureData()
+        cell.configureImagesByCount()
         return cell
     }
     
@@ -84,7 +81,6 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
 // Rx
@@ -108,7 +104,7 @@ extension MainPostViewController {
         }
     }
     
-    @objc private func callPosts(next: String = "") {
+    private func callPosts(next: String = "") {
         let getAllPostsQuery = GetAllPostQuery(next: next, limit: "5", productID: ProductID.forUsers.rawValue)
         NetworkManager.shared.getAllPosts(query: getAllPostsQuery) { [weak self] response in
             DispatchQueue.main.async {
@@ -134,20 +130,12 @@ extension MainPostViewController {
             AccountManager.shared.userID = response.userID
         }
     }
-     
-}
-
-// Other Functions
-extension MainPostViewController {
     
-    @objc private func changeMode() {
-        if overrideUserInterfaceStyle == .light {
-            overrideUserInterfaceStyle = .dark
-        } else {
-            overrideUserInterfaceStyle = .light
-        }
+    @objc private func refreshPosts() {
+        nextCursor = ""
+        callPosts()
     }
-    
+     
 }
 
 // View
@@ -158,12 +146,12 @@ extension MainPostViewController {
         
         let login = UIBarButtonItem(image: ButtonImage.navLogin, style: .plain, target: self, action: #selector(login))
         let refreshToken = UIBarButtonItem(image: ButtonImage.navRefresh, style: .plain, target: self, action: #selector(refreshToken))
-        let toggle = UIBarButtonItem(image: UIImage(systemName: "light.cylindrical.ceiling.inverse"),
-                                   style: .plain, target: self,
-                                   action: #selector(changeMode))
+        
+        let request = UIBarButtonItem(image: UIImage(systemName: "arrow.down"), style: .plain, target: self, action: #selector(refreshPosts))
+        
         
         navigationItem.leftBarButtonItems = [login, refreshToken]
-        navigationItem.rightBarButtonItems = [toggle]
+        navigationItem.rightBarButtonItem = request
         
     }
     

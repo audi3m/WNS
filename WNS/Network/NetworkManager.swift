@@ -8,6 +8,10 @@
 import Foundation
 import Alamofire
 
+enum RequestError: Error {
+    case invalidURL
+}
+
 final class NetworkManager {
     
     static let shared = NetworkManager()

@@ -8,55 +8,46 @@
 import UIKit
 import SnapKit
 
-struct Appearance {
-    
-    
-    
-}
-
 final class AppearanceCollectionViewCell: UICollectionViewCell {
     
-    enum AppearanceMode: String, CaseIterable {
-        case system = "System"
-        case light = "Light"
-        case dark = "Dark"
-
-        var iconName: String {
-            switch self {
-            case .system: return "iphone"
-            case .light: return "sun.max"
-            case .dark: return "moon"
-            }
-        }
-    }
-    
-    let systemImageView: UIImageView = {
-        let view = UIImageView()
-        view.image = UIImage(systemName: "iphone")
+    lazy var stackView: UIStackView = {
+        let view = UIStackView()
+        view.addArrangedSubview(system)
+        view.addArrangedSubview(light)
+        view.addArrangedSubview(dark)
+        view.axis = .horizontal
+        view.distribution = .equalSpacing
         return view
     }()
     
-    let sunImageView: UIImageView = {
-        let view = UIImageView()
-        view.image = UIImage(systemName: "sun")
-        
+    let system: SelectionView = {
+        let view = SelectionView(type: .system)
         return view
     }()
-    
-    let moonImageView: UIImageView = {
-        let view = UIImageView()
-        view.image = UIImage(systemName: "iphone")
-        
+    let light: SelectionView = {
+        let view = SelectionView(type: .light)
+        return view
+    }()
+    let dark: SelectionView = {
+        let view = SelectionView(type: .dark)
         return view
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        contentView.addSubview(stackView)
+        stackView.addSubview(system)
+        stackView.addSubview(light)
+        stackView.addSubview(dark)
+        
+        stackView.snp.makeConstraints { make in
+            make.verticalEdges.equalToSuperview()
+            make.horizontalEdges.equalToSuperview().inset(50)
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
-     
       
 }
