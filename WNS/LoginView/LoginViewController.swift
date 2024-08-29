@@ -20,7 +20,7 @@ final class LoginViewController: BaseViewController {
         return view
     }()
     let emailField = OutlineField(fieldType: .emailForLogin, cornerType: .top)
-    let passwordField = OutlineField(fieldType: .password, cornerType: .bottom)
+    let passwordField = OutlineField(fieldType: .passwordForLogin, cornerType: .bottom)
     let validLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
@@ -108,7 +108,7 @@ extension LoginViewController {
         }
         
         emailField.snp.makeConstraints { make in
-            make.bottom.equalTo(passwordField.snp.top).offset(1.5)
+            make.bottom.equalTo(passwordField.snp.top).offset(DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(view).inset(20)
             make.height.equalTo(60)
         }

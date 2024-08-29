@@ -83,12 +83,7 @@ final class ProfileViewController: BaseViewController {
 // Rx
 extension ProfileViewController {
     
-    private func rxBind() {
-        
-        let input = ProfileViewModel.Input()
-        let output = viewModel.transform(input: input)
-            
-    }
+    private func rxBind() { }
     
 }
 
@@ -96,6 +91,7 @@ extension ProfileViewController {
 extension ProfileViewController {
     @objc private func settingsClicked() {
         let vc = SettingsViewController()
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -18,7 +18,6 @@ struct ImageItem: Identifiable {
 
 final class NewPostViewController: BaseViewController {
     
-    // UIScrollView와 contentView 추가
     private let scrollView: UIScrollView = {
         let view = UIScrollView()
         view.keyboardDismissMode = .onDrag
@@ -208,13 +207,13 @@ extension NewPostViewController {
         }
         
         hashtagField.snp.makeConstraints { make in
-            make.top.equalTo(titleField.snp.bottom).offset(-1.5)
+            make.top.equalTo(titleField.snp.bottom).offset(-DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(contentView).inset(20)
             make.height.equalTo(60)
         }
         
         contentsField.snp.makeConstraints { make in
-            make.top.equalTo(hashtagField.snp.bottom).offset(-1.5)
+            make.top.equalTo(hashtagField.snp.bottom).offset(-DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(contentView).inset(20)
             make.height.equalTo(200)
         }

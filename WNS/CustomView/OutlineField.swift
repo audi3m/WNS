@@ -12,7 +12,7 @@ final class OutlineField: UIView {
     lazy var outlineView: UIView = {
         let view = UIView()
         view.layer.borderColor = UIColor.lightGray.cgColor
-        view.layer.borderWidth = 1.5
+        view.layer.borderWidth = DesignSize.outlineWidth
         view.roundCorners(cornerType)
         return view
     }()
@@ -107,7 +107,7 @@ final class OutlineField: UIView {
  
 extension OutlineField {
     enum FieldType {
-        case email, emailForLogin, password, nickname, birthday, phone, contents, hashtag, title
+        case email, emailForLogin, password, passwordForLogin, nickname, birthday, phone, contents, hashtag, title
         
         var placeholder: String {
             switch self {
@@ -116,13 +116,15 @@ extension OutlineField {
             case .emailForLogin:
                 "이메일"
             case .password:
+                "비밀번호 (8자리 이상)"
+            case .passwordForLogin:
                 "비밀번호"
             case .nickname:
-                "닉네임 - 공백 없이 입력"
+                "닉네임 (공백 없이 입력)"
             case .birthday:
                 "생년월일 8자리 ex) 20010710"
             case .phone:
-                "[선택] 전화번호 - 숫자만 입력"
+                "[선택] 전화번호 (숫자만 입력)"
             case .hashtag:
                 "#해시태그"
             case .title:
@@ -136,7 +138,7 @@ extension OutlineField {
             switch self {
             case .email, .emailForLogin:
                 "envelope"
-            case .password:
+            case .password, .passwordForLogin:
                 "lock"
             case .nickname:
                 "person"

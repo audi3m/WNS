@@ -16,7 +16,7 @@ final class SettingsViewController: BaseViewController {
     private let appearanceOutline: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
-        view.layer.borderWidth = 1.5
+        view.layer.borderWidth = DesignSize.outlineWidth
         view.layer.borderColor = UIColor.lightGray.cgColor
         return view
     }()
@@ -168,13 +168,13 @@ extension SettingsViewController {
         }
         
         editProfile.snp.makeConstraints { make in
-            make.top.equalTo(wineRequest.snp.bottom).offset(-1.5)
+            make.top.equalTo(wineRequest.snp.bottom).offset(-DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(contentView).inset(20)
             make.height.equalTo(60)
         }
         
         what.snp.makeConstraints { make in
-            make.top.equalTo(editProfile.snp.bottom).offset(-1.5)
+            make.top.equalTo(editProfile.snp.bottom).offset(-DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(contentView).inset(20)
             make.height.equalTo(60)
         }
@@ -189,7 +189,7 @@ extension SettingsViewController {
             make.top.equalTo(logoutButton.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(contentView).inset(20)
             make.height.equalTo(30)
-            make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).offset(-20)
+            make.bottom.equalTo(contentView.safeAreaLayoutGuide).offset(-20)
         }
     }
 }

@@ -16,7 +16,7 @@ final class OutlineButton: UIView {
     lazy var outlineView: UIView = {
         let view = UIView()
         view.layer.borderColor = UIColor.lightGray.cgColor
-        view.layer.borderWidth = 1.5
+        view.layer.borderWidth = DesignSize.outlineWidth
         view.roundCorners(cornerType)
         return view
     }()

@@ -55,6 +55,8 @@ final class ProfileAndNicknameView: UIView {
     func setProfile(creator: Creator) {
         if let image = creator.profileImage, !image.isEmpty {
             profileImageView.setImageWithURL(with: image)
+        } else {
+            profileImageView.image = UIImage(systemName: "person.circle")
         }
         nicknameLabel.text = creator.nick
     }

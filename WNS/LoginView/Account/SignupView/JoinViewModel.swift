@@ -30,6 +30,16 @@ final class JoinViewModel {
             self.validations[0] = info
             return ValidationResult(valid: valid)
         }
+//        let emailChecked = input.email.map { email in
+//            guard !email.isEmpty else {
+//                self.validations[0] = ""
+//                return ValidationResult(valid: false)
+//            }
+//            let valid = self.isValidEmail(email: email)
+//            let info = valid ? "" : "[이메일] 이메일 형식을 맞춰주세요. ex) aaa@bbb.com"
+//            self.validations[0] = info
+//            return ValidationResult(valid: valid)
+//        }
         let passwordValid = input.password.map { password in
             guard !password.isEmpty else {
                 self.validations[1] = ""
@@ -85,6 +95,7 @@ final class JoinViewModel {
         
         return Output(validationText: validationText,
                       allValidation: allValid,
+//                      duplicationConfirmed: emailChecked,
                       tap: input.tap)
     }
 }
@@ -97,6 +108,7 @@ extension JoinViewModel {
     
     struct Input {
         let email: ControlProperty<String>
+        let emailDuplicationTap: ControlEvent<Void>
         let password: ControlProperty<String>
         let nickname: ControlProperty<String>
         let birthday: ControlProperty<String>
@@ -106,9 +118,9 @@ extension JoinViewModel {
     }
     
     struct Output {
-//        let emailValid: Observable<Bool>
         let validationText: Observable<String>
         let allValidation: Observable<Bool>
+//        let duplicationConfirmed: Observable<Bool>
         let tap: ControlEvent<Void>
     }
 }
@@ -119,6 +131,14 @@ extension JoinViewModel {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailPredicate.evaluate(with: email)
+    }
+    
+    private func checkDuplication(email: String) -> Bool {
+        let body = EmailDuplicationCheckBody(email: email)
+        NetworkManager.shared.emailDuplicateCheck(body: body) { response in
+            
+        }
+        return false
     }
     
     private func isValidDate(birthday: String) -> Bool {

@@ -36,7 +36,7 @@ final class JoinViewController: BaseViewController {
         button.setTitle("가입하기", for: .normal)
         button.layer.cornerRadius = 10
         button.backgroundColor = .lightGray
-        button.addTarget(self, action: #selector(signup), for: .touchUpInside)
+        button.addTarget(self, action: #selector(join), for: .touchUpInside)
         return button
     }()
     
@@ -57,6 +57,7 @@ extension JoinViewController {
     private func rxBind() {
         
         let input = JoinViewModel.Input(email: emailField.textField.rx.text.orEmpty,
+                                        emailDuplicationTap: emailField.duplicationButton.rx.tap,
                                         password: passwordField.textField.rx.text.orEmpty,
                                         nickname: nicknameField.textField.rx.text.orEmpty,
                                         birthday: birthdayField.textField.rx.text.orEmpty,
@@ -65,8 +66,6 @@ extension JoinViewController {
                                         emailDupCheck: emailField.duplicationButton.rx.tap)
         
         let output = viewModel.transform(input: input)
-        
-        
         
         output.validationText
             .bind(with: self) { owner, warning in
@@ -88,35 +87,34 @@ extension JoinViewController {
             .disposed(by: disposeBag)
         
     }
-    
 }
 
 // Network Functions
 extension JoinViewController {
     
-    @objc private func signup() {
+    @objc private func join() {
         
         let joinBody = JoinBody(email: emailField.textField.text ?? "",
                                 password: passwordField.textField.text ?? "",
                                 nick: nicknameField.textField.text ?? "", 
-                                phoneNum: "",
-                                birthDay: birthdayField.textField.text)
+                                birthDay: birthdayField.textField.text ?? "",
+                                phoneNum: phoneField.textField.text)
         
         NetworkManager.shared.join(body: joinBody) { response in 
             
         }
-        
-        
     }
     
     @objc private func emailDuplicationCheck() {
-        
+        guard let email = emailField.textField.text else { return }
+        let body = EmailDuplicationCheckBody(email: email)
+        NetworkManager.shared.emailDuplicateCheck(body: body) { response in
+            DispatchQueue.main.async {
+                
+            }
+        }
     }
     
-    @objc private func nicknameDuplicationCheck() {
-        
-        
-    }
      
     
 }
@@ -149,25 +147,25 @@ extension JoinViewController {
         }
         
         passwordField.snp.makeConstraints { make in
-            make.top.equalTo(emailField.snp.bottom).offset(-1.5)
+            make.top.equalTo(emailField.snp.bottom).offset(-DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(view).inset(20)
             make.height.equalTo(60)
         }
         
         nicknameField.snp.makeConstraints { make in
-            make.top.equalTo(passwordField.snp.bottom).offset(-1.5)
+            make.top.equalTo(passwordField.snp.bottom).offset(-DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(view).inset(20)
             make.height.equalTo(60)
         }
         
         birthdayField.snp.makeConstraints { make in
-            make.top.equalTo(nicknameField.snp.bottom).offset(-1.5)
+            make.top.equalTo(nicknameField.snp.bottom).offset(-DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(view).inset(20)
             make.height.equalTo(60)
         }
         
         phoneField.snp.makeConstraints { make in
-            make.top.equalTo(birthdayField.snp.bottom).offset(-1.5)
+            make.top.equalTo(birthdayField.snp.bottom).offset(-DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(view).inset(20)
             make.height.equalTo(60)
         }

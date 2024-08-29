@@ -31,6 +31,7 @@ final class PostDetailViewController: BaseViewController {
         control.hidesForSinglePage = true
         control.currentPageIndicatorTintColor = .systemBlue
         control.pageIndicatorTintColor = .lightGray
+        control.backgroundStyle = .minimal
         return control
     }()
     let colorView: UIView = {
@@ -67,9 +68,6 @@ final class PostDetailViewController: BaseViewController {
         rxBind()
     }
 }
-
-    
-
 
 // Rx
 extension PostDetailViewController {
@@ -168,6 +166,7 @@ extension PostDetailViewController {
         like = post.likeThisPost
         collectionView.reloadData()
     }
+    
 }
 
 // CollectionView
@@ -198,4 +197,5 @@ extension PostDetailViewController: UICollectionViewDelegate, UICollectionViewDa
         layout.minimumInteritemSpacing = 0
         return layout
     }
+    
 }

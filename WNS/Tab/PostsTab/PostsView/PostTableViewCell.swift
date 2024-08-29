@@ -17,7 +17,7 @@ final class PostTableViewCell: UITableViewCell {
     let profileView = ProfileAndNicknameView()
     let imageBackground: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 15
+        view.layer.cornerRadius = 10
         view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
         view.layer.masksToBounds = true
         return view
@@ -37,7 +37,7 @@ final class PostTableViewCell: UITableViewCell {
     let labelBackground: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray6
-        view.layer.cornerRadius = 15
+        view.layer.cornerRadius = 10
         view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner)
         view.layer.masksToBounds = true
         return view

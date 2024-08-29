@@ -37,9 +37,7 @@
 		D404A5272C6F7D10005C3C6E /* GetAllPostQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5262C6F7D10005C3C6E /* GetAllPostQuery.swift */; };
 		D404A5292C6F7DAD005C3C6E /* GetLikePostQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5282C6F7DAD005C3C6E /* GetLikePostQuery.swift */; };
 		D404A52B2C6F7E05005C3C6E /* HashQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A52A2C6F7E05005C3C6E /* HashQuery.swift */; };
-		D404A52D2C6F875E005C3C6E /* NetworkTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A52C2C6F875E005C3C6E /* NetworkTestView.swift */; };
 		D404A52F2C6F9435005C3C6E /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A52E2C6F9435005C3C6E /* ErrorResponse.swift */; };
-		D404A5332C706E24005C3C6E /* JoinField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5322C706E24005C3C6E /* JoinField.swift */; };
 		D404A5352C7085E0005C3C6E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5342C7085E0005C3C6E /* BaseViewController.swift */; };
 		D404A5372C708686005C3C6E /* ViewController+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5362C708686005C3C6E /* ViewController+Ex.swift */; };
 		D404A5392C70871B005C3C6E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5382C70871B005C3C6E /* LoginViewModel.swift */; };
@@ -67,6 +65,7 @@
 		D41E73142C7F08E500097F90 /* OutlineField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73132C7F08E500097F90 /* OutlineField.swift */; };
 		D41E73162C7F35DB00097F90 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73152C7F35DB00097F90 /* DateManager.swift */; };
 		D41E731A2C7F8D5F00097F90 /* OutlineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73192C7F8D5F00097F90 /* OutlineButton.swift */; };
+		D45345852C80338A00BABF48 /* WineAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45345842C80338A00BABF48 /* WineAddViewController.swift */; };
 		D462B0D52C7452D400AE86CE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D42C7452D400AE86CE /* SettingsViewController.swift */; };
 		D462B0D72C7452EC00AE86CE /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D62C7452EC00AE86CE /* SettingsViewModel.swift */; };
 		D462B0D92C747B1C00AE86CE /* TabItemsImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D82C747B1C00AE86CE /* TabItemsImage.swift */; };
@@ -145,9 +144,7 @@
 		D404A5262C6F7D10005C3C6E /* GetAllPostQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllPostQuery.swift; sourceTree = "<group>"; };
 		D404A5282C6F7DAD005C3C6E /* GetLikePostQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLikePostQuery.swift; sourceTree = "<group>"; };
 		D404A52A2C6F7E05005C3C6E /* HashQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashQuery.swift; sourceTree = "<group>"; };
-		D404A52C2C6F875E005C3C6E /* NetworkTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTestView.swift; sourceTree = "<group>"; };
 		D404A52E2C6F9435005C3C6E /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
-		D404A5322C706E24005C3C6E /* JoinField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinField.swift; sourceTree = "<group>"; };
 		D404A5342C7085E0005C3C6E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D404A5362C708686005C3C6E /* ViewController+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Ex.swift"; sourceTree = "<group>"; };
 		D404A5382C70871B005C3C6E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -174,6 +171,7 @@
 		D41E73132C7F08E500097F90 /* OutlineField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineField.swift; sourceTree = "<group>"; };
 		D41E73152C7F35DB00097F90 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		D41E73192C7F8D5F00097F90 /* OutlineButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineButton.swift; sourceTree = "<group>"; };
+		D45345842C80338A00BABF48 /* WineAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineAddViewController.swift; sourceTree = "<group>"; };
 		D462B0D42C7452D400AE86CE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D462B0D62C7452EC00AE86CE /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		D462B0D82C747B1C00AE86CE /* TabItemsImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemsImage.swift; sourceTree = "<group>"; };
@@ -284,7 +282,6 @@
 			isa = PBXGroup;
 			children = (
 				D41E73152C7F35DB00097F90 /* DateManager.swift */,
-				D404A5322C706E24005C3C6E /* JoinField.swift */,
 				D4E3C7452C784F9B00131DA5 /* EmptyView.swift */,
 				D4E3C75D2C7B650A00131DA5 /* BasicImageView.swift */,
 				D4E3C7472C78544900131DA5 /* ProfileAndNicknameView.swift */,
@@ -302,6 +299,7 @@
 				D404A5432C71B44A005C3C6E /* ProfileViewController.swift */,
 				D404A5622C721455005C3C6E /* ProfileViewModel.swift */,
 				D404A5502C720AB6005C3C6E /* CountAndLabelView.swift */,
+				D45345832C80337200BABF48 /* WineApplication */,
 				D404A5522C720D24005C3C6E /* FollowView */,
 				D462B0D32C7452C300AE86CE /* Settings */,
 			);
@@ -413,6 +411,14 @@
 			path = Tab;
 			sourceTree = "<group>";
 		};
+		D45345832C80337200BABF48 /* WineApplication */ = {
+			isa = PBXGroup;
+			children = (
+				D45345842C80338A00BABF48 /* WineAddViewController.swift */,
+			);
+			path = WineApplication;
+			sourceTree = "<group>";
+		};
 		D462B0D32C7452C300AE86CE /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,7 +471,6 @@
 		D467D4362C6C8061000C3993 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				D404A52C2C6F875E005C3C6E /* NetworkTestView.swift */,
 				D404A50E2C6E302E005C3C6E /* NetworkManager.swift */,
 				D467D4372C6C8070000C3993 /* APIKey.swift */,
 				D467D4542C6CDDAD000C3993 /* Router.swift */,
@@ -631,7 +636,6 @@
 			files = (
 				D462B0D92C747B1C00AE86CE /* TabItemsImage.swift in Sources */,
 				D404A4E72C6DA0EC005C3C6E /* JoinResponse.swift in Sources */,
-				D404A52D2C6F875E005C3C6E /* NetworkTestView.swift in Sources */,
 				D4E3C71A2C764E1B00131DA5 /* SearchUsersResponse.swift in Sources */,
 				D4E3C7422C76FA9000131DA5 /* CommentCollectionViewCell.swift in Sources */,
 				D404A5032C6DFE5F005C3C6E /* LikePostResponse.swift in Sources */,
@@ -647,6 +651,7 @@
 				D404A55F2C721364005C3C6E /* WineTabController.swift in Sources */,
 				D404A4F32C6DB78D005C3C6E /* Post.swift in Sources */,
 				D404A5422C70E1A1005C3C6E /* PostTableViewCell.swift in Sources */,
+				D45345852C80338A00BABF48 /* WineAddViewController.swift in Sources */,
 				D467D43A2C6C85F4000C3993 /* AccountManager.swift in Sources */,
 				D404A4FB2C6DFC2C005C3C6E /* GetUserPostResponse.swift in Sources */,
 				D404A5052C6E0019005C3C6E /* FollowResponse.swift in Sources */,
@@ -671,7 +676,6 @@
 				D4E3C7622C7B8B0300131DA5 /* SearchViewController.swift in Sources */,
 				D467D4512C6CD94C000C3993 /* PostDetailViewController.swift in Sources */,
 				D4E3C7752C7C9CFB00131DA5 /* SettingsTest.swift in Sources */,
-				D404A5332C706E24005C3C6E /* JoinField.swift in Sources */,
 				D467D45A2C6CE188000C3993 /* LoginBody.swift in Sources */,
 				D404A5632C721455005C3C6E /* ProfileViewModel.swift in Sources */,
 				D467D4552C6CDDAD000C3993 /* Router.swift in Sources */,

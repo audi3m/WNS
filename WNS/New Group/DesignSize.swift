@@ -12,4 +12,11 @@ enum DesignSize {
     static let HorizontalPadding: CGFloat = 20
     
     
+    
+    
+    
+    
+    static let outlineWidth: CGFloat = 1
+    
 }
+

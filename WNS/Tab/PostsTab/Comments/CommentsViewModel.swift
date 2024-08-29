@@ -14,13 +14,7 @@ final class CommentsViewModel {
     let disposeBag = DisposeBag()
     
     func transform(input: Input) -> Output {
-        
-        
-    
         let result = Driver.just([Comment]())
-        
-        
-        
         return Output(commentsList: result)
     }
     

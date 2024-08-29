@@ -65,13 +65,15 @@ final class CommentTableViewCell: UITableViewCell {
             make.trailing.equalTo(contentView).offset(-15)
             make.height.equalTo(15)
         }
-        
     }
     
     func configureData() {
         guard let data else { return }
-        
-        profileImageView.image = UIImage(systemName: "person.circle")
+        if let image = data.creator.profileImage {
+            profileImageView.setImageWithURL(with: image)
+        } else {
+            profileImageView.image = UIImage(systemName: "person.circle")
+        }
         nicknameLabel.text = data.creator.nick
         commentLabel.text = data.content
     }
