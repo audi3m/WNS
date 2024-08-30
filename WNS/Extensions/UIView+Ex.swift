@@ -15,7 +15,7 @@ enum BorderOption {
 }
 
 enum Corner {
-    case top, middle, bottom
+    case top, middle, bottom, all
 }
 
 extension UIView {
@@ -30,9 +30,12 @@ extension UIView {
             maskedCorners = []
         case .bottom:
             maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        case .all:
+            maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner,
+                             .layerMinXMinYCorner, .layerMaxXMinYCorner]
         }
         
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = DesignSize.fieldCornerRadius
         self.layer.maskedCorners = maskedCorners
     }
 }

@@ -149,7 +149,6 @@ extension MainPostViewController {
         
         let request = UIBarButtonItem(image: UIImage(systemName: "arrow.down"), style: .plain, target: self, action: #selector(refreshPosts))
         
-        
         navigationItem.leftBarButtonItems = [login, refreshToken]
         navigationItem.rightBarButtonItem = request
         

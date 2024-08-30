@@ -114,9 +114,6 @@ extension JoinViewController {
             }
         }
     }
-    
-     
-    
 }
 
 // View
@@ -142,48 +139,47 @@ extension JoinViewController {
         
         emailField.snp.makeConstraints { make in
             make.top.equalTo(imageView.snp.bottom).offset(20)
-            make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(60)
+            make.horizontalEdges.equalTo(view).inset(30)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         passwordField.snp.makeConstraints { make in
             make.top.equalTo(emailField.snp.bottom).offset(-DesignSize.outlineWidth)
-            make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(60)
+            make.horizontalEdges.equalTo(view).inset(30)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         nicknameField.snp.makeConstraints { make in
             make.top.equalTo(passwordField.snp.bottom).offset(-DesignSize.outlineWidth)
-            make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(60)
+            make.horizontalEdges.equalTo(view).inset(30)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         birthdayField.snp.makeConstraints { make in
             make.top.equalTo(nicknameField.snp.bottom).offset(-DesignSize.outlineWidth)
-            make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(60)
+            make.horizontalEdges.equalTo(view).inset(30)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         phoneField.snp.makeConstraints { make in
             make.top.equalTo(birthdayField.snp.bottom).offset(-DesignSize.outlineWidth)
-            make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(60)
+            make.horizontalEdges.equalTo(view).inset(30)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         validationLabel.snp.makeConstraints { make in
             make.top.equalTo(phoneField.snp.bottom).offset(10)
-            make.horizontalEdges.equalTo(view).inset(20)
+            make.horizontalEdges.equalTo(view).inset(30)
         }
         
         joinButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
-            make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(50)
+            make.horizontalEdges.equalTo(view).inset(30)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         emailField.duplicationButton.addTarget(self, action: #selector(emailDuplicationCheck), for: .touchUpInside)
         
     }
-    
 }
 

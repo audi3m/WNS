@@ -66,15 +66,15 @@ final class OutlineField: UIView {
             make.edges.equalToSuperview()
         }
         iconImageView.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().inset(15)
-            make.size.equalTo(30)
+            make.top.leading.equalToSuperview().inset(DesignSize.fieldPadding)
+            make.size.equalTo(DesignSize.fieldHeight - DesignSize.fieldPadding * 2)
         }
         
         if fieldType == .contents {
             outlineView.addSubview(textView)
             textView.snp.makeConstraints { make in
-                make.verticalEdges.trailing.equalToSuperview().inset(15)
-                make.leading.equalTo(iconImageView.snp.trailing).offset(15)
+                make.verticalEdges.trailing.equalToSuperview().inset(DesignSize.fieldPadding)
+                make.leading.equalTo(iconImageView.snp.trailing).offset(DesignSize.fieldPadding)
             }
         } else {
             outlineView.addSubview(textField)
@@ -83,24 +83,30 @@ final class OutlineField: UIView {
                 outlineView.addSubview(duplicationButton)
                 
                 duplicationButton.snp.makeConstraints { make in
-                    make.verticalEdges.trailing.equalToSuperview().inset(15)
+                    make.verticalEdges.equalToSuperview().inset(10)
+                    make.trailing.equalToSuperview().inset(DesignSize.fieldPadding)
                     make.width.equalTo(50)
                 }
                 textField.snp.makeConstraints { make in
-                    make.verticalEdges.equalToSuperview().inset(10)
-                    make.leading.equalTo(iconImageView.snp.trailing).offset(15)
-                    make.trailing.equalTo(duplicationButton.snp.leading).offset(-15) 
+                    make.verticalEdges.equalToSuperview().inset(DesignSize.fieldPadding)
+                    make.leading.equalTo(iconImageView.snp.trailing).offset(DesignSize.fieldPadding)
+                    make.trailing.equalTo(duplicationButton.snp.leading).offset(-DesignSize.fieldPadding)
                 }
                 
             } else {
                 textField.snp.makeConstraints { make in
-                    make.leading.equalTo(iconImageView.snp.trailing).offset(15)
-                    make.verticalEdges.trailing.equalToSuperview().inset(15)
+                    make.leading.equalTo(iconImageView.snp.trailing).offset(DesignSize.fieldPadding)
+                    make.verticalEdges.trailing.equalToSuperview().inset(DesignSize.fieldPadding)
                 }
             }
         }
         
-        iconImageView.image = UIImage(systemName: fieldType.image)
+        iconImageView.image = switch fieldType {
+        case .variety, .winery:
+            UIImage(named: fieldType.image)
+        default:
+            UIImage(systemName: fieldType.image)
+        }
         textField.placeholder = fieldType.placeholder
     }
 }
@@ -108,7 +114,8 @@ final class OutlineField: UIView {
 extension OutlineField {
     enum FieldType {
         case email, emailForLogin, password, passwordForLogin, nickname, birthday, phone, contents, hashtag, title
-        
+        case wineName, variety, country, region, winery
+        // 이름, 품종, 국가, 지역, 와이너리
         var placeholder: String {
             switch self {
             case .email:
@@ -129,8 +136,18 @@ extension OutlineField {
                 "#해시태그"
             case .title:
                 "제목"
-            default:
+            case .contents:
                 ""
+            case .wineName:
+                "와인 이름"
+            case .variety:
+                "품종"
+            case .country:
+                "국가"
+            case .region:
+                "지역"
+            case .winery:
+                "와이너리"
             }
         }
         
@@ -152,6 +169,16 @@ extension OutlineField {
                 "number"
             case .title:
                 "pencil"
+            case .wineName:
+                "tag"
+            case .variety:
+                "grapes"
+            case .country:
+                "globe"
+            case .region:
+                "map"
+            case .winery:
+                "winery"
             }
         }
         

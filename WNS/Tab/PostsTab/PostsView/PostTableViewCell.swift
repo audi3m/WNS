@@ -172,8 +172,7 @@ extension PostTableViewCell {
         
         imageView1.setImageWithURL(with: post.files[0])
         imageView1.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalToSuperview()
-            make.height.equalTo(180)
+            make.edges.equalToSuperview()
         }
     }
     
@@ -185,16 +184,12 @@ extension PostTableViewCell {
         imageView2.setImageWithURL(with: post.files[1])
         
         imageView1.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.verticalEdges.leading.equalToSuperview()
             make.width.equalToSuperview().dividedBy(2)
-            make.height.equalTo(180)
         }
         imageView2.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.verticalEdges.trailing.equalToSuperview()
             make.leading.equalTo(imageView1.snp.trailing).offset(2)
-            make.trailing.equalToSuperview()
-            make.height.equalTo(180)
         }
     }
     
@@ -209,22 +204,19 @@ extension PostTableViewCell {
         imageView3.setImageWithURL(with: post.files[2])
         
         imageView1.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.verticalEdges.leading.equalToSuperview()
             make.width.equalToSuperview().dividedBy(2)
-            make.height.equalTo(180)
         }
         imageView2.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.trailing.equalToSuperview()
             make.leading.equalTo(imageView1.snp.trailing).offset(2)
-            make.trailing.equalToSuperview()
-            make.height.equalTo(90)
+            make.height.equalToSuperview().dividedBy(2)
         }
         imageView3.snp.makeConstraints { make in
             make.top.equalTo(imageView2.snp.bottom).offset(2)
             make.leading.equalTo(imageView1.snp.trailing).offset(2)
-            make.trailing.equalToSuperview()
-            make.bottom.equalTo(imageView1.snp.bottom)
+            make.trailing.bottom.equalToSuperview()
+            
         }
     }
     
@@ -240,28 +232,23 @@ extension PostTableViewCell {
         imageView3.setImageWithURL(with: post.files[2])
         
         imageView1.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.verticalEdges.leading.equalToSuperview()
             make.width.equalToSuperview().dividedBy(2)
-            make.height.equalTo(180)
         }
         imageView2.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.trailing.equalToSuperview()
             make.leading.equalTo(imageView1.snp.trailing).offset(2)
-            make.trailing.equalToSuperview()
-            make.height.equalTo(90)
+            make.height.equalToSuperview().dividedBy(2)
         }
         imageView3.snp.makeConstraints { make in
             make.top.equalTo(imageView2.snp.bottom).offset(2)
             make.leading.equalTo(imageView1.snp.trailing).offset(2)
-            make.trailing.equalToSuperview()
-            make.bottom.equalTo(imageView1.snp.bottom)
+            make.trailing.bottom.equalToSuperview()
         }
         moreView.snp.makeConstraints { make in
             make.top.equalTo(imageView2.snp.bottom).offset(2)
             make.leading.equalTo(imageView1.snp.trailing).offset(2)
-            make.trailing.equalToSuperview()
-            make.bottom.equalTo(imageView1.snp.bottom)
+            make.trailing.bottom.equalToSuperview()
         }
         
         moreView.text = "+ \(count-2)"

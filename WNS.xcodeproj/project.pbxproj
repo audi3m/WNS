@@ -66,6 +66,8 @@
 		D41E73162C7F35DB00097F90 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73152C7F35DB00097F90 /* DateManager.swift */; };
 		D41E731A2C7F8D5F00097F90 /* OutlineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73192C7F8D5F00097F90 /* OutlineButton.swift */; };
 		D45345852C80338A00BABF48 /* WineAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45345842C80338A00BABF48 /* WineAddViewController.swift */; };
+		D45976652C80A74000077BC7 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45976642C80A74000077BC7 /* Database.swift */; };
+		D45976672C81863600077BC7 /* WineAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45976662C81863600077BC7 /* WineAddViewModel.swift */; };
 		D462B0D52C7452D400AE86CE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D42C7452D400AE86CE /* SettingsViewController.swift */; };
 		D462B0D72C7452EC00AE86CE /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D62C7452EC00AE86CE /* SettingsViewModel.swift */; };
 		D462B0D92C747B1C00AE86CE /* TabItemsImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D82C747B1C00AE86CE /* TabItemsImage.swift */; };
@@ -172,6 +174,8 @@
 		D41E73152C7F35DB00097F90 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		D41E73192C7F8D5F00097F90 /* OutlineButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineButton.swift; sourceTree = "<group>"; };
 		D45345842C80338A00BABF48 /* WineAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineAddViewController.swift; sourceTree = "<group>"; };
+		D45976642C80A74000077BC7 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		D45976662C81863600077BC7 /* WineAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineAddViewModel.swift; sourceTree = "<group>"; };
 		D462B0D42C7452D400AE86CE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D462B0D62C7452EC00AE86CE /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		D462B0D82C747B1C00AE86CE /* TabItemsImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemsImage.swift; sourceTree = "<group>"; };
@@ -415,8 +419,18 @@
 			isa = PBXGroup;
 			children = (
 				D45345842C80338A00BABF48 /* WineAddViewController.swift */,
+				D45976662C81863600077BC7 /* WineAddViewModel.swift */,
 			);
 			path = WineApplication;
+			sourceTree = "<group>";
+		};
+		D45976632C80A72900077BC7 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				D45976642C80A74000077BC7 /* Database.swift */,
+			);
+			name = Database;
+			path = Test/Database;
 			sourceTree = "<group>";
 		};
 		D462B0D32C7452C300AE86CE /* Settings */ = {
@@ -455,6 +469,7 @@
 				D467D4222C6C7FFA000C3993 /* SceneDelegate.swift */,
 				D4E3C76F2C7C8C1A00131DA5 /* Test */,
 				D467D4362C6C8061000C3993 /* Network */,
+				D45976632C80A72900077BC7 /* Database */,
 				D4E3C75F2C7B8A0B00131DA5 /* Account */,
 				D404A55D2C72126F005C3C6E /* Tab */,
 				D404A5172C6E4F13005C3C6E /* Base */,
@@ -643,6 +658,7 @@
 				D4E3C7442C7844CB00131DA5 /* ButtonImages.swift in Sources */,
 				D41E73142C7F08E500097F90 /* OutlineField.swift in Sources */,
 				D4E3C7532C79F03900131DA5 /* GalleryButtonView.swift in Sources */,
+				D45976652C80A74000077BC7 /* Database.swift in Sources */,
 				D404A5092C6E2CA8005C3C6E /* EditMyProfileResponse.swift in Sources */,
 				D4E3C76E2C7C89C700131DA5 /* AppearanceCollectionViewCell.swift in Sources */,
 				D404A5512C720AB6005C3C6E /* CountAndLabelView.swift in Sources */,
@@ -666,6 +682,7 @@
 				D404A50F2C6E302E005C3C6E /* NetworkManager.swift in Sources */,
 				D404A50D2C6E2DE9005C3C6E /* HashtagResponse.swift in Sources */,
 				D404A54A2C71B7DE005C3C6E /* NSObject+Ex.swift in Sources */,
+				D45976672C81863600077BC7 /* WineAddViewModel.swift in Sources */,
 				D4E3C7512C79BCE500131DA5 /* HorizontalScrollViewController.swift in Sources */,
 				D4E3C76C2C7C6DAD00131DA5 /* Emoji.swift in Sources */,
 				D404A4FD2C6DFCD9005C3C6E /* WriteCommentResponse.swift in Sources */,

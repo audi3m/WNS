@@ -57,7 +57,16 @@ final class LoginViewController: BaseViewController {
 // Rx Functions
 extension LoginViewController {
     
-    private func rxBind() { }
+    private func rxBind() { 
+        
+        let input = LoginViewModel.Input(email: emailField.textField.rx.text.orEmpty,
+                                         password: passwordField.textField.rx.text.orEmpty,
+                                         loginTap: loginButton.rx.tap)
+        let output = viewModel.transform(input: input)
+        
+        
+        
+    }
     
 }
 
@@ -109,25 +118,25 @@ extension LoginViewController {
         
         emailField.snp.makeConstraints { make in
             make.bottom.equalTo(passwordField.snp.top).offset(DesignSize.outlineWidth)
-            make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(60)
+            make.horizontalEdges.equalTo(view).inset(30)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         passwordField.snp.makeConstraints { make in
             make.centerY.equalTo(view)
-            make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(60)
+            make.horizontalEdges.equalTo(view).inset(30)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         validLabel.snp.makeConstraints { make in
             make.top.equalTo(passwordField.snp.bottom).offset(10)
-            make.horizontalEdges.equalTo(view).inset(20)
+            make.horizontalEdges.equalTo(view).inset(30)
         }
         
         loginButton.snp.makeConstraints { make in
             make.top.equalTo(validLabel.snp.bottom).offset(30)
-            make.horizontalEdges.equalTo(view).inset(20)
-            make.height.equalTo(50)
+            make.horizontalEdges.equalTo(view).inset(30)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         signupButton.snp.makeConstraints { make in

@@ -104,6 +104,8 @@ extension SettingsViewController {
     
     @objc private func addWineClicked() {
         print("Add wine")
+        let vc = WineAddViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func editProfileClicked() {
@@ -152,42 +154,42 @@ extension SettingsViewController {
         
         appearanceOutline.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top).offset(20)
-            make.horizontalEdges.equalTo(contentView).inset(20)
+            make.horizontalEdges.equalTo(contentView).inset(30)
             make.height.equalTo(100)
         }
         
         stackView.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview()
-            make.horizontalEdges.equalToSuperview().inset(50)
+            make.horizontalEdges.equalToSuperview().inset(40)
         }
         
         wineRequest.snp.makeConstraints { make in
             make.top.equalTo(stackView.snp.bottom).offset(20)
-            make.horizontalEdges.equalTo(contentView).inset(20)
-            make.height.equalTo(60)
+            make.horizontalEdges.equalTo(contentView).inset(30)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         editProfile.snp.makeConstraints { make in
             make.top.equalTo(wineRequest.snp.bottom).offset(-DesignSize.outlineWidth)
-            make.horizontalEdges.equalTo(contentView).inset(20)
-            make.height.equalTo(60)
+            make.horizontalEdges.equalTo(contentView).inset(30)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         what.snp.makeConstraints { make in
             make.top.equalTo(editProfile.snp.bottom).offset(-DesignSize.outlineWidth)
-            make.horizontalEdges.equalTo(contentView).inset(20)
-            make.height.equalTo(60)
+            make.horizontalEdges.equalTo(contentView).inset(30)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         logoutButton.snp.makeConstraints { make in
             make.top.equalTo(what.snp.bottom).offset(20)
-            make.horizontalEdges.equalTo(contentView).inset(20)
-            make.height.equalTo(50)
+            make.horizontalEdges.equalTo(contentView).inset(30)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         withdrawButton.snp.makeConstraints { make in
             make.top.equalTo(logoutButton.snp.bottom).offset(20)
-            make.horizontalEdges.equalTo(contentView).inset(20)
+            make.horizontalEdges.equalTo(contentView).inset(30)
             make.height.equalTo(30)
             make.bottom.equalTo(contentView.safeAreaLayoutGuide).offset(-20)
         }

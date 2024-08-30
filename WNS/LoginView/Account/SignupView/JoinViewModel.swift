@@ -23,12 +23,12 @@ final class JoinViewModel {
         let emailValid = input.email.map { email in
             guard !email.isEmpty else {
                 self.validations[0] = ""
-                return ValidationResult(valid: false)
+                return false
             }
             let valid = self.isValidEmail(email: email)
             let info = valid ? "" : "[이메일] 이메일 형식을 맞춰주세요. ex) aaa@bbb.com"
             self.validations[0] = info
-            return ValidationResult(valid: valid)
+            return valid
         }
 //        let emailChecked = input.email.map { email in
 //            guard !email.isEmpty else {
@@ -43,48 +43,48 @@ final class JoinViewModel {
         let passwordValid = input.password.map { password in
             guard !password.isEmpty else {
                 self.validations[1] = ""
-                return ValidationResult(valid: false)
+                return false
             }
             let valid = password.count >= 8
             let info = valid ? "" : "[비밀번호] 8자리 이상 입력하세요."
             self.validations[1] = info
-            return ValidationResult(valid: valid)
+            return valid
         }
         let nicknameValid = input.nickname.map { nickname in
             guard !nickname.isEmpty else {
                 self.validations[2] = ""
-                return ValidationResult(valid: false)
+                return false
             }
             let valid = !nickname.contains(" ")
             let info = valid ? "" : "[닉네임] 공백없이 입력하세요"
             self.validations[2] = info
-            return ValidationResult(valid: valid)
+            return valid
         }
         let ageValid = input.birthday.map { birthday in
             guard !birthday.isEmpty else {
                 self.validations[3] = ""
-                return ValidationResult(valid: false)
+                return false
             }
             let validDate = self.isValidDate(birthday: birthday)
             let validAge = self.isValidAge(birthday: birthday)
             let info = validDate ? validAge ? "" : "[생일] 만 19세 이상만 가입 가능합니다." : "[생일] 생년월일 8자리를 입력하세요"
             self.validations[3] = info
-            return ValidationResult(valid: validAge)
+            return validAge
         }
         let phoneValid = input.phoneNumber.map { phone in
             guard !phone.isEmpty else {
                 self.validations[4] = ""
-                return ValidationResult(valid: true)
+                return true
             }
             let countValid = phone.count >= 10
             let numValid = Int(phone) != nil
             let info = numValid ? countValid ? "" : "[전화번호] 10자리 이상 입력하세요." : "[전화번호] 숫자만 입력하세요."
             self.validations[4] = info
-            return ValidationResult(valid: countValid && numValid)
+            return countValid && numValid
         }
         let allValid = Observable.combineLatest(emailValid, passwordValid, nicknameValid, ageValid, phoneValid)
             .map { email, password, nickname, age, phone in
-                email.valid && password.valid && nickname.valid && phone.valid && age.valid
+                email && password && nickname && phone && age
             }
         let validationText = Observable
             .combineLatest(emailValid, passwordValid, nicknameValid, ageValid, phoneValid)
