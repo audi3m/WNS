@@ -22,6 +22,11 @@ final class PostTableViewCell: UITableViewCell {
         view.layer.masksToBounds = true
         return view
     }()
+    let wineImageView: BasicImageView = {
+        let view = BasicImageView(frame: .zero)
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
     let imageView1 = BasicImageView(frame: .zero)
     let imageView2 = BasicImageView(frame: .zero)
     let imageView3 = BasicImageView(frame: .zero)
@@ -134,6 +139,7 @@ extension PostTableViewCell {
     
     func resetSubViews() {
         imageBackground.backgroundColor = .systemBackground
+        wineImageView.removeFromSuperview()
         imageView1.removeFromSuperview()
         imageView2.removeFromSuperview()
         imageView3.removeFromSuperview()
@@ -156,11 +162,11 @@ extension PostTableViewCell {
         case 4: configureImages45(post: postData, count: 4)
         case 5: configureImages45(post: postData, count: 5)
         default:
-            configureEmptyImage()
+            configureEmptyImage(post: postData)
         }
     }
     
-    private func configureEmptyImage() {
+    private func configureEmptyImage(post: Post) {
         imageBackground.backgroundColor = .systemGray4
     }
     

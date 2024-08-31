@@ -77,6 +77,8 @@
 		D45976792C82C8D000077BC7 /* WineListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45976782C82C8D000077BC7 /* WineListManager.swift */; };
 		D459767B2C832BFF00077BC7 /* OutlineNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D459767A2C832BFF00077BC7 /* OutlineNavigation.swift */; };
 		D459767E2C833DF500077BC7 /* HashtagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D459767D2C833DF500077BC7 /* HashtagViewController.swift */; };
+		D45976812C836BA200077BC7 /* TagListView in Frameworks */ = {isa = PBXBuildFile; productRef = D45976802C836BA200077BC7 /* TagListView */; };
+		D45976832C8372AC00077BC7 /* CustomTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45976822C8372AC00077BC7 /* CustomTagListView.swift */; };
 		D462B0D52C7452D400AE86CE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D42C7452D400AE86CE /* SettingsViewController.swift */; };
 		D462B0D72C7452EC00AE86CE /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D62C7452EC00AE86CE /* SettingsViewModel.swift */; };
 		D462B0D92C747B1C00AE86CE /* TabItemsImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462B0D82C747B1C00AE86CE /* TabItemsImage.swift */; };
@@ -194,6 +196,7 @@
 		D45976782C82C8D000077BC7 /* WineListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineListManager.swift; sourceTree = "<group>"; };
 		D459767A2C832BFF00077BC7 /* OutlineNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineNavigation.swift; sourceTree = "<group>"; };
 		D459767D2C833DF500077BC7 /* HashtagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagViewController.swift; sourceTree = "<group>"; };
+		D45976822C8372AC00077BC7 /* CustomTagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTagListView.swift; sourceTree = "<group>"; };
 		D462B0D42C7452D400AE86CE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D462B0D62C7452EC00AE86CE /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		D462B0D82C747B1C00AE86CE /* TabItemsImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemsImage.swift; sourceTree = "<group>"; };
@@ -253,6 +256,7 @@
 				D404A5242C6F2EA4005C3C6E /* TextFieldEffects in Frameworks */,
 				D462B0DC2C74AF7B00AE86CE /* Toast in Frameworks */,
 				D404A53C2C7087B8005C3C6E /* IQKeyboardManagerSwift in Frameworks */,
+				D45976812C836BA200077BC7 /* TagListView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +499,7 @@
 			isa = PBXGroup;
 			children = (
 				D459767D2C833DF500077BC7 /* HashtagViewController.swift */,
+				D45976822C8372AC00077BC7 /* CustomTagListView.swift */,
 			);
 			path = Hashtag;
 			sourceTree = "<group>";
@@ -653,6 +658,7 @@
 				D404A53B2C7087B8005C3C6E /* IQKeyboardManagerSwift */,
 				D462B0DB2C74AF7B00AE86CE /* Toast */,
 				D4E3C74A2C7859D100131DA5 /* Kingfisher */,
+				D45976802C836BA200077BC7 /* TagListView */,
 			);
 			productName = WNS;
 			productReference = D467D41D2C6C7FFA000C3993 /* WNS.app */;
@@ -690,6 +696,7 @@
 				D404A53A2C7087B8005C3C6E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				D462B0DA2C74AF7B00AE86CE /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				D4E3C7492C7859D100131DA5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				D459767F2C836BA200077BC7 /* XCRemoteSwiftPackageReference "TagListView" */,
 			);
 			productRefGroup = D467D41E2C6C7FFA000C3993 /* Products */;
 			projectDirPath = "";
@@ -725,6 +732,7 @@
 				D4E3C71A2C764E1B00131DA5 /* SearchUsersResponse.swift in Sources */,
 				D4E3C7422C76FA9000131DA5 /* CommentCollectionViewCell.swift in Sources */,
 				D404A5032C6DFE5F005C3C6E /* LikePostResponse.swift in Sources */,
+				D45976832C8372AC00077BC7 /* CustomTagListView.swift in Sources */,
 				D467D44D2C6CB39C000C3993 /* JoinViewController.swift in Sources */,
 				D4E3C7442C7844CB00131DA5 /* ButtonImages.swift in Sources */,
 				D41E73142C7F08E500097F90 /* OutlineField.swift in Sources */,
@@ -1061,6 +1069,14 @@
 				minimumVersion = 7.1.1;
 			};
 		};
+		D459767F2C836BA200077BC7 /* XCRemoteSwiftPackageReference "TagListView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ElaWorkshop/TagListView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
 		D462B0DA2C74AF7B00AE86CE /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
@@ -1110,6 +1126,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D404A53A2C7087B8005C3C6E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		D45976802C836BA200077BC7 /* TagListView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D459767F2C836BA200077BC7 /* XCRemoteSwiftPackageReference "TagListView" */;
+			productName = TagListView;
 		};
 		D462B0DB2C74AF7B00AE86CE /* Toast */ = {
 			isa = XCSwiftPackageProductDependency;
