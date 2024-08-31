@@ -21,14 +21,16 @@ final class LoginViewController: BaseViewController {
     }()
     let emailField = OutlineField(fieldType: .emailForLogin, cornerType: .top)
     let passwordField = OutlineField(fieldType: .passwordForLogin, cornerType: .bottom)
-    let validLabel: UILabel = {
+    let validationLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
+        label.textColor = .systemRed
+        label.numberOfLines = 0
         return label
     }()
     lazy var loginButton: UIButton = {
         let button = UIButton()
-        button.configuration = .borderedProminent()
+        button.layer.cornerRadius = 10
         button.setTitle("로그인", for: .normal)
         button.addTarget(self, action: #selector(login), for: .touchUpInside)
         return button
@@ -49,6 +51,9 @@ final class LoginViewController: BaseViewController {
         super.viewDidLoad()
         configureView()
         rxBind()
+        
+        emailField.textField.text = "d@d.com"
+        passwordField.textField.text = "dddddddd"
     }
     
     
@@ -64,7 +69,18 @@ extension LoginViewController {
                                          loginTap: loginButton.rx.tap)
         let output = viewModel.transform(input: input)
         
+        output.validationText
+            .bind(with: self) { owner, warning in
+                owner.validationLabel.text = warning
+            }
+            .disposed(by: disposeBag)
         
+        output.allValidation
+            .bind(with: self) { owner, value in
+                owner.loginButton.backgroundColor = value ? .systemBlue : .lightGray
+                owner.loginButton.isEnabled = value
+            }
+            .disposed(by: disposeBag)
         
     }
     
@@ -80,14 +96,18 @@ extension LoginViewController {
         
         let loginInfo = LoginBody(email: email, password: password)
         
-        NetworkManager.shared.login(body: loginInfo) { response in
+        NetworkManager.shared.login(body: loginInfo) { [weak self] response in
+            guard let self else { return }
             AccountManager.shared.userID = response.userID
             AccountManager.shared.access = response.accessToken
             AccountManager.shared.refresh = response.refreshToken
             
-            let vc = MainPostViewController()
-            self.resetRootViewController(root: vc, withNav: true)
-        } 
+            let vc = WineTabController()
+            self.resetRootViewController(root: vc, withNav: false)
+        } onResponseError: { [weak self] message in
+            guard let self else { return }
+            self.showAlert(title: "", message: message, ok: "확인") { }
+        }
         
     }
     
@@ -106,7 +126,7 @@ extension LoginViewController {
         view.addSubview(imageView)
         view.addSubview(emailField)
         view.addSubview(passwordField)
-        view.addSubview(validLabel)
+        view.addSubview(validationLabel)
         view.addSubview(loginButton)
         view.addSubview(signupButton)
         
@@ -128,13 +148,13 @@ extension LoginViewController {
             make.height.equalTo(DesignSize.fieldHeight)
         }
         
-        validLabel.snp.makeConstraints { make in
+        validationLabel.snp.makeConstraints { make in
             make.top.equalTo(passwordField.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view).inset(30)
         }
         
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(validLabel.snp.bottom).offset(30)
+            make.top.equalTo(validationLabel.snp.bottom).offset(30)
             make.horizontalEdges.equalTo(view).inset(30)
             make.height.equalTo(DesignSize.fieldHeight)
         }

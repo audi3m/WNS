@@ -29,9 +29,9 @@ final class PostDetailViewController: BaseViewController {
         let control = UIPageControl()
         control.currentPage = 0
         control.hidesForSinglePage = true
-        control.currentPageIndicatorTintColor = .systemBlue
-        control.pageIndicatorTintColor = .lightGray
-        control.backgroundStyle = .minimal
+        control.backgroundStyle = .prominent
+        control.contentScaleFactor = 0.5
+        control.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         return control
     }()
     let colorView: UIView = {
@@ -63,6 +63,7 @@ final class PostDetailViewController: BaseViewController {
             self.configureNavBar(post: post)
             self.configureData(post: post)
             self.pageControl.numberOfPages = post.files.count
+            self.configureWine(wineInJSON: post.content1)
         }
         
         rxBind()
@@ -107,6 +108,15 @@ extension PostDetailViewController {
 // View
 extension PostDetailViewController {
     
+    private func configureWine(wineInJSON: String?) {
+        if let wineInJSON {
+            let wine = Wine.fromJsonString(wineInJSON)
+            
+        } else {
+            
+        }
+    }
+    
     private func configureNavBar(post: Post) {
         navigationItem.title = "상세화면"
         let image = post.likeThisPost ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
@@ -114,6 +124,7 @@ extension PostDetailViewController {
         item.tintColor = post.likeThisPost ? .systemPink : .label
         
         let comments = UIBarButtonItem(image: UIImage(systemName: "bubble"), style: .plain, target: self, action: #selector(commentsButtonTapped))
+        comments.tintColor = .label
         navigationItem.rightBarButtonItems = [comments, item]
     }
     
@@ -147,7 +158,7 @@ extension PostDetailViewController {
         }
         
         pageControl.snp.makeConstraints { make in
-            make.top.equalTo(collectionView.snp.bottom)
+            make.bottom.equalTo(collectionView.snp.bottom)
             make.centerX.equalTo(contentView.snp.centerX)
             make.height.equalTo(30)
         }

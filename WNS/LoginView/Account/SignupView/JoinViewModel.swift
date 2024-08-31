@@ -11,16 +11,21 @@ import RxCocoa
 
 final class JoinViewModel {
     
+    enum DupError: Error {
+        case fillInBlank(message: String)
+        case duplicated(message: String)
+        case unknown
+    }
+    
     let disposeBag = DisposeBag()
     var validations = ["", "", "", "", ""]
+    var isDuplicated = BehaviorRelay<Bool>(value: false)
     
     func transform(input: Input) -> Output {
-        let emailWarning = BehaviorRelay(value: "")
-        let passwordWarning = BehaviorRelay(value: "")
-        let phoneWarning = BehaviorRelay(value: "")
-        let ageWarning = BehaviorRelay(value: "")
         
-        let emailValid = input.email.map { email in
+        let emailValid = input.email.map { [weak self] email in
+            guard let self else { return false }
+            self.isDuplicated.accept(false)
             guard !email.isEmpty else {
                 self.validations[0] = ""
                 return false
@@ -30,16 +35,16 @@ final class JoinViewModel {
             self.validations[0] = info
             return valid
         }
-//        let emailChecked = input.email.map { email in
-//            guard !email.isEmpty else {
-//                self.validations[0] = ""
-//                return ValidationResult(valid: false)
-//            }
-//            let valid = self.isValidEmail(email: email)
-//            let info = valid ? "" : "[이메일] 이메일 형식을 맞춰주세요. ex) aaa@bbb.com"
-//            self.validations[0] = info
-//            return ValidationResult(valid: valid)
-//        }
+        let emailDuplicationChecked = input.emailDupTap
+            .withLatestFrom(input.email)
+            .flatMapLatest { [weak self] email -> Observable<Bool> in
+                guard let self = self else { return .just(false) }
+                return self.checkDuplication(email: email)
+            }
+            .do(onNext: { [weak self] isDuplicated in
+                guard let self else { return }
+                self.isDuplicated.accept(isDuplicated)
+            })
         let passwordValid = input.password.map { password in
             guard !password.isEmpty else {
                 self.validations[1] = ""
@@ -71,23 +76,12 @@ final class JoinViewModel {
             self.validations[3] = info
             return validAge
         }
-        let phoneValid = input.phoneNumber.map { phone in
-            guard !phone.isEmpty else {
-                self.validations[4] = ""
-                return true
-            }
-            let countValid = phone.count >= 10
-            let numValid = Int(phone) != nil
-            let info = numValid ? countValid ? "" : "[전화번호] 10자리 이상 입력하세요." : "[전화번호] 숫자만 입력하세요."
-            self.validations[4] = info
-            return countValid && numValid
-        }
-        let allValid = Observable.combineLatest(emailValid, passwordValid, nicknameValid, ageValid, phoneValid)
-            .map { email, password, nickname, age, phone in
-                email && password && nickname && phone && age
+        let allValid = Observable.combineLatest(emailValid, emailDuplicationChecked, passwordValid, nicknameValid, ageValid)
+            .map { email, emailUnique, password, nickname, age in
+                email && emailUnique && password && nickname && age
             }
         let validationText = Observable
-            .combineLatest(emailValid, passwordValid, nicknameValid, ageValid, phoneValid)
+            .combineLatest(emailValid, passwordValid, nicknameValid, ageValid)
             .map { _ in
                 return self.showWarnings(items: self.validations)
             }
@@ -95,16 +89,12 @@ final class JoinViewModel {
         
         return Output(validationText: validationText,
                       allValidation: allValid,
-//                      duplicationConfirmed: emailChecked,
+                      duplicationConfirmed: emailDuplicationChecked,
                       tap: input.tap)
     }
 }
 
 extension JoinViewModel {
-    
-    struct ValidationResult {
-        let valid: Bool
-    }
     
     struct Input {
         let email: ControlProperty<String>
@@ -112,15 +102,14 @@ extension JoinViewModel {
         let password: ControlProperty<String>
         let nickname: ControlProperty<String>
         let birthday: ControlProperty<String>
-        let phoneNumber: ControlProperty<String>
         let tap: ControlEvent<Void>
-        let emailDupCheck: ControlEvent<Void>
+        let emailDupTap: ControlEvent<Void>
     }
     
     struct Output {
         let validationText: Observable<String>
         let allValidation: Observable<Bool>
-//        let duplicationConfirmed: Observable<Bool>
+        let duplicationConfirmed: Observable<Bool>
         let tap: ControlEvent<Void>
     }
 }
@@ -133,12 +122,17 @@ extension JoinViewModel {
         return emailPredicate.evaluate(with: email)
     }
     
-    private func checkDuplication(email: String) -> Bool {
-        let body = EmailDuplicationCheckBody(email: email)
-        NetworkManager.shared.emailDuplicateCheck(body: body) { response in
-            
+    private func checkDuplication(email: String) -> Observable<Bool> {
+        return Observable.create { observer in
+            let body = EmailDuplicationCheckBody(email: email)
+            NetworkManager.shared.emailDuplicateCheck(body: body) { response in
+                observer.onNext(true)
+                observer.onCompleted()
+            } onResponseError: { message in
+                observer.onError(DupError.duplicated(message: message))
+            }
+            return Disposables.create()
         }
-        return false
     }
     
     private func isValidDate(birthday: String) -> Bool {
@@ -147,7 +141,7 @@ extension JoinViewModel {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
         
-        guard let birthdate = dateFormatter.date(from: birthday) else {
+        guard let _ = dateFormatter.date(from: birthday) else {
             return false
         }
         
@@ -180,6 +174,5 @@ extension JoinViewModel {
         let textToDisplay = filteredItems.joined(separator: "\n")
         return textToDisplay
     }
-    
     
 }

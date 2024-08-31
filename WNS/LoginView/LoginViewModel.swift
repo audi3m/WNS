@@ -49,8 +49,8 @@ final class LoginViewModel {
             return valid
         }
         let allValid = Observable.combineLatest(emailValid, passwordValid)
-            .map { email, password in
-                email && password
+            .map { emailValid, passwordValid in
+                emailValid && passwordValid
             }
         let validationText = Observable
             .combineLatest(emailValid, passwordValid)

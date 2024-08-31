@@ -15,7 +15,7 @@ final class OutlineButton: UIView {
     
     lazy var outlineView: UIView = {
         let view = UIView()
-        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.layer.borderColor = UIColor.label.cgColor
         view.layer.borderWidth = DesignSize.outlineWidth
         view.roundCorners(cornerType)
         return view
@@ -23,7 +23,7 @@ final class OutlineButton: UIView {
     lazy var button: UIButton = {
         let button = UIButton()
         button.setTitle(name, for: .normal)
-        button.setTitleColor(.lightGray, for: .normal)
+        button.setTitleColor(.label, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 15)
         button.contentHorizontalAlignment = .leading
         return button
@@ -51,7 +51,7 @@ final class OutlineButton: UIView {
             make.edges.equalToSuperview()
         }
         button.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(DesignSize.fieldPadding)
+            make.verticalEdges.leading.equalToSuperview().inset(DesignSize.fieldPadding)
         }
         
     }

@@ -11,7 +11,7 @@ final class OutlineField: UIView {
      
     lazy var outlineView: UIView = {
         let view = UIView()
-        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.layer.borderColor = UIColor.label.cgColor
         view.layer.borderWidth = DesignSize.outlineWidth
         view.roundCorners(cornerType)
         return view
@@ -36,12 +36,20 @@ final class OutlineField: UIView {
         field.placeholder = "이메일"
         field.font = .systemFont(ofSize: 15)
         field.keyboardType = fieldType.keyboardType
+        field.autocapitalizationType = .none
         return field
     }()
     let textView: UITextView = {
         let view = UITextView()
         view.font = .systemFont(ofSize: 15)
         return view
+    }()
+    let contentsPlaceholder: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 15)
+        label.textColor = .placeholderText
+        label.text = "내용"
+        return label
     }()
     
     let fieldType: FieldType

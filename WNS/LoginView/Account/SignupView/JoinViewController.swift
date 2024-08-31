@@ -22,9 +22,8 @@ final class JoinViewController: BaseViewController {
     let emailField = OutlineField(fieldType: .email, cornerType: .top)
     let passwordField = OutlineField(fieldType: .password, cornerType: .middle)
     let nicknameField = OutlineField(fieldType: .nickname, cornerType: .middle)
-    let birthdayField = OutlineField(fieldType: .birthday, cornerType: .middle)
-    let phoneField = OutlineField(fieldType: .phone, cornerType: .bottom)
-    lazy var validationLabel: UILabel = {
+    let birthdayField = OutlineField(fieldType: .birthday, cornerType: .bottom)
+    let validationLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
         label.textColor = .systemRed
@@ -61,9 +60,8 @@ extension JoinViewController {
                                         password: passwordField.textField.rx.text.orEmpty,
                                         nickname: nicknameField.textField.rx.text.orEmpty,
                                         birthday: birthdayField.textField.rx.text.orEmpty,
-                                        phoneNumber: phoneField.textField.rx.text.orEmpty,
                                         tap: joinButton.rx.tap,
-                                        emailDupCheck: emailField.duplicationButton.rx.tap)
+                                        emailDupTap: emailField.duplicationButton.rx.tap)
         
         let output = viewModel.transform(input: input)
         
@@ -86,6 +84,12 @@ extension JoinViewController {
             }
             .disposed(by: disposeBag)
         
+        output.duplicationConfirmed
+            .bind(with: self) { owner, value in
+                owner.emailField.duplicationButton.backgroundColor = value ? .systemGreen : .lightGray
+            }
+            .disposed(by: disposeBag)
+        
     }
 }
 
@@ -98,7 +102,7 @@ extension JoinViewController {
                                 password: passwordField.textField.text ?? "",
                                 nick: nicknameField.textField.text ?? "", 
                                 birthDay: birthdayField.textField.text ?? "",
-                                phoneNum: phoneField.textField.text)
+                                phoneNum: "")
         
         NetworkManager.shared.join(body: joinBody) { response in 
             
@@ -108,10 +112,14 @@ extension JoinViewController {
     @objc private func emailDuplicationCheck() {
         guard let email = emailField.textField.text else { return }
         let body = EmailDuplicationCheckBody(email: email)
-        NetworkManager.shared.emailDuplicateCheck(body: body) { response in
+        NetworkManager.shared.emailDuplicateCheck(body: body) { [weak self] response in
+            guard let self else { return }
             DispatchQueue.main.async {
                 
             }
+        } onResponseError: { [weak self] message in
+            guard let self else { return }
+            self.showAlert(title: "", message: message, ok: "확인") { }
         }
     }
 }
@@ -127,7 +135,6 @@ extension JoinViewController {
         view.addSubview(passwordField)
         view.addSubview(nicknameField)
         view.addSubview(birthdayField)
-        view.addSubview(phoneField)
         view.addSubview(validationLabel)
         view.addSubview(joinButton)
         
@@ -161,14 +168,8 @@ extension JoinViewController {
             make.height.equalTo(DesignSize.fieldHeight)
         }
         
-        phoneField.snp.makeConstraints { make in
-            make.top.equalTo(birthdayField.snp.bottom).offset(-DesignSize.outlineWidth)
-            make.horizontalEdges.equalTo(view).inset(30)
-            make.height.equalTo(DesignSize.fieldHeight)
-        }
-        
         validationLabel.snp.makeConstraints { make in
-            make.top.equalTo(phoneField.snp.bottom).offset(10)
+            make.top.equalTo(birthdayField.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view).inset(30)
         }
         
@@ -179,6 +180,7 @@ extension JoinViewController {
         }
         
         emailField.duplicationButton.addTarget(self, action: #selector(emailDuplicationCheck), for: .touchUpInside)
+        
         
     }
 }

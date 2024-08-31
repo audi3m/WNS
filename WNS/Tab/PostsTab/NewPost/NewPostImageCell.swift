@@ -15,7 +15,7 @@ class NewPostImageCell: UICollectionViewCell {
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.layer.cornerRadius = 10
-        view.layer.borderColor = UIColor.systemGray4.cgColor
+        view.layer.borderColor = UIColor.label.cgColor
         view.layer.borderWidth = 1.5
         view.backgroundColor = .systemGray4
         return view

@@ -9,7 +9,6 @@ import Foundation
 
 enum DesignSize {
     
-    static let HorizontalPadding: CGFloat = 20
     
     
     
@@ -21,5 +20,6 @@ enum DesignSize {
     static let outlineWidth: CGFloat = 1
     static let fieldCornerRadius: CGFloat = 10
     
+    static let fieldHorizontalPadding: CGFloat = 30
 }
 

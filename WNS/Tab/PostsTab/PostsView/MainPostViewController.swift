@@ -71,7 +71,8 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
         cell.postData = data
         cell.like = data.likes.contains(AccountManager.shared.userID)
         cell.delegate = self 
-        cell.configureImagesByCount()
+        cell.configureImagesByCount() 
+        cell.configureData(data: data)
         return cell
     }
     
@@ -124,10 +125,14 @@ extension MainPostViewController {
     @objc private func login() {
         let login = LoginBody(email: "c@c.com", password: "cccc")
         NetworkManager.shared.login(body: login) { [weak self] response in
-            self?.view.makeToast("Login Success", position: .top)
+            guard let self else { return }
+            self.view.makeToast("Login Success", position: .top)
             AccountManager.shared.access = response.accessToken
             AccountManager.shared.refresh = response.refreshToken
             AccountManager.shared.userID = response.userID
+        } onResponseError: { [weak self] message in
+            guard let self else { return }
+            self.showAlert(title: "", message: message, ok: "확인") { }
         }
     }
     

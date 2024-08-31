@@ -51,7 +51,9 @@ extension NetworkManager {
         }
     }
     
-    func emailDuplicateCheck(body: EmailDuplicationCheckBody, handler: @escaping ((EmailDuplicateCheckResponse) -> Void)) {
+    func emailDuplicateCheck(body: EmailDuplicationCheckBody,
+                             handler: @escaping ((EmailDuplicateCheckResponse) -> Void),
+                             onResponseError: @escaping ((String) -> Void)) {
         do {
             let request = try Router.emailDuplicateCheck(body: body).asURLRequest()
             AF.request(request)
@@ -65,12 +67,12 @@ extension NetworkManager {
                         if let statusCode = response.response?.statusCode {
                             switch statusCode {
                             case 400:
-                                print("필수값을 채워주세요")
+                                onResponseError("필수값을 채워주세요")
                             case 409:
-                                print("이미 사용중인 이메일입니다")
+                                onResponseError("이미 사용중인 이메일입니다")
                             default:
                                 print("Failed")
-                                print(failure)
+                                onResponseError(failure.localizedDescription)
                             }
                         }
                     }
@@ -81,7 +83,9 @@ extension NetworkManager {
         }
     }
     
-    func login(body: LoginBody, handler: @escaping ((LoginResponse) -> Void)) {
+    func login(body: LoginBody,
+               handler: @escaping ((LoginResponse) -> Void),
+               onResponseError: @escaping ((String) -> Void)) {
         do {
             let request = try Router.login(body: body).asURLRequest()
             AF.request(request)
@@ -96,10 +100,13 @@ extension NetworkManager {
                             switch statusCode {
                             case 400:
                                 print("에러코드: \(statusCode) 필수값을 채워주세요")
+                                onResponseError("필수값을 채워주세요")
                             case 401:
                                 print("에러코드: \(statusCode) 계정을 확인해주세요")
+                                onResponseError("계정을 확인해주세요")
                             default:
                                 print("Failed: \(failure)")
+                                onResponseError("failure")
                             }
                         }
                     }
@@ -186,7 +193,10 @@ extension NetworkManager {
 extension NetworkManager {
     
     func postImages(items: [ImageItem], handler: @escaping ((PostImageResponse) -> Void)) {
-        
+        guard !items.isEmpty else {
+            handler(PostImageResponse(files: []))
+            return 
+        }
         let url = APIKey.baseURL + "v1/posts/files"
         let headers: HTTPHeaders = [
             Header.authorization: AccountManager.shared.access,

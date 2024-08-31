@@ -39,6 +39,18 @@ class BaseViewController: UIViewController {
         alert.addAction(cancel)
         present(alert, animated: true)
     }
+    
+    func showAlertForReal(title: String, message: String, ok: String, handler: @escaping (() -> Void)) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        let ok = UIAlertAction(title: ok, style: .default) { _ in
+            handler()
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
 }
 
 extension BaseViewController {

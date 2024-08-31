@@ -42,7 +42,16 @@ final class AccountManager {
         }
     }
     
+    var isAdmin: Bool {
+        userID == "66d1ff39dfc656014225765f"
+    }
     
-    
-    
+}
+
+extension AccountManager {
+    func resetAccount() {
+        access = ""
+        refresh = ""
+        userID = ""
+    }
 }

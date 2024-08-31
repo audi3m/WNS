@@ -12,9 +12,9 @@ class GalleryButtonCell: UICollectionViewCell {
 
     let galleryButton: GalleryButtonView = {
         let view = GalleryButtonView()
-        view.layer.borderColor = UIColor.lightGray.cgColor
-        view.layer.borderWidth = 1.5
-        view.layer.cornerRadius = 10
+        view.layer.borderColor = UIColor.label.cgColor
+        view.layer.borderWidth = DesignSize.outlineWidth
+        view.layer.cornerRadius = DesignSize.fieldCornerRadius
         
         return view
     }()

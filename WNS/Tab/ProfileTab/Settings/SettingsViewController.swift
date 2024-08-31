@@ -55,9 +55,9 @@ final class SettingsViewController: BaseViewController {
         return button
     }()
     
-    private let wineRequest = OutlineButton(name: "와인 추가 신청", cornerType: .top)
-    private let editProfile = OutlineButton(name: "프로필 수정", cornerType: .middle)
-    private let what = OutlineButton(name: "뭐가 필요할까", cornerType: .bottom)
+    private let editProfile = OutlineButton(name: "프로필 수정", cornerType: .top)
+    private let wineRequest = OutlineButton(name: "와인 추가 신청", cornerType: .middle)
+    private let inquiry = OutlineButton(name: "1:1 문의", cornerType: .bottom)
     
     private let logoutButton: UIButton = {
         let button = UIButton()
@@ -104,7 +104,7 @@ extension SettingsViewController {
     
     @objc private func addWineClicked() {
         print("Add wine")
-        let vc = WineAddViewController()
+        let vc = WineRequestViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -112,14 +112,42 @@ extension SettingsViewController {
         print("Edit")
     }
     
-    @objc private func whatTodoClicked() {
-        print("What?")
+    @objc private func inquiryClicked() {
+        let vc = InquiryViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func logoutClicked() {
+        showAlertWithChoice(title: "로그아웃", message: "정말로 로그아웃하시겠습니까?", ok: "확인") {
+            AccountManager.shared.resetAccount()
+            self.resetRootViewController(root: LoginViewController(), withNav: true)
+        } 
+    }
+    
+    @objc private func withdrawClicked() {
+        print(#function)
+        showAlertWithChoice(title: "회원탈퇴", message: "정말로 탈퇴하시겠습니까?", ok: "확인") {
+            self.showAlertForReal(title: "회원탈퇴", message: "탈퇴하면 모든 정보가 사라집니다", ok: "확인") {
+                NetworkManager.shared.withdraw { response in
+                    self.showAlert(title: "", message: "탈퇴되었습니다", ok: "확인") {
+                        self.resetRootViewController(root: LoginViewController(), withNav: true)
+                    }
+                }
+            }
+        }
+    }
+    
+    @objc private func goToAdminPage() {
+        let vc = AdminViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setButtons() {
+        editProfile.button.addTarget(self, action: #selector(editProfileClicked), for: .touchUpInside)
         wineRequest.button.addTarget(self, action: #selector(addWineClicked), for: .touchUpInside)
-        wineRequest.button.addTarget(self, action: #selector(editProfileClicked), for: .touchUpInside)
-        wineRequest.button.addTarget(self, action: #selector(whatTodoClicked), for: .touchUpInside)
+        inquiry.button.addTarget(self, action: #selector(inquiryClicked), for: .touchUpInside)
+        logoutButton.addTarget(self, action: #selector(logoutClicked), for: .touchUpInside)
+        withdrawButton.addTarget(self, action: #selector(withdrawClicked), for: .touchUpInside)
     }
     
 }
@@ -130,6 +158,14 @@ extension SettingsViewController {
     private func configureView() {
         navigationItem.title = "설정"
         
+        if AccountManager.shared.isAdmin {
+            let admin = UIBarButtonItem(image: UIImage(systemName: "person.badge.key"),
+                                       style: .plain, target: self,
+                                       action: #selector(goToAdminPage))
+            
+            navigationItem.rightBarButtonItem = admin
+        }
+        
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
@@ -138,7 +174,7 @@ extension SettingsViewController {
         
         contentView.addSubview(wineRequest)
         contentView.addSubview(editProfile)
-        contentView.addSubview(what)
+        contentView.addSubview(inquiry)
         contentView.addSubview(logoutButton)
         contentView.addSubview(withdrawButton)
          
@@ -163,26 +199,26 @@ extension SettingsViewController {
             make.horizontalEdges.equalToSuperview().inset(40)
         }
         
-        wineRequest.snp.makeConstraints { make in
+        editProfile.snp.makeConstraints { make in
             make.top.equalTo(stackView.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(contentView).inset(30)
             make.height.equalTo(DesignSize.fieldHeight)
         }
         
-        editProfile.snp.makeConstraints { make in
-            make.top.equalTo(wineRequest.snp.bottom).offset(-DesignSize.outlineWidth)
-            make.horizontalEdges.equalTo(contentView).inset(30)
-            make.height.equalTo(DesignSize.fieldHeight)
-        }
-        
-        what.snp.makeConstraints { make in
+        wineRequest.snp.makeConstraints { make in
             make.top.equalTo(editProfile.snp.bottom).offset(-DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(contentView).inset(30)
             make.height.equalTo(DesignSize.fieldHeight)
         }
         
+        inquiry.snp.makeConstraints { make in
+            make.top.equalTo(wineRequest.snp.bottom).offset(-DesignSize.outlineWidth)
+            make.horizontalEdges.equalTo(contentView).inset(30)
+            make.height.equalTo(DesignSize.fieldHeight)
+        }
+        
         logoutButton.snp.makeConstraints { make in
-            make.top.equalTo(what.snp.bottom).offset(20)
+            make.top.equalTo(inquiry.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(contentView).inset(30)
             make.height.equalTo(DesignSize.fieldHeight)
         }

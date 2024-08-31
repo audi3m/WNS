@@ -26,7 +26,7 @@ final class NewPostViewController: BaseViewController {
     private let contentView = UIView()
     lazy private var imagesCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout(size: CGSize(width: 80, height: 80)))
-        view.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        view.contentInset = UIEdgeInsets(top: 0, left: DesignSize.fieldHorizontalPadding, bottom: 0, right: DesignSize.fieldHorizontalPadding)
         view.showsHorizontalScrollIndicator = false
         view.register(NewPostImageCell.self, forCellWithReuseIdentifier: NewPostImageCell.id)
         view.register(GalleryButtonCell.self, forCellWithReuseIdentifier: GalleryButtonCell.id)
@@ -34,7 +34,8 @@ final class NewPostViewController: BaseViewController {
         view.dataSource = self
         return view
     }()
-    
+     
+    let wineSelection = OutlineNavigation(image: "wineglass", cornerType: .all)
     let titleField = OutlineField(fieldType: .title, cornerType: .top)
     let hashtagField = OutlineField(fieldType: .hashtag, cornerType: .middle)
     let contentsField = OutlineField(fieldType: .contents, cornerType: .bottom)
@@ -49,10 +50,16 @@ final class NewPostViewController: BaseViewController {
     
     let viewModel = NewPostViewModel()
     private var selectedImages = [ImageItem]()
+    var selectedWine: Wine? {
+        didSet {
+            dump(selectedWine)
+        }
+    }
      
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        setButtons()
         rxBind()
     }
 }
@@ -105,12 +112,28 @@ extension NewPostViewController: PHPickerViewControllerDelegate {
 // Button Functions
 extension NewPostViewController {
     
+    @objc private func showWineSelectionView() {
+        let vc = WineSelectViewController()
+        vc.sendSelectedWine = { [weak self] wine in
+            guard let self else { return }
+            self.selectedWine = wine
+            self.wineSelection.wineLabel.text = wine.name
+            self.wineSelection.wineLabel.textColor = .label
+        }
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @objc private func postButtonClicked() {
+        guard let selectedWine else { return }
+        guard let wineString = selectedWine.toJsonString() else { return }
+        let hashtag = selectedWine.nameForHashtag + "hashtag by users"
         
         NetworkManager.shared.postImages(items: selectedImages) { [weak self] response in
             guard let self else { return }
             let body = PostBody(title: self.titleField.textField.text,
-                                content: contentsField.textField.text,
+                                content: hashtag,
+                                content1: wineString,
+                                content2: contentsField.textField.text,
                                 product_id: ProductID.forUsers.rawValue,
                                 files: response.files)
             NetworkManager.shared.writePost(body: body) { [weak self] post in
@@ -172,6 +195,10 @@ extension NewPostViewController: UICollectionViewDelegateFlowLayout {
 // View
 extension NewPostViewController {
     
+    private func setButtons() {
+        wineSelection.button.addTarget(self, action: #selector(showWineSelectionView), for: .touchUpInside)
+    }
+    
     private func configureView() {
         navigationItem.title = "새로운 포스트"
         let close = UIBarButtonItem(title: "닫기", style: .plain, target: self, action: #selector(dismissView))
@@ -180,6 +207,7 @@ extension NewPostViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(imagesCollectionView)
+        contentView.addSubview(wineSelection)
         contentView.addSubview(titleField)
         contentView.addSubview(hashtagField)
         contentView.addSubview(contentsField)
@@ -200,27 +228,33 @@ extension NewPostViewController {
             make.height.equalTo(80)
         }
         
-        titleField.snp.makeConstraints { make in
+        wineSelection.snp.makeConstraints { make in
             make.top.equalTo(imagesCollectionView.snp.bottom).offset(20)
-            make.horizontalEdges.equalTo(contentView).inset(20)
-            make.height.equalTo(60)
+            make.horizontalEdges.equalTo(contentView).inset(DesignSize.fieldHorizontalPadding)
+            make.height.equalTo(DesignSize.fieldHeight)
+        }
+        
+        titleField.snp.makeConstraints { make in
+            make.top.equalTo(wineSelection.snp.bottom).offset(20)
+            make.horizontalEdges.equalTo(contentView).inset(DesignSize.fieldHorizontalPadding)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         hashtagField.snp.makeConstraints { make in
             make.top.equalTo(titleField.snp.bottom).offset(-DesignSize.outlineWidth)
-            make.horizontalEdges.equalTo(contentView).inset(20)
-            make.height.equalTo(60)
+            make.horizontalEdges.equalTo(contentView).inset(DesignSize.fieldHorizontalPadding)
+            make.height.equalTo(DesignSize.fieldHeight)
         }
         
         contentsField.snp.makeConstraints { make in
             make.top.equalTo(hashtagField.snp.bottom).offset(-DesignSize.outlineWidth)
-            make.horizontalEdges.equalTo(contentView).inset(20)
+            make.horizontalEdges.equalTo(contentView).inset(DesignSize.fieldHorizontalPadding)
             make.height.equalTo(200)
         }
         
         postButton.snp.makeConstraints { make in
             make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).offset(-30)
-            make.horizontalEdges.equalTo(contentView).inset(20)
+            make.horizontalEdges.equalTo(contentView).inset(DesignSize.fieldHorizontalPadding)
             make.height.equalTo(50)
             make.top.equalTo(contentsField.snp.bottom).offset(30)
             make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).offset(-30)

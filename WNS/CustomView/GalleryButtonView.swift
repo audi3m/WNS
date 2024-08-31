@@ -13,13 +13,13 @@ final class GalleryButtonView: UIView {
     let cameraImageView: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(systemName: "camera")
-        view.tintColor = .lightGray
+        view.tintColor = .label
         return view
     }()
     let countLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
-        label.textColor = .lightGray
+        label.textColor = .label
         label.text = "3 / 5"
         return label
     }()

@@ -54,12 +54,6 @@ final class PostTableViewCell: UITableViewCell {
         button.tintColor = .label
         return button
     }()
-    let commentsButton: UIButton = {
-        let button = UIButton()
-        button.setImage(ButtonImage.bubble, for: .normal)
-        button.tintColor = .label
-        return button
-    }()
     let hashtagLabel: UILabel = {
         let label = UILabel()
         label.text = "#레드 #본테라 #화이트"
@@ -126,11 +120,16 @@ extension PostTableViewCell {
 }
 
 extension PostTableViewCell {
-    func configureData() {
-        guard let postData else { return }
-        let creator = postData.creator
+    func configureData(data: Post) {
+        let creator = data.creator
         profileView.setProfile(creator: creator)
         setLikeButton(like: like)
+        if let wineJSON = data.content1 {
+            let wine = Wine.fromJsonString(wineJSON)
+            wineNameLabel.text = wine?.name
+        } else {
+            wineNameLabel.text = "와인 선택 전 게시물"
+        }
     }
     
     func resetSubViews() {
@@ -139,6 +138,7 @@ extension PostTableViewCell {
         imageView2.removeFromSuperview()
         imageView3.removeFromSuperview()
         moreView.removeFromSuperview()
+        wineNameLabel.text = ""
     }
     
 }
@@ -148,9 +148,6 @@ extension PostTableViewCell {
     
     func configureImagesByCount() {
         guard let postData else { return }
-        let creator = postData.creator
-        profileView.setProfile(creator: creator)
-        setLikeButton(like: like)
         
         switch postData.files.count {
         case 1: configureImage(post: postData)
@@ -260,7 +257,6 @@ extension PostTableViewCell {
         contentView.addSubview(imageBackground)
         contentView.addSubview(labelBackground)
         labelBackground.addSubview(likeButton)
-//        labelBackground.addSubview(commentsButton)
         labelBackground.addSubview(wineNameLabel)
         
         profileView.snp.makeConstraints { make in
@@ -289,13 +285,8 @@ extension PostTableViewCell {
             make.trailing.equalTo(likeButton.snp.leading).inset(-15)
         }
         
-//        commentsButton.snp.makeConstraints { make in
-//            
-//        }
-        
         imageBackground.backgroundColor = .systemBackground
         likeButton.addTarget(self, action: #selector(likePostTapped), for: .touchUpInside)
-        commentsButton.addTarget(self, action: #selector(commentsButtonTapped), for: .touchUpInside)
     }
     
 }
