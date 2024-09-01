@@ -48,31 +48,34 @@ final class PostTableViewCell: UITableViewCell {
     let wineNameLabel: UILabel = {
         let label = UILabel()
         label.text = "와인 이름"
-        label.font = .boldSystemFont(ofSize: 16)
+        label.font = .boldSystemFont(ofSize: 15)
         return label
     }()
     let likeButton: UIButton = {
         let button = UIButton()
         button.setImage(ButtonImage.heart, for: .normal)
         button.tintColor = .label
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     let commentsButton: UIButton = {
         let button = UIButton()
         button.setImage(ButtonImage.bubble, for: .normal)
         button.tintColor = .label
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     let hashtagLabel: UILabel = {
         let label = UILabel()
         label.text = "#레드 #본테라 #화이트"
-        label.font = .systemFont(ofSize: 13)
+        label.font = .systemFont(ofSize: 12)
         label.textColor = .systemBlue
+        label.numberOfLines = 2
         return label
     }()
     let contentLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13)
+        label.font = .systemFont(ofSize: 12)
         label.textColor = .label
         label.numberOfLines = 2
         return label
@@ -298,28 +301,28 @@ extension PostTableViewCell {
             make.bottom.equalToSuperview().offset(-30)
         }
         wineNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(15)
-            make.leading.equalToSuperview().offset(15)
-            make.trailing.equalTo(likeButton.snp.leading).inset(-15)
+            make.top.equalToSuperview().offset(12)
+            make.leading.equalToSuperview().offset(12)
+            make.trailing.equalTo(likeButton.snp.leading).inset(-12)
         }
         commentsButton.snp.makeConstraints { make in
             make.centerY.equalTo(wineNameLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(-15)
-            make.width.equalTo(25)
+            make.trailing.equalToSuperview().offset(-12)
+            make.size.equalTo(23)
         }
         likeButton.snp.makeConstraints { make in
             make.centerY.equalTo(wineNameLabel.snp.centerY)
-            make.trailing.equalTo(commentsButton.snp.leading).offset(-15)
-            make.width.equalTo(25)
+            make.trailing.equalTo(commentsButton.snp.leading).offset(-12)
+            make.size.equalTo(23)
         }
         hashtagLabel.snp.makeConstraints { make in
-            make.top.equalTo(wineNameLabel.snp.bottom).offset(5)
-            make.horizontalEdges.equalToSuperview().inset(15)
+            make.top.equalTo(wineNameLabel.snp.bottom).offset(10)
+            make.horizontalEdges.equalToSuperview().inset(12)
         }
         contentLabel.snp.makeConstraints { make in
             make.top.equalTo(hashtagLabel.snp.bottom).offset(2)
-            make.horizontalEdges.equalToSuperview().inset(15)
-            make.bottom.equalToSuperview().offset(-15)
+            make.horizontalEdges.equalToSuperview().inset(12)
+            make.bottom.equalToSuperview().offset(-12)
         }
         
         imageBackground.backgroundColor = .systemBackground

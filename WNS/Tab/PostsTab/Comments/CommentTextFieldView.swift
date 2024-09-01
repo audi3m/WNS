@@ -27,9 +27,8 @@ final class CommentTextFieldView: UIView {
     }()
     let sendButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.up.circle",
-                                withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium)),
-                        for: .normal)
+        button.setImage(ButtonImage.sendButton, for: .normal)
+        button.tintColor = .label
         return button
     }()
  

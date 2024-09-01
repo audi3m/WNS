@@ -138,6 +138,7 @@ extension NewPostViewController {
         let hashtag = selectedWine.nameForHashtag + " " + hashList
         
         AccountManager.shared.login { response in
+            self.postButton.isEnabled = false
             print("login success")
             NetworkManager.shared.postImages(items: self.selectedImages) { [weak self] response in
                 guard let self else { return }

@@ -34,11 +34,9 @@ final class PostDetailViewController: BaseViewController {
         control.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         return control
     }()
-    let colorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
-        return view
-    }()
+    let postSection = PostSectionView()
+    let wineSection = WineSectionView()
+    
     
     let postID: String
     var like: Bool?
@@ -63,6 +61,7 @@ final class PostDetailViewController: BaseViewController {
             self.configureNavBar(post: post)
             self.configureData(post: post)
             self.pageControl.numberOfPages = post.files.count
+            self.postSection.setData(post: post)
             self.configureWine(wineInJSON: post.content1)
         }
         
@@ -109,9 +108,8 @@ extension PostDetailViewController {
 extension PostDetailViewController {
     
     private func configureWine(wineInJSON: String?) {
-        if let wineInJSON {
-            let wine = Wine.fromJsonString(wineInJSON)
-            
+        if let wineInJSON, let wine = Wine.fromJsonString(wineInJSON) {
+            wineSection.setData(wine: wine)
         } else {
             
         }
@@ -135,7 +133,8 @@ extension PostDetailViewController {
         contentView.addSubview(profileView)
         contentView.addSubview(collectionView)
         contentView.addSubview(pageControl)
-        contentView.addSubview(colorView)
+        contentView.addSubview(postSection)
+        contentView.addSubview(wineSection)
         
         scrollView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
@@ -163,12 +162,17 @@ extension PostDetailViewController {
             make.height.equalTo(30)
         }
         
-        colorView.snp.makeConstraints { make in
-            make.top.equalTo(pageControl.snp.bottom)
-            make.horizontalEdges.equalToSuperview().inset(100)
-            make.height.equalTo(1000)
-            make.bottom.equalToSuperview()
+        postSection.snp.makeConstraints { make in
+            make.top.equalTo(pageControl.snp.bottom).offset(10)
+            make.horizontalEdges.equalToSuperview().inset(20)
         }
+        
+        wineSection.snp.makeConstraints { make in
+            make.top.equalTo(postSection.snp.bottom).offset(30)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview().offset(-100)
+        }
+         
     }
     
     private func configureData(post: Post) {

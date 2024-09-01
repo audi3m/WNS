@@ -1,19 +1,31 @@
 //
-//  WineInfoCollectionViewListCell.swift
+//  WineSectionView.swift
 //  WNS
 //
-//  Created by J Oh on 8/31/24.
+//  Created by J Oh on 9/1/24.
 //
 
 import UIKit
 import SnapKit
 
-final class WineInfoCollectionViewListCell: UICollectionViewListCell {
+final class WineSectionView: UIView {
     
+    let sectionTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 20)
+        label.text = "와인정보"
+        return label
+    }()
+    let backgroundColorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray6
+        view.layer.cornerRadius = 10
+        return view
+    }()
     let imageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
         view.layer.masksToBounds = true
@@ -61,13 +73,22 @@ final class WineInfoCollectionViewListCell: UICollectionViewListCell {
     }
     
     private func configureView() {
-        contentView.addSubview(imageView)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(typeLabel)
-        contentView.addSubview(wineryLabel)
-        contentView.addSubview(varietyLabel)
-        contentView.addSubview(placeLabel)
+        addSubview(sectionTitleLabel)
+        addSubview(backgroundColorView)
+        backgroundColorView.addSubview(imageView)
+        backgroundColorView.addSubview(nameLabel)
+        backgroundColorView.addSubview(typeLabel)
+        backgroundColorView.addSubview(wineryLabel)
+        backgroundColorView.addSubview(varietyLabel)
+        backgroundColorView.addSubview(placeLabel)
         
+        sectionTitleLabel.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalToSuperview()
+        }
+        backgroundColorView.snp.makeConstraints { make in
+            make.top.equalTo(sectionTitleLabel.snp.bottom).offset(13)
+            make.horizontalEdges.bottom.equalToSuperview()
+        }
         imageView.snp.makeConstraints { make in
             make.verticalEdges.leading.equalToSuperview().inset(DesignSize.fieldPadding)
             make.width.equalTo(80)
@@ -105,7 +126,7 @@ final class WineInfoCollectionViewListCell: UICollectionViewListCell {
         
     }
     
-    func setData(wine: Wine) {
+    func setData(wine: Wine) { 
         let url = URL(string: wine.imageURL)
         imageView.kf.setImage(with: url)
         
@@ -119,7 +140,7 @@ final class WineInfoCollectionViewListCell: UICollectionViewListCell {
         let range = (winery as NSString).range(of: "By ")
         let attributedString = NSMutableAttributedString(string: winery)
         attributedString.addAttribute(.foregroundColor, value: UIColor.secondaryLabel, range: range)
-
+        
         wineryLabel.attributedText = attributedString
         
         varietyLabel.text = wine.variety
@@ -128,3 +149,4 @@ final class WineInfoCollectionViewListCell: UICollectionViewListCell {
     }
     
 }
+

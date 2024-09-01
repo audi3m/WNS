@@ -15,6 +15,8 @@ enum ButtonImage {
     
     static let postButton = UIImage(systemName: "plus.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 50, weight: .medium))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(paletteColors: [.white, .systemPurple]))
     
+    static let sendButton = UIImage(systemName: "arrow.up.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium))
+    
     static let deleteButton = UIImage(systemName: "xmark.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(paletteColors: [.white, .lightGray]))
     
     

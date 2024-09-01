@@ -62,8 +62,8 @@ extension InquiryViewController {
 extension InquiryViewController {
     @objc private func submitInquiry() {
         print(#function)
-        let body = PostBody(title: titleField.textField.text,
-                            content: contentsField.textField.text,
+        let body = PostBody(content1: titleField.textField.text,
+                            content2: contentsField.textField.text,
                             product_id: ProductID.forInquiry.rawValue)
         NetworkManager.shared.writePost(body: body) { post in
             dump(post)

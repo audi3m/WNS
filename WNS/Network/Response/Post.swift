@@ -53,6 +53,36 @@ struct Post: Decodable {
     var hashTagsString: String {
         hashTags.dropFirst().map { "#\($0)" }.joined(separator: " ")
     }
+    
+    var shortDate: String {
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        if let date = isoFormatter.date(from: createdAt) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "M월 d일"
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+
+            let result = dateFormatter.string(from: date)
+            return result
+        }
+        return "DATE UNKNOWN"
+    }
+    
+    var longDate: String {
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        if let date = isoFormatter.date(from: createdAt) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy년 M월 d일 H시 m분"
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+
+            let result = dateFormatter.string(from: date)
+            return result
+        }
+        return "DATE UNKNOWN"
+    }
 }
 
 struct Creator: Decodable, Hashable {
