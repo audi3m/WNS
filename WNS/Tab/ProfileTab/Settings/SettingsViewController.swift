@@ -104,7 +104,7 @@ extension SettingsViewController {
     
     @objc private func addWineClicked() {
         print("Add wine")
-        let vc = WineRequestViewController()
+        let vc = MyWineRequestViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -113,7 +113,7 @@ extension SettingsViewController {
     }
     
     @objc private func inquiryClicked() {
-        let vc = InquiryViewController()
+        let vc = MyInquiryViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     

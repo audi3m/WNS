@@ -35,6 +35,7 @@ final class InquiryViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavBar()
         configureView()
         rxBind()
     }
@@ -76,8 +77,14 @@ extension InquiryViewController {
 }
 
 extension InquiryViewController {
-    private func configureView() {
+    
+    private func configureNavBar() {
         navigationItem.title = "1:1 문의"
+        let close = UIBarButtonItem(title: "닫기", image: nil, target: self, action: #selector(dismissView))
+        navigationItem.leftBarButtonItem = close
+    }
+    
+    private func configureView() {
         view.addSubview(titleField)
         view.addSubview(contentsField)
         view.addSubview(validationLabel)

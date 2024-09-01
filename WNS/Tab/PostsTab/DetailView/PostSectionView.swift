@@ -54,6 +54,7 @@ final class PostSectionView: UIView {
     private func configureView() {
         addSubview(sectionTitleLabel)
         addSubview(backgroundColorView)
+        
         backgroundColorView.addSubview(hashtagsLabel)
         backgroundColorView.addSubview(dateLabel)
         backgroundColorView.addSubview(contentsLabel)

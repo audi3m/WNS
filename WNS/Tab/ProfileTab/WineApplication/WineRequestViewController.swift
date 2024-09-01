@@ -28,7 +28,7 @@ final class WineRequestViewController: BaseViewController {
         let button = UIButton()
         button.layer.cornerRadius = DesignSize.fieldCornerRadius
         button.backgroundColor = .systemBlue
-        button.setTitle("제출", for: .normal)
+        button.setTitle("신청", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(submit), for: .touchUpInside)
         return button
@@ -39,6 +39,7 @@ final class WineRequestViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavBar()
         configureView()
         rxBind()
     }
@@ -69,7 +70,7 @@ extension WineRequestViewController {
 extension WineRequestViewController {
     @objc private func submit() {
         print(#function)
-        let body = PostBody(title: "와인 추가 요청",
+        let body = PostBody(title: "",
                             content: "",
                             content1: nameField.textField.text,
                             content2: grapeField.textField.text,
@@ -80,13 +81,18 @@ extension WineRequestViewController {
         NetworkManager.shared.writePost(body: body) { post in
             self.showAlert(title: "", message: "제출되었습니다", ok: "확인") {
                 dump(post)
-                self.navigationController?.popViewController(animated: true)
+                self.dismissView()
             }
         }
     }
 }
 
 extension WineRequestViewController {
+    
+    private func configureNavBar() {
+        let close = UIBarButtonItem(title: "닫기", image: nil, target: self, action: #selector(dismissView))
+        navigationItem.leftBarButtonItem = close
+    }
     
     private func configureView() {
         navigationItem.title = "와인 추가 요청"

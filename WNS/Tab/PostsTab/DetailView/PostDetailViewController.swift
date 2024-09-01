@@ -29,6 +29,7 @@ final class PostDetailViewController: BaseViewController {
         let control = UIPageControl()
         control.currentPage = 0
         control.hidesForSinglePage = true
+        control.currentPageIndicatorTintColor = .redWine
         control.backgroundStyle = .prominent
         control.contentScaleFactor = 0.5
         control.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
@@ -36,6 +37,12 @@ final class PostDetailViewController: BaseViewController {
     }()
     let postSection = PostSectionView()
     let wineSection = WineSectionView()
+    lazy var closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(ButtonImage.closeButton, for: .normal)
+        button.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        return button
+    }()
     
     
     let postID: String
@@ -116,7 +123,6 @@ extension PostDetailViewController {
     }
     
     private func configureNavBar(post: Post) {
-        navigationItem.title = "상세화면"
         let image = post.likeThisPost ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
         let item = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(likeButtonTapped))
         item.tintColor = post.likeThisPost ? .systemPink : .label
@@ -128,6 +134,7 @@ extension PostDetailViewController {
     
     private func configureView() {
         view.addSubview(scrollView)
+        view.addSubview(closeButton)
         scrollView.addSubview(contentView)
         
         contentView.addSubview(profileView)
@@ -171,6 +178,12 @@ extension PostDetailViewController {
             make.top.equalTo(postSection.snp.bottom).offset(30)
             make.horizontalEdges.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().offset(-100)
+        }
+        
+        closeButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.size.equalTo(50)
         }
          
     }

@@ -71,7 +71,7 @@
 		D445A1802C84BBB5003CEEBF /* MyInquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445A17F2C84BBB5003CEEBF /* MyInquiryViewController.swift */; };
 		D445A1822C84BBE9003CEEBF /* WineRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445A1812C84BBE9003CEEBF /* WineRequestCell.swift */; };
 		D445A1842C84BBF2003CEEBF /* InquiryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445A1832C84BBF2003CEEBF /* InquiryCell.swift */; };
-		D45345852C80338A00BABF48 /* WineAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45345842C80338A00BABF48 /* WineAddViewController.swift */; };
+		D45345852C80338A00BABF48 /* WineRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45345842C80338A00BABF48 /* WineRequestViewController.swift */; };
 		D45976652C80A74000077BC7 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45976642C80A74000077BC7 /* Database.swift */; };
 		D45976672C81863600077BC7 /* WineRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45976662C81863600077BC7 /* WineRequestViewModel.swift */; };
 		D459766B2C81F4F200077BC7 /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D459766A2C81F4F200077BC7 /* InquiryViewController.swift */; };
@@ -198,7 +198,7 @@
 		D445A17F2C84BBB5003CEEBF /* MyInquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInquiryViewController.swift; sourceTree = "<group>"; };
 		D445A1812C84BBE9003CEEBF /* WineRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineRequestCell.swift; sourceTree = "<group>"; };
 		D445A1832C84BBF2003CEEBF /* InquiryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryCell.swift; sourceTree = "<group>"; };
-		D45345842C80338A00BABF48 /* WineAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineAddViewController.swift; sourceTree = "<group>"; };
+		D45345842C80338A00BABF48 /* WineRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineRequestViewController.swift; sourceTree = "<group>"; };
 		D45976642C80A74000077BC7 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		D45976662C81863600077BC7 /* WineRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineRequestViewModel.swift; sourceTree = "<group>"; };
 		D459766A2C81F4F200077BC7 /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
@@ -465,7 +465,7 @@
 			children = (
 				D445A17D2C84BBA8003CEEBF /* MyWineRequestViewController.swift */,
 				D445A1812C84BBE9003CEEBF /* WineRequestCell.swift */,
-				D45345842C80338A00BABF48 /* WineAddViewController.swift */,
+				D45345842C80338A00BABF48 /* WineRequestViewController.swift */,
 				D45976662C81863600077BC7 /* WineRequestViewModel.swift */,
 			);
 			path = WineApplication;
@@ -771,7 +771,7 @@
 				D404A55F2C721364005C3C6E /* WineTabController.swift in Sources */,
 				D404A4F32C6DB78D005C3C6E /* Post.swift in Sources */,
 				D404A5422C70E1A1005C3C6E /* PostTableViewCell.swift in Sources */,
-				D45345852C80338A00BABF48 /* WineAddViewController.swift in Sources */,
+				D45345852C80338A00BABF48 /* WineRequestViewController.swift in Sources */,
 				D467D43A2C6C85F4000C3993 /* AccountManager.swift in Sources */,
 				D404A4FB2C6DFC2C005C3C6E /* GetUserPostResponse.swift in Sources */,
 				D404A5052C6E0019005C3C6E /* FollowResponse.swift in Sources */,
