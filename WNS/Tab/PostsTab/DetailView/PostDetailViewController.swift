@@ -158,7 +158,7 @@ extension PostDetailViewController {
         }
         
         pageControl.snp.makeConstraints { make in
-            make.bottom.equalTo(collectionView.snp.bottom)
+            make.top.equalTo(collectionView.snp.bottom)
             make.centerX.equalTo(contentView.snp.centerX)
             make.height.equalTo(30)
         }

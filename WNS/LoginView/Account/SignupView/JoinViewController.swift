@@ -33,7 +33,7 @@ final class JoinViewController: BaseViewController {
     lazy var joinButton: UIButton = {
         let button = UIButton()
         button.setTitle("가입하기", for: .normal)
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = DesignSize.fieldCornerRadius
         button.backgroundColor = .lightGray
         button.addTarget(self, action: #selector(join), for: .touchUpInside)
         return button

@@ -15,7 +15,7 @@ final class SettingsViewController: BaseViewController {
     
     private let appearanceOutline: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = DesignSize.fieldCornerRadius
         view.layer.borderWidth = DesignSize.outlineWidth
         view.layer.borderColor = UIColor.lightGray.cgColor
         return view
@@ -63,7 +63,7 @@ final class SettingsViewController: BaseViewController {
         let button = UIButton()
         button.setTitle("로그아웃", for: .normal)
         button.backgroundColor = .red
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = DesignSize.fieldCornerRadius
         return button
     }()
     
@@ -149,7 +149,6 @@ extension SettingsViewController {
         logoutButton.addTarget(self, action: #selector(logoutClicked), for: .touchUpInside)
         withdrawButton.addTarget(self, action: #selector(withdrawClicked), for: .touchUpInside)
     }
-    
 }
 
 // View
@@ -162,7 +161,6 @@ extension SettingsViewController {
             let admin = UIBarButtonItem(image: UIImage(systemName: "person.badge.key"),
                                        style: .plain, target: self,
                                        action: #selector(goToAdminPage))
-            
             navigationItem.rightBarButtonItem = admin
         }
         
@@ -182,47 +180,39 @@ extension SettingsViewController {
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view)
         }
-         
         contentView.snp.makeConstraints { make in
             make.edges.equalTo(scrollView)
             make.width.equalTo(scrollView)
         }
-        
         appearanceOutline.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top).offset(20)
             make.horizontalEdges.equalTo(contentView).inset(30)
             make.height.equalTo(100)
         }
-        
         stackView.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview()
             make.horizontalEdges.equalToSuperview().inset(40)
         }
-        
         editProfile.snp.makeConstraints { make in
             make.top.equalTo(stackView.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(contentView).inset(30)
             make.height.equalTo(DesignSize.fieldHeight)
         }
-        
         wineRequest.snp.makeConstraints { make in
             make.top.equalTo(editProfile.snp.bottom).offset(-DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(contentView).inset(30)
             make.height.equalTo(DesignSize.fieldHeight)
         }
-        
         inquiry.snp.makeConstraints { make in
             make.top.equalTo(wineRequest.snp.bottom).offset(-DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(contentView).inset(30)
             make.height.equalTo(DesignSize.fieldHeight)
         }
-        
         logoutButton.snp.makeConstraints { make in
             make.top.equalTo(inquiry.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(contentView).inset(30)
             make.height.equalTo(DesignSize.fieldHeight)
         }
-        
         withdrawButton.snp.makeConstraints { make in
             make.top.equalTo(logoutButton.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(contentView).inset(30)

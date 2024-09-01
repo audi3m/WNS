@@ -18,7 +18,7 @@ enum DesignSize {
     static let fieldHeight: CGFloat = 50
     static let fieldPadding: CGFloat = 13
     static let outlineWidth: CGFloat = 1
-    static let fieldCornerRadius: CGFloat = 10
+    static let fieldCornerRadius: CGFloat = 5
     
     static let fieldHorizontalPadding: CGFloat = 30
 }

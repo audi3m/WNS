@@ -17,8 +17,7 @@ final class PostTableViewCell: UITableViewCell {
     let profileView = ProfileAndNicknameView()
     let imageBackground: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 10
-        view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
+        view.layer.cornerRadius = DesignSize.fieldCornerRadius
         view.layer.masksToBounds = true
         return view
     }()
@@ -42,15 +41,14 @@ final class PostTableViewCell: UITableViewCell {
     let labelBackground: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray6
-        view.layer.cornerRadius = 10
-        view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner)
+        view.layer.cornerRadius = DesignSize.fieldCornerRadius
         view.layer.masksToBounds = true
         return view
     }()
     let wineNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "도그 포인트, 소비뇽 블랑 2017"
-        label.font = .boldSystemFont(ofSize: 15)
+        label.text = "와인 이름"
+        label.font = .boldSystemFont(ofSize: 16)
         return label
     }()
     let likeButton: UIButton = {
@@ -59,11 +57,24 @@ final class PostTableViewCell: UITableViewCell {
         button.tintColor = .label
         return button
     }()
+    let commentsButton: UIButton = {
+        let button = UIButton()
+        button.setImage(ButtonImage.bubble, for: .normal)
+        button.tintColor = .label
+        return button
+    }()
     let hashtagLabel: UILabel = {
         let label = UILabel()
         label.text = "#레드 #본테라 #화이트"
         label.font = .systemFont(ofSize: 13)
         label.textColor = .systemBlue
+        return label
+    }()
+    let contentLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13)
+        label.textColor = .label
+        label.numberOfLines = 2
         return label
     }()
     
@@ -135,6 +146,8 @@ extension PostTableViewCell {
         } else {
             wineNameLabel.text = "와인 선택 전 게시물"
         }
+        hashtagLabel.text = data.hashTagsString
+        contentLabel.text = data.content2
     }
     
     func resetSubViews() {
@@ -145,6 +158,8 @@ extension PostTableViewCell {
         imageView3.removeFromSuperview()
         moreView.removeFromSuperview()
         wineNameLabel.text = ""
+        hashtagLabel.text = ""
+        contentLabel.text = ""
     }
     
 }
@@ -192,7 +207,7 @@ extension PostTableViewCell {
         }
         imageView2.snp.makeConstraints { make in
             make.verticalEdges.trailing.equalToSuperview()
-            make.leading.equalTo(imageView1.snp.trailing).offset(2)
+            make.leading.equalTo(imageView1.snp.trailing).offset(3)
         }
     }
     
@@ -212,12 +227,12 @@ extension PostTableViewCell {
         }
         imageView2.snp.makeConstraints { make in
             make.top.trailing.equalToSuperview()
-            make.leading.equalTo(imageView1.snp.trailing).offset(2)
+            make.leading.equalTo(imageView1.snp.trailing).offset(3)
             make.height.equalToSuperview().dividedBy(2)
         }
         imageView3.snp.makeConstraints { make in
-            make.top.equalTo(imageView2.snp.bottom).offset(2)
-            make.leading.equalTo(imageView1.snp.trailing).offset(2)
+            make.top.equalTo(imageView2.snp.bottom).offset(3)
+            make.leading.equalTo(imageView1.snp.trailing).offset(3)
             make.trailing.bottom.equalToSuperview()
             
         }
@@ -240,17 +255,17 @@ extension PostTableViewCell {
         }
         imageView2.snp.makeConstraints { make in
             make.top.trailing.equalToSuperview()
-            make.leading.equalTo(imageView1.snp.trailing).offset(2)
+            make.leading.equalTo(imageView1.snp.trailing).offset(3)
             make.height.equalToSuperview().dividedBy(2)
         }
         imageView3.snp.makeConstraints { make in
-            make.top.equalTo(imageView2.snp.bottom).offset(2)
-            make.leading.equalTo(imageView1.snp.trailing).offset(2)
+            make.top.equalTo(imageView2.snp.bottom).offset(3)
+            make.leading.equalTo(imageView1.snp.trailing).offset(3)
             make.trailing.bottom.equalToSuperview()
         }
         moreView.snp.makeConstraints { make in
-            make.top.equalTo(imageView2.snp.bottom).offset(2)
-            make.leading.equalTo(imageView1.snp.trailing).offset(2)
+            make.top.equalTo(imageView2.snp.bottom).offset(3)
+            make.leading.equalTo(imageView1.snp.trailing).offset(3)
             make.trailing.bottom.equalToSuperview()
         }
         
@@ -262,8 +277,11 @@ extension PostTableViewCell {
         contentView.addSubview(profileView)
         contentView.addSubview(imageBackground)
         contentView.addSubview(labelBackground)
-        labelBackground.addSubview(likeButton)
         labelBackground.addSubview(wineNameLabel)
+        labelBackground.addSubview(commentsButton)
+        labelBackground.addSubview(likeButton)
+        labelBackground.addSubview(hashtagLabel)
+        labelBackground.addSubview(contentLabel)
         
         profileView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -275,24 +293,39 @@ extension PostTableViewCell {
             make.height.equalTo(180)
         }
         labelBackground.snp.makeConstraints { make in
-            make.top.equalTo(imageBackground.snp.bottom).offset(2)
+            make.top.equalTo(imageBackground.snp.bottom).offset(3)
             make.horizontalEdges.equalToSuperview().inset(20)
-            make.height.equalTo(70)
             make.bottom.equalToSuperview().offset(-30)
         }
-        likeButton.snp.makeConstraints { make in
-            make.centerY.equalTo(labelBackground)
+        wineNameLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(15)
+            make.leading.equalToSuperview().offset(15)
+            make.trailing.equalTo(likeButton.snp.leading).inset(-15)
+        }
+        commentsButton.snp.makeConstraints { make in
+            make.centerY.equalTo(wineNameLabel.snp.centerY)
             make.trailing.equalToSuperview().offset(-15)
             make.width.equalTo(25)
         }
-        wineNameLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(labelBackground)
-            make.leading.equalToSuperview().offset(15)
-            make.trailing.equalTo(likeButton.snp.leading).inset(-15)
+        likeButton.snp.makeConstraints { make in
+            make.centerY.equalTo(wineNameLabel.snp.centerY)
+            make.trailing.equalTo(commentsButton.snp.leading).offset(-15)
+            make.width.equalTo(25)
+        }
+        hashtagLabel.snp.makeConstraints { make in
+            make.top.equalTo(wineNameLabel.snp.bottom).offset(5)
+            make.horizontalEdges.equalToSuperview().inset(15)
+        }
+        contentLabel.snp.makeConstraints { make in
+            make.top.equalTo(hashtagLabel.snp.bottom).offset(2)
+            make.horizontalEdges.equalToSuperview().inset(15)
+            make.bottom.equalToSuperview().offset(-15)
         }
         
         imageBackground.backgroundColor = .systemBackground
         likeButton.addTarget(self, action: #selector(likePostTapped), for: .touchUpInside)
+        commentsButton.addTarget(self, action: #selector(commentsButtonTapped), for: .touchUpInside)
+        
     }
     
 }

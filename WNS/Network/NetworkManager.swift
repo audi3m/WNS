@@ -94,6 +94,11 @@ extension NetworkManager {
                     switch response.result {
                     case .success(let response):
                         dump(response)
+                        AccountManager.shared.email = body.email
+                        AccountManager.shared.password = body.password
+                        AccountManager.shared.access = response.accessToken
+                        AccountManager.shared.refresh = response.refreshToken
+                        AccountManager.shared.userID = response.userID
                         handler(response)
                     case .failure(let failure):
                         if let statusCode = response.response?.statusCode {

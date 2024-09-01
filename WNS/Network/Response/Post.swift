@@ -49,6 +49,10 @@ struct Post: Decodable {
     var likeThisPost: Bool {
         likes.contains(AccountManager.shared.userID)
     }
+    
+    var hashTagsString: String {
+        hashTags.dropFirst().map { "#\($0)" }.joined(separator: " ")
+    }
 }
 
 struct Creator: Decodable, Hashable {

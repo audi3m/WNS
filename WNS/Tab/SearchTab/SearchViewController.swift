@@ -13,6 +13,11 @@ import RxCocoa
 
 final class SearchViewController: BaseViewController {
     
+    let searchBar: UISearchBar = {
+        let view = UISearchBar()
+        view.placeholder = "와인, 해시태그, 닉네임을 검색해보세요"
+        return view
+    }()
     
     
     override func viewDidLoad() {
@@ -48,6 +53,13 @@ extension SearchViewController {
     
     private func configureView() {
         
+        view.addSubview(searchBar)
+        
+        searchBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(44)
+        }
         
         
     }

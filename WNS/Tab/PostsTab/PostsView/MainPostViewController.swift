@@ -127,9 +127,6 @@ extension MainPostViewController {
         NetworkManager.shared.login(body: login) { [weak self] response in
             guard let self else { return }
             self.view.makeToast("Login Success", position: .top)
-            AccountManager.shared.access = response.accessToken
-            AccountManager.shared.refresh = response.refreshToken
-            AccountManager.shared.userID = response.userID
         } onResponseError: { [weak self] message in
             guard let self else { return }
             self.showAlert(title: "", message: message, ok: "확인") { }

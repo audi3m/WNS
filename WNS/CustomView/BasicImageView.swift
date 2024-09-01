@@ -14,6 +14,7 @@ class BasicImageView: UIImageView {
         image = UIImage(named: "sample1")
         contentMode = .scaleAspectFill
         layer.masksToBounds = true
+        layer.cornerRadius = DesignSize.fieldCornerRadius
     }
     
     required init?(coder: NSCoder) {

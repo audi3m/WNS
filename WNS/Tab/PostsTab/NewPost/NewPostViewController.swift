@@ -35,9 +35,9 @@ final class NewPostViewController: BaseViewController {
         return view
     }()
      
-    let wineSelection = OutlineNavigation(image: "wineglass", cornerType: .all)
+    let wineSelection = OutlineNavigation(placeholer: "와인선택", image: "wineglass", cornerType: .top)
+    let hashtagField = OutlineNavigation(placeholer: "해시태그", lines: 0, image: "number", cornerType: .bottom)
     let titleField = OutlineField(fieldType: .title, cornerType: .top)
-    let hashtagField = OutlineField(fieldType: .hashtag, cornerType: .middle)
     let contentsField = OutlineField(fieldType: .contents, cornerType: .bottom)
     
     lazy private var postButton: UIButton = {
@@ -50,11 +50,8 @@ final class NewPostViewController: BaseViewController {
     
     let viewModel = NewPostViewModel()
     private var selectedImages = [ImageItem]()
-    var selectedWine: Wine? {
-        didSet {
-            dump(selectedWine)
-        }
-    }
+    var selectedWine: Wine?
+    var hashList: String = ""
      
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,13 +109,25 @@ extension NewPostViewController: PHPickerViewControllerDelegate {
 // Button Functions
 extension NewPostViewController {
     
+    @objc private func showHashtagClicked() {
+        let vc = HashtagViewController()
+        vc.hashtags = self.hashList
+        vc.sendHash = { [weak self] hash in
+            guard let self else { return }
+            self.hashList = hash
+            self.hashtagField.fieldLabel.text = hashList
+            self.hashtagField.fieldLabel.textColor = .systemBlue
+        }
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @objc private func showWineSelectionView() {
         let vc = WineSelectViewController()
         vc.sendSelectedWine = { [weak self] wine in
             guard let self else { return }
             self.selectedWine = wine
-            self.wineSelection.wineLabel.text = wine.name
-            self.wineSelection.wineLabel.textColor = .label
+            self.wineSelection.fieldLabel.text = wine.name
+            self.wineSelection.fieldLabel.textColor = .label
         }
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -126,20 +135,23 @@ extension NewPostViewController {
     @objc private func postButtonClicked() {
         guard let selectedWine else { return }
         guard let wineString = selectedWine.toJsonString() else { return }
-        let hashtag = selectedWine.nameForHashtag + "hashtag by users"
+        let hashtag = selectedWine.nameForHashtag + " " + hashList
         
-        NetworkManager.shared.postImages(items: selectedImages) { [weak self] response in
-            guard let self else { return }
-            let body = PostBody(title: self.titleField.textField.text,
-                                content: hashtag,
-                                content1: wineString,
-                                content2: contentsField.textField.text,
-                                product_id: ProductID.forUsers.rawValue,
-                                files: response.files)
-            NetworkManager.shared.writePost(body: body) { [weak self] post in
+        AccountManager.shared.login { response in
+            print("login success")
+            NetworkManager.shared.postImages(items: self.selectedImages) { [weak self] response in
                 guard let self else { return }
-                print(post)
-                self.dismissView()
+                let body = PostBody(title: self.titleField.textField.text,
+                                    content: hashtag,
+                                    content1: wineString,
+                                    content2: contentsField.textView.text,
+                                    product_id: ProductID.forUsers.rawValue,
+                                    files: response.files)
+                NetworkManager.shared.writePost(body: body) { [weak self] post in
+                    guard let self else { return }
+                    print(post)
+                    self.dismissView()
+                }
             }
         }
     }
@@ -196,7 +208,8 @@ extension NewPostViewController: UICollectionViewDelegateFlowLayout {
 extension NewPostViewController {
     
     private func setButtons() {
-        wineSelection.button.addTarget(self, action: #selector(showWineSelectionView), for: .touchUpInside)
+        wineSelection.navigateButton.addTarget(self, action: #selector(showWineSelectionView), for: .touchUpInside)
+        hashtagField.navigateButton.addTarget(self, action: #selector(showHashtagClicked), for: .touchUpInside)
     }
     
     private func configureView() {
@@ -234,20 +247,20 @@ extension NewPostViewController {
             make.height.equalTo(DesignSize.fieldHeight)
         }
         
-        titleField.snp.makeConstraints { make in
-            make.top.equalTo(wineSelection.snp.bottom).offset(20)
+        hashtagField.snp.makeConstraints { make in
+            make.top.equalTo(wineSelection.snp.bottom).offset(-DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(contentView).inset(DesignSize.fieldHorizontalPadding)
-            make.height.equalTo(DesignSize.fieldHeight)
+            make.height.greaterThanOrEqualTo(DesignSize.fieldHeight)
         }
         
-        hashtagField.snp.makeConstraints { make in
-            make.top.equalTo(titleField.snp.bottom).offset(-DesignSize.outlineWidth)
+        titleField.snp.makeConstraints { make in
+            make.top.equalTo(hashtagField.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(contentView).inset(DesignSize.fieldHorizontalPadding)
             make.height.equalTo(DesignSize.fieldHeight)
         }
         
         contentsField.snp.makeConstraints { make in
-            make.top.equalTo(hashtagField.snp.bottom).offset(-DesignSize.outlineWidth)
+            make.top.equalTo(titleField.snp.bottom).offset(-DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(contentView).inset(DesignSize.fieldHorizontalPadding)
             make.height.equalTo(200)
         }

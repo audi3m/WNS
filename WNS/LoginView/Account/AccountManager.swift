@@ -12,6 +12,24 @@ final class AccountManager {
     static let shared = AccountManager()
     private init() { }
     
+    var email: String {
+        get {
+            return UserDefaults.standard.string(forKey: "email") ?? ""
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "email")
+        }
+    }
+    
+    var password: String {
+        get {
+            return UserDefaults.standard.string(forKey: "password") ?? ""
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "password")
+        }
+    }
+    
     var access: String {
         get {
             return UserDefaults.standard.string(forKey: "access") ?? ""
@@ -53,5 +71,15 @@ extension AccountManager {
         access = ""
         refresh = ""
         userID = ""
+    }
+    
+    func login(handler: @escaping ((LoginResponse) -> Void)) {
+        let body = LoginBody(email: email, password: password)
+        NetworkManager.shared.login(body: body) { response in
+            handler(response)
+        } onResponseError: { message in
+            print(message)
+        }
+
     }
 }

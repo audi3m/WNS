@@ -7,7 +7,7 @@
 
 // Home, New, Profile
 
-import UIKit
+import UIKit 
 
 final class WineTabController: UITabBarController, UITabBarControllerDelegate {
 
@@ -19,7 +19,7 @@ final class WineTabController: UITabBarController, UITabBarControllerDelegate {
         let addNew = UIViewController()
         let joinTab = UINavigationController(rootViewController: JoinViewController())
         let profileTab = UINavigationController(rootViewController: ProfileViewController())
-        let testTab = UINavigationController(rootViewController: HashtagViewController())
+        let testTab = UINavigationController(rootViewController: GPTTab())
         
         mainTab.tabBarItem = UITabBarItem(title: nil, image: TabItemImage.home.unselectedImage, selectedImage: TabItemImage.home.selectedImage)
         searchTab.tabBarItem = UITabBarItem(title: nil, image: TabItemImage.search.unselectedImage, selectedImage: TabItemImage.search.selectedImage)
