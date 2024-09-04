@@ -35,6 +35,8 @@ final class PostTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 25, weight: .semibold)
         label.textColor = .white
         label.textAlignment = .center
+        label.layer.cornerRadius = DesignSize.fieldCornerRadius
+        label.clipsToBounds = true
         label.backgroundColor = .black.withAlphaComponent(0.6)
         return label
     }()
@@ -195,6 +197,13 @@ extension PostTableViewCell {
         imageView1.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        // Test
+//        imageView1.snp.makeConstraints { make in
+//            make.top.horizontalEdges.equalToSuperview()
+//            make.height.equalTo(180)
+//        }
+        
     }
     
     private func configureImages2(post: Post) {
@@ -204,14 +213,29 @@ extension PostTableViewCell {
         imageView1.setImageWithURL(with: post.files[0])
         imageView2.setImageWithURL(with: post.files[1])
         
+//        imageView1.snp.makeConstraints { make in
+//            make.verticalEdges.leading.equalToSuperview()
+//            make.width.equalToSuperview().dividedBy(2)
+//        }
+//        imageView2.snp.makeConstraints { make in
+//            make.verticalEdges.trailing.equalToSuperview()
+//            make.leading.equalTo(imageView1.snp.trailing).offset(3)
+//        }
+        
+        // Test
         imageView1.snp.makeConstraints { make in
-            make.verticalEdges.leading.equalToSuperview()
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
             make.width.equalToSuperview().dividedBy(2)
+            make.height.equalTo(180)
         }
         imageView2.snp.makeConstraints { make in
-            make.verticalEdges.trailing.equalToSuperview()
-            make.leading.equalTo(imageView1.snp.trailing).offset(3)
+            make.top.equalToSuperview()
+            make.leading.equalTo(imageView1.snp.trailing).offset(2)
+            make.trailing.equalToSuperview()
+            make.height.equalTo(180)
         }
+         
     }
     
     private func configureImages3(post: Post) {
@@ -224,21 +248,41 @@ extension PostTableViewCell {
         imageView2.setImageWithURL(with: post.files[1])
         imageView3.setImageWithURL(with: post.files[2])
         
+//        imageView1.snp.makeConstraints { make in
+//            make.verticalEdges.leading.equalToSuperview()
+//            make.width.equalToSuperview().dividedBy(2)
+//        }
+//        imageView2.snp.makeConstraints { make in
+//            make.top.trailing.equalToSuperview()
+//            make.leading.equalTo(imageView1.snp.trailing).offset(3)
+//            make.height.equalToSuperview().dividedBy(2)
+//        }
+//        imageView3.snp.makeConstraints { make in
+//            make.top.equalTo(imageView2.snp.bottom).offset(3)
+//            make.leading.equalTo(imageView1.snp.trailing).offset(3)
+//            make.trailing.bottom.equalToSuperview()
+//        }
+        
+        //Test
         imageView1.snp.makeConstraints { make in
-            make.verticalEdges.leading.equalToSuperview()
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
             make.width.equalToSuperview().dividedBy(2)
+            make.height.equalTo(180)
         }
         imageView2.snp.makeConstraints { make in
-            make.top.trailing.equalToSuperview()
-            make.leading.equalTo(imageView1.snp.trailing).offset(3)
-            make.height.equalToSuperview().dividedBy(2)
+            make.top.equalToSuperview()
+            make.leading.equalTo(imageView1.snp.trailing).offset(2)
+            make.trailing.equalToSuperview()
+            make.height.equalTo(90)
         }
         imageView3.snp.makeConstraints { make in
-            make.top.equalTo(imageView2.snp.bottom).offset(3)
-            make.leading.equalTo(imageView1.snp.trailing).offset(3)
-            make.trailing.bottom.equalToSuperview()
-            
+            make.top.equalTo(imageView2.snp.bottom).offset(2)
+            make.leading.equalTo(imageView1.snp.trailing).offset(2)
+            make.trailing.equalToSuperview()
+            make.bottom.equalTo(imageView1.snp.bottom)
         }
+        
     }
     
     private func configureImages45(post: Post, count: Int) {
@@ -252,28 +296,53 @@ extension PostTableViewCell {
         imageView2.setImageWithURL(with: post.files[1])
         imageView3.setImageWithURL(with: post.files[2])
         
+//        imageView1.snp.makeConstraints { make in
+//            make.verticalEdges.leading.equalToSuperview()
+//            make.width.equalToSuperview().dividedBy(2)
+//        }
+//        imageView2.snp.makeConstraints { make in
+//            make.top.trailing.equalToSuperview()
+//            make.leading.equalTo(imageView1.snp.trailing).offset(3)
+//            make.height.equalToSuperview().dividedBy(2)
+//        }
+//        imageView3.snp.makeConstraints { make in
+//            make.top.equalTo(imageView2.snp.bottom).offset(3)
+//            make.leading.equalTo(imageView1.snp.trailing).offset(3)
+//            make.trailing.bottom.equalToSuperview()
+//        }
+//        moreView.snp.makeConstraints { make in
+//            make.top.equalTo(imageView2.snp.bottom).offset(3)
+//            make.leading.equalTo(imageView1.snp.trailing).offset(3)
+//            make.trailing.bottom.equalToSuperview()
+//        }
+        
+        //Test
         imageView1.snp.makeConstraints { make in
-            make.verticalEdges.leading.equalToSuperview()
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
             make.width.equalToSuperview().dividedBy(2)
+            make.height.equalTo(180)
         }
         imageView2.snp.makeConstraints { make in
-            make.top.trailing.equalToSuperview()
-            make.leading.equalTo(imageView1.snp.trailing).offset(3)
-            make.height.equalToSuperview().dividedBy(2)
+            make.top.equalToSuperview()
+            make.leading.equalTo(imageView1.snp.trailing).offset(2)
+            make.trailing.equalToSuperview()
+            make.height.equalTo(90)
         }
         imageView3.snp.makeConstraints { make in
-            make.top.equalTo(imageView2.snp.bottom).offset(3)
-            make.leading.equalTo(imageView1.snp.trailing).offset(3)
-            make.trailing.bottom.equalToSuperview()
+            make.top.equalTo(imageView2.snp.bottom).offset(2)
+            make.leading.equalTo(imageView1.snp.trailing).offset(2)
+            make.trailing.equalToSuperview()
+            make.bottom.equalTo(imageView1.snp.bottom)
         }
         moreView.snp.makeConstraints { make in
-            make.top.equalTo(imageView2.snp.bottom).offset(3)
-            make.leading.equalTo(imageView1.snp.trailing).offset(3)
-            make.trailing.bottom.equalToSuperview()
+            make.top.equalTo(imageView2.snp.bottom).offset(2)
+            make.leading.equalTo(imageView1.snp.trailing).offset(2)
+            make.trailing.equalToSuperview()
+            make.bottom.equalTo(imageView1.snp.bottom)
         }
         
         moreView.text = "+ \(count-2)"
-        
     }
     
     func configureBasicView() {
@@ -308,12 +377,12 @@ extension PostTableViewCell {
         commentsButton.snp.makeConstraints { make in
             make.centerY.equalTo(wineNameLabel.snp.centerY)
             make.trailing.equalToSuperview().offset(-12)
-            make.size.equalTo(23)
+            make.size.equalTo(24)
         }
         likeButton.snp.makeConstraints { make in
             make.centerY.equalTo(wineNameLabel.snp.centerY)
             make.trailing.equalTo(commentsButton.snp.leading).offset(-12)
-            make.size.equalTo(23)
+            make.size.equalTo(24)
         }
         hashtagLabel.snp.makeConstraints { make in
             make.top.equalTo(wineNameLabel.snp.bottom).offset(10)
@@ -324,11 +393,8 @@ extension PostTableViewCell {
             make.horizontalEdges.equalToSuperview().inset(12)
             make.bottom.equalToSuperview().offset(-12)
         }
-        
         imageBackground.backgroundColor = .systemBackground
         likeButton.addTarget(self, action: #selector(likePostTapped), for: .touchUpInside)
         commentsButton.addTarget(self, action: #selector(commentsButtonTapped), for: .touchUpInside)
-        
     }
-    
 }

@@ -17,7 +17,7 @@ final class SettingsViewController: BaseViewController {
         let view = UIView()
         view.layer.cornerRadius = DesignSize.fieldCornerRadius
         view.layer.borderWidth = DesignSize.outlineWidth
-        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.layer.borderColor = UIColor.label.cgColor
         return view
     }()
     
@@ -88,18 +88,21 @@ extension SettingsViewController {
         systemAppearance.tintColor = .label
         lightAppearance.tintColor = .lightGray
         darkAppearance.tintColor = .lightGray
+        ThemeManager.shared.applyTheme(.system)
     }
     
     @objc private func lightClicked() {
         systemAppearance.tintColor = .lightGray
         lightAppearance.tintColor = .label
         darkAppearance.tintColor = .lightGray
+        ThemeManager.shared.applyTheme(.light)
     }
     
     @objc private func darkClicked() {
         systemAppearance.tintColor = .lightGray
         lightAppearance.tintColor = .lightGray
         darkAppearance.tintColor = .label
+        ThemeManager.shared.applyTheme(.dark)
     }
     
     @objc private func addWineClicked() {

@@ -19,7 +19,7 @@ final class MyInquiryViewController: BaseViewController {
         return view
     }()
     
-    var list: [Post] = [] {
+    var inquiryList: [Post] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -35,12 +35,12 @@ final class MyInquiryViewController: BaseViewController {
 
 extension MyInquiryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        list.count
+        inquiryList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: InquiryCell.id, for: indexPath) as? InquiryCell {
-            let post = list[indexPath.row]
+            let post = inquiryList[indexPath.row]
             cell.setData(post: post)
             return cell
         } else {
@@ -48,6 +48,18 @@ extension MyInquiryViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let inquiry = inquiryList[indexPath.row]
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, success in
+            self?.inquiryList.remove(at: indexPath.row)
+            NetworkManager.shared.deletePost(postID: inquiry.postID) {
+                success(true)
+            }
+        }
+        deleteAction.image = UIImage(systemName: "trash")
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
     
 }
 
@@ -57,7 +69,7 @@ extension MyInquiryViewController {
         let query = GetAllPostQuery(next: "", limit: "100", productID: ProductID.forInquiry.rawValue)
         NetworkManager.shared.getUserPosts(userID: AccountManager.shared.userID, query: query) { [weak self] response in
             guard let self else { return }
-            self.list = response.data
+            self.inquiryList = response.data
         }
     }
     
@@ -66,7 +78,7 @@ extension MyInquiryViewController {
         let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true)
     }
-     
+    
 }
 
 extension MyInquiryViewController {
@@ -76,7 +88,7 @@ extension MyInquiryViewController {
         let request = UIBarButtonItem(title: "문의하기", image: nil, target: self, action: #selector(showRequestSheet))
         
         navigationItem.rightBarButtonItem = request
-         
+        
     }
     private func configureView() {
         view.addSubview(tableView)

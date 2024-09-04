@@ -13,9 +13,12 @@ import RxCocoa
 
 final class PostDetailViewController: BaseViewController {
     
-    let scrollView = UIScrollView()
+    let scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.showsVerticalScrollIndicator = false
+        return view
+    }()
     let contentView = UIView()
-    let profileView = ProfileAndNicknameView()
     private lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout())
         view.isPagingEnabled = true
@@ -35,7 +38,9 @@ final class PostDetailViewController: BaseViewController {
         control.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         return control
     }()
+    let profileView = ProfileAndNicknameView()
     let postSection = PostSectionView()
+    let commentsSection = CommentsSectionView()
     let wineSection = WineSectionView()
     lazy var closeButton: UIButton = {
         let button = UIButton()
@@ -43,7 +48,6 @@ final class PostDetailViewController: BaseViewController {
         button.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         return button
     }()
-    
     
     let postID: String
     var like: Bool?
@@ -62,16 +66,7 @@ final class PostDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        
-        NetworkManager.shared.getSomePost(postID: postID) { [weak self] post in
-            guard let self else { return }
-            self.configureNavBar(post: post)
-            self.configureData(post: post)
-            self.pageControl.numberOfPages = post.files.count
-            self.postSection.setData(post: post)
-            self.configureWine(wineInJSON: post.content1)
-        }
-        
+        callPosts()
         rxBind()
     }
 }
@@ -83,6 +78,17 @@ extension PostDetailViewController {
 
 // Functions
 extension PostDetailViewController {
+    
+    private func callPosts() {
+        NetworkManager.shared.getSomePost(postID: postID) { [weak self] post in
+            guard let self else { return }
+            self.configureNavBar(post: post)
+            self.configureData(post: post)
+            self.pageControl.numberOfPages = post.files.count
+            self.postSection.setData(post: post)
+            self.configureWine(wineInJSON: post.content1)
+        }
+    }
     
     @objc func commentsButtonTapped() {
         let vc = CommentsViewController(postID: postID)
@@ -117,9 +123,13 @@ extension PostDetailViewController {
     private func configureWine(wineInJSON: String?) {
         if let wineInJSON, let wine = Wine.fromJsonString(wineInJSON) {
             wineSection.setData(wine: wine)
-        } else {
-            
         }
+    }
+    
+    @objc private func commentClicked() {
+        let vc = CommentsViewController(postID: postID)
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
     }
     
     private func configureNavBar(post: Post) {
@@ -137,55 +147,64 @@ extension PostDetailViewController {
         view.addSubview(closeButton)
         scrollView.addSubview(contentView)
         
-        contentView.addSubview(profileView)
         contentView.addSubview(collectionView)
         contentView.addSubview(pageControl)
+        contentView.addSubview(profileView)
         contentView.addSubview(postSection)
+        contentView.addSubview(commentsSection)
         contentView.addSubview(wineSection)
         
         scrollView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(view)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.bottom.equalTo(view)
         }
         
         contentView.snp.makeConstraints { make in
             make.edges.width.equalToSuperview()
         }
         
-        profileView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.horizontalEdges.equalToSuperview().inset(15)
-        }
-        
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(profileView.snp.bottom)
+            make.top.equalToSuperview()
             make.horizontalEdges.equalTo(contentView)
             make.height.equalTo(350)
         }
         
         pageControl.snp.makeConstraints { make in
-            make.top.equalTo(collectionView.snp.bottom)
+            make.bottom.equalTo(collectionView.snp.bottom)
             make.centerX.equalTo(contentView.snp.centerX)
             make.height.equalTo(30)
         }
         
+        profileView.snp.makeConstraints { make in
+            make.top.equalTo(pageControl.snp.bottom).offset(5)
+            make.horizontalEdges.equalToSuperview().inset(25)
+        }
+        
         postSection.snp.makeConstraints { make in
-            make.top.equalTo(pageControl.snp.bottom).offset(10)
+            make.top.equalTo(profileView.snp.bottom).offset(5)
+            make.horizontalEdges.equalToSuperview().inset(20)
+        }
+        
+        commentsSection.snp.makeConstraints { make in
+            make.top.equalTo(postSection.snp.bottom).offset(30)
             make.horizontalEdges.equalToSuperview().inset(20)
         }
         
         wineSection.snp.makeConstraints { make in
-            make.top.equalTo(postSection.snp.bottom).offset(30)
+            make.top.equalTo(commentsSection.snp.bottom).offset(30)
             make.horizontalEdges.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().offset(-100)
+            make.bottom.equalToSuperview().offset(-130)
         }
         
         closeButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.size.equalTo(50)
+            make.size.equalTo(60)
         }
-         
+        
+        let commentGesture = UITapGestureRecognizer(target: self, action: #selector(commentClicked))
+        commentsSection.addGestureRecognizer(commentGesture)
+        
     }
     
     private func configureData(post: Post) {
@@ -193,6 +212,7 @@ extension PostDetailViewController {
         images = post.files
         like = post.likeThisPost
         collectionView.reloadData()
+        commentsSection.setComments(comments: post.comments)
     }
     
 }

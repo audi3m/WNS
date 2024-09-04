@@ -96,6 +96,8 @@ extension NetworkManager {
                         dump(response)
                         AccountManager.shared.email = body.email
                         AccountManager.shared.password = body.password
+                        AccountManager.shared.nickname = response.nick
+                        AccountManager.shared.profile = response.profileImage
                         AccountManager.shared.access = response.accessToken
                         AccountManager.shared.refresh = response.refreshToken
                         AccountManager.shared.userID = response.userID

@@ -12,9 +12,9 @@ final class CommentTableViewCell: UITableViewCell {
     
     let profileImageView: UIImageView = {
         let view = UIImageView()
+        view.tintColor = .label
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        view.backgroundColor = .systemMint
         view.layer.cornerRadius = 18
         return view
     }()

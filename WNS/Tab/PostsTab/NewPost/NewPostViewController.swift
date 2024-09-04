@@ -37,8 +37,7 @@ final class NewPostViewController: BaseViewController {
      
     let wineSelection = OutlineNavigation(placeholer: "와인선택", image: "wineglass", cornerType: .top)
     let hashtagField = OutlineNavigation(placeholer: "해시태그", lines: 0, image: "number", cornerType: .bottom)
-    let titleField = OutlineField(fieldType: .title, cornerType: .top)
-    let contentsField = OutlineField(fieldType: .contents, cornerType: .bottom)
+    let contentsField = OutlineField(fieldType: .contents, cornerType: .all)
     
     lazy private var postButton: UIButton = {
         let button = UIButton()
@@ -81,13 +80,10 @@ extension NewPostViewController: PHPickerViewControllerDelegate {
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         dismiss(animated: true)
-        
         let group = DispatchGroup()
-        
         for (index, result) in results.enumerated() {
             guard index < 5 else { break }
             group.enter()
-            
             result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] (object, error) in
                 defer { group.leave() }
                 if let image = object as? UIImage {
@@ -99,7 +95,6 @@ extension NewPostViewController: PHPickerViewControllerDelegate {
                 }
             }
         }
-        
         group.notify(queue: .main) { [weak self] in
             self?.imagesCollectionView.reloadData()
         }
@@ -142,7 +137,7 @@ extension NewPostViewController {
             print("login success")
             NetworkManager.shared.postImages(items: self.selectedImages) { [weak self] response in
                 guard let self else { return }
-                let body = PostBody(title: self.titleField.textField.text,
+                let body = PostBody(title: "",
                                     content: hashtag,
                                     content1: wineString,
                                     content2: contentsField.textView.text,
@@ -222,7 +217,6 @@ extension NewPostViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(imagesCollectionView)
         contentView.addSubview(wineSelection)
-        contentView.addSubview(titleField)
         contentView.addSubview(hashtagField)
         contentView.addSubview(contentsField)
         contentView.addSubview(postButton)
@@ -254,14 +248,8 @@ extension NewPostViewController {
             make.height.greaterThanOrEqualTo(DesignSize.fieldHeight)
         }
         
-        titleField.snp.makeConstraints { make in
-            make.top.equalTo(hashtagField.snp.bottom).offset(20)
-            make.horizontalEdges.equalTo(contentView).inset(DesignSize.fieldHorizontalPadding)
-            make.height.equalTo(DesignSize.fieldHeight)
-        }
-        
         contentsField.snp.makeConstraints { make in
-            make.top.equalTo(titleField.snp.bottom).offset(-DesignSize.outlineWidth)
+            make.top.equalTo(hashtagField.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(contentView).inset(DesignSize.fieldHorizontalPadding)
             make.height.equalTo(200)
         }

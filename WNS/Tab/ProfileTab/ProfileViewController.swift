@@ -44,27 +44,15 @@ final class ProfileViewController: BaseViewController {
         let view = CountAndLabelView(type: .followings)
         return view
     }()
-    let emailLabel: UILabel = {
+    lazy var nicknameLabel: UILabel = {
         let label = UILabel()
-        label.text = "이메일 aaaaa@aaaa.com"
-        label.font = .systemFont(ofSize: 14)
+        label.text = AccountManager.shared.nickname
+        label.font = .boldSystemFont(ofSize: 20)
         return label
     }()
-    let nicknameLabel: UILabel = {
+    lazy var emailLabel: UILabel = {
         let label = UILabel()
-        label.text = "닉네임 AppleApps"
-        label.font = .systemFont(ofSize: 14)
-        return label
-    }()
-    let phoneLabel: UILabel = {
-        let label = UILabel()
-        label.text = "전화번호 010-1234-1234"
-        label.font = .systemFont(ofSize: 14)
-        return label
-    }()
-    let birthdayLabel: UILabel = {
-        let label = UILabel()
-        label.text = "2020년 8월 20일"
+        label.text = AccountManager.shared.email
         label.font = .systemFont(ofSize: 14)
         return label
     }()
@@ -73,6 +61,7 @@ final class ProfileViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavBar()
         configureView()
         rxBind()
     }
@@ -104,53 +93,38 @@ extension ProfileViewController {
 // View
 extension ProfileViewController {
     
-    private func configureView() {
-        
-        navigationItem.title = "닉네임 자리"
+    private func configureNavBar() {
+        navigationItem.title = "프로필"
         
         let settings = UIBarButtonItem(image: UIImage(systemName: "switch.2"),
                                        style: .plain, target: self,
                                        action: #selector(settingsClicked))
         settings.tintColor = .label
         navigationItem.rightBarButtonItem = settings
-        
+    }
+    
+    private func configureView() {
         view.addSubview(profileImageView)
-        view.addSubview(stackView)
-        view.addSubview(emailLabel)
         view.addSubview(nicknameLabel)
-        view.addSubview(phoneLabel)
-        view.addSubview(birthdayLabel) 
+        view.addSubview(emailLabel)
+        view.addSubview(stackView)
         
         profileImageView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
             make.leading.equalTo(view).offset(15)
             make.size.equalTo(80)
         }
-        
-        stackView.snp.makeConstraints { make in
-            make.leading.equalTo(profileImageView.snp.trailing).offset(15)
-            make.centerY.equalTo(profileImageView.snp.centerY)
-            make.trailing.equalTo(view).offset(-15)
-        }
-        
-        emailLabel.snp.makeConstraints { make in
-            make.top.equalTo(profileImageView.snp.bottom).offset(20)
-            make.leading.equalTo(view).offset(15)
-        }
-        
         nicknameLabel.snp.makeConstraints { make in
-            make.top.equalTo(emailLabel.snp.bottom).offset(4)
-            make.leading.equalTo(view).offset(15)
+            make.bottom.equalTo(profileImageView.snp.centerY).offset(-1)
+            make.leading.equalTo(profileImageView.snp.trailing).offset(20)
         }
-        
-        phoneLabel.snp.makeConstraints { make in
-            make.top.equalTo(nicknameLabel.snp.bottom).offset(4)
-            make.leading.equalTo(view).offset(15)
+        emailLabel.snp.makeConstraints { make in
+            make.top.equalTo(profileImageView.snp.centerY).offset(1)
+            make.leading.equalTo(profileImageView.snp.trailing).offset(20)
         }
-        
-        birthdayLabel.snp.makeConstraints { make in
-            make.top.equalTo(phoneLabel.snp.bottom).offset(4)
-            make.leading.equalTo(view).offset(15)
+        stackView.snp.makeConstraints { make in
+            make.top.equalTo(profileImageView.snp.bottom).offset(20)
+            make.horizontalEdges.equalToSuperview().inset(20)
         }
     }
 }

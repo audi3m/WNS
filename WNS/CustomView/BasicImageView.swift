@@ -11,7 +11,6 @@ class BasicImageView: UIImageView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        image = UIImage(named: "sample1")
         contentMode = .scaleAspectFill
         layer.masksToBounds = true
         layer.cornerRadius = DesignSize.fieldCornerRadius

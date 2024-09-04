@@ -13,6 +13,7 @@ final class AdminViewController: BaseViewController {
     
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -22,6 +23,9 @@ final class AdminViewController: BaseViewController {
 
 extension AdminViewController {
     private func configureView() {
-        navigationItem.title = "관리자 페이지"
+        navigationItem.title = "관리자"
+        
+        
+        
     }
 }

@@ -51,7 +51,7 @@ final class OutlineButton: UIView {
             make.edges.equalToSuperview()
         }
         button.snp.makeConstraints { make in
-            make.verticalEdges.leading.equalToSuperview().inset(DesignSize.fieldPadding)
+            make.edges.equalToSuperview().inset(DesignSize.fieldPadding)
         }
         
     }

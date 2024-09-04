@@ -10,16 +10,19 @@ import SnapKit
 
 final class PostSectionView: UIView {
     
-    lazy var sectionTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 20)
-        label.text = "게시물 제목"
-        return label
-    }()
     let backgroundColorView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 10
+        return view
+    }()
+    lazy var stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.spacing = 5
+        view.addArrangedSubview(hashtagsLabel)
+        view.addArrangedSubview(contentsLabel)
+        view.addArrangedSubview(dateLabel)
         return view
     }()
     let hashtagsLabel: UILabel = {
@@ -29,16 +32,16 @@ final class PostSectionView: UIView {
         label.numberOfLines = 0
         return label
     }()
-    let dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 13)
-        label.textColor = .secondaryLabel
-        return label
-    }()
     let contentsLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
         label.numberOfLines = 0
+        return label
+    }()
+    let dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13)
+        label.textColor = .secondaryLabel
         return label
     }()
     
@@ -52,42 +55,22 @@ final class PostSectionView: UIView {
     }
     
     private func configureView() {
-        addSubview(sectionTitleLabel)
         addSubview(backgroundColorView)
+        backgroundColorView.addSubview(stackView)
         
-        backgroundColorView.addSubview(hashtagsLabel)
-        backgroundColorView.addSubview(dateLabel)
-        backgroundColorView.addSubview(contentsLabel)
-        
-        sectionTitleLabel.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalToSuperview()
-        }
         backgroundColorView.snp.makeConstraints { make in
-            make.top.equalTo(sectionTitleLabel.snp.bottom).offset(13)
+            make.top.equalToSuperview()
             make.horizontalEdges.bottom.equalToSuperview()
         }
-        hashtagsLabel.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalToSuperview().inset(DesignSize.fieldPadding)
+        stackView.snp.makeConstraints { make in
+            make.edges.equalTo(backgroundColorView).inset(DesignSize.fieldPadding)
         }
-        dateLabel.snp.makeConstraints { make in
-            make.top.equalTo(hashtagsLabel.snp.bottom).offset(3)
-            make.horizontalEdges.equalToSuperview().inset(DesignSize.fieldPadding)
-        }
-        contentsLabel.snp.makeConstraints { make in
-            make.top.equalTo(dateLabel.snp.bottom).offset(10)
-            make.horizontalEdges.bottom.equalToSuperview().inset(DesignSize.fieldPadding)
-        }
-        
-         
-        
     }
     
     func setData(post: Post) {
-        sectionTitleLabel.text = post.title
         hashtagsLabel.text = post.hashTagsString
         dateLabel.text = post.longDate
         contentsLabel.text = post.content2
     }
-    
 }
 

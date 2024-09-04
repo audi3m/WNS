@@ -30,6 +30,24 @@ final class AccountManager {
         }
     }
     
+    var nickname: String {
+        get {
+            return UserDefaults.standard.string(forKey: "nickname") ?? ""
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "nickname")
+        }
+    }
+    
+    var profile: String? {
+        get {
+            return UserDefaults.standard.string(forKey: "profile")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "profile")
+        }
+    }
+    
     var access: String {
         get {
             return UserDefaults.standard.string(forKey: "access") ?? ""

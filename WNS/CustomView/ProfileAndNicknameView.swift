@@ -14,14 +14,14 @@ final class ProfileAndNicknameView: UIView {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        view.layer.cornerRadius = 15
+        view.layer.cornerRadius = 18
         view.image = UIImage(systemName: "person.circle")
         view.tintColor = .label
         return view
     }()
     let nicknameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13)
+        label.font = .boldSystemFont(ofSize: 14)
         label.text = "Wine_Lover"
         return label
     }()
@@ -42,7 +42,7 @@ final class ProfileAndNicknameView: UIView {
         profileImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.verticalEdges.equalToSuperview().inset(10)
-            make.size.equalTo(30)
+            make.size.equalTo(36)
         }
         
         nicknameLabel.snp.makeConstraints { make in
@@ -56,7 +56,7 @@ final class ProfileAndNicknameView: UIView {
         if let image = creator.profileImage, !image.isEmpty {
             profileImageView.setImageWithURL(with: image)
         } else {
-            profileImageView.image = UIImage(systemName: "person.circle")
+            profileImageView.image = UIImage(named: "sample")
         }
         nicknameLabel.text = creator.nick
     }

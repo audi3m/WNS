@@ -17,9 +17,9 @@ final class WineTabController: UITabBarController, UITabBarControllerDelegate {
         let mainTab = UINavigationController(rootViewController: MainPostViewController())
         let searchTab = UINavigationController(rootViewController: SearchViewController())
         let addNew = UIViewController()
-        let joinTab = UINavigationController(rootViewController: JoinViewController())
+        let joinTab = UINavigationController(rootViewController: SegmentedTableViewController())
         let profileTab = UINavigationController(rootViewController: ProfileViewController())
-        let testTab = UINavigationController(rootViewController: GPTTab())
+        let testTab = UINavigationController(rootViewController: SearchViewController())
         
         mainTab.tabBarItem = UITabBarItem(title: nil, image: TabItemImage.home.unselectedImage, selectedImage: TabItemImage.home.selectedImage)
         searchTab.tabBarItem = UITabBarItem(title: nil, image: TabItemImage.search.unselectedImage, selectedImage: TabItemImage.search.selectedImage)
@@ -31,8 +31,9 @@ final class WineTabController: UITabBarController, UITabBarControllerDelegate {
         
         profileTab.tabBarItem = UITabBarItem(title: nil, image: TabItemImage.profile.unselectedImage, selectedImage: TabItemImage.profile.selectedImage)
         joinTab.tabBarItem = UITabBarItem(title: nil, image: TabItemImage.join.unselectedImage, selectedImage: TabItemImage.join.selectedImage)
-        testTab.tabBarItem = UITabBarItem(title: nil, image: TabItemImage.login.unselectedImage, selectedImage: TabItemImage.login.selectedImage)
+        testTab.tabBarItem = UITabBarItem(title: nil, image: TabItemImage.search.unselectedImage, selectedImage: TabItemImage.search.selectedImage)
 
+//        viewControllers = [mainTab, addNew, profileTab]
         viewControllers = [mainTab, addNew, profileTab, joinTab, testTab]
         
         tabBar.tintColor = .label

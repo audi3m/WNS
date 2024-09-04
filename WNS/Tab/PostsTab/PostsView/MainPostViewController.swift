@@ -32,7 +32,10 @@ final class MainPostViewController: BaseViewController {
         super.viewDidLoad()
         configureNavBar()
         configureView()
+        login()
         rxBind()
+        
+        print(AccountManager.shared.profile ?? "")
     }
     
 }
@@ -81,9 +84,7 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = PostDetailViewController(postID: postID) 
         vc.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .crossDissolve
-        present(vc, animated: true)
-//        vc.hidesBottomBarWhenPushed = true
-//        navigationController?.pushViewController(vc, animated: true)
+        present(vc, animated: true) 
     }
 }
 
@@ -126,9 +127,10 @@ extension MainPostViewController {
     }
     
     @objc private func login() {
-        let login = LoginBody(email: "c@c.com", password: "cccc")
+        let login = LoginBody(email: "admin@admin.admin", password: "adminadmin")
         NetworkManager.shared.login(body: login) { [weak self] response in
             guard let self else { return }
+            callPosts()
             self.view.makeToast("Login Success", position: .top)
         } onResponseError: { [weak self] message in
             guard let self else { return }
@@ -152,11 +154,8 @@ extension MainPostViewController {
         let login = UIBarButtonItem(image: ButtonImage.navLogin, style: .plain, target: self, action: #selector(login))
         let refreshToken = UIBarButtonItem(image: ButtonImage.navRefresh, style: .plain, target: self, action: #selector(refreshToken))
         
-        let request = UIBarButtonItem(image: UIImage(systemName: "arrow.down"), style: .plain, target: self, action: #selector(refreshPosts))
-        
-        navigationItem.leftBarButtonItems = [login, refreshToken]
-        navigationItem.rightBarButtonItem = request
-        
+//        navigationItem.leftBarButtonItems = [login, refreshToken]
+
     }
     
     private func configureView() {

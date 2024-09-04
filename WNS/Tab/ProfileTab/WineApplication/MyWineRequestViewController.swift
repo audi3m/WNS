@@ -19,7 +19,7 @@ final class MyWineRequestViewController: BaseViewController {
         return view
     }()
     
-    var list: [Post] = [] {
+    var requestList: [Post] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -36,12 +36,12 @@ final class MyWineRequestViewController: BaseViewController {
 
 extension MyWineRequestViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        list.count
+        requestList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: WineRequestCell.id, for: indexPath) as? WineRequestCell {
-            let post = list[indexPath.row]
+            let post = requestList[indexPath.row]
             cell.setData(post: post)
             return cell
         } else {
@@ -49,6 +49,18 @@ extension MyWineRequestViewController: UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let request = requestList[indexPath.row]
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, success in
+            self?.requestList.remove(at: indexPath.row)
+            NetworkManager.shared.deletePost(postID: request.postID) {
+                success(true)
+            }
+        }
+        deleteAction.image = UIImage(systemName: "trash")
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
     
 }
 
@@ -58,8 +70,7 @@ extension MyWineRequestViewController {
         let query = GetAllPostQuery(next: "", limit: "100", productID: ProductID.forWineRequest.rawValue)
         NetworkManager.shared.getUserPosts(userID: AccountManager.shared.userID, query: query) { [weak self] response in
             guard let self else { return }
-            self.list = response.data
-            print(list)
+            self.requestList = response.data
         }
     }
     
@@ -74,7 +85,7 @@ extension MyWineRequestViewController {
 extension MyWineRequestViewController {
     
     private func configureNavBar() {
-        navigationItem.title = "와인 리스트 신청"
+        navigationItem.title = "와인 리스트 추가"
         let request = UIBarButtonItem(title: "신청하기", image: nil, target: self, action: #selector(showRequestSheet))
         
         navigationItem.rightBarButtonItem = request

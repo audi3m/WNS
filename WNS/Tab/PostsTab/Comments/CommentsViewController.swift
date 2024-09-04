@@ -47,6 +47,9 @@ final class CommentsViewController: BaseViewController {
         }
     }
     
+    var commentsBottomConstraint: Constraint?
+    var emptyBottomConstraint: Constraint?
+    
     init(postID: String) {
         self.postID = postID
         super.init(nibName: nil, bundle: nil)
@@ -66,7 +69,26 @@ final class CommentsViewController: BaseViewController {
             sheet.detents = [.medium(), .large()]
             sheet.prefersGrabberVisible = true
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enable = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.shared.enable = true
+    }
+    
 }
 
 // Functions
@@ -97,6 +119,7 @@ extension CommentsViewController {
     private func rxBind() { }
 }
 
+// TextField
 extension CommentsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let comment = commentField.textField.text else { return false }
@@ -104,7 +127,6 @@ extension CommentsViewController: UITextFieldDelegate {
         
         let commentBody = CommentBody(content: comment)
         NetworkManager.shared.writeComment(postID: postID, body: commentBody) { response in
-            print(response)
             self.commentField.textField.text = ""
             self.getComments(postID: self.postID)
         }
@@ -112,6 +134,43 @@ extension CommentsViewController: UITextFieldDelegate {
         view.endEditing(true)
         return true
     }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+           let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
+           let animationCurve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt {
+            
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            commentsBottomConstraint?.update(offset: -keyboardHeight + 10)
+            
+            UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: animationCurve << 16),
+                           animations: { self.view.layoutIfNeeded() },
+                           completion: nil)
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        if let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
+           let animationCurve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt {
+            
+            self.commentsBottomConstraint?.update(offset: -10)
+            
+            UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: animationCurve << 16),
+                           animations: { self.view.layoutIfNeeded() },
+                           completion: nil)
+        }
+    }
+    
+//    @objc func keyboardWillShow(_ notification: Notification) {
+//        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+//            let keyboardHeight = keyboardFrame.cgRectValue.height
+//            commentsBottomConstraint?.update(offset: -keyboardHeight)
+//        }
+//    }
+//    
+//    @objc func keyboardWillHide(_ notification: Notification) {
+//        commentsBottomConstraint?.update(offset: -10)
+//    }
     
 }
 
@@ -145,13 +204,16 @@ extension CommentsViewController {
             make.bottom.equalTo(commentField.snp.top)
         }
         emptyView.snp.makeConstraints { make in
-            make.bottom.equalTo(view.snp.centerY).offset(-30)
-            make.centerX.equalTo(view)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(50)
         }
         commentField.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            commentsBottomConstraint = make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10).constraint
             make.height.equalTo(50)
         }
     }
 }
+ 
+  

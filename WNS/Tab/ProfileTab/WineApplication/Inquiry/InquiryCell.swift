@@ -18,8 +18,13 @@ final class InquiryCell: UITableViewCell {
     }()
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13)
+        label.font = .systemFont(ofSize: 15)
         return label
+    }()
+    let lineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        return view
     }()
     let contentsLabel: UILabel = {
         let label = UILabel()
@@ -35,14 +40,6 @@ final class InquiryCell: UITableViewCell {
         label.layer.cornerRadius = 5
         label.clipsToBounds = true
         return label
-    }()
-    let deleteButton: UIButton = {
-        let button = UIButton()
-        button.setImage(ButtonImage.trash, for: .normal)
-        button.backgroundColor = .systemRed
-        button.tintColor = .white
-        button.layer.cornerRadius = 5
-        return button
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -61,8 +58,8 @@ final class InquiryCell: UITableViewCell {
     }
     
     private func resetData() {
-        titleLabel.text = ""
-        contentsLabel.text = ""
+        titleLabel.text = "[제목]"
+        contentsLabel.text = "[내용]"
     }
      
     private func configureView() {
@@ -70,8 +67,8 @@ final class InquiryCell: UITableViewCell {
         
         backgroundColorView.addSubview(responseLabel)
         backgroundColorView.addSubview(titleLabel)
+        backgroundColorView.addSubview(lineView)
         backgroundColorView.addSubview(contentsLabel)
-        backgroundColorView.addSubview(deleteButton)
         
         backgroundColorView.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(DesignSize.fieldPadding/2)
@@ -83,22 +80,25 @@ final class InquiryCell: UITableViewCell {
         }
         titleLabel.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().inset(DesignSize.fieldPadding)
-            make.height.equalTo(15)
+            make.height.equalTo(25)
+        }
+        lineView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(DesignSize.fieldPadding/2)
+            make.leading.equalToSuperview().offset(DesignSize.fieldPadding)
+            make.trailing.equalTo(titleLabel.snp.trailing)
+            make.height.equalTo(1)
         }
         contentsLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom)
-            make.leading.equalToSuperview().inset(DesignSize.fieldPadding)
+            make.top.equalTo(lineView.snp.bottom).offset(DesignSize.fieldPadding/2)
+            make.leading.equalToSuperview().offset(DesignSize.fieldPadding)
             make.height.greaterThanOrEqualTo(100)
-        }
-        deleteButton.snp.makeConstraints { make in
-            make.trailing.bottom.equalToSuperview().inset(DesignSize.fieldPadding)
-            make.size.equalTo(25)
-        }
+            make.bottom.equalToSuperview().inset(DesignSize.fieldPadding)
+        } 
     }
     
     func setData(post: Post) {
-        titleLabel.text = post.content1
-        contentsLabel.text = post.content2
+        titleLabel.text = "[제목] \(post.content1 ?? "")"
+        contentsLabel.text = "[내용]\n\(post.content2 ?? "")"
     }
     
 }
