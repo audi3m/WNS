@@ -29,7 +29,7 @@
 		D404A5092C6E2CA8005C3C6E /* EditMyProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5082C6E2CA8005C3C6E /* EditMyProfileResponse.swift */; };
 		D404A50B2C6E2D51005C3C6E /* GetOthersProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A50A2C6E2D51005C3C6E /* GetOthersProfileResponse.swift */; };
 		D404A50D2C6E2DE9005C3C6E /* HashtagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A50C2C6E2DE9005C3C6E /* HashtagResponse.swift */; };
-		D404A50F2C6E302E005C3C6E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A50E2C6E302E005C3C6E /* NetworkManager.swift */; };
+		D404A50F2C6E302E005C3C6E /* SearchNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A50E2C6E302E005C3C6E /* SearchNetworkManager.swift */; };
 		D404A5122C6E4EC8005C3C6E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D404A5112C6E4EC8005C3C6E /* SnapKit */; };
 		D404A51D2C6E4F2D005C3C6E /* JoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A51C2C6E4F2D005C3C6E /* JoinViewModel.swift */; };
 		D404A5212C6F28A5005C3C6E /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404A5202C6F28A5005C3C6E /* TestViewController.swift */; };
@@ -64,6 +64,11 @@
 		D41E73142C7F08E500097F90 /* OutlineField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73132C7F08E500097F90 /* OutlineField.swift */; };
 		D41E73162C7F35DB00097F90 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73152C7F35DB00097F90 /* DateManager.swift */; };
 		D41E731A2C7F8D5F00097F90 /* OutlineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73192C7F8D5F00097F90 /* OutlineButton.swift */; };
+		D42FB9562C8BD55C002BA635 /* AccountNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42FB9552C8BD55C002BA635 /* AccountNetworkManager.swift */; };
+		D42FB9582C8BD571002BA635 /* PostNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42FB9572C8BD571002BA635 /* PostNetworkManager.swift */; };
+		D42FB95A2C8BD59E002BA635 /* CommentsNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42FB9592C8BD59E002BA635 /* CommentsNetworkManager.swift */; };
+		D42FB95C2C8BD5BC002BA635 /* LikeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42FB95B2C8BD5BC002BA635 /* LikeNetworkManager.swift */; };
+		D42FB95E2C8BD5CB002BA635 /* ProfileNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42FB95D2C8BD5CB002BA635 /* ProfileNetworkManager.swift */; };
 		D43A68B52C8709CE00ACD6B9 /* TokenInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A68B42C8709CE00ACD6B9 /* TokenInterceptor.swift */; };
 		D445A17A2C849DA7003CEEBF /* WineSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445A1792C849DA7003CEEBF /* WineSectionView.swift */; };
 		D445A17C2C84A9D3003CEEBF /* PostSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445A17B2C84A9D3003CEEBF /* PostSectionView.swift */; };
@@ -159,7 +164,7 @@
 		D404A5082C6E2CA8005C3C6E /* EditMyProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyProfileResponse.swift; sourceTree = "<group>"; };
 		D404A50A2C6E2D51005C3C6E /* GetOthersProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOthersProfileResponse.swift; sourceTree = "<group>"; };
 		D404A50C2C6E2DE9005C3C6E /* HashtagResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagResponse.swift; sourceTree = "<group>"; };
-		D404A50E2C6E302E005C3C6E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		D404A50E2C6E302E005C3C6E /* SearchNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNetworkManager.swift; sourceTree = "<group>"; };
 		D404A51C2C6E4F2D005C3C6E /* JoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewModel.swift; sourceTree = "<group>"; };
 		D404A5202C6F28A5005C3C6E /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		D404A5262C6F7D10005C3C6E /* GetAllPostQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllPostQuery.swift; sourceTree = "<group>"; };
@@ -192,6 +197,11 @@
 		D41E73132C7F08E500097F90 /* OutlineField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineField.swift; sourceTree = "<group>"; };
 		D41E73152C7F35DB00097F90 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		D41E73192C7F8D5F00097F90 /* OutlineButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineButton.swift; sourceTree = "<group>"; };
+		D42FB9552C8BD55C002BA635 /* AccountNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountNetworkManager.swift; sourceTree = "<group>"; };
+		D42FB9572C8BD571002BA635 /* PostNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNetworkManager.swift; sourceTree = "<group>"; };
+		D42FB9592C8BD59E002BA635 /* CommentsNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsNetworkManager.swift; sourceTree = "<group>"; };
+		D42FB95B2C8BD5BC002BA635 /* LikeNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeNetworkManager.swift; sourceTree = "<group>"; };
+		D42FB95D2C8BD5CB002BA635 /* ProfileNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNetworkManager.swift; sourceTree = "<group>"; };
 		D43A68B42C8709CE00ACD6B9 /* TokenInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInterceptor.swift; sourceTree = "<group>"; };
 		D445A1792C849DA7003CEEBF /* WineSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineSectionView.swift; sourceTree = "<group>"; };
 		D445A17B2C84A9D3003CEEBF /* PostSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSectionView.swift; sourceTree = "<group>"; };
@@ -460,6 +470,19 @@
 			path = Tab;
 			sourceTree = "<group>";
 		};
+		D42FB95F2C8BD5E6002BA635 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D42FB9552C8BD55C002BA635 /* AccountNetworkManager.swift */,
+				D42FB9572C8BD571002BA635 /* PostNetworkManager.swift */,
+				D42FB9592C8BD59E002BA635 /* CommentsNetworkManager.swift */,
+				D42FB95B2C8BD5BC002BA635 /* LikeNetworkManager.swift */,
+				D42FB95D2C8BD5CB002BA635 /* ProfileNetworkManager.swift */,
+				D404A50E2C6E302E005C3C6E /* SearchNetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		D45345832C80337200BABF48 /* WineApplication */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,7 +603,7 @@
 		D467D4362C6C8061000C3993 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				D404A50E2C6E302E005C3C6E /* NetworkManager.swift */,
+				D42FB95F2C8BD5E6002BA635 /* Managers */,
 				D467D4372C6C8070000C3993 /* APIKey.swift */,
 				D467D4542C6CDDAD000C3993 /* Router.swift */,
 				D467D4482C6C8738000C3993 /* TargetType.swift */,
@@ -781,9 +804,10 @@
 				D43A68B52C8709CE00ACD6B9 /* TokenInterceptor.swift in Sources */,
 				D41E73052C7D8AC300097F90 /* SelectionView.swift in Sources */,
 				D404A5462C71B5BC005C3C6E /* CommentsViewController.swift in Sources */,
+				D42FB95A2C8BD59E002BA635 /* CommentsNetworkManager.swift in Sources */,
 				D404A5292C6F7DAD005C3C6E /* GetLikePostQuery.swift in Sources */,
 				D467D4602C6CE99C000C3993 /* CommentBody.swift in Sources */,
-				D404A50F2C6E302E005C3C6E /* NetworkManager.swift in Sources */,
+				D404A50F2C6E302E005C3C6E /* SearchNetworkManager.swift in Sources */,
 				D404A50D2C6E2DE9005C3C6E /* HashtagResponse.swift in Sources */,
 				D404A54A2C71B7DE005C3C6E /* NSObject+Ex.swift in Sources */,
 				D45976672C81863600077BC7 /* WineRequestViewModel.swift in Sources */,
@@ -832,6 +856,7 @@
 				D404A5402C7088B4005C3C6E /* DetailViewModel.swift in Sources */,
 				D445A1822C84BBE9003CEEBF /* WineRequestCell.swift in Sources */,
 				D404A5612C721387005C3C6E /* CommentsViewModel.swift in Sources */,
+				D42FB95E2C8BD5CB002BA635 /* ProfileNetworkManager.swift in Sources */,
 				D467D4382C6C8070000C3993 /* APIKey.swift in Sources */,
 				D404A53E2C70889E005C3C6E /* MainPostViewModel.swift in Sources */,
 				D4E3C7582C79F65100131DA5 /* GalleryButtonCell.swift in Sources */,
@@ -839,6 +864,8 @@
 				D404A52B2C6F7E05005C3C6E /* HashQuery.swift in Sources */,
 				D4E3C7482C78544900131DA5 /* ProfileAndNicknameView.swift in Sources */,
 				D467D4582C6CE03A000C3993 /* EmailDuplicationCheckBody.swift in Sources */,
+				D42FB95C2C8BD5BC002BA635 /* LikeNetworkManager.swift in Sources */,
+				D42FB9582C8BD571002BA635 /* PostNetworkManager.swift in Sources */,
 				D404A5392C70871B005C3C6E /* LoginViewModel.swift in Sources */,
 				D4E3C74F2C79763E00131DA5 /* NewPostImageCell.swift in Sources */,
 				D445A17E2C84BBA8003CEEBF /* MyWineRequestViewController.swift in Sources */,
@@ -847,6 +874,7 @@
 				D404A54F2C7204B6005C3C6E /* NewPostViewController.swift in Sources */,
 				D404A4F12C6DB762005C3C6E /* PostImageResponse.swift in Sources */,
 				D404A5372C708686005C3C6E /* ViewController+Ex.swift in Sources */,
+				D42FB9562C8BD55C002BA635 /* AccountNetworkManager.swift in Sources */,
 				D404A4EF2C6DA9D9005C3C6E /* WithdrawResponse.swift in Sources */,
 				D45976792C82C8D000077BC7 /* WineListManager.swift in Sources */,
 				D404A4F92C6DFB99005C3C6E /* EditPostResponse.swift in Sources */,
