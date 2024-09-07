@@ -48,7 +48,7 @@ final class CommentsViewController: BaseViewController {
     }
     
     var commentsBottomConstraint: Constraint?
-    var emptyBottomConstraint: Constraint?
+//    var emptyBottomConstraint: Constraint?
     
     init(postID: String) {
         self.postID = postID
@@ -95,7 +95,7 @@ final class CommentsViewController: BaseViewController {
 extension CommentsViewController {
     
     func getComments(postID: String) {
-        NetworkManager.shared.getSomePost(postID: postID) { [weak self] post in
+        PostNetworkManager.shared.getSomePost(postID: postID) { [weak self] post in
             self?.list = post.comments
         }
     }
@@ -105,7 +105,7 @@ extension CommentsViewController {
         guard !comment.isEmpty else { return }
         
         let commentBody = CommentBody(content: comment)
-        NetworkManager.shared.writeComment(postID: postID, body: commentBody) { response in
+        CommentsNetworkManager.shared.writeComment(postID: postID, body: commentBody) { response in
             print(response)
             self.commentField.textField.text = ""
             self.getComments(postID: self.postID)
@@ -126,7 +126,7 @@ extension CommentsViewController: UITextFieldDelegate {
         guard !comment.isEmpty else { return false }
         
         let commentBody = CommentBody(content: comment)
-        NetworkManager.shared.writeComment(postID: postID, body: commentBody) { response in
+        CommentsNetworkManager.shared.writeComment(postID: postID, body: commentBody) { response in
             self.commentField.textField.text = ""
             self.getComments(postID: self.postID)
         }

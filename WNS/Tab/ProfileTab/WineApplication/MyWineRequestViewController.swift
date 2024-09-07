@@ -53,7 +53,7 @@ extension MyWineRequestViewController: UITableViewDelegate, UITableViewDataSourc
         let request = requestList[indexPath.row]
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, success in
             self?.requestList.remove(at: indexPath.row)
-            NetworkManager.shared.deletePost(postID: request.postID) {
+            PostNetworkManager.shared.deletePost(postID: request.postID) {
                 success(true)
             }
         }
@@ -68,7 +68,7 @@ extension MyWineRequestViewController {
     
     private func getMyRequest() {
         let query = GetAllPostQuery(next: "", limit: "100", productID: ProductID.forWineRequest.rawValue)
-        NetworkManager.shared.getUserPosts(userID: AccountManager.shared.userID, query: query) { [weak self] response in
+        PostNetworkManager.shared.getUserPosts(userID: AccountManager.shared.userID, query: query) { [weak self] response in
             guard let self else { return }
             self.requestList = response.data
         }

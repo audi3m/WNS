@@ -52,7 +52,7 @@ extension MyInquiryViewController: UITableViewDelegate, UITableViewDataSource {
         let inquiry = inquiryList[indexPath.row]
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, success in
             self?.inquiryList.remove(at: indexPath.row)
-            NetworkManager.shared.deletePost(postID: inquiry.postID) {
+            PostNetworkManager.shared.deletePost(postID: inquiry.postID) {
                 success(true)
             }
         }
@@ -67,7 +67,7 @@ extension MyInquiryViewController {
     
     private func getMyInquiry() {
         let query = GetAllPostQuery(next: "", limit: "100", productID: ProductID.forInquiry.rawValue)
-        NetworkManager.shared.getUserPosts(userID: AccountManager.shared.userID, query: query) { [weak self] response in
+        PostNetworkManager.shared.getUserPosts(userID: AccountManager.shared.userID, query: query) { [weak self] response in
             guard let self else { return }
             self.inquiryList = response.data
         }

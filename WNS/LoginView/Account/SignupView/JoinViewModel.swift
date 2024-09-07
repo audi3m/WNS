@@ -125,7 +125,7 @@ extension JoinViewModel {
     private func checkDuplication(email: String) -> Observable<Bool> {
         return Observable.create { observer in
             let body = EmailDuplicationCheckBody(email: email)
-            NetworkManager.shared.emailDuplicateCheck(body: body) { response in
+            AccountNetworkManager.shared.emailDuplicateCheck(body: body) { response in
                 observer.onNext(true)
                 observer.onCompleted()
             } onResponseError: { message in

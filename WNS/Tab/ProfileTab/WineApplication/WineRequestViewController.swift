@@ -78,7 +78,7 @@ extension WineRequestViewController {
                             content4: regionField.textField.text,
                             content5: wineryField.textField.text,
                             product_id: ProductID.forWineRequest.rawValue)
-        NetworkManager.shared.writePost(body: body) { post in
+        PostNetworkManager.shared.writePost(body: body) { post in
             self.showAlert(title: "", message: "제출되었습니다", ok: "확인") {
                 dump(post)
                 self.dismissView()

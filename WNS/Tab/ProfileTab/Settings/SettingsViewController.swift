@@ -131,7 +131,7 @@ extension SettingsViewController {
         print(#function)
         showAlertWithChoice(title: "회원탈퇴", message: "정말로 탈퇴하시겠습니까?", ok: "확인") {
             self.showAlertForReal(title: "회원탈퇴", message: "탈퇴하면 모든 정보가 사라집니다", ok: "확인") {
-                NetworkManager.shared.withdraw { response in
+                AccountNetworkManager.shared.withdraw { response in
                     self.showAlert(title: "", message: "탈퇴되었습니다", ok: "확인") {
                         self.resetRootViewController(root: LoginViewController(), withNav: true)
                     }

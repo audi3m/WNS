@@ -54,7 +54,7 @@ final class AccountManager {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "access")
-            print("액세스 토큰 재설정")
+            print("액세스 토큰 재설정 - \(Date.now.formatted())")
         }
     }
     
@@ -74,7 +74,6 @@ final class AccountManager {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "userID")
-            print("userID")
         }
     }
     
@@ -84,7 +83,26 @@ final class AccountManager {
     
 }
 
+//AccountManager.shared.email = body.email
+//AccountManager.shared.password = body.password
+//AccountManager.shared.nickname = response.nick
+//AccountManager.shared.profile = response.profileImage
+//AccountManager.shared.access = response.accessToken
+//AccountManager.shared.refresh = response.refreshToken
+//AccountManager.shared.userID = response.userID
+
 extension AccountManager {
+    
+    func setWtihResponse(body: LoginBody, response: LoginResponse) {
+        email = body.email
+        password = body.password
+        nickname = response.nick
+        profile = response.profileImage
+        access = response.accessToken
+        refresh = response.refreshToken
+        userID = response.userID
+    }
+    
     func resetAccount() {
         access = ""
         refresh = ""
@@ -93,7 +111,7 @@ extension AccountManager {
     
     func login(handler: @escaping ((LoginResponse) -> Void)) {
         let body = LoginBody(email: email, password: password)
-        NetworkManager.shared.login(body: body) { response in
+        AccountNetworkManager.shared.login(body: body) { response in
             handler(response)
         } onResponseError: { message in
             print(message)

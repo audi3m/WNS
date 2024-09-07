@@ -66,7 +66,7 @@ extension InquiryViewController {
         let body = PostBody(content1: titleField.textField.text,
                             content2: contentsField.textView.text,
                             product_id: ProductID.forInquiry.rawValue)
-        NetworkManager.shared.writePost(body: body) { post in
+        PostNetworkManager.shared.writePost(body: body) { post in
             dump(post)
             self.showAlert(title: "", message: "제출되었습니다", ok: "확인") {
                 self.navigationController?.popViewController(animated: true)

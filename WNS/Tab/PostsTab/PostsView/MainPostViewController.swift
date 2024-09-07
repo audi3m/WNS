@@ -15,6 +15,7 @@ final class MainPostViewController: BaseViewController {
     
     lazy var tableView: UITableView = {
         let view = UITableView()
+        view.backgroundColor = .systemGray6
         view.separatorStyle = .none
         view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         view.delegate = self
@@ -104,14 +105,20 @@ extension MainPostViewController {
     }
     
     @objc private func refreshToken() {
-        NetworkManager.shared.refreshAccessToken {
+        AccountNetworkManager.shared.refreshAccessToken {
             self.view.makeToast("Refresh Success", position: .top)
+        } onFail: { message in
+            print(message)
         }
+    }
+    
+    @objc private func wrongToken() {
+        AccountManager.shared.access = "hi"
     }
     
     private func callPosts(next: String = "") {
         let getAllPostsQuery = GetAllPostQuery(next: next, limit: "5", productID: ProductID.forUsers.rawValue)
-        NetworkManager.shared.getAllPosts(query: getAllPostsQuery) { [weak self] response in
+        PostNetworkManager.shared.getAllPosts(query: getAllPostsQuery) { [weak self] response in
             DispatchQueue.main.async {
                 if next.isEmpty {
                     self?.list = response.data
@@ -128,10 +135,10 @@ extension MainPostViewController {
     
     @objc private func login() {
         let login = LoginBody(email: "admin@admin.admin", password: "adminadmin")
-        NetworkManager.shared.login(body: login) { [weak self] response in
+        AccountNetworkManager.shared.login(body: login) { [weak self] response in
             guard let self else { return }
-            callPosts()
             self.view.makeToast("Login Success", position: .top)
+            callPosts()
         } onResponseError: { [weak self] message in
             guard let self else { return }
             self.showAlert(title: "", message: message, ok: "확인") { }
@@ -152,9 +159,11 @@ extension MainPostViewController {
         navigationItem.title = "게시물"
         
         let login = UIBarButtonItem(image: ButtonImage.navLogin, style: .plain, target: self, action: #selector(login))
-        let refreshToken = UIBarButtonItem(image: ButtonImage.navRefresh, style: .plain, target: self, action: #selector(refreshToken))
+        let wrongToken = UIBarButtonItem(image: ButtonImage.navRefresh, style: .plain, target: self, action: #selector(wrongToken))
+        let callPost = UIBarButtonItem(title: "불러오기", style: .plain, target: self, action: #selector(callPostssss))
         
-//        navigationItem.leftBarButtonItems = [login, refreshToken]
+        navigationItem.leftBarButtonItems = [login, wrongToken]
+        navigationItem.rightBarButtonItem = callPost
 
     }
     
@@ -164,6 +173,10 @@ extension MainPostViewController {
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    @objc func callPostssss() {
+        callPosts()
     }
 }
 

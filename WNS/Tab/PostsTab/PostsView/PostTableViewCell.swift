@@ -42,7 +42,7 @@ final class PostTableViewCell: UITableViewCell {
     }()
     let labelBackground: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .systemBackground
         view.layer.cornerRadius = DesignSize.fieldCornerRadius
         view.layer.masksToBounds = true
         return view
@@ -106,8 +106,7 @@ final class PostTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+     
 }
 
 // Tap Functions
@@ -119,7 +118,7 @@ extension PostTableViewCell {
         guard let postData else { return }
         let body = LikeBody(like_status: like)
         
-        NetworkManager.shared.like(postID: postData.postID, body: body) { response in
+        LikeNetworkManager.shared.like(postID: postData.postID, body: body) { response in
             DispatchQueue.main.async {
                 let like = response.likeStatus
                 self.setLikeButton(like: like)
@@ -198,12 +197,6 @@ extension PostTableViewCell {
             make.edges.equalToSuperview()
         }
         
-        // Test
-//        imageView1.snp.makeConstraints { make in
-//            make.top.horizontalEdges.equalToSuperview()
-//            make.height.equalTo(180)
-//        }
-        
     }
     
     private func configureImages2(post: Post) {
@@ -213,27 +206,13 @@ extension PostTableViewCell {
         imageView1.setImageWithURL(with: post.files[0])
         imageView2.setImageWithURL(with: post.files[1])
         
-//        imageView1.snp.makeConstraints { make in
-//            make.verticalEdges.leading.equalToSuperview()
-//            make.width.equalToSuperview().dividedBy(2)
-//        }
-//        imageView2.snp.makeConstraints { make in
-//            make.verticalEdges.trailing.equalToSuperview()
-//            make.leading.equalTo(imageView1.snp.trailing).offset(3)
-//        }
-        
-        // Test
         imageView1.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.verticalEdges.leading.equalToSuperview()
             make.width.equalToSuperview().dividedBy(2)
-            make.height.equalTo(180)
         }
         imageView2.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalTo(imageView1.snp.trailing).offset(2)
-            make.trailing.equalToSuperview()
-            make.height.equalTo(180)
+            make.verticalEdges.trailing.equalToSuperview()
+            make.leading.equalTo(imageView1.snp.trailing).offset(3)
         }
          
     }
@@ -248,39 +227,19 @@ extension PostTableViewCell {
         imageView2.setImageWithURL(with: post.files[1])
         imageView3.setImageWithURL(with: post.files[2])
         
-//        imageView1.snp.makeConstraints { make in
-//            make.verticalEdges.leading.equalToSuperview()
-//            make.width.equalToSuperview().dividedBy(2)
-//        }
-//        imageView2.snp.makeConstraints { make in
-//            make.top.trailing.equalToSuperview()
-//            make.leading.equalTo(imageView1.snp.trailing).offset(3)
-//            make.height.equalToSuperview().dividedBy(2)
-//        }
-//        imageView3.snp.makeConstraints { make in
-//            make.top.equalTo(imageView2.snp.bottom).offset(3)
-//            make.leading.equalTo(imageView1.snp.trailing).offset(3)
-//            make.trailing.bottom.equalToSuperview()
-//        }
-        
-        //Test
         imageView1.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.verticalEdges.leading.equalToSuperview()
             make.width.equalToSuperview().dividedBy(2)
-            make.height.equalTo(180)
         }
         imageView2.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalTo(imageView1.snp.trailing).offset(2)
-            make.trailing.equalToSuperview()
-            make.height.equalTo(90)
+            make.top.trailing.equalToSuperview()
+            make.leading.equalTo(imageView1.snp.trailing).offset(3)
+            make.height.equalToSuperview().dividedBy(2)
         }
         imageView3.snp.makeConstraints { make in
-            make.top.equalTo(imageView2.snp.bottom).offset(2)
-            make.leading.equalTo(imageView1.snp.trailing).offset(2)
-            make.trailing.equalToSuperview()
-            make.bottom.equalTo(imageView1.snp.bottom)
+            make.top.equalTo(imageView2.snp.bottom).offset(3)
+            make.leading.equalTo(imageView1.snp.trailing).offset(3)
+            make.trailing.bottom.equalToSuperview()
         }
         
     }
@@ -296,50 +255,24 @@ extension PostTableViewCell {
         imageView2.setImageWithURL(with: post.files[1])
         imageView3.setImageWithURL(with: post.files[2])
         
-//        imageView1.snp.makeConstraints { make in
-//            make.verticalEdges.leading.equalToSuperview()
-//            make.width.equalToSuperview().dividedBy(2)
-//        }
-//        imageView2.snp.makeConstraints { make in
-//            make.top.trailing.equalToSuperview()
-//            make.leading.equalTo(imageView1.snp.trailing).offset(3)
-//            make.height.equalToSuperview().dividedBy(2)
-//        }
-//        imageView3.snp.makeConstraints { make in
-//            make.top.equalTo(imageView2.snp.bottom).offset(3)
-//            make.leading.equalTo(imageView1.snp.trailing).offset(3)
-//            make.trailing.bottom.equalToSuperview()
-//        }
-//        moreView.snp.makeConstraints { make in
-//            make.top.equalTo(imageView2.snp.bottom).offset(3)
-//            make.leading.equalTo(imageView1.snp.trailing).offset(3)
-//            make.trailing.bottom.equalToSuperview()
-//        }
-        
-        //Test
         imageView1.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.verticalEdges.leading.equalToSuperview()
             make.width.equalToSuperview().dividedBy(2)
-            make.height.equalTo(180)
         }
         imageView2.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalTo(imageView1.snp.trailing).offset(2)
-            make.trailing.equalToSuperview()
-            make.height.equalTo(90)
+            make.top.trailing.equalToSuperview()
+            make.leading.equalTo(imageView1.snp.trailing).offset(3)
+            make.height.equalToSuperview().dividedBy(2)
         }
         imageView3.snp.makeConstraints { make in
-            make.top.equalTo(imageView2.snp.bottom).offset(2)
-            make.leading.equalTo(imageView1.snp.trailing).offset(2)
-            make.trailing.equalToSuperview()
-            make.bottom.equalTo(imageView1.snp.bottom)
+            make.top.equalTo(imageView2.snp.bottom).offset(3)
+            make.leading.equalTo(imageView1.snp.trailing).offset(3)
+            make.trailing.bottom.equalToSuperview()
         }
         moreView.snp.makeConstraints { make in
-            make.top.equalTo(imageView2.snp.bottom).offset(2)
-            make.leading.equalTo(imageView1.snp.trailing).offset(2)
-            make.trailing.equalToSuperview()
-            make.bottom.equalTo(imageView1.snp.bottom)
+            make.top.equalTo(imageView2.snp.bottom).offset(3)
+            make.leading.equalTo(imageView1.snp.trailing).offset(3)
+            make.trailing.bottom.equalToSuperview()
         }
         
         moreView.text = "+ \(count-2)"
@@ -393,7 +326,8 @@ extension PostTableViewCell {
             make.horizontalEdges.equalToSuperview().inset(12)
             make.bottom.equalToSuperview().offset(-12)
         }
-        imageBackground.backgroundColor = .systemBackground
+        
+        contentView.backgroundColor = .systemGray6
         likeButton.addTarget(self, action: #selector(likePostTapped), for: .touchUpInside)
         commentsButton.addTarget(self, action: #selector(commentsButtonTapped), for: .touchUpInside)
     }

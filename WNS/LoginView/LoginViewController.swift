@@ -96,7 +96,7 @@ extension LoginViewController {
         
         let loginInfo = LoginBody(email: email, password: password)
         
-        NetworkManager.shared.login(body: loginInfo) { [weak self] response in
+        AccountNetworkManager.shared.login(body: loginInfo) { [weak self] response in
             guard let self else { return }
             AccountManager.shared.userID = response.userID
             AccountManager.shared.access = response.accessToken

@@ -135,7 +135,7 @@ extension NewPostViewController {
         AccountManager.shared.login { response in
             self.postButton.isEnabled = false
             print("login success")
-            NetworkManager.shared.postImages(items: self.selectedImages) { [weak self] response in
+            PostNetworkManager.shared.postImages(items: self.selectedImages) { [weak self] response in
                 guard let self else { return }
                 let body = PostBody(title: "",
                                     content: hashtag,
@@ -143,7 +143,7 @@ extension NewPostViewController {
                                     content2: contentsField.textView.text,
                                     product_id: ProductID.forUsers.rawValue,
                                     files: response.files)
-                NetworkManager.shared.writePost(body: body) { [weak self] post in
+                PostNetworkManager.shared.writePost(body: body) { [weak self] post in
                     guard let self else { return }
                     print(post)
                     self.dismissView()

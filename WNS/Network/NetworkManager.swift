@@ -17,10 +17,17 @@ final class NetworkManager {
     static let shared = NetworkManager()
     private init() { }
     
+    func request() {
+        
+    }
+    
 }
 
 // Member
-extension NetworkManager {
+final class AccountNetworkManager {
+    
+    static let shared = AccountNetworkManager()
+    private init() { }
     
     func join(body: JoinBody, handler: @escaping ((JoinResponse) -> Void)) {
         do {
@@ -76,7 +83,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -93,14 +100,7 @@ extension NetworkManager {
                 .responseDecodable(of: LoginResponse.self) { response in
                     switch response.result {
                     case .success(let response):
-                        dump(response)
-                        AccountManager.shared.email = body.email
-                        AccountManager.shared.password = body.password
-                        AccountManager.shared.nickname = response.nick
-                        AccountManager.shared.profile = response.profileImage
-                        AccountManager.shared.access = response.accessToken
-                        AccountManager.shared.refresh = response.refreshToken
-                        AccountManager.shared.userID = response.userID
+                        AccountManager.shared.setWtihResponse(body: body, response: response)
                         handler(response)
                     case .failure(let failure):
                         if let statusCode = response.response?.statusCode {
@@ -124,8 +124,7 @@ extension NetworkManager {
         }
     }
     
-    func refreshAccessToken(handler: @escaping (() -> Void)) {
-        
+    func refreshAccessToken(handler: @escaping (() -> Void), onFail: @escaping ((String) -> Void)) {
         do {
             let request = try Router.refreshAccessToken.asURLRequest()
             AF.request(request)
@@ -140,19 +139,20 @@ extension NetworkManager {
                         if let statusCode = response.response?.statusCode {
                             switch statusCode {
                             case 401:
+                                onFail("인증할 수 없는 액세스/리프레시 토큰입니다")
                                 print("인증할 수 없는 액세스/리프레시 토큰입니다")
                             case 403:
-                                print("Forbidden")
+                                onFail("Forbidden \(#function)")
+                                print("Forbidden \(#function)")
                             case 418:
+                                onFail("리프레시 토큰이 만료되었습니다. 다시 로그인 해주세요")
                                 print("리프레시 토큰이 만료되었습니다. 다시 로그인 해주세요")
-                                // 로그인 화면 전환
-                                
                             default:
                                 print("Failed: \(failure)")
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -180,14 +180,16 @@ extension NetworkManager {
                                 print("액세스 토큰이 만료되었습니다. 다시 로그인 해주세요")
                                 self.refreshAccessToken {
                                     self.withdraw { _ in }
+                                } onFail: { message in
+                                    
                                 }
-
+                                
                             default:
                                 print("Failed: \(failure)")
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -197,12 +199,15 @@ extension NetworkManager {
 }
 
 // Post
-extension NetworkManager {
+final class PostNetworkManager {
+    
+    static let shared = PostNetworkManager()
+    private init() { }
     
     func postImages(items: [ImageItem], handler: @escaping ((PostImageResponse) -> Void)) {
         guard !items.isEmpty else {
             handler(PostImageResponse(files: []))
-            return 
+            return
         }
         let url = APIKey.baseURL + "v1/posts/files"
         let headers: HTTPHeaders = [
@@ -261,7 +266,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -294,7 +299,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -303,12 +308,12 @@ extension NetworkManager {
     
     func getAllPosts(query: GetAllPostQuery, handler: @escaping ((GetAllPostsResponse) -> Void)) {
         do {
-            let request = try Router.getAllPosts(query: query).asURLRequest()
-            AF.request(request)
+            let request = try Router.getAllPosts(query: query).asURLRequest() 
+            AF.request(request, interceptor: TokenInterceptor.shared)
                 .validate(statusCode: 200...299)
                 .responseDecodable(of: GetAllPostsResponse.self) { response in
                     switch response.result {
-                    case .success(let response): 
+                    case .success(let response):
                         handler(response)
                     case .failure(let failure):
                         if let statusCode = response.response?.statusCode {
@@ -316,7 +321,7 @@ extension NetworkManager {
                             case 400:
                                 print("잘못된 요청")
                             case 401:
-                                print("인증할 수 없는 액세스 토큰입니다")
+                                print("인증할 수 없는 액세스 토큰입니다 - getAllPosts")
                             case 403:
                                 print("Forbidden")
                             case 419:
@@ -326,7 +331,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -354,18 +359,13 @@ extension NetworkManager {
                                 print("Forbidden")
                             case 419:
                                 print("액세스 토큰이 만료되었습니다")
-                                self.refreshAccessToken {
-                                    self.getSomePost(postID: postID) { post in
-                                        handler(post)
-                                    }
-                                }
-
+                                
                             default:
                                 print("Failed: \(failure)")
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -402,7 +402,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -437,7 +437,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -470,7 +470,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -480,7 +480,10 @@ extension NetworkManager {
 }
 
 // Comment
-extension NetworkManager {
+final class CommentsNetworkManager {
+    
+    static let shared = CommentsNetworkManager()
+    private init() { }
     
     func writeComment(postID: String, body: CommentBody, handler: @escaping ((WriteCommentResponse) -> Void)) {
         do {
@@ -510,7 +513,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -547,7 +550,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -582,7 +585,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -592,7 +595,10 @@ extension NetworkManager {
 }
 
 // Like
-extension NetworkManager {
+final class LikeNetworkManager {
+    
+    static let shared = LikeNetworkManager()
+    private init() { }
     
     func like(postID: String, body: LikeBody, handler: @escaping ((LikeResponse) -> Void)) {
         do {
@@ -622,7 +628,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -657,7 +663,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -690,7 +696,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -723,7 +729,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -760,7 +766,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -795,7 +801,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -805,7 +811,10 @@ extension NetworkManager {
 }
 
 // Profile
-extension NetworkManager {
+final class ProfileNetworkManager {
+    
+    static let shared = ProfileNetworkManager()
+    private init() { }
     
     func getMyProfile(handler: @escaping ((GetMyProfileResponse) -> Void)) {
         do {
@@ -831,7 +840,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -864,7 +873,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -895,7 +904,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -905,7 +914,10 @@ extension NetworkManager {
 }
 
 // Search
-extension NetworkManager {
+final class SearchNetworkManager {
+    
+    static let shared = SearchNetworkManager()
+    private init() { }
     
     func searchUsers(query: SearchUserQuery, handler: @escaping ((SearchUsersResponse) -> Void)) {
         do {
@@ -933,7 +945,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)
@@ -966,7 +978,7 @@ extension NetworkManager {
                             }
                         }
                     }
-            }
+                }
             
         } catch {
             print(error)

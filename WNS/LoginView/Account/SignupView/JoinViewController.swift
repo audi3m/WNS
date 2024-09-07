@@ -104,7 +104,7 @@ extension JoinViewController {
                                 birthDay: birthdayField.textField.text ?? "",
                                 phoneNum: "")
         
-        NetworkManager.shared.join(body: joinBody) { response in 
+        AccountNetworkManager.shared.join(body: joinBody) { response in
             
         }
     }
@@ -112,7 +112,7 @@ extension JoinViewController {
     @objc private func emailDuplicationCheck() {
         guard let email = emailField.textField.text else { return }
         let body = EmailDuplicationCheckBody(email: email)
-        NetworkManager.shared.emailDuplicateCheck(body: body) { [weak self] response in
+        AccountNetworkManager.shared.emailDuplicateCheck(body: body) { [weak self] response in
             guard let self else { return }
             DispatchQueue.main.async {
                 

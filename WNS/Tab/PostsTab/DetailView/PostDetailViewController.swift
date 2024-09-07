@@ -80,7 +80,7 @@ extension PostDetailViewController {
 extension PostDetailViewController {
     
     private func callPosts() {
-        NetworkManager.shared.getSomePost(postID: postID) { [weak self] post in
+        PostNetworkManager.shared.getSomePost(postID: postID) { [weak self] post in
             guard let self else { return }
             self.configureNavBar(post: post)
             self.configureData(post: post)
@@ -102,7 +102,7 @@ extension PostDetailViewController {
         setLikeButton(like: like)
         let body = LikeBody(like_status: like)
         
-        NetworkManager.shared.like(postID: postID, body: body) { response in
+        LikeNetworkManager.shared.like(postID: postID, body: body) { response in
             DispatchQueue.main.async {
                 let like = response.likeStatus
                 self.setLikeButton(like: like)

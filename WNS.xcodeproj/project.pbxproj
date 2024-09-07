@@ -64,7 +64,7 @@
 		D41E73142C7F08E500097F90 /* OutlineField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73132C7F08E500097F90 /* OutlineField.swift */; };
 		D41E73162C7F35DB00097F90 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73152C7F35DB00097F90 /* DateManager.swift */; };
 		D41E731A2C7F8D5F00097F90 /* OutlineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41E73192C7F8D5F00097F90 /* OutlineButton.swift */; };
-		D43A68B52C8709CE00ACD6B9 /* RequestInterCeptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A68B42C8709CE00ACD6B9 /* RequestInterCeptor.swift */; };
+		D43A68B52C8709CE00ACD6B9 /* TokenInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A68B42C8709CE00ACD6B9 /* TokenInterceptor.swift */; };
 		D445A17A2C849DA7003CEEBF /* WineSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445A1792C849DA7003CEEBF /* WineSectionView.swift */; };
 		D445A17C2C84A9D3003CEEBF /* PostSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445A17B2C84A9D3003CEEBF /* PostSectionView.swift */; };
 		D445A17E2C84BBA8003CEEBF /* MyWineRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445A17D2C84BBA8003CEEBF /* MyWineRequestViewController.swift */; };
@@ -192,7 +192,7 @@
 		D41E73132C7F08E500097F90 /* OutlineField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineField.swift; sourceTree = "<group>"; };
 		D41E73152C7F35DB00097F90 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		D41E73192C7F8D5F00097F90 /* OutlineButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineButton.swift; sourceTree = "<group>"; };
-		D43A68B42C8709CE00ACD6B9 /* RequestInterCeptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterCeptor.swift; sourceTree = "<group>"; };
+		D43A68B42C8709CE00ACD6B9 /* TokenInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInterceptor.swift; sourceTree = "<group>"; };
 		D445A1792C849DA7003CEEBF /* WineSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineSectionView.swift; sourceTree = "<group>"; };
 		D445A17B2C84A9D3003CEEBF /* PostSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSectionView.swift; sourceTree = "<group>"; };
 		D445A17D2C84BBA8003CEEBF /* MyWineRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWineRequestViewController.swift; sourceTree = "<group>"; };
@@ -584,7 +584,7 @@
 				D467D4372C6C8070000C3993 /* APIKey.swift */,
 				D467D4542C6CDDAD000C3993 /* Router.swift */,
 				D467D4482C6C8738000C3993 /* TargetType.swift */,
-				D43A68B42C8709CE00ACD6B9 /* RequestInterCeptor.swift */,
+				D43A68B42C8709CE00ACD6B9 /* TokenInterceptor.swift */,
 				D404A5252C6F7CF7005C3C6E /* QueryString */,
 				D467D4562C6CDFE8000C3993 /* RequestBody */,
 				D404A4E52C6DA0D6005C3C6E /* Response */,
@@ -778,7 +778,7 @@
 				D404A55A2C721108005C3C6E /* FollowsListView.swift in Sources */,
 				D404A4E22C6D84FC005C3C6E /* LikeBody.swift in Sources */,
 				D404A5582C721063005C3C6E /* FollowsViewModel.swift in Sources */,
-				D43A68B52C8709CE00ACD6B9 /* RequestInterCeptor.swift in Sources */,
+				D43A68B52C8709CE00ACD6B9 /* TokenInterceptor.swift in Sources */,
 				D41E73052C7D8AC300097F90 /* SelectionView.swift in Sources */,
 				D404A5462C71B5BC005C3C6E /* CommentsViewController.swift in Sources */,
 				D404A5292C6F7DAD005C3C6E /* GetLikePostQuery.swift in Sources */,
