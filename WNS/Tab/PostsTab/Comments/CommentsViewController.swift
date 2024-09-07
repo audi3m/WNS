@@ -95,8 +95,14 @@ final class CommentsViewController: BaseViewController {
 extension CommentsViewController {
     
     func getComments(postID: String) {
-        PostNetworkManager.shared.getSomePost(postID: postID) { [weak self] post in
-            self?.list = post.comments
+        PostNetworkManager.shared.getSomePost(postID: postID) { [weak self] response in
+            guard let self else { return }
+            switch response {
+            case .success(let success):
+                self.list = success.comments
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
         }
     }
     
@@ -105,10 +111,16 @@ extension CommentsViewController {
         guard !comment.isEmpty else { return }
         
         let commentBody = CommentBody(content: comment)
-        CommentsNetworkManager.shared.writeComment(postID: postID, body: commentBody) { response in
-            print(response)
-            self.commentField.textField.text = ""
-            self.getComments(postID: self.postID)
+        CommentsNetworkManager.shared.writeComment(postID: postID, body: commentBody) { [weak self] response in
+            guard let self else { return }
+            switch response {
+            case .success(let success):
+                self.commentField.textField.text = ""
+                self.getComments(postID: self.postID)
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+            
         }
         view.endEditing(true)
     }

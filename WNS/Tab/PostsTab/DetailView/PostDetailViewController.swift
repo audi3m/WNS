@@ -80,13 +80,19 @@ extension PostDetailViewController {
 extension PostDetailViewController {
     
     private func callPosts() {
-        PostNetworkManager.shared.getSomePost(postID: postID) { [weak self] post in
+        PostNetworkManager.shared.getSomePost(postID: postID) { [weak self] response in
             guard let self else { return }
-            self.configureNavBar(post: post)
-            self.configureData(post: post)
-            self.pageControl.numberOfPages = post.files.count
-            self.postSection.setData(post: post)
-            self.configureWine(wineInJSON: post.content1)
+            switch response {
+            case .success(let post):
+                self.configureNavBar(post: post)
+                self.configureData(post: post)
+                self.pageControl.numberOfPages = post.files.count
+                self.postSection.setData(post: post)
+                self.configureWine(wineInJSON: post.content1)
+            case .failure(let failure):
+                print(failure)
+            }
+            
         }
     }
     
@@ -103,9 +109,14 @@ extension PostDetailViewController {
         let body = LikeBody(like_status: like)
         
         LikeNetworkManager.shared.like(postID: postID, body: body) { response in
-            DispatchQueue.main.async {
-                let like = response.likeStatus
-                self.setLikeButton(like: like)
+            switch response {
+            case .success(let success):
+                DispatchQueue.main.async {
+                    let like = success.likeStatus
+                    self.setLikeButton(like: like)
+                }
+            case .failure(let failure):
+                print(failure)
             }
         }
     }

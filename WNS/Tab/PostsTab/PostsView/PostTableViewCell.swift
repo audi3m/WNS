@@ -118,11 +118,17 @@ extension PostTableViewCell {
         guard let postData else { return }
         let body = LikeBody(like_status: like)
         
-        LikeNetworkManager.shared.like(postID: postData.postID, body: body) { response in
-            DispatchQueue.main.async {
-                let like = response.likeStatus
-                self.setLikeButton(like: like)
-            }
+        LikeNetworkManager.shared.like(postID: postData.postID, body: body) { [weak self] response in
+            guard let self else { return }
+            switch response {
+            case .success(let success):
+                DispatchQueue.main.async {
+                    let like = success.likeStatus
+                    self.setLikeButton(like: like)
+                }
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            } 
         }
     }
     

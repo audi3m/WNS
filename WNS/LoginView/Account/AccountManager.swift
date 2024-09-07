@@ -83,14 +83,6 @@ final class AccountManager {
     
 }
 
-//AccountManager.shared.email = body.email
-//AccountManager.shared.password = body.password
-//AccountManager.shared.nickname = response.nick
-//AccountManager.shared.profile = response.profileImage
-//AccountManager.shared.access = response.accessToken
-//AccountManager.shared.refresh = response.refreshToken
-//AccountManager.shared.userID = response.userID
-
 extension AccountManager {
     
     func setWtihResponse(body: LoginBody, response: LoginResponse) {
@@ -109,13 +101,19 @@ extension AccountManager {
         userID = ""
     }
     
-    func login(handler: @escaping ((LoginResponse) -> Void)) {
-        let body = LoginBody(email: email, password: password)
-        AccountNetworkManager.shared.login(body: body) { response in
-            handler(response)
-        } onResponseError: { message in
-            print(message)
-        }
-
-    }
+//    func login(handler: @escaping ((LoginResponse) -> Void)) {
+//        let body = LoginBody(email: email, password: password)
+//        AccountNetworkManager.shared.login(body: body) { response in
+//            switch response {
+//            case .success(let success):
+//                <#code#>
+//            case .failure(let failure):
+//                <#code#>
+//            }
+//            handler(response)
+//        } onResponseError: { message in
+//            print(message)
+//        }
+//
+//    }
 }

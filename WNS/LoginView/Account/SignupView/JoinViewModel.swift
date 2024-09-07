@@ -126,10 +126,13 @@ extension JoinViewModel {
         return Observable.create { observer in
             let body = EmailDuplicationCheckBody(email: email)
             AccountNetworkManager.shared.emailDuplicateCheck(body: body) { response in
-                observer.onNext(true)
-                observer.onCompleted()
-            } onResponseError: { message in
-                observer.onError(DupError.duplicated(message: message))
+                switch response {
+                case .success(let success):
+                    observer.onNext(true)
+                    observer.onCompleted()
+                case .failure(let failure):
+                    observer.onError(DupError.duplicated(message: failure.localizedDescription))
+                }
             }
             return Disposables.create()
         }

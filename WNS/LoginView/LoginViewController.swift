@@ -98,15 +98,17 @@ extension LoginViewController {
         
         AccountNetworkManager.shared.login(body: loginInfo) { [weak self] response in
             guard let self else { return }
-            AccountManager.shared.userID = response.userID
-            AccountManager.shared.access = response.accessToken
-            AccountManager.shared.refresh = response.refreshToken
-            
-            let vc = WineTabController()
-            self.resetRootViewController(root: vc, withNav: false)
-        } onResponseError: { [weak self] message in
-            guard let self else { return }
-            self.showAlert(title: "", message: message, ok: "확인") { }
+            switch response {
+            case .success(let success):
+                AccountManager.shared.userID = success.userID
+                AccountManager.shared.access = success.accessToken
+                AccountManager.shared.refresh = success.refreshToken
+                
+                let vc = WineTabController()
+                self.resetRootViewController(root: vc, withNav: false)
+            case .failure(let failure):
+                self.showAlert(title: "", message: failure.localizedDescription, ok: "확인") { }
+            }
         }
         
     }

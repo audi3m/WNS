@@ -132,22 +132,36 @@ extension NewPostViewController {
         guard let wineString = selectedWine.toJsonString() else { return }
         let hashtag = selectedWine.nameForHashtag + " " + hashList
         
-        AccountManager.shared.login { response in
-            self.postButton.isEnabled = false
-            print("login success")
-            PostNetworkManager.shared.postImages(items: self.selectedImages) { [weak self] response in
-                guard let self else { return }
-                let body = PostBody(title: "",
-                                    content: hashtag,
-                                    content1: wineString,
-                                    content2: contentsField.textView.text,
-                                    product_id: ProductID.forUsers.rawValue,
-                                    files: response.files)
-                PostNetworkManager.shared.writePost(body: body) { [weak self] post in
+        let body = LoginBody(email: AccountManager.shared.email, password: AccountManager.shared.password)
+        AccountNetworkManager.shared.login(body: body) { [weak self] response in
+            guard let self else { return }
+            switch response {
+            case .success(let success):
+                self.postButton.isEnabled = false
+                print("login success")
+                
+                PostNetworkManager.shared.postImages(items: self.selectedImages) { [weak self] response in
                     guard let self else { return }
-                    print(post)
-                    self.dismissView()
+                    switch response {
+                    case .success(let success):
+                        let body = PostBody(title: "",
+                                            content: hashtag,
+                                            content1: wineString,
+                                            content2: self.contentsField.textView.text,
+                                            product_id: ProductID.forUsers.rawValue,
+                                            files: success.files)
+                        // 게시글 작성 요청
+                        PostNetworkManager.shared.writePost(body: body) { [weak self] post in
+                            guard let self else { return }
+                            print(post)
+                            self.dismissView()
+                        }
+                    case .failure(let failure):
+                        print(failure.localizedDescription)
+                    }
                 }
+            case .failure(let failure):
+                print(failure.localizedDescription)
             }
         }
     }

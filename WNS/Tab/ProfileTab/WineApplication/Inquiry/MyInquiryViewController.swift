@@ -52,8 +52,15 @@ extension MyInquiryViewController: UITableViewDelegate, UITableViewDataSource {
         let inquiry = inquiryList[indexPath.row]
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, success in
             self?.inquiryList.remove(at: indexPath.row)
-            PostNetworkManager.shared.deletePost(postID: inquiry.postID) {
-                success(true)
+            PostNetworkManager.shared.deletePost(postID: inquiry.postID) { [weak self] response in
+                guard let self else { return }
+                switch response {
+                case .success:
+                    success(true)
+                case .failure(let failure):
+                    print(failure.localizedDescription)
+                }
+                
             }
         }
         deleteAction.image = UIImage(systemName: "trash")
@@ -69,7 +76,13 @@ extension MyInquiryViewController {
         let query = GetAllPostQuery(next: "", limit: "100", productID: ProductID.forInquiry.rawValue)
         PostNetworkManager.shared.getUserPosts(userID: AccountManager.shared.userID, query: query) { [weak self] response in
             guard let self else { return }
-            self.inquiryList = response.data
+            switch response {
+            case .success(let success):
+                self.inquiryList = success.data
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+            
         }
     }
     

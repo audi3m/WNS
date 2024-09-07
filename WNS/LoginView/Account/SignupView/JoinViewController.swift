@@ -114,12 +114,14 @@ extension JoinViewController {
         let body = EmailDuplicationCheckBody(email: email)
         AccountNetworkManager.shared.emailDuplicateCheck(body: body) { [weak self] response in
             guard let self else { return }
-            DispatchQueue.main.async {
-                
+            switch response {
+            case .success(let success):
+                DispatchQueue.main.async {
+                    print(success)
+                }
+            case .failure(let failure):
+                self.showAlert(title: "", message: failure.localizedDescription, ok: "확인") { }
             }
-        } onResponseError: { [weak self] message in
-            guard let self else { return }
-            self.showAlert(title: "", message: message, ok: "확인") { }
         }
     }
 }

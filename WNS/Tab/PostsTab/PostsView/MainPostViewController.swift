@@ -104,14 +104,6 @@ extension MainPostViewController {
         present(nav, animated: true, completion: nil)
     }
     
-    @objc private func refreshToken() {
-        AccountNetworkManager.shared.refreshAccessToken {
-            self.view.makeToast("Refresh Success", position: .top)
-        } onFail: { message in
-            print(message)
-        }
-    }
-    
     @objc private func wrongToken() {
         AccountManager.shared.access = "hi"
     }
@@ -119,17 +111,23 @@ extension MainPostViewController {
     private func callPosts(next: String = "") {
         let getAllPostsQuery = GetAllPostQuery(next: next, limit: "5", productID: ProductID.forUsers.rawValue)
         PostNetworkManager.shared.getAllPosts(query: getAllPostsQuery) { [weak self] response in
-            DispatchQueue.main.async {
-                if next.isEmpty {
-                    self?.list = response.data
-                    self?.tableView.reloadData()
-                    self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                } else {
-                    self?.list.append(contentsOf: response.data)
-                    self?.tableView.reloadData()
+            guard let self else { return }
+            switch response {
+            case .success(let success):
+                DispatchQueue.main.async {
+                    if next.isEmpty {
+                        self.list = success.data
+                        self.tableView.reloadData()
+                        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                    } else {
+                        self.list.append(contentsOf: success.data)
+                        self.tableView.reloadData()
+                    }
                 }
+                self.nextCursor = success.nextCursor
+            case .failure(let failure):
+                print(failure.localizedDescription)
             }
-            self?.nextCursor = response.nextCursor
         }
     }
     
@@ -137,11 +135,13 @@ extension MainPostViewController {
         let login = LoginBody(email: "admin@admin.admin", password: "adminadmin")
         AccountNetworkManager.shared.login(body: login) { [weak self] response in
             guard let self else { return }
-            self.view.makeToast("Login Success", position: .top)
-            callPosts()
-        } onResponseError: { [weak self] message in
-            guard let self else { return }
-            self.showAlert(title: "", message: message, ok: "확인") { }
+            switch response {
+            case .success(let success):
+                self.view.makeToast("Login Success", position: .top)
+                callPosts()
+            case .failure(let failure):
+                self.showAlert(title: "", message: failure.localizedDescription, ok: "확인") { }
+            }
         }
     }
     

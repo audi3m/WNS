@@ -32,31 +32,24 @@ final class TokenInterceptor: RequestInterceptor {
             if !isRefreshing {
                 isRefreshing = true
                 
-                AccountNetworkManager.shared.refreshAccessToken { [weak self] in
+                AccountNetworkManager.shared.refreshAccessToken { [weak self] response in
                     guard let self else { return }
-                    self.isRefreshing = false
-                    self.requestsToRetry.forEach { $0(.retry) }
-                    self.requestsToRetry.removeAll()
-                    print("토근 갱신 성공")
-                } onFail: { [weak self] errorMessage in
-                    guard let self else { return }
-                    self.isRefreshing = false
-                    self.requestsToRetry.forEach { $0(.doNotRetry) }
-                    self.requestsToRetry.removeAll()
-                    print("토큰 갱신 실패: \(errorMessage)")
+                    switch response {
+                    case .success(let success):
+                        self.isRefreshing = false
+                        self.requestsToRetry.forEach { $0(.retry) }
+                        self.requestsToRetry.removeAll()
+                        print("토근 갱신 성공")
+                    case .failure(let failure):
+                        self.isRefreshing = false
+                        self.requestsToRetry.forEach { $0(.doNotRetry) }
+                        self.requestsToRetry.removeAll()
+                        print("토큰 갱신 실패: \(failure)")
+                    }
                 }
             }
         } else {
             completion(.doNotRetry)
         }
     } 
-    
-    private func refreshAccessToken(completion: @escaping (Bool) -> Void) {
-        AccountNetworkManager.shared.refreshAccessToken {
-            completion(true)
-        } onFail: { message in
-            print(message)
-            completion(false)
-        }
-    }
 }
