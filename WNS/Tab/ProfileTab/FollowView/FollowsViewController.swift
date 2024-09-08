@@ -39,6 +39,7 @@ extension FollowsViewController {
         
         let input = FollowsViewModel.Input()
         let output = viewModel.transform(input: input)
+        print(output)
             
     }
 }

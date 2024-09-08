@@ -42,7 +42,7 @@ final class PostTableViewCell: UITableViewCell {
     }()
     let labelBackground: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemGray6
         view.layer.cornerRadius = DesignSize.fieldCornerRadius
         view.layer.masksToBounds = true
         return view
@@ -332,8 +332,7 @@ extension PostTableViewCell {
             make.horizontalEdges.equalToSuperview().inset(12)
             make.bottom.equalToSuperview().offset(-12)
         }
-        
-        contentView.backgroundColor = .systemGray6
+         
         likeButton.addTarget(self, action: #selector(likePostTapped), for: .touchUpInside)
         commentsButton.addTarget(self, action: #selector(commentsButtonTapped), for: .touchUpInside)
     }

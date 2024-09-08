@@ -66,7 +66,7 @@ final class PostDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        callPosts()
+        callPost()
         rxBind()
     }
 }
@@ -79,7 +79,7 @@ extension PostDetailViewController {
 // Functions
 extension PostDetailViewController {
     
-    private func callPosts() {
+    private func callPost() {
         PostNetworkManager.shared.getSomePost(postID: postID) { [weak self] response in
             guard let self else { return }
             switch response {
@@ -92,7 +92,6 @@ extension PostDetailViewController {
             case .failure(let failure):
                 print(failure)
             }
-            
         }
     }
     

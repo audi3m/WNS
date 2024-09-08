@@ -127,7 +127,7 @@ extension JoinViewModel {
             let body = EmailDuplicationCheckBody(email: email)
             AccountNetworkManager.shared.emailDuplicateCheck(body: body) { response in
                 switch response {
-                case .success(let success):
+                case .success:
                     observer.onNext(true)
                     observer.onCompleted()
                 case .failure(let failure):

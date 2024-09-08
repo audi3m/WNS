@@ -153,6 +153,7 @@ final class PostNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }
@@ -192,6 +193,7 @@ final class PostNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }
@@ -231,6 +233,7 @@ final class PostNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }
@@ -289,7 +292,7 @@ final class PostNetworkManager {
                 .validate(statusCode: 200...299)
                 .response { response in
                     switch response.result {
-                    case .success(let response):
+                    case .success:
                         handler(.success(()))
                     case .failure(let failure):
                         if let statusCode = response.response?.statusCode {
@@ -319,6 +322,7 @@ final class PostNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }
@@ -358,6 +362,7 @@ final class PostNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }

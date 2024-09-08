@@ -34,7 +34,7 @@ struct Wine: Codable, Hashable {
     }
     
     var nameForHashtag: String {
-        "\(HashtagForWineSearch.prefix)" + name.replacingOccurrences(of: " ", with: "")
+        "\(HashtagForWineSearch.prefix)" + name.replacingOccurrences(of: " ", with: "") + " "
     }
     
 }

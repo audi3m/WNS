@@ -114,7 +114,7 @@ extension CommentsViewController {
         CommentsNetworkManager.shared.writeComment(postID: postID, body: commentBody) { [weak self] response in
             guard let self else { return }
             switch response {
-            case .success(let success):
+            case .success:
                 self.commentField.textField.text = ""
                 self.getComments(postID: self.postID)
             case .failure(let failure):

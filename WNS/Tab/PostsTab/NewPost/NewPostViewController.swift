@@ -130,13 +130,13 @@ extension NewPostViewController {
     @objc private func postButtonClicked() {
         guard let selectedWine else { return }
         guard let wineString = selectedWine.toJsonString() else { return }
-        let hashtag = selectedWine.nameForHashtag + " " + hashList
+        let hashtag = selectedWine.nameForHashtag + hashList
         
         let body = LoginBody(email: AccountManager.shared.email, password: AccountManager.shared.password)
         AccountNetworkManager.shared.login(body: body) { [weak self] response in
             guard let self else { return }
             switch response {
-            case .success(let success):
+            case .success:
                 self.postButton.isEnabled = false
                 print("login success")
                 

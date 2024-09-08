@@ -1,34 +1,36 @@
 //
-//  NetworkManager.swift
+//  PaymentManager.swift
 //  WNS
 //
-//  Created by J Oh on 8/15/24.
+//  Created by J Oh on 9/8/24.
 //
 
 import Foundation
 import Alamofire
 
-enum SearchError: Error {
-    case wrongRequest // 400
+enum PaymentsError: Error {
+    case invalidRequest // 400
     case tokenUnavailable // 401
     case forbidden // 403
+    case validatedPayment // 409
+    case postNotFound // 410
     case accessTokenExpired // 419
     case unknown
     case statusCodeError
 }
 
-// Search
-final class SearchNetworkManager {
+// Payments
+final class PaymentManager {
     
-    static let shared = SearchNetworkManager()
+    static let shared = PaymentManager()
     private init() { }
     
-    func searchUsers(query: SearchUserQuery, handler: @escaping (Result<SearchUsersResponse, SearchError>) -> Void) {
+    func checkPayments(body: PaymentsBody, handler: @escaping (Result<PaymentsResponse, PaymentsError>) -> Void) {
         do {
-            let request = try Router.searchUser(query: query).asURLRequest()
+            let request = try Router.payments(body: body).asURLRequest()
             AF.request(request, interceptor: TokenInterceptor.shared)
                 .validate(statusCode: 200...299)
-                .responseDecodable(of: SearchUsersResponse.self) { response in
+                .responseDecodable(of: PaymentsResponse.self) { response in
                     switch response.result {
                     case .success(let response):
                         handler(.success(response))
@@ -36,8 +38,51 @@ final class SearchNetworkManager {
                         if let statusCode = response.response?.statusCode {
                             switch statusCode {
                             case 400:
-                                print("잘못된 요청입니다")
-                                handler(.failure(.wrongRequest))
+                                print("유효하지 않은 결제건입니다/필수값을 채워주세요")
+                                handler(.failure(.invalidRequest))
+                            case 401:
+                                print("인증할 수 없는 액세스/리프레시 토큰입니다")
+                                handler(.failure(.tokenUnavailable))
+                            case 403:
+                                print("Forbidden")
+                                handler(.failure(.forbidden))
+                            case 409:
+                                print("검증처리가 완료된 결제건입니다")
+                                handler(.failure(.validatedPayment))
+                            case 410:
+                                print("게시글을 찾을 수 없습니다")
+                                handler(.failure(.postNotFound))
+                            case 419:
+                                print("액세스 토큰이 만료되었습니다")
+                                handler(.failure(.accessTokenExpired))
+                            default:
+                                print("Failed: \(failure)")
+                                handler(.failure(.unknown))
+                            }
+                        } else {
+                            print("Status Code Error")
+                            handler(.failure(.statusCodeError))
+                        }
+                    }
+                }
+            
+        } catch {
+            print(error)
+        }
+    }
+    
+    func getPaymentsList(body: PaymentsBody, handler: @escaping (Result<PaymentsListResponse, PaymentsError>) -> Void) {
+        do {
+            let request = try Router.paymentsList.asURLRequest()
+            AF.request(request, interceptor: TokenInterceptor.shared)
+                .validate(statusCode: 200...299)
+                .responseDecodable(of: PaymentsListResponse.self) { response in
+                    switch response.result {
+                    case .success(let response):
+                        handler(.success(response))
+                    case .failure(let failure):
+                        if let statusCode = response.response?.statusCode {
+                            switch statusCode {
                             case 401:
                                 print("인증할 수 없는 액세스/리프레시 토큰입니다")
                                 handler(.failure(.tokenUnavailable))
@@ -58,45 +103,6 @@ final class SearchNetworkManager {
                     }
                 }
             
-         } catch {
-            print(error)
-        }
-    }
-    
-    func searchHashtag(query: HashQuery, handler: @escaping (Result<HashtagResponse, SearchError>) -> Void) {
-        do {
-            let request = try Router.searchHash(query: query).asURLRequest()
-            AF.request(request, interceptor: TokenInterceptor.shared)
-                .validate(statusCode: 200...299)
-                .responseDecodable(of: HashtagResponse.self) { response in
-                    switch response.result {
-                    case .success(let response):
-                        handler(.success(response))
-                    case .failure(let failure):
-                        if let statusCode = response.response?.statusCode {
-                            switch statusCode {
-                            case 400:
-                                print("잘못된 요청입니다")
-                                handler(.failure(.wrongRequest))
-                            case 401:
-                                print("인증할 수 없는 액세스/리프레시 토큰입니다")
-                                handler(.failure(.tokenUnavailable))
-                            case 403:
-                                print("Forbidden")
-                                handler(.failure(.forbidden))
-                            case 419:
-                                print("액세스 토큰이 만료되었습니다")
-                                handler(.failure(.accessTokenExpired))
-                            default:
-                                print("Failed: \(failure)")
-                                handler(.failure(.unknown))
-                            }
-                        } else {
-                            print("Status Code Error")
-                            handler(.failure(.statusCodeError))
-                        }
-                    }
-                }
         } catch {
             print(error)
         }

@@ -63,6 +63,7 @@ final class LikeNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }
@@ -105,6 +106,7 @@ final class LikeNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }
@@ -144,6 +146,7 @@ final class LikeNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }
@@ -183,6 +186,7 @@ final class LikeNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }
@@ -228,6 +232,7 @@ final class LikeNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }
@@ -270,6 +275,7 @@ final class LikeNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }

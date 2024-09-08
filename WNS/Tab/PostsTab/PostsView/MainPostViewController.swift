@@ -34,9 +34,7 @@ final class MainPostViewController: BaseViewController {
         configureNavBar()
         configureView()
         login()
-        rxBind()
-        
-        print(AccountManager.shared.profile ?? "")
+        rxBind() 
     }
     
 }
@@ -97,17 +95,6 @@ extension MainPostViewController {
 // Network Functions
 extension MainPostViewController {
     
-    @objc private func writePost() {
-        let vc = NewPostViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true, completion: nil)
-    }
-    
-    @objc private func wrongToken() {
-        AccountManager.shared.access = "hi"
-    }
-    
     private func callPosts(next: String = "") {
         let getAllPostsQuery = GetAllPostQuery(next: next, limit: "5", productID: ProductID.forUsers.rawValue)
         PostNetworkManager.shared.getAllPosts(query: getAllPostsQuery) { [weak self] response in
@@ -136,18 +123,13 @@ extension MainPostViewController {
         AccountNetworkManager.shared.login(body: login) { [weak self] response in
             guard let self else { return }
             switch response {
-            case .success(let success):
+            case .success:
                 self.view.makeToast("Login Success", position: .top)
                 callPosts()
             case .failure(let failure):
                 self.showAlert(title: "", message: failure.localizedDescription, ok: "확인") { }
             }
         }
-    }
-    
-    @objc private func refreshPosts() {
-        nextCursor = ""
-        callPosts()
     }
      
 }
@@ -159,11 +141,10 @@ extension MainPostViewController {
         navigationItem.title = "게시물"
         
         let login = UIBarButtonItem(image: ButtonImage.navLogin, style: .plain, target: self, action: #selector(login))
-        let wrongToken = UIBarButtonItem(image: ButtonImage.navRefresh, style: .plain, target: self, action: #selector(wrongToken))
         let callPost = UIBarButtonItem(title: "불러오기", style: .plain, target: self, action: #selector(callPostssss))
         
-        navigationItem.leftBarButtonItems = [login, wrongToken]
-        navigationItem.rightBarButtonItem = callPost
+        navigationItem.leftBarButtonItems = [login]
+        navigationItem.rightBarButtonItems = [callPost]
 
     }
     

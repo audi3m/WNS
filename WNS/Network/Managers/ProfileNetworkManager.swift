@@ -54,6 +54,7 @@ final class ProfileNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }

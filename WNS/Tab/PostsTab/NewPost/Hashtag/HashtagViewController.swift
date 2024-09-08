@@ -74,11 +74,9 @@ extension HashtagViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let hash = hashField.textField.text else { return false }
         if !hash.isEmpty {
-            
-            let hashView = hashtagListView.addTag("#" + hash)
+            let _ = hashtagListView.addTag("#" + hash)
             hashField.textField.text = ""
-        }
-        
+        } 
         return true
     }
     

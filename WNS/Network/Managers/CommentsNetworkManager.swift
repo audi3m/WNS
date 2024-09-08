@@ -62,6 +62,7 @@ final class CommentsNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }
@@ -107,6 +108,7 @@ final class CommentsNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }
@@ -119,7 +121,7 @@ final class CommentsNetworkManager {
                 .validate(statusCode: 200...299)
                 .response { response in
                     switch response.result {
-                    case .success(let response):
+                    case .success:
                         handler(.success(()))
                     case .failure(let failure):
                         if let statusCode = response.response?.statusCode {
@@ -149,6 +151,7 @@ final class CommentsNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }

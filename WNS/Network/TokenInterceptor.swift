@@ -13,7 +13,7 @@ final class TokenInterceptor: RequestInterceptor {
     static let shared = TokenInterceptor()
     private init() { }
     
-    private let retryLimit = 1
+    private let retryLimit = 3
     private var isRefreshing = false
     private var requestsToRetry: [(RetryResult) -> Void] = []
     
@@ -35,7 +35,7 @@ final class TokenInterceptor: RequestInterceptor {
                 AccountNetworkManager.shared.refreshAccessToken { [weak self] response in
                     guard let self else { return }
                     switch response {
-                    case .success(let success):
+                    case .success:
                         self.isRefreshing = false
                         self.requestsToRetry.forEach { $0(.retry) }
                         self.requestsToRetry.removeAll()
@@ -48,6 +48,7 @@ final class TokenInterceptor: RequestInterceptor {
                     }
                 }
             }
+            
         } else {
             completion(.doNotRetry)
         }

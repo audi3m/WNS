@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import iamport_ios
 
 final class SettingsViewController: BaseViewController {
     
@@ -57,7 +58,7 @@ final class SettingsViewController: BaseViewController {
     
     private let editProfile = OutlineButton(name: "프로필 수정", cornerType: .top)
     private let wineRequest = OutlineButton(name: "와인 추가 신청", cornerType: .middle)
-    private let inquiry = OutlineButton(name: "1:1 문의", cornerType: .bottom)
+    private let donate = OutlineButton(name: "개발자 후원하기", cornerType: .bottom)
     
     private let logoutButton: UIButton = {
         let button = UIButton()
@@ -105,7 +106,7 @@ extension SettingsViewController {
         ThemeManager.shared.applyTheme(.dark)
     }
     
-    @objc private func addWineClicked() {
+    @objc private func requestWineClicked() {
         print("Add wine")
         let vc = MyWineRequestViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -115,9 +116,19 @@ extension SettingsViewController {
         print("Edit")
     }
     
-    @objc private func inquiryClicked() {
-        let vc = MyInquiryViewController()
-        navigationController?.pushViewController(vc, animated: true)
+    @objc private func donateClicked() {
+        let payment = IamportPayment(pg: PG.html5_inicis.makePgRawName(pgId: "INIpayTest"),
+                                     merchant_uid: "ios_\(APIKey.key)_\(Int(Date().timeIntervalSince1970))",
+                                     amount: "1000").then {
+            $0.pay_method = PayMethod.card.rawValue
+            $0.name = "개발자 후원하기"
+            $0.buyer_name = "오종우"
+            $0.app_scheme = "vinote"
+        }
+        
+        let nav = UINavigationController(rootViewController: PaymentsViewController(payment: payment))
+        present(nav, animated: true)
+        
     }
     
     @objc private func logoutClicked() {
@@ -128,7 +139,6 @@ extension SettingsViewController {
     }
     
     @objc private func withdrawClicked() {
-        print(#function)
         showAlertWithChoice(title: "회원탈퇴", message: "정말로 탈퇴하시겠습니까?", ok: "확인") {
             self.showAlertForReal(title: "회원탈퇴", message: "탈퇴하면 모든 정보가 사라집니다", ok: "확인") {
                 AccountNetworkManager.shared.withdraw { response in
@@ -147,8 +157,8 @@ extension SettingsViewController {
     
     private func setButtons() {
         editProfile.button.addTarget(self, action: #selector(editProfileClicked), for: .touchUpInside)
-        wineRequest.button.addTarget(self, action: #selector(addWineClicked), for: .touchUpInside)
-        inquiry.button.addTarget(self, action: #selector(inquiryClicked), for: .touchUpInside)
+        wineRequest.button.addTarget(self, action: #selector(requestWineClicked), for: .touchUpInside)
+        donate.button.addTarget(self, action: #selector(donateClicked), for: .touchUpInside)
         logoutButton.addTarget(self, action: #selector(logoutClicked), for: .touchUpInside)
         withdrawButton.addTarget(self, action: #selector(withdrawClicked), for: .touchUpInside)
     }
@@ -175,7 +185,7 @@ extension SettingsViewController {
         
         contentView.addSubview(wineRequest)
         contentView.addSubview(editProfile)
-        contentView.addSubview(inquiry)
+        contentView.addSubview(donate)
         contentView.addSubview(logoutButton)
         contentView.addSubview(withdrawButton)
          
@@ -206,13 +216,13 @@ extension SettingsViewController {
             make.horizontalEdges.equalTo(contentView).inset(30)
             make.height.equalTo(DesignSize.fieldHeight)
         }
-        inquiry.snp.makeConstraints { make in
+        donate.snp.makeConstraints { make in
             make.top.equalTo(wineRequest.snp.bottom).offset(-DesignSize.outlineWidth)
             make.horizontalEdges.equalTo(contentView).inset(30)
             make.height.equalTo(DesignSize.fieldHeight)
         }
         logoutButton.snp.makeConstraints { make in
-            make.top.equalTo(inquiry.snp.bottom).offset(20)
+            make.top.equalTo(donate.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(contentView).inset(30)
             make.height.equalTo(DesignSize.fieldHeight)
         }

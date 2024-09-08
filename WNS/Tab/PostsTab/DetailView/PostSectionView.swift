@@ -12,7 +12,7 @@ final class PostSectionView: UIView {
     
     let backgroundColorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 10
         return view
     }()

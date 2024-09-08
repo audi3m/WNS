@@ -11,24 +11,23 @@ import RxCocoa
 
 final class NewPostViewModel {
     
-    let disposeBag = DisposeBag()
-    
-    func transform(input: Input) -> Output {
-        
-        
-        
-        return Output()
+    struct Input {
+        let galleryTapped: () -> Void
+        let writePostTapped: () -> Void
     }
+    
+    struct Output {
+        let postResult: () -> Void
+    }
+    
+    
+    
+    
+    
     
 }
 
 extension NewPostViewModel {
     
-    struct Input {
-        
-    }
     
-    struct Output {
-        
-    }
 }

@@ -62,6 +62,7 @@ final class AccountNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }
@@ -130,6 +131,7 @@ final class AccountNetworkManager {
                         }
                     }
                 }
+            
         } catch {
             print(error)
         }
