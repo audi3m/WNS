@@ -1,5 +1,5 @@
 //
-//  PaymentsResponse.swift
+//  PaymentResponse.swift
 //  WNS
 //
 //  Created by J Oh on 9/8/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PaymentsResponse: Decodable {
+struct PaymentResponse: Decodable {
     let buyerID: String
     let postID: String
     let merchantUID: String
@@ -26,6 +26,6 @@ struct PaymentsResponse: Decodable {
     
 }
 
-struct PaymentsListResponse: Decodable {
-    let data: [PaymentsResponse]
+struct PaymentListResponse: Decodable {
+    let data: [PaymentResponse]
 }

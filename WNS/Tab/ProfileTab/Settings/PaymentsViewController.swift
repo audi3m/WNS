@@ -63,7 +63,7 @@ final class PaymentsViewController: BaseViewController {
             switch iamportResponse.success {
             case true:
                 dump(iamportResponse)
-                self.resultLabel.text = "감사합니다"
+                self.resultLabel.text = "결제에 성공했습니다\n감사합니다"
                 self.wkWebView.isHidden = true
                 self.resultLabel.isHidden = false
                 self.returnButton.isHidden = false
@@ -77,7 +77,7 @@ final class PaymentsViewController: BaseViewController {
             }
             
 //            if let imp_uid = iamportResponse.imp_uid {
-//                let body = PaymentsBody(imp_uid: imp_uid, post_id: PaymentsConstants.postID)
+//                let body = PaymentBody(imp_uid: imp_uid, post_id: PaymentsConstants.postID)
 //                PaymentManager.shared.checkPayments(body: body) { [weak self] response in
 //                    guard let self else { return }
 //                    switch response {

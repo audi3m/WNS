@@ -8,19 +8,39 @@
 //import UIKit
 import SwiftUI
 import SnapKit
+import PhotosUI
 import RxSwift
 import RxCocoa
 
 // id, email, nick, phone, birthday, profile, followers, following, posts
 final class ProfileViewController: BaseViewController {
     
-    let profileImageView: UIImageView = {
+    lazy var profileImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.layer.cornerRadius = 40
-        view.backgroundColor = .systemCyan
         return view
+    }()
+    lazy var nicknameLabel: UILabel = {
+        let label = UILabel()
+        label.text = AccountManager.shared.nickname
+        label.font = .boldSystemFont(ofSize: 20)
+        return label
+    }()
+    lazy var emailLabel: UILabel = {
+        let label = UILabel()
+        label.text = AccountManager.shared.email
+        label.font = .systemFont(ofSize: 14)
+        return label
+    }()
+    lazy var editButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("수정", for: .normal)
+        button.configuration = .borderedProminent()
+        button.tintColor = .lightGray
+        button.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
+        return button
     }()
     lazy var stackView: UIStackView = {
         let view = UIStackView()
@@ -44,18 +64,6 @@ final class ProfileViewController: BaseViewController {
         let view = CountAndLabelView(type: .followings)
         return view
     }()
-    lazy var nicknameLabel: UILabel = {
-        let label = UILabel()
-        label.text = AccountManager.shared.nickname
-        label.font = .boldSystemFont(ofSize: 20)
-        return label
-    }()
-    lazy var emailLabel: UILabel = {
-        let label = UILabel()
-        label.text = AccountManager.shared.email
-        label.font = .systemFont(ofSize: 14)
-        return label
-    }()
     
     let viewModel = ProfileViewModel()
     
@@ -76,6 +84,7 @@ extension ProfileViewController {
     
 }
 
+
 // Functions
 extension ProfileViewController {
     @objc private func settingsClicked() {
@@ -86,6 +95,12 @@ extension ProfileViewController {
     
     @objc private func viewFollows() {
         let vc = FollowsViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func editProfile() {
+        let vc = EditProfileViewController()
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -107,8 +122,10 @@ extension ProfileViewController {
         view.addSubview(profileImageView)
         view.addSubview(nicknameLabel)
         view.addSubview(emailLabel)
+        view.addSubview(editButton)
         view.addSubview(stackView)
         
+        profileImageView.setImageWithURL(with: AccountManager.shared.profile)
         profileImageView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
             make.leading.equalTo(view).offset(15)
@@ -121,6 +138,10 @@ extension ProfileViewController {
         emailLabel.snp.makeConstraints { make in
             make.top.equalTo(profileImageView.snp.centerY).offset(1)
             make.leading.equalTo(profileImageView.snp.trailing).offset(20)
+        }
+        editButton.snp.makeConstraints { make in
+            make.centerY.equalTo(profileImageView.snp.centerY)
+            make.trailing.equalTo(view).offset(-20)
         }
         stackView.snp.makeConstraints { make in
             make.top.equalTo(profileImageView.snp.bottom).offset(20)

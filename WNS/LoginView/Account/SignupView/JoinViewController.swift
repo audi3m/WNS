@@ -183,7 +183,6 @@ extension JoinViewController {
         
         emailField.duplicationButton.addTarget(self, action: #selector(emailDuplicationCheck), for: .touchUpInside)
         
-        
     }
 }
 

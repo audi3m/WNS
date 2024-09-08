@@ -86,6 +86,7 @@ final class AccountManager {
 extension AccountManager {
     
     func setWtihResponse(body: LoginBody, response: LoginResponse) {
+        
         email = body.email
         password = body.password
         nickname = response.nick

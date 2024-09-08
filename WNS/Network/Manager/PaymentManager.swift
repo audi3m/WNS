@@ -25,12 +25,12 @@ final class PaymentManager {
     static let shared = PaymentManager()
     private init() { }
     
-    func checkPayments(body: PaymentsBody, handler: @escaping (Result<PaymentsResponse, PaymentsError>) -> Void) {
+    func checkPayments(body: PaymentBody, handler: @escaping (Result<PaymentResponse, PaymentsError>) -> Void) {
         do {
             let request = try Router.payments(body: body).asURLRequest()
             AF.request(request, interceptor: TokenInterceptor.shared)
                 .validate(statusCode: 200...299)
-                .responseDecodable(of: PaymentsResponse.self) { response in
+                .responseDecodable(of: PaymentResponse.self) { response in
                     switch response.result {
                     case .success(let response):
                         handler(.success(response))
@@ -71,12 +71,12 @@ final class PaymentManager {
         }
     }
     
-    func getPaymentsList(body: PaymentsBody, handler: @escaping (Result<PaymentsListResponse, PaymentsError>) -> Void) {
+    func getPaymentsList(body: PaymentBody, handler: @escaping (Result<PaymentListResponse, PaymentsError>) -> Void) {
         do {
             let request = try Router.paymentsList.asURLRequest()
             AF.request(request, interceptor: TokenInterceptor.shared)
                 .validate(statusCode: 200...299)
-                .responseDecodable(of: PaymentsListResponse.self) { response in
+                .responseDecodable(of: PaymentListResponse.self) { response in
                     switch response.result {
                     case .success(let response):
                         handler(.success(response))

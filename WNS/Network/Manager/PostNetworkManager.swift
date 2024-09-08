@@ -57,7 +57,7 @@ final class PostNetworkManager {
                     switch statusCode {
                     case 400:
                         print("잘못된 요청입니다/필수값을 채워주세요/파일 용량")
-                        handler(.failure(.tokenUnavailable))
+                        handler(.failure(.wrongRequest))
                     case 401:
                         print("인증할 수 없는 액세스/리프레시 토큰입니다")
                         handler(.failure(.tokenUnavailable))

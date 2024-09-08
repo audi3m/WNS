@@ -21,7 +21,6 @@ final class SettingsViewController: BaseViewController {
         view.layer.borderColor = UIColor.label.cgColor
         return view
     }()
-    
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
         view.addArrangedSubview(systemAppearance)
@@ -31,7 +30,6 @@ final class SettingsViewController: BaseViewController {
         view.distribution = .equalSpacing
         return view
     }()
-    
     private lazy var systemAppearance: UIButton = {
         let button = UIButton()
         button.tintColor = .lightGray
@@ -39,7 +37,6 @@ final class SettingsViewController: BaseViewController {
         button.addTarget(self, action: #selector(systemClicked), for: .touchUpInside)
         return button
     }()
-    
     private lazy var lightAppearance: UIButton = {
         let button = UIButton()
         button.tintColor = .lightGray
@@ -47,7 +44,6 @@ final class SettingsViewController: BaseViewController {
         button.addTarget(self, action: #selector(lightClicked), for: .touchUpInside)
         return button
     }()
-    
     private lazy var darkAppearance: UIButton = {
         let button = UIButton()
         button.tintColor = .lightGray
@@ -55,7 +51,6 @@ final class SettingsViewController: BaseViewController {
         button.addTarget(self, action: #selector(darkClicked), for: .touchUpInside)
         return button
     }()
-    
     private let editProfile = OutlineButton(name: "프로필 수정", cornerType: .top)
     private let wineRequest = OutlineButton(name: "와인 추가 신청", cornerType: .middle)
     private let donate = OutlineButton(name: "개발자 후원하기", cornerType: .bottom)

@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct ProfileBody: Encodable {
-    let nick: String?
-    let phoneNum: String?
-    let birthDay: String?
-    let profile: Data?
+struct ProfileBody: Codable {
+    var nick: String?
+    var phoneNum: String?
+    var birthDay: String?
+    var profile: Data?
 }
