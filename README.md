@@ -1,12 +1,14 @@
 ## 프로젝트 소개
 - 와인 경험 공유
-  
+
+<스크린 샷 수정 예정>
 |1. 피드 화면 | 2. 상세 화면 | 3. 작성할 와인 선택 화면 |
 | -- | -- | -- |
-| <img width="200" src="" /> | <img width="200" src="" /> | <img width="200" src="" /> |
+| <img width="200" src="https://github.com/user-attachments/assets/086173d9-2f68-431d-b759-0e37375cfdee" /> | <img width="200" src="https://github.com/user-attachments/assets/7cddf06f-bf3a-40f1-90ab-4682453498d1" /> | <img width="200" src="https://github.com/user-attachments/assets/ed321b01-d4c9-43b0-b0c4-53aa99d650ff" /> |
 </br>
 
 ## 프로젝트 정보
+
 - 개발 기간
   - 1차: 
 - 개발 인원: 1인
@@ -23,10 +25,9 @@
 
 </br>
 
-## 프로젝트에서 고민한 것
-- 키보드
+## 프로젝트에서 고려한 것
 - 토큰 관리
-- 
+- 키보드 커스터마이제이션
   
 </br>
 
