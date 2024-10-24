@@ -19,6 +19,7 @@
   - Network: Alamofire
   - 기타 기능
     - 사진선택: PhotosUI
+- MVVM 패턴
 - 앱 주요 기능
   - 와인 테이스트 노트 작성, 공유
   - 취향이 비슷한 유저 팔로우
