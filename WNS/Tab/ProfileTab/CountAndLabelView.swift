@@ -62,7 +62,6 @@ final class CountAndLabelView: UIView {
             make.bottom.equalToSuperview()
         }
         
-        countLabel.text = "\(Int.random(in: 100..<1000))"
         nameLabel.text = type.rawValue
     }
     

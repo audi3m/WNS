@@ -24,7 +24,7 @@ final class ProfileViewController: BaseViewController {
     }()
     lazy var nicknameLabel: UILabel = {
         let label = UILabel()
-        label.text = AccountManager.shared.nickname
+        label.text = AccountManager.shared.nick
         label.font = .boldSystemFont(ofSize: 20)
         return label
     }()
@@ -52,18 +52,9 @@ final class ProfileViewController: BaseViewController {
         view.addArrangedSubview(followingsCount)
         return view
     }()
-    let postsCount: CountAndLabelView = {
-        let view = CountAndLabelView(type: .posts)
-        return view
-    }()
-    let followersCount: CountAndLabelView = {
-        let view = CountAndLabelView(type: .followers)
-        return view
-    }()
-    let followingsCount: CountAndLabelView = {
-        let view = CountAndLabelView(type: .followings)
-        return view
-    }()
+    let postsCount = CountAndLabelView(type: .posts)
+    let followersCount = CountAndLabelView(type: .followers)
+    let followingsCount = CountAndLabelView(type: .followings)
     
     let viewModel = ProfileViewModel()
     
@@ -125,7 +116,7 @@ extension ProfileViewController {
         view.addSubview(editButton)
         view.addSubview(stackView)
         
-        profileImageView.setImageWithURL(with: AccountManager.shared.profile)
+        profileImageView.setImageWithURL(with: AccountManager.shared.profileImage)
         profileImageView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
             make.leading.equalTo(view).offset(15)
@@ -147,5 +138,9 @@ extension ProfileViewController {
             make.top.equalTo(profileImageView.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview().inset(20)
         }
+        postsCount.countLabel.text = "\(AccountManager.shared.posts.count)"
+        followersCount.countLabel.text = "\(AccountManager.shared.followers.count)"
+        followingsCount.countLabel.text = "\(AccountManager.shared.following.count)"
+        
     }
 }

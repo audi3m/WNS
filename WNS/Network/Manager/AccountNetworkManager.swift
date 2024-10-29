@@ -110,8 +110,9 @@ final class AccountNetworkManager {
                 .responseDecodable(of: LoginResponse.self) { response in
                     switch response.result {
                     case .success(let response):
-                        AccountManager.shared.setWtihResponse(body: body, response: response)
                         handler(.success(response))
+                        AccountManager.shared.access = response.accessToken
+                        AccountManager.shared.refresh = response.refreshToken
                     case .failure(let failure):
                         if let statusCode = response.response?.statusCode {
                             switch statusCode {

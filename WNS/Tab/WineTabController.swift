@@ -19,11 +19,10 @@ final class WineTabController: UITabBarController, UITabBarControllerDelegate {
         let addNew = UIViewController()
         let joinTab = UINavigationController(rootViewController: SegmentedTableViewController())
         let profileTab = UINavigationController(rootViewController: ProfileViewController())
-        let testTab = UINavigationController(rootViewController: JoinViewController())
+        let testTab = UINavigationController(rootViewController: SearchViewController())
         
         mainTab.tabBarItem = UITabBarItem(title: nil, image: TabItemImage.home.unselectedImage, selectedImage: TabItemImage.home.selectedImage)
         searchTab.tabBarItem = UITabBarItem(title: nil, image: TabItemImage.search.unselectedImage, selectedImage: TabItemImage.search.selectedImage)
-        
         
         addNew.tabBarItem = UITabBarItem(title: "", image: TabItemImage.addNew.selectedImage, tag: 1)
         

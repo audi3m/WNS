@@ -30,21 +30,39 @@ final class AccountManager {
         }
     }
     
-    var nickname: String {
+    var nick: String {
         get {
-            return UserDefaults.standard.string(forKey: "nickname") ?? ""
+            return UserDefaults.standard.string(forKey: "nick") ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "nickname")
+            UserDefaults.standard.set(newValue, forKey: "nick")
         }
     }
     
-    var profile: String? {
+    var profileImage: String? {
         get {
-            return UserDefaults.standard.string(forKey: "profile")
+            return UserDefaults.standard.string(forKey: "profileImage")
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "profile")
+            UserDefaults.standard.set(newValue, forKey: "profileImage")
+        }
+    }
+    
+    var followers: [String] {
+        get {
+            return UserDefaults.standard.stringArray(forKey: "followers") ?? []
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "followers")
+        }
+    }
+    
+    var following: [String] {
+        get {
+            return UserDefaults.standard.stringArray(forKey: "following") ?? []
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "following")
         }
     }
     
@@ -77,6 +95,15 @@ final class AccountManager {
         }
     }
     
+    var posts: [String] {
+        get {
+            return UserDefaults.standard.stringArray(forKey: "posts") ?? []
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "posts")
+        }
+    }
+    
     var isAdmin: Bool {
         userID == "66d1ff39dfc656014225765f"
     }
@@ -85,36 +112,27 @@ final class AccountManager {
 
 extension AccountManager {
     
-    func setWtihResponse(body: LoginBody, response: LoginResponse) {
+    func setMyProfile(with response: GetMyProfileResponse) {
         
-        email = body.email
-        password = body.password
-        nickname = response.nick
-        profile = response.profileImage
-        access = response.accessToken
-        refresh = response.refreshToken
         userID = response.userID
+        email = response.email
+        nick = response.nick
+        profileImage = response.profileImage
+        followers = response.followers.map { $0.userID }
+        following = response.following.map { $0.userID }
+        posts = response.posts
     }
     
     func resetAccount() {
+        email = ""
+        password = ""
+        nick = ""
+        profileImage = nil
+        followers = []
+        following = []
         access = ""
         refresh = ""
         userID = ""
     }
     
-//    func login(handler: @escaping ((LoginResponse) -> Void)) {
-//        let body = LoginBody(email: email, password: password)
-//        AccountNetworkManager.shared.login(body: body) { response in
-//            switch response {
-//            case .success(let success):
-//                <#code#>
-//            case .failure(let failure):
-//                <#code#>
-//            }
-//            handler(response)
-//        } onResponseError: { message in
-//            print(message)
-//        }
-//
-//    }
 }

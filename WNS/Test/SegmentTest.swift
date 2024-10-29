@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+enum SearchBy {
+    case wine, hashtag, user
+}
+
 final class SegmentedTableViewController: BaseViewController {
     
     lazy var segmentedControl: UISegmentedControl = {
@@ -27,25 +31,34 @@ final class SegmentedTableViewController: BaseViewController {
         let view = UITableView()
         view.delegate = self
         view.dataSource = self
-        view.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        view.register(SearchPostsCell.self, forCellReuseIdentifier: SearchPostsCell.id)
         return view
     }()
     let noResultsLabel = UILabel()
     
-    let firstData = ["Apple", "Banana", "Cherry"]
-    let secondData = ["Dog", "Cat", "Rabbit"]
-    let thirdData = [String]()
+    var wineList = [Post]()
+    var hashList = [Post]()
+    var userList = [Creator]()
     
-    var currentData: [String] = []
+    var currentData = [Post]()
+    var searchBy = SearchBy.wine {
+        didSet {
+            switch searchBy {
+            case .wine:
+                currentData = wineList
+            case .hashtag:
+                currentData = hashList
+            case .user:
+                currentData = wineList
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureView()
-        setupNoResultsLabel()
-        
-        currentData = firstData
-        updateNoResultsLabel()
+        currentData = wineList
     }
 }
 
@@ -54,56 +67,93 @@ extension SegmentedTableViewController {
     
     func configureView() {
         navigationItem.title = "게시물 검색"
-        view.addSubview(segmentedControl)
         view.addSubview(searchBar)
+        view.addSubview(segmentedControl)
         view.addSubview(tableView)
         
-        segmentedControl.snp.makeConstraints { make in
+        searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.equalToSuperview()
+        }
+        segmentedControl.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom)
             make.horizontalEdges.equalToSuperview().inset(20)
         }
-        searchBar.snp.makeConstraints { make in
-            make.top.equalTo(segmentedControl.snp.bottom)
-            make.horizontalEdges.equalToSuperview().inset(10)
-        }
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom)
+            make.top.equalTo(segmentedControl.snp.bottom)
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-    }
-    
-    func setupNoResultsLabel() {
-        noResultsLabel.text = "검색결과가 없습니다."
-        noResultsLabel.textAlignment = .center
-        noResultsLabel.textColor = .gray
-        noResultsLabel.font = UIFont.systemFont(ofSize: 18)
-        noResultsLabel.isHidden = true
-        
-        view.addSubview(noResultsLabel)
     }
     
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            currentData = firstData
+            searchBy = .wine
+            currentData = wineList
         case 1:
-            currentData = secondData
+            searchBy = .hashtag
+            currentData = hashList
         case 2:
-            currentData = thirdData
+            searchBy = .user
+            print("0")
         default:
             break
         }
         tableView.reloadData()
-        updateNoResultsLabel()
+    }
+}
+
+extension SegmentedTableViewController {
+    
+    private func searchByWine(searchText: String) {
+        let wineName = HashtagForWineSearch.prefix.dropFirst() + searchText.replacingOccurrences(of: " ", with: "")
+        let query = HashQuery(next: "", limit: "100", productID: ProductID.forUsers.rawValue, hashTag: String(wineName))
+        SearchNetworkManager.shared.searchHashtag(query: query) { [weak self] response in
+            guard let self else { return }
+            switch response {
+            case .success(let success):
+                self.wineList = success.data
+            case .failure(let failure):
+                print(failure)
+            }
+        }
     }
     
-    func updateNoResultsLabel() {
-        noResultsLabel.isHidden = !currentData.isEmpty
+    private func searchByHashtag(searchText: String) {
+        let query = HashQuery(next: "", limit: "100", productID: ProductID.forUsers.rawValue, hashTag: searchText)
+        SearchNetworkManager.shared.searchHashtag(query: query) { [weak self] response in
+            guard let self else { return }
+            switch response {
+            case .success(let success):
+                self.hashList = success.data
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+
+    }
+    
+    private func searchByUser() {
+        
     }
 }
 
 extension SegmentedTableViewController: UISearchBarDelegate {
-    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchText = searchBar.text, !searchText.isEmpty {
+            searchByWine(searchText: searchText)
+            searchByHashtag(searchText: searchText)
+            switch searchBy {
+            case .wine:
+                currentData = wineList
+            case .hashtag:
+                currentData = hashList
+            case .user:
+                print("To be updated")
+            }
+            
+        }
+    }
 }
 
 extension SegmentedTableViewController: UITableViewDelegate, UITableViewDataSource {
@@ -113,13 +163,22 @@ extension SegmentedTableViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = currentData[indexPath.row]
-        return cell
+        let data = currentData[indexPath.row]
+        if let cell = tableView.dequeueReusableCell(withIdentifier: SearchPostsCell.id, for: indexPath) as? SearchPostsCell {
+            cell.configureData(data: data)
+            return cell
+        } else {
+            return UITableViewCell()
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected \(currentData[indexPath.row])")
         tableView.deselectRow(at: indexPath, animated: true)
+        let postID = currentData[indexPath.row].postID
+        let vc = PostDetailViewController(postID: postID)
+        vc.modalPresentationStyle = .fullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true)
+        
     }
 }

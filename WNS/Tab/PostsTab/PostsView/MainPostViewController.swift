@@ -34,7 +34,8 @@ final class MainPostViewController: BaseViewController {
         configureNavBar()
         configureView()
         login()
-        rxBind() 
+        
+        rxBind()
     }
     
 }
@@ -123,9 +124,10 @@ extension MainPostViewController {
         AccountNetworkManager.shared.login(body: login) { [weak self] response in
             guard let self else { return }
             switch response {
-            case .success:
+            case .success(let success):
                 self.view.makeToast("Login Success", position: .top)
                 callPosts()
+                ProfileNetworkManager.shared.getMyProfile { _ in }
             case .failure(let failure):
                 self.showAlert(title: "", message: failure.localizedDescription, ok: "확인") { }
             }

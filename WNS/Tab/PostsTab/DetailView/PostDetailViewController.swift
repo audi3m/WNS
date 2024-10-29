@@ -39,6 +39,14 @@ final class PostDetailViewController: BaseViewController {
         return control
     }()
     let profileView = ProfileAndNicknameView()
+    let followButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("팔로우", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 13)
+        button.layer.cornerRadius = DesignSize.fieldCornerRadius
+        button.backgroundColor = .systemBlue
+        return button
+    }()
     let postSection = PostSectionView()
     let commentsSection = CommentsSectionView()
     let wineSection = WineSectionView()
@@ -79,12 +87,39 @@ extension PostDetailViewController {
 // Functions
 extension PostDetailViewController {
     
+    private func follow(userID: String) {
+        
+        LikeNetworkManager.shared.follow(userID: userID) { response in
+            switch response {
+            case .success(let success):
+                print(success)
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+    }
+    
+    private func unFollow(userID: String) {
+        
+        LikeNetworkManager.shared.unFollow(userID: userID) { response in
+            switch response {
+            case .success(let success):
+                print(success)
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+    }
+    
+    @objc private func followTapped(userID: String) {
+        
+    }
+    
     private func callPost() {
         PostNetworkManager.shared.getSomePost(postID: postID) { [weak self] response in
             guard let self else { return }
             switch response {
             case .success(let post):
-                self.configureNavBar(post: post)
                 self.configureData(post: post)
                 self.pageControl.numberOfPages = post.files.count
                 self.postSection.setData(post: post)
@@ -120,6 +155,12 @@ extension PostDetailViewController {
         }
     }
     
+    @objc private func commentClicked() {
+        let vc = CommentsViewController(postID: postID)
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
+    }
+    
     private func setLikeButton(like: Bool) {
         let image = like ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
         navigationItem.rightBarButtonItem?.image = image
@@ -136,22 +177,6 @@ extension PostDetailViewController {
         }
     }
     
-    @objc private func commentClicked() {
-        let vc = CommentsViewController(postID: postID)
-        let nav = UINavigationController(rootViewController: vc)
-        present(nav, animated: true)
-    }
-    
-    private func configureNavBar(post: Post) {
-        let image = post.likeThisPost ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
-        let item = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(likeButtonTapped))
-        item.tintColor = post.likeThisPost ? .systemPink : .label
-        
-        let comments = UIBarButtonItem(image: UIImage(systemName: "bubble"), style: .plain, target: self, action: #selector(commentsButtonTapped))
-        comments.tintColor = .label
-        navigationItem.rightBarButtonItems = [comments, item]
-    }
-    
     private func configureView() {
         view.addSubview(scrollView)
         view.addSubview(closeButton)
@@ -160,6 +185,7 @@ extension PostDetailViewController {
         contentView.addSubview(collectionView)
         contentView.addSubview(pageControl)
         contentView.addSubview(profileView)
+        contentView.addSubview(followButton)
         contentView.addSubview(postSection)
         contentView.addSubview(commentsSection)
         contentView.addSubview(wineSection)
@@ -187,7 +213,15 @@ extension PostDetailViewController {
         
         profileView.snp.makeConstraints { make in
             make.top.equalTo(pageControl.snp.bottom).offset(5)
-            make.horizontalEdges.equalToSuperview().inset(25)
+            make.leading.equalToSuperview().inset(25)
+            make.trailing.equalTo(followButton.snp.leading).offset(-DesignSize.fieldPadding)
+        }
+        
+        followButton.snp.makeConstraints { make in
+            make.centerY.equalTo(profileView)
+            make.trailing.equalToSuperview().inset(20)
+            make.width.equalTo(50)
+            make.height.equalTo(30)
         }
         
         postSection.snp.makeConstraints { make in

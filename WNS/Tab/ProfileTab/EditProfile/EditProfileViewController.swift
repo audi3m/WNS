@@ -18,7 +18,7 @@ final class EditProfileViewController: BaseViewController {
     }()
     let nicknameField: OutlineField = {
         let view = OutlineField(fieldType: .nickname, cornerType: .all)
-        view.textField.text = AccountManager.shared.nickname
+        view.textField.text = AccountManager.shared.nick
         return view
     }()
     lazy var doneButton: UIButton = {
@@ -49,7 +49,7 @@ extension EditProfileViewController {
         progressView.isHidden = false
         var body = ProfileBody()
         
-        if nicknameField.textField.text != AccountManager.shared.nickname {
+        if nicknameField.textField.text != AccountManager.shared.nick {
             body.nick = nicknameField.textField.text
         }
         
@@ -65,8 +65,8 @@ extension EditProfileViewController {
             case .success(let success):
                 print("SUCCESS")
                 AccountManager.shared.userID = success.userID
-                AccountManager.shared.nickname = success.nick
-                AccountManager.shared.profile = success.profileImage
+                AccountManager.shared.nick = success.nick
+                AccountManager.shared.profileImage = success.profileImage
                 navigationController?.popViewController(animated: true)
             case .failure(let failure):
                 print(failure)
@@ -134,7 +134,7 @@ extension EditProfileViewController {
             make.edges.equalToSuperview()
         }
         
-        profileImageView.setImageWithURL(with: AccountManager.shared.profile)
+        profileImageView.setImageWithURL(with: AccountManager.shared.profileImage)
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(openGallery))
         profileImageView.isUserInteractionEnabled = true

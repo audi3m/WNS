@@ -72,6 +72,7 @@
 		D42FB9652C8D2748002BA635 /* PaymentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42FB9642C8D2748002BA635 /* PaymentResponse.swift */; };
 		D42FB9682C8D2E24002BA635 /* iamport-ios in Frameworks */ = {isa = PBXBuildFile; productRef = D42FB9672C8D2E24002BA635 /* iamport-ios */; };
 		D42FB96A2C8D64D8002BA635 /* PaymentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42FB9692C8D64D8002BA635 /* PaymentsViewController.swift */; };
+		D42FB96C2C8DF9F0002BA635 /* SearchPostsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42FB96B2C8DF9F0002BA635 /* SearchPostsCell.swift */; };
 		D43A68B52C8709CE00ACD6B9 /* TokenInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43A68B42C8709CE00ACD6B9 /* TokenInterceptor.swift */; };
 		D445A17A2C849DA7003CEEBF /* WineSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445A1792C849DA7003CEEBF /* WineSectionView.swift */; };
 		D445A17C2C84A9D3003CEEBF /* PostSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445A17B2C84A9D3003CEEBF /* PostSectionView.swift */; };
@@ -199,6 +200,7 @@
 		D42FB9622C8D259F002BA635 /* PaymentBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentBody.swift; sourceTree = "<group>"; };
 		D42FB9642C8D2748002BA635 /* PaymentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResponse.swift; sourceTree = "<group>"; };
 		D42FB9692C8D64D8002BA635 /* PaymentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsViewController.swift; sourceTree = "<group>"; };
+		D42FB96B2C8DF9F0002BA635 /* SearchPostsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostsCell.swift; sourceTree = "<group>"; };
 		D43A68B42C8709CE00ACD6B9 /* TokenInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInterceptor.swift; sourceTree = "<group>"; };
 		D445A1792C849DA7003CEEBF /* WineSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineSectionView.swift; sourceTree = "<group>"; };
 		D445A17B2C84A9D3003CEEBF /* PostSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSectionView.swift; sourceTree = "<group>"; };
@@ -631,6 +633,7 @@
 			isa = PBXGroup;
 			children = (
 				D4E3C7612C7B8B0300131DA5 /* SearchViewController.swift */,
+				D42FB96B2C8DF9F0002BA635 /* SearchPostsCell.swift */,
 			);
 			path = SearchTab;
 			sourceTree = "<group>";
@@ -767,6 +770,7 @@
 				D404A5512C720AB6005C3C6E /* CountAndLabelView.swift in Sources */,
 				D404A4ED2C6DA9A0005C3C6E /* RefreshResponse.swift in Sources */,
 				D404A5442C71B44A005C3C6E /* ProfileViewController.swift in Sources */,
+				D42FB96C2C8DF9F0002BA635 /* SearchPostsCell.swift in Sources */,
 				D404A55F2C721364005C3C6E /* WineTabController.swift in Sources */,
 				D404A4F32C6DB78D005C3C6E /* Post.swift in Sources */,
 				D404A5422C70E1A1005C3C6E /* PostTableViewCell.swift in Sources */,
@@ -998,6 +1002,7 @@
 				DEVELOPMENT_TEAM = NWL6WKXWCJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WNS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ViNote;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1030,6 +1035,7 @@
 				DEVELOPMENT_TEAM = NWL6WKXWCJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WNS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ViNote;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

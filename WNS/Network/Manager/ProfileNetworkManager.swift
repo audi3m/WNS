@@ -30,8 +30,9 @@ final class ProfileNetworkManager {
                 .validate(statusCode: 200...299)
                 .responseDecodable(of: GetMyProfileResponse.self) { response in
                     switch response.result {
-                    case .success(let response):
-                        handler(.success(response))
+                    case .success(let success):
+                        handler(.success(success))
+                        AccountManager.shared.setMyProfile(with: success)
                     case .failure(let failure):
                         if let statusCode = response.response?.statusCode {
                             switch statusCode {
